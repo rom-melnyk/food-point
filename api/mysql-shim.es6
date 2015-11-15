@@ -1,14 +1,16 @@
 const mysql = require('mysql');
-const pool      =    mysql.createPool({
-    connectionLimit : 100, //important
-    host     : 'localhost',
-    user     : 'root',
-    password : '',
-    database : 'food_point',
-    debug    :  false
+const config = require('../package.json').config.mysql;
+const pool = mysql.createPool({
+    connectionLimit: 100, //important
+    host: config.host,
+    user: config.user,
+    password: config.password,
+    database: config.database,
+    debug: false
 });
 
 /**
+ * @param {String} query
  * @return Promise
  */
 function doQuery (query) {

@@ -4,7 +4,13 @@
   "description": "Food Point site",
   "main": "server.es6",
   "config": {
-    "port": 8080
+    "port": 8080,
+    "mysql": {
+      "host": "localhost",
+      "user": "root",
+      "password": "",
+      "database": "food_point"
+    }
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
