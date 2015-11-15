@@ -1,4 +1,7 @@
-node_modules/
 .idea/
+*.iws
 
+node_modules/
+npm-debug.log
 
+static/script.dev.js

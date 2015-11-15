@@ -2,9 +2,14 @@
   "name": "food-point",
   "version": "0.0.1",
   "description": "Food Point site",
-  "main": "index.js",
+  "main": "server.es6",
+  "config": {
+    "port": 8080
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-api": "nodemon --watch api --exec \"node --harmony\" ./server.es6",
+    "dev-static": "watchify src/app.es6 -t babelify -o static/script.dev.js -d -v"
   },
   "author": "Roman Melnyk",
   "license": "ISC",
@@ -15,6 +20,7 @@
   "devDependencies": {
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",
+    "nodemon": "^1.8.1",
     "uglify": "^0.1.5",
     "watchify": "^3.6.0"
   }
