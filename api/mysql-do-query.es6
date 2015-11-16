@@ -18,26 +18,24 @@ function doQuery (query) {
         pool.getConnection((err, connection) => {
             if (err) {
                 connection.release();
-                reject({error: true, message: 'Error connecting to database', debug: err});
+                resolve({error: true, message: 'Error getting the connecting to database', debug: err});
                 return;
             }
 
             connection.query(query, (err, rows) => {
                 connection.release();
                 if (err) {
-                    reject({error: true, message : 'Error querying the database', debug: err});
+                    resolve({error: true, message : 'Error querying the database', debug: err});
                 } else {
                     resolve(rows);
                 }
             });
 
             connection.on('error', (err) => {
-                reject({error: true, message : 'Error connecting to database', debug: err});
+                resolve({error: true, message : 'Error connecting to database', debug: err});
             });
         });
     });
 }
 
-module.exports = {
-    doQuery
-};
+module.exports = doQuery;

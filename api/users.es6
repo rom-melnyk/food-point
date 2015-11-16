@@ -1,15 +1,31 @@
-var mysqlShim = require('./mysql-shim.es6');
+const doQuery = require('./mysql-do-query.es6');
 
 function getUsers (req, res) {
-    mysqlShim.doQuery('select * from users')
+    doQuery('select * from users')
         .then((rows) => {
             res.json(rows);
         })
-        .catch((obj) => {
-            res.json(obj);
+        .catch((err) => {
+            res.json({error: true, message: 'Server error', debug: err});
         });
 }
 
+function getUserByEmail (req, res) {
+    let email = req.params.email;
+    // TODO ensure the string is injection-safe
+    doQuery(`select * from users where email="${email}"`)
+        .then((rows) => {
+            res.json(rows);
+        }).catch((err) => {
+            res.json({error: true, message: 'Server error', debug: err});
+        });
+}
+
+function createUser (req, res) {
+
+}
+
 module.exports = {
-     getUsers
+     getUsers,
+    getUserByEmail
  };
