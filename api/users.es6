@@ -26,6 +26,5 @@ function createUser (req, res) {
 }
 
 module.exports = {
-     getUsers,
-    getUserByEmail
+    getUsers
  };
