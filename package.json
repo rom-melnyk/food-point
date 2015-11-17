@@ -14,7 +14,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev-api": "nodemon --watch api --exec \"node --harmony\" ./server.es6",
+    "dev-api": "nodemon --watch api --exec \"node --harmony --use_strict\" ./server.es6",
     "dev-static": "watchify src/app.es6 -t babelify -o static/script.dev.js -d -v"
   },
   "author": "Roman Melnyk",
