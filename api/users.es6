@@ -1,4 +1,4 @@
-const doQuery = require('./mysql-do-query.es6');
+const doQuery = require('./mysql-shim.es6');
 
 function getUsers (req, res) {
     doQuery('select * from users')

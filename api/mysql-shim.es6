@@ -25,17 +25,28 @@ function doQuery (query) {
             connection.query(query, (err, rows) => {
                 connection.release();
                 if (err) {
-                    resolve({error: true, message : 'Error querying the database', debug: err});
+                    resolve({error: true, message: 'Error querying the database', debug: err});
                 } else {
                     resolve(rows);
                 }
             });
 
             connection.on('error', (err) => {
-                resolve({error: true, message : 'Error connecting to database', debug: err});
+                resolve({error: true, message: 'Error connecting to database', debug: err});
             });
         });
     });
 }
 
-module.exports = doQuery;
+/**
+ * @param {String} string
+ * @return {String}
+ */
+function normaliseInput (string) {
+    return string;
+}
+
+module.exports = {
+    doQuery,
+    normaliseInput
+};

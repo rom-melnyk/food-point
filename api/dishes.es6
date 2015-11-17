@@ -1,4 +1,4 @@
-const doQuery = require('./mysql-do-query.es6');
+const doQuery = require('./mysql-shim.es6');
 
 function getDishes(req, res) {
     doQuery('SELECT * FROM dishes;')
