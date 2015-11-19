@@ -1,18 +1,19 @@
 const doResponse = require('./response-wrapper.es6').doResponse;
+const escape = require('./mysql-shim.es6').escape;
 
 function getDishes(req, res) {
     doResponse('SELECT * FROM dishes;', res);
 }
 
 function getDishById(req, res) {
-    let id = req.params.id;
-    // TODO ensure the string is injection-safe
+    const id = escape(req.params.id);
     doResponse(`SELECT * FROM dishes WHERE id="${id}";`, res);
 }
 
 function createDish(req, res) {
-    let params = req.body;
-    let query = `INSERT INTO dishes (name, price, attr) VALUES ("${params.name}","${params.price}","");`;
+    const name = escape(req.body.name);
+    const price = escape(req.body.price);
+    const query = `INSERT INTO dishes (name, price, attr) VALUES ("${name}", "${price}", "");`;
     doResponse(query, res);
 }
 

@@ -53,14 +53,14 @@ URL=$(echo $URL | sed "s/__area__/$AREA/")
 DATA=$(echo $DATA | sed "s/__3__/$3/" | sed "s/__4__/$4/")
 
 CMD="curl --include --header '$HEADER' --data '$DATA' --request $METHOD $URL"
-CMD=$(echo "$CMD" | sed 's/ \+/ /g')
+CMD=$(echo $CMD | sed 's/ \+/ /g')
 
 echo $METHOD $URL
-[ "$HEADER" != "" ] && echo Header: "$HEADER"
-[ "$DATA" != "" ] && echo Data: "$DATA"
-echo Command: "$CMD"
+[ "$HEADER" != "" ] && echo Header: $HEADER
+[ "$DATA" != "" ] && echo Data: $DATA
+echo Command: $CMD
 echo -e '\n'
 
-$($CMD)
+#$($CMD)
 
-echo -e '\n'
+#echo -e '\n'
