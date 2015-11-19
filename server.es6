@@ -13,7 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.get('/api/users', users.getUsers);
 
 app.get('/api/dishes', dishes.getDishes);
+app.get('/api/dishes/:id', dishes.getDishById);
 app.post('/api/dishes', dishes.createDish);
+app.put('/api/dishes/:id', dishes.updateDish);
+app.delete('/api/dishes/:id', dishes.deleteDish);
 
 const server = app.listen(config.port, () => {
     const address = server.address();

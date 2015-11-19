@@ -17,8 +17,25 @@ function createDish(req, res) {
     doResponse(query, res);
 }
 
+function updateDish(req, res) {
+    const id = escape(req.params.id);
+    const name = escape(req.body.name);
+    const price = escape(req.body.price);
+    const attr = escape(req.body.attr);
+    const query = `UPDATE dishes SET name="${name}", price="${price}", attr="${attr}" WHERE id="${id}";`;
+    doResponse(query, res);
+}
+
+function deleteDish(req, res) {
+    const id = escape(req.params.id);
+    const query = `DELETE FROM dishes WHERE id="${id}";`;
+    doResponse(query, res);
+}
+
 module.exports = {
     createDish,
     getDishes,
-    getDishById
+    getDishById,
+    updateDish,
+    deleteDish
 };
