@@ -44,7 +44,8 @@ function doQuery (query) {
  * @return {String}
  */
 function escape (string) {
-    return (string + '').replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, (char) => {
+    string = string ? string + '' : '';
+    return string.replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, (char) => {
         switch (char) {
             case '\0':
                 return '\\0';
@@ -70,5 +71,5 @@ function escape (string) {
 
 module.exports = {
     doQuery,
-    escape: mysql.escape
+    escape: escape
 };
