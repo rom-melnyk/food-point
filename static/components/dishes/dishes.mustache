@@ -1,0 +1,16 @@
+<div class="page dishes">
+    <h1>Страви</h1>
+    {{#section}}
+        <section>
+            <h2>{{name}}</h2>
+            <ul>
+                {{#dish}}
+                    <li>
+                        <div class="name">{{name}}</div>
+                        <div class="name">{{price}}</div>
+                    </li>
+                {{/dish}}
+            </ul>
+        </section>
+    {{/section}}
+</div>
