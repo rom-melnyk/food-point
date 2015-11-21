@@ -1,0 +1,32 @@
+$button-gradient-from: hsl(240, 80%, 85%);
+$button-gradient-to: lighten($button-gradient-from, 10%); // hsl(240, 80%, 95%);
+$button-gradient-from-hover: lighten($button-gradient-from, 5%);
+$button-gradient-to-hover: lighten($button-gradient-to, 2%);
+
+.button {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  padding: .5em;
+
+  background: linear-gradient($button-gradient-from, $button-gradient-to, $button-gradient-from);
+  border: 1px solid $button-gradient-from;
+  border-radius: .2em;
+  cursor: pointer;
+
+  transition: border-color 1s;
+
+  &:hover {
+    background: linear-gradient($button-gradient-from-hover, $button-gradient-to-hover, $button-gradient-from-hover);
+    border-color: $button-gradient-from-hover;
+  }
+
+  &.edit::after {
+    content: "e";
+  }
+
+  &.delete::after {
+    content: "x";
+  }
+}
+

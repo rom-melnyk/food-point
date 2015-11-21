@@ -1,0 +1,11 @@
+@import "buttons";
+
+@mixin clear-fix {
+  &::after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}
+

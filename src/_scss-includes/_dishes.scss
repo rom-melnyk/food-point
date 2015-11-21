@@ -1,0 +1,35 @@
+@import "general";
+
+.dishes {
+  padding: 2em;
+  min-width: 30em;
+
+  ul {
+    li {
+      @include clear-fix();
+      margin-bottom: .5em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      div {
+        float: left;
+      }
+      .name {
+        width: 60%;
+      }
+      .price {
+        width: 20%;
+        text-align: right;
+
+        &::after {
+          content: " грн.";
+        }
+      }
+      .controls {
+        width: 20%;
+      }
+    }
+  }
+}
