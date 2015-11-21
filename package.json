@@ -15,7 +15,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-api": "nodemon --watch api --exec \"node --harmony --use_strict\" ./server.es6",
-    "dev-static": "watchify src/app.es6 -t babelify -o static/script.dev.js -d -v"
+    "dev-static": "watchify src/app.es6 -t babelify -o static/script.dev.js -d -v",
+    "dev-style": "node-sass -w --source-map-embed --output-style expanded src/style.scss static/css/style.css"
   },
   "author": "Roman Melnyk",
   "license": "ISC",
@@ -29,6 +30,7 @@
     "body-parser": "^1.14.1",
     "browserify": "^12.0.1",
     "mustache": "^2.2.0",
+    "node-sass": "^3.4.2",
     "nodemon": "^1.8.1",
     "uglify": "^0.1.5",
     "watchify": "^3.6.0"
