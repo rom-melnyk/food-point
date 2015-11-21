@@ -2,7 +2,7 @@
 *.iws
 
 node_modules/
-npm-debug.log
+npm-debug.log*
 
 static/script.dev.js
 static/css/style.dev.css
