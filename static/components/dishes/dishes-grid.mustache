@@ -1,20 +1,15 @@
 <div class="page dishes">
-    <h1>Страви</h1>
-    {{#section}}
-        <section>
-            <h2>{{name}}</h2>
-            <ul>
-                {{#dish}}
-                    <li>
-                        <div class="name">{{name}}</div>
-                        <div class="name">{{price}}</div>
-                        <div class="controls">
-                          <input type="button" class="edit"/>
-                          <input type="delete" class="delete"/>
-                        </div>
-                    </li>
-                {{/dish}}
-            </ul>
-        </section>
-    {{/section}}
+  <h1>Страви</h1>
+  <ul>
+    {{#.}}
+      <li>
+        <div class="name">{{name}}</div>
+        <div class="name">{{price}}</div>
+        <div class="controls">
+          <input type="button" class="edit"/>
+          <input type="button" class="delete"/>
+        </div>
+      </li>
+    {{/.}}
+  </ul>
 </div>

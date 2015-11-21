@@ -1,5 +1,3 @@
-"use strict";
-
 const Ajax = require('./utils/ajax.es6');
 const Mustache = require('mustache');
 
