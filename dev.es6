@@ -35,7 +35,7 @@ const Dev = {
 module.exports = Dev;
 
 function _transpileEs () {
-    const jsFileName = `${config.output.dir}/script.dev.js`;
+    const jsFileName = `${config.output.dir}/${config.output.js}`;
     const writeStream = fs.createWriteStream(jsFileName);
     writeStream.on('error', (err) => {
         console.error(`\t${err}\n`);
@@ -62,7 +62,7 @@ function _compileScss () {
         if (err) {
             console.error(`\t${err.message}\n`);
         } else {
-            const cssFileName = `${config.output.dir}/css/style.dev.css`;
+            const cssFileName = `${config.output.dir}/${config.output.css}`;
             fs.writeFile(cssFileName, result.css, (err) => {
                 if (!err) {
                     console.info(`<<< Wrote ${cssFileName}\n`);
