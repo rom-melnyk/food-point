@@ -3,11 +3,15 @@
   <ul>
     {{#.}}
       <li>
-        <div class="name">{{name}}</div>
-        <div class="price">{{price}}</div>
-        <div class="controls">
-          <span class="button edit"></span>
-          <span class="button delete"></span>
+        <div class="left">
+          <span class="name">{{name}}</span>
+        </div>
+        <div class="right">
+          <span class="price">{{price}}</span>
+          <span class="controls">
+            <span class="button icon-edit"></span>
+            <span class="button icon-delete"></span>
+          </span>
         </div>
       </li>
     {{/.}}

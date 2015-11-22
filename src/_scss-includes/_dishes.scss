@@ -14,21 +14,34 @@
       }
 
       div {
-        float: left;
-      }
-      .name {
-        width: 60%;
-      }
-      .price {
-        width: 20%;
-        text-align: right;
-
-        &::after {
-          content: " грн.";
+        &.left {
+          float: left;
+          width: 80%;
         }
+
+        &.right {
+          float: right;
+          width: 20%;
+          text-align: right;
+
+          .price::after {
+            content: " грн.";
+          }
+          .controls {
+            padding-left: 1em;
+            opacity: 0;
+            transition: opacity .3s;
+          }
+        }
+
       }
-      .controls {
-        width: 20%;
+
+      &:hover {
+        div {
+          .controls {
+            opacity: 1;
+          }
+        }
       }
     }
   }
