@@ -4,5 +4,5 @@
 node_modules/
 npm-debug.log*
 
-static/js/script.dev.js
-static/css/style.dev.css
+static/script.js
+static/style.css
