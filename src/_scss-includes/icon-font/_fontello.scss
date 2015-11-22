@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'fontello';
+  src: url('./font/fontello.eot');
+  src: url('./font/fontello.eot#iefix') format('embedded-opentype'),
+  url('./font/fontello.woff') format('woff'),
+  url('./font/fontello.ttf') format('truetype'),
+  url('./font/fontello.svg#fontello') format('svg');
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?86156582#fontello') format('svg');
+  }
+}
+*/
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  display: inline-block;
+  width: 1em;
+  margin-right: .2em;
+  margin-left: .2em;
+
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-decoration: none;
+  line-height: 1em;
+  speak: none;
+
+  text-align: center;
+  text-transform: none;
+
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+.icon-back:before {
+  content: '\62'; /* 'b' */
+}
+
+.icon-edit:before {
+  content: '\65'; /* 'e' */
+}
+
+.icon-update:before {
+  content: '\75'; /* 'u' */
+}
+
+.icon-delete:before {
+  content: '\78'; /* 'x' */
+}
+
+.icon-ok:before {
+  content: '\79'; /* 'y' */
+}
