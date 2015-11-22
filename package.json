@@ -10,13 +10,21 @@
       "user": "root",
       "password": "",
       "database": "food_point"
+    },
+    "src": {
+      "dir": "./src",
+      "es": "app.es6",
+      "scss": "style.scss"
+    },
+    "output": {
+      "dir": "./static"
     }
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev-api": "nodemon --watch api --exec \"node --harmony --use_strict\" ./server.es6",
-    "dev-static": "watchify src/app.es6 -t babelify -o static/script.dev.js -d -v",
-    "dev-style": "node-sass -w --source-map-embed --output-style=expanded src/style.scss static/css/style.dev.css"
+    "dev": "nodemon --watch api --exec \"node --harmony --use_strict\" ./server.es6",
+    "compile-statics": "browserify src/app.es6 -t babelify -o static/script.dev.js -v",
+    "compile-styles": "node-sass -x --output-style=compressed src/style.scss static/css/style.dev.css"
   },
   "author": "Roman Melnyk",
   "license": "ISC",
@@ -33,6 +41,6 @@
     "node-sass": "^3.4.2",
     "nodemon": "^1.8.1",
     "uglify": "^0.1.5",
-    "watchify": "^3.6.0"
+    "watch": "^0.16.0"
   }
 }
