@@ -18,14 +18,14 @@
     },
     "output": {
       "dir": "./static",
-      "js": "script.dev.js",
+      "js": "js/script.dev.js",
       "css": "css/style.dev.css"
     }
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --watch api --exec \"node --harmony --use_strict\" ./server.es6 --dev",
-    "compile-statics": "browserify src/app.es6 -t babelify -o static/script.dev.js -v && uglifyjs static/script.dev.js --screw-ie8 -c -m -o static/script.js",
+    "compile-statics": "browserify src/app.es6 -t babelify -o static/js/script.dev.js -v && uglifyjs static/js/script.dev.js --screw-ie8 -c -m -o static/js/script.js",
     "compile-styles": "node-sass -x --output-style=compressed src/style.scss static/css/style.css"
   },
   "author": "Roman Melnyk",
