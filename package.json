@@ -24,7 +24,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch api --exec \"node --harmony --use_strict\" ./server.es6 --dev",
+    "dev-api": "nodemon --watch api --exec \"node --harmony --use_strict\" ./server.es6",
+    "dev-static": "echo Run \\\"node --harmony --use_strict ./server.es6 --dev\\\"",
     "compile-statics": "browserify src/app.es6 -t babelify -o static/script.js -v && uglifyjs static/script.js --screw-ie8 -c -m -o static/script.js",
     "compile-styles": "node-sass -x --output-style=compressed src/style.scss static/style.css"
   },
