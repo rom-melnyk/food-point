@@ -29,9 +29,5 @@ const server = app.listen(config.port, () => {
     );
 });
 
-if (process.argv.filter(v => /^(--)?dev$/i.test(v)).length > 0) {
-    console.info('DEV mode ON; watching *.es6 and *.scss\n');
-    dev.startSocket(server);
-    dev.watch();
-    dev.force();
-}
+dev.init(/^(--)?dev$/i);
+dev.watch(app, server);

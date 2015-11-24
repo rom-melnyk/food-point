@@ -5,17 +5,7 @@
   <title>Food Point 2015</title>
   <link rel="stylesheet" href="style.css"/>
   <script src="script.js"></script>
-  <script>
-    var script = document.createElement('script');
-    script.onload = function () {
-      var socket = io();
-      socket.on('update', function (message) {
-        window.location.reload(true);
-      });
-    };
-    document.head.appendChild(script);
-    script.src = '/socket.io/socket.io.js';
-  </script>
+  <script src="/auto-reload.js"></script>
 </head>
 <body>
 
