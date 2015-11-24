@@ -6,21 +6,29 @@
 
   ul {
     li {
-      @include clear-fix();
+      @include hover(background-color);
+      display: table;
+      width: 100%;
       margin-bottom: .5em;
+      padding: .2em 1em;
+
+      &:hover {
+        background-color: #f3f3f5;
+      }
 
       &:last-child {
         margin-bottom: 0;
       }
 
       div {
+        display: table-cell;
+        vertical-align: middle;
+
         &.left {
-          float: left;
           width: 80%;
         }
 
         &.right {
-          float: right;
           width: 20%;
           text-align: right;
 
@@ -28,9 +36,9 @@
             content: " грн.";
           }
           .controls {
+            @include hover(opacity);
             padding-left: 1em;
             opacity: 0;
-            transition: opacity .3s;
           }
         }
 

@@ -9,3 +9,6 @@
   }
 }
 
+@mixin hover($property) {
+  transition: $property .3s;
+}
