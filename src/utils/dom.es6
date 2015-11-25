@@ -1,28 +1,41 @@
+/**
+ * @param {String} selector
+ * @returns {Array<Element>}
+ */
 function Dom (selector) {
-    const result = Array.prototype.slice.call(
-        document.querySelectorAll(selector)
-    );
+    let result = [];
+    if (typeof selector === 'string') {
+        try {
+            result = Array.prototype.slice.call(
+                document.querySelectorAll(selector)
+            );
+        } catch (e) {
+            console.error(`[ DOM ] Bad selector: "${selector}"`);
+        }
+    } else if (selector instanceof Element) {
+        result = [selector];
+    }
 
     result.hasClass = (className) => {
-        return this.length > 0 && _hasClass.call(this[0], className);
+        return result.length > 0 && _hasClass.call(result[0], className);
     };
 
     result.addClass = (className) => {
-        this.forEach((el) => {
+        result.forEach((el) => {
             _addClass.call(el, className);
-        });
+        }, result);
     };
 
     result.removeClass = (className) => {
-        this.forEach((el) => {
+        result.forEach((el) => {
             _removeClass.call(el, className);
-        });
+        }, result);
     };
 
     result.toggleClass = (className) => {
-        this.forEach((el) => {
+        result.forEach((el) => {
             _toggleClass.call(el, className);
-        });
+        }, result);
     };
 
     return result;
