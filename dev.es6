@@ -45,6 +45,7 @@ const Dev = {
                     console.info(`>>> Got ${file}`);
                     _compileScss(file);
                 } if (/\.mustache$/.test(file)) {
+                    console.info(`>>> Got ${file}`);
                     _emitSocketEvent(file);
                 }
             }
@@ -125,6 +126,7 @@ function _transpileEs (es6FileName) {
 
     browserify(`${config.src.dir}/${config.src.es}`, { debug: true })
         .transform(babelify, {presets: ['es2015']})
+        .transform('brfs')
         .bundle()
         .on('error', (err) => {
             console.error(`\t${err.message}`);

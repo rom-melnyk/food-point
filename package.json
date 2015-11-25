@@ -26,7 +26,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-api": "nodemon --watch api --exec \"node --harmony --use_strict\" ./server.es6",
     "dev-static": "echo Run \\\"node --harmony --use_strict ./server.es6 --dev\\\"",
-    "compile-statics": "browserify src/app.es6 -t babelify -o static/script.js -v && uglifyjs static/script.js --screw-ie8 -c -m -o static/script.js",
+    "compile-statics": "browserify src/app.es6 -t babelify -t brfs -o static/script.js -v && uglifyjs static/script.js --screw-ie8 -c -m -o static/script.js",
     "compile-styles": "node-sass -x --output-style=compressed src/style.scss static/style.css"
   },
   "author": "Roman Melnyk",
@@ -39,6 +39,7 @@
     "babel-preset-es2015": "^6.1.18",
     "babelify": "^7.2.0",
     "body-parser": "^1.14.1",
+    "brfs": "^1.4.1",
     "browserify": "^12.0.1",
     "mustache": "^2.2.0",
     "node-sass": "^3.4.2",
