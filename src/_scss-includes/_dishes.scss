@@ -43,7 +43,7 @@
             .button {
               padding: .3em .5em;
 
-              &.edit {
+              &:first-child {
                 margin-right: .3em;
               }
             }
@@ -58,6 +58,62 @@
             opacity: 1;
           }
         }
+      }
+    }
+  }
+}
+
+.edit-dish {
+  .input-section {
+    display: table;
+    width: 100%;
+    padding: .3em 0;
+
+    label, .input-wrapper {
+      display: table-cell;
+    }
+
+    label {
+      width: 20%;
+    }
+
+    .input-wrapper {
+      width: 80%;
+
+      input {
+        @include in-out-fast(background-color);
+
+        width: 100%;
+        padding: .3em;
+
+        border: 1px solid #eee;
+        background-color: #eee;
+
+        &:focus {
+          background-color: #fff;
+        }
+
+        &[name=price] {
+          width: 4em;
+          text-align: right;
+        }
+      }
+
+      .currency {
+        padding-left: .3em;
+      }
+    }
+  }
+
+  .controls {
+    padding-top: .3em;
+    text-align: center;
+
+    .button {
+      padding: .3em .5em;
+
+      &:first-child {
+        margin-right: 2em;
       }
     }
   }

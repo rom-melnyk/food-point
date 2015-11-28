@@ -34,11 +34,11 @@ function _loadGridView () {
                 document.body.innerHTML = Mustache.render(gridTemplate, dishes);
 
                 setTimeout(() => {
-                    dom('.dishes .button').forEach((el) => {
+                    dom('.dishes .button').forEach((el, idx) => {
                         if (dom(el).hasClass('delete')) {
                             _assignDeleteHandler(el);
                         } else if (dom(el).hasClass('edit')) {
-                            _assignEditHandler(el);
+                            _assignEditHandler(el, dishes[idx]);
                         }
                     });
                     resolve();
@@ -47,12 +47,27 @@ function _loadGridView () {
         });
 }
 
-function _assignEditHandler (el) {
-    const id = el.getAttribute('data-id');
+function _assignEditHandler (el, dishData) {
     el.addEventListener('click', (e) => {
-        //console.log(`Editing "${id}"`);
         const modal = Modal.open();
-        modal.container.innerHTML = `Editing "${id}"`;
+        modal.container.innerHTML = Mustache.render(editTemplate, {});
+        setTimeout(() => {
+            const nameField = dom('.edit-dish [name=name]')[0];
+            const priceField = dom('.edit-dish [name=price]')[0];
+            nameField.value = dishData.name;
+            priceField.value = dishData.price;
+
+            dom('.edit-dish .cancel')[0].addEventListener('click', modal.close);
+            dom('.edit-dish .submit')[0].addEventListener('click', () => {
+                const data = {
+                    name: nameField.value,
+                    price: priceField.value
+                };
+
+                console.log(data);
+                //Ajax.put('/api/dishes/${dishData.id}');
+            });
+        }, 1);
     });
 }
 
