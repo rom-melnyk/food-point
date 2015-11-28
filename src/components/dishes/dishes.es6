@@ -1,5 +1,6 @@
 const Ajax = require('../../utils/ajax.es6');
 const dom = require('../../utils/dom.es6');
+const Modal = require('../../utils/modal.es6');
 const Mustache = require('mustache');
 const fs = require('fs');
 const gridTemplate = fs.readFileSync(__dirname + '/dishes-grid.mustache', 'utf8');
@@ -49,7 +50,9 @@ function _loadGridView () {
 function _assignEditHandler (el) {
     const id = el.getAttribute('data-id');
     el.addEventListener('click', (e) => {
-        console.log(`Editing "${id}"`);
+        //console.log(`Editing "${id}"`);
+        const modal = Modal.open();
+        modal.container.innerHTML = `Editing "${id}"`;
     });
 }
 
