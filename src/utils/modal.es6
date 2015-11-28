@@ -12,35 +12,38 @@ module.exports = Modal;
  */
 function _open () {
     const shader = document.createElement('div');
+    const modalWrapper = document.createElement('div');
     const modalWindow = document.createElement('div');
     const closeButton = document.createElement('div');
     const container = document.createElement('div');
 
     const close = (e) => {
+        dom(shader).removeClass('appear');
         dom(modalWindow).removeClass('appear');
         setTimeout(() => {
-            dom(shader).removeClass('appear');
-        }, 100);
-        setTimeout(() => {
-            document.body.removeChild(modalWindow);
             document.body.removeChild(shader);
-        }, 500);
+        }, 300);
     };
 
     shader.className = 'modal-shader';
+    modalWrapper.className = 'modal-wrapper';
     modalWindow.className = 'modal-window';
-    closeButton.className = 'icon-delete';
+    closeButton.className = 'icon-back';
     container.className = 'modal-content';
-
-    modalWindow.appendChild(closeButton);
-    modalWindow.appendChild(container);
 
     closeButton.addEventListener('click', close);
 
+    modalWindow.appendChild(closeButton);
+    modalWindow.appendChild(container);
+    modalWrapper.appendChild(modalWindow);
+    shader.appendChild(modalWrapper);
+
     document.body.appendChild(shader);
-    document.body.appendChild(modalWindow);
-    dom(shader).addClass('appear');
-    dom(modalWindow).addClass('appear');
+
+    setTimeout(() => {
+        dom(shader).addClass('appear');
+        dom(modalWindow).addClass('appear');
+    }, 10);
 
     return {
         container,

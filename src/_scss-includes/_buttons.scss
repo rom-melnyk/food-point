@@ -6,7 +6,7 @@ $button-gradient-from-hover: lighten($button-gradient-from, 5%);
 $button-gradient-to-hover: lighten($button-gradient-to, 2%);
 
 .button {
-  @include in-out(border-color);
+  @include in-out-fast(border-color);
 
   display: inline-block;
   padding: .5em;

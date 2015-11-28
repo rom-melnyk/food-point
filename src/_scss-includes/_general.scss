@@ -7,6 +7,6 @@
   }
 }
 
-@mixin in-out($property) {
+@mixin in-out-fast($property) {
   transition: $property .3s;
 }

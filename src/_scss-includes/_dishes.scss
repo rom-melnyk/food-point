@@ -6,7 +6,7 @@
 
   ul {
     li {
-      @include in-out(background-color);
+      @include in-out-fast(background-color);
       display: table;
       width: 100%;
       margin-bottom: .5em;
@@ -36,7 +36,7 @@
             content: " грн.";
           }
           .controls {
-            @include in-out(opacity);
+            @include in-out-fast(opacity);
             padding-left: 1em;
             opacity: 0;
           }
