@@ -1,9 +1,13 @@
+@import "general";
+
 $button-gradient-from: hsl(200, 75%, 85%);
 $button-gradient-to: lighten($button-gradient-from, 10%);
 $button-gradient-from-hover: lighten($button-gradient-from, 5%);
 $button-gradient-to-hover: lighten($button-gradient-to, 2%);
 
 .button {
+  @include in-out(border-color);
+
   display: inline-block;
   padding: .5em;
 
@@ -11,8 +15,6 @@ $button-gradient-to-hover: lighten($button-gradient-to, 2%);
   border: 1px solid $button-gradient-from;
   border-radius: .2em;
   cursor: pointer;
-
-  transition: border-color 1s;
 
   &:hover {
     background: linear-gradient($button-gradient-from-hover, $button-gradient-to-hover, $button-gradient-from-hover);

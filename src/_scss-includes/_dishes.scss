@@ -6,7 +6,7 @@
 
   ul {
     li {
-      @include hover(background-color);
+      @include in-out(background-color);
       display: table;
       width: 100%;
       margin-bottom: .5em;
@@ -36,7 +36,7 @@
             content: " грн.";
           }
           .controls {
-            @include hover(opacity);
+            @include in-out(opacity);
             padding-left: 1em;
             opacity: 0;
           }

@@ -1,0 +1,62 @@
+@import "general";
+
+$modal-background-color: hsl(200, 20, 20, .8);
+
+.modal-shader {
+  @include in-out(opacity);
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: $modal-background-color;
+  opacity: 0;
+
+  &.appear {
+    opacity: 1;
+  }
+}
+
+.modal-window {
+  position: fixed;
+  min-width: 40%;
+  max-width: 80%;
+  margin: 0 auto;
+
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+
+  opacity: 0;
+
+  transition: opacity .5s, margin-top .5s;
+
+  &.appear {
+    opacity: 1;
+    margin-top: 50%
+  }
+
+  .icon-delete {
+    @include in-out(opacity);
+
+    position: absolute;
+    top: 1em;
+    right: 1em;
+
+    font-size: 200%;
+    cursor: pointer;
+    opacity: .3;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .content {
+    margin: 2em;
+  }
+}
