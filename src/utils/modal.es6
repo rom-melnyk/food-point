@@ -31,7 +31,13 @@ function _open () {
     closeButton.className = 'icon-x';
     container.className = 'modal-content';
 
-    closeButton.addEventListener('click', close);
+    closeButton.addEventListener('click', close, true);
+    shader.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget || e.target === modalWrapper) {
+            close(e);
+            e.stopPropagation();
+        }
+    }, true);
 
     modalWindow.appendChild(closeButton);
     modalWindow.appendChild(container);
