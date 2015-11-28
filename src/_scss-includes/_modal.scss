@@ -44,7 +44,7 @@ $modal-shadow-color: #000;
       background-color: #fff;
       box-shadow: 0 0 3em $modal-shadow-color;
 
-      .icon-back {
+      .icon-x {
         @include in-out-fast(opacity);
 
         position: absolute;

@@ -28,7 +28,7 @@ function _open () {
     shader.className = 'modal-shader';
     modalWrapper.className = 'modal-wrapper';
     modalWindow.className = 'modal-window';
-    closeButton.className = 'icon-back';
+    closeButton.className = 'icon-x';
     container.className = 'modal-content';
 
     closeButton.addEventListener('click', close);
