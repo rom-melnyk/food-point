@@ -24,18 +24,33 @@ function Dom (selector) {
         result.forEach((el) => {
             _addClass.call(el, className);
         }, result);
+
+        return result;
     };
 
     result.removeClass = (className) => {
         result.forEach((el) => {
             _removeClass.call(el, className);
         }, result);
+
+        return result;
     };
 
     result.toggleClass = (className) => {
         result.forEach((el) => {
             _toggleClass.call(el, className);
         }, result);
+
+        return result;
+    };
+
+    /**
+     * @param {Number} [count=1] levels to climb the DOM tree
+     */
+    result.parent = (count) => {
+        let parent = result.length > 0 ? _getParent.call(result[0], count) : null;
+
+        return Dom(parent);
     };
 
     return result;
@@ -64,4 +79,14 @@ function _removeClass (className) {
 
 function _toggleClass (className) {
     return this.classList.toggle(className);
+}
+
+function _getParent (count = 1) {
+    let parent = this.parentNode;
+
+    while (count-- > 0 && parent) {
+        parent = parent.parentNode;
+    }
+
+    return parent;
 }
