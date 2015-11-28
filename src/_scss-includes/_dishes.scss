@@ -84,8 +84,9 @@
         @include in-out-fast(background-color);
 
         width: 100%;
-        padding: .3em;
+        padding: .3em .7em;
 
+        font: inherit;
         border: 1px solid #eee;
         background-color: #eee;
 
@@ -94,7 +95,7 @@
         }
 
         &[name=price] {
-          width: 4em;
+          width: 6em;
           text-align: right;
         }
       }
