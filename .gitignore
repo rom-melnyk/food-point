@@ -4,5 +4,8 @@
 node_modules/
 npm-debug.log*
 
+fontello*.zip
+fontello*/
+
 static/script.js
 static/style.css
