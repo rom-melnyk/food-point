@@ -1,5 +1,5 @@
 /**
- * @param {String} selector
+ * @param {String|Element} selector
  * @returns {Array<Element>}
  */
 function Dom (selector) {
@@ -17,20 +17,22 @@ function Dom (selector) {
     }
 
     result.hasClass = (className) => {
-        return result.length > 0 && _hasClass.call(result[0], className);
+        return result.length > 0 && result[0].classList.contains(className);
     };
 
     result.addClass = (className) => {
         result.forEach((el) => {
-            _addClass.call(el, className);
-        }, result);
+            if (!el.classList.contains(className)) {
+                el.classList.add(className);
+            }
+        });
 
         return result;
     };
 
     result.removeClass = (className) => {
         result.forEach((el) => {
-            _removeClass.call(el, className);
+            el.classList.remove(className);
         }, result);
 
         return result;
@@ -38,7 +40,7 @@ function Dom (selector) {
 
     result.toggleClass = (className) => {
         result.forEach((el) => {
-            _toggleClass.call(el, className);
+            el.classList.toggle(className);
         }, result);
 
         return result;
@@ -48,7 +50,7 @@ function Dom (selector) {
      * @param {Number} [count=1] levels to climb the DOM tree
      */
     result.parent = (count) => {
-        let parent = result.length > 0 ? _getParent.call(result[0], count) : null;
+        let parent = result.length > 0 ? _getParent(result[0], count) : null;
 
         return Dom(parent);
     };
@@ -59,30 +61,8 @@ function Dom (selector) {
 module.exports = Dom;
 
 // ------------------------------ private methods ------------------------------
-// all the methods use {Element} `this`
-function _hasClass (className) {
-    return this.classList.contains(className);
-}
-
-function _addClass (className) {
-    if (!_hasClass(className)) {
-        this.classList.add(className);
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function _removeClass (className) {
-    this.classList.remove(className);
-}
-
-function _toggleClass (className) {
-    return this.classList.toggle(className);
-}
-
-function _getParent (count = 1) {
-    let parent = this.parentNode;
+function _getParent (el, count = 1) {
+    let parent = el.parentNode;
 
     while (count-- > 0 && parent) {
         parent = parent.parentNode;
