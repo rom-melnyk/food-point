@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { editDish } from '../../actions.es6';
+import { editDish, setModalCommand } from '../../actions.es6';
 
 export default React.createClass({
     componentDidMount () {
@@ -44,6 +44,6 @@ export default React.createClass({
     },
 
     _onBackHandler () {
-        //Modals.open();
+        setModalCommand('edit-dish', 'close');
     }
 });

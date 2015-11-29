@@ -22,6 +22,10 @@ $modal-shadow-color: #000;
     .modal-wrapper {
       top: 50%;
       opacity: 1;
+
+      .modal-window .modal-container {
+        visibility: visible;
+      }
     }
   }
 
@@ -85,7 +89,9 @@ $modal-shadow-color: #000;
 
       .wait-indicator {}
 
-      .modal-container {}
+      .modal-container {
+        visibility: hidden;
+      }
     }
   }
 
