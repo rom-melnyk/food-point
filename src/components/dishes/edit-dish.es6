@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Modals from '../modals/modals.es6';
+import { editDish } from '../../actions.es6';
 
 export default React.createClass({
     componentDidMount () {
@@ -31,8 +31,8 @@ export default React.createClass({
                     </span>
                 </div>
                 <div className="controls">
-                    <span className="button cancel"></span>
-                    <span className="button submit"></span>
+                    <span className="button cancel" onClick={this._onBackHandler}></span>
+                    <span className="button submit" onClick={this._onOkHandler}></span>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@ export default React.createClass({
     },
 
     _onOkHandler () {
-        //Modals.open();
+        editDish(this.props.id, this._name.value, this._price.value);
     },
 
     _onBackHandler () {
