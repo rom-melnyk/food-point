@@ -2,7 +2,7 @@ import React from 'react';
 import Modals from '../modals/modals.es6';
 
 export default React.createClass({
-    componentDiMount () {},
+    componentDidMount () {},
 
     render () {
         return (
@@ -30,10 +30,14 @@ export default React.createClass({
     },
 
     _onEditHandler () {
-        Modals.open();
+        Modals.open('edit-dish', {
+            id: this.props.id,
+            name: this.props.name,
+            price: this.props.price
+        });
     },
 
     _onDeleteHandler () {
-        Modals.open();
+        Modals.open('delete-dish');
     }
 });

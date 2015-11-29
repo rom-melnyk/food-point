@@ -1,5 +1,5 @@
 import React from 'react';
-import Row from './dishes-row.es6';
+import Row from './dish-row.es6';
 import { getDishes } from '../../actions.es6';
 
 export default React.createClass({

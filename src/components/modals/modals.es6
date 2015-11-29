@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { getState, addChengeListener, removeChengeListener } from '../../state.es6';
+import EditDish from '../dishes/edit-dish.es6';
 import dom from '../../utils/dom.es6';
 
 const Modal = React.createClass({
@@ -13,13 +14,14 @@ const Modal = React.createClass({
     },
 
     render () {
+        const payload = _getModal(this.props.type, this.props.data);
         return (
             <div className="modal-wrapper">
                 <div className="modal-window">
                     <div className="close" onClick={_getCloseHandler(this)}></div>
                     <div className="wait-indicator"></div>
                     <div className="modal-container">
-                        Test String
+                        {payload}
                     </div>
                 </div>
             </div>
@@ -34,12 +36,12 @@ export default {
 }
 
 // -------------------------------- private methods --------------------------------
-function _open () {
+function _open (type, data) {
     const shader = document.createElement('div');
     shader.className = 'modal-shader';
     document.body.appendChild(shader);
 
-    ReactDom.render(<Modal />, shader);
+    ReactDom.render(<Modal type={type} data={data}/>, shader);
 }
 
 /**
@@ -82,4 +84,12 @@ function _getCloseHandler (component) {
         }, 300); // respect the animation
     };
 
+}
+
+function _getModal (type, props) {
+    if (type === 'edit-dish') {
+        return <EditDish {...props} />;
+    }
+
+    return null;
 }

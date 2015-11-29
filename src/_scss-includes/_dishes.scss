@@ -131,8 +131,13 @@
     .button {
       padding: .3em .5em;
 
-      &:first-child {
+      &.cancel {
+        @include icon-back();
         margin-right: 2em;
+      }
+
+      &.submit {
+        @include icon-ok();
       }
     }
   }

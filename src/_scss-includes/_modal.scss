@@ -25,12 +25,17 @@ $modal-shadow-color: #000;
     }
 
     &.wait .modal-wrapper .modal-window {
+      .close {
+        visibility: hidden;
+      }
+
       .wait-indicator {
         @include vertically-centered();
         @include icon-update();
 
         font-size: 200%;
         text-align: center;
+        color: $modal-background-color;
 
         &::before {
           @include animate-spin();

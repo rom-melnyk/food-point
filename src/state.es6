@@ -2,8 +2,7 @@ const _state = {
     dishes: [],
     users: [],
     orders: [],
-    me: {},
-    modals: []
+    me: {}
 };
 
 const _listeners = [];
