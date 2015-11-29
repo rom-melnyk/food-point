@@ -1,4 +1,6 @@
 @import "general";
+@import "icon-font/fontello";
+@import "icon-font/animations";
 
 $modal-background-color: hsla(200, 20, 20, .9);
 $modal-shadow-color: #000;
@@ -22,10 +24,10 @@ $modal-shadow-color: #000;
       opacity: 1;
     }
 
-    &.wait .model-window {
+    &.wait .modal-wrapper .model-window {
       &::after {
         @include vertically-centered();
-        @include animate-spin;
+        @include animate-spin();
 
         content: 'Wait';
         text-align: center;
@@ -55,8 +57,9 @@ $modal-shadow-color: #000;
       background-color: #fff;
       box-shadow: 0 0 3em $modal-shadow-color;
 
-      .icon-x {
+      .close {
         @include in-out-fast(opacity);
+        @include icon-x();
 
         position: absolute;
         top: .5em;

@@ -14,14 +14,14 @@ export default React.createClass({
                     <span className="price"> {this.props.price}</span>
                     <span className="controls">
                         <span
-                            className="button edit icon-edit"
+                            className="button edit"
                             data-id="{this.props.id}"
                             onClick={this._onEditHandler}
                         ></span>
                         <span
-                            className="button delete icon-x"
+                            className="button delete"
                             data-id="{this.props.id}"
-                            onClick={this._onEditHandler}
+                            onClick={this._onDeleteHandler}
                         ></span>
                     </span>
                 </div>
@@ -30,6 +30,10 @@ export default React.createClass({
     },
 
     _onEditHandler () {
+        Modals.open();
+    },
+
+    _onDeleteHandler () {
         Modals.open();
     }
 });

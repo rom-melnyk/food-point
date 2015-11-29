@@ -21,7 +21,7 @@
 }
 */
 
-[class^="icon-"]:before, [class*=" icon-"]:before {
+@mixin __icon-general__ {
   display: inline-block;
   width: 1em;
   margin-right: .2em;
@@ -46,8 +46,37 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.icon-back:before { content: '\62'; } /* 'b' */
-.icon-edit:before { content: '\65'; } /* 'e' */
-.icon-update:before { content: '\75'; } /* 'u' */
-.icon-x:before { content: '\78'; } /* 'x' */
-.icon-ok:before { content: '\79'; } /* 'y' */
+@mixin icon-back {
+  &::before {
+    @include __icon-general__();
+    content: '\62'; /* 'b' */
+  }
+}
+
+@mixin icon-edit {
+  &::before {
+    @include __icon-general__();
+    content: '\65'; /* 'e' */
+  }
+}
+
+@mixin icon-update {
+  &::before {
+    @include __icon-general__();
+    content: '\75'; /* 'u' */
+  }
+}
+
+@mixin icon-x {
+  &::before {
+    @include __icon-general__();
+    content: '\78'; /* 'x' */
+  }
+}
+
+@mixin icon-ok {
+  &::before {
+    @include __icon-general__();
+    content: '\79'; /* 'y' */
+  }
+}

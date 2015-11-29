@@ -1,4 +1,5 @@
 @import "general";
+@import "icon-font/fontello";
 
 .dishes {
   padding: 2em;
@@ -43,8 +44,13 @@
             .button {
               padding: .3em .5em;
 
-              &:first-child {
+              &.edit {
+                @include icon-edit();
                 margin-right: .3em;
+              }
+
+              &.delete {
+                @include icon-x();
               }
             }
           }

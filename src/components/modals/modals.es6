@@ -16,7 +16,7 @@ const Modal = React.createClass({
         return (
             <div className="modal-wrapper">
                 <div className="modal-window">
-                    <div className="icon-x" onClick={_getCloseHandler(this)}></div>
+                    <div className="close" onClick={_getCloseHandler(this)}></div>
                     <div className="modal-container">
                         Test String
                     </div>
@@ -44,40 +44,40 @@ function _open () {
 /**
  * @return {{container: {Element}, close: {Function}}}
  */
-function _open2 () {
-    closeButton.addEventListener('click', _close, true);
-    shader.addEventListener('click', (e) => {
-        if (e.target === e.currentTarget || e.target === modalWrapper) {
-            _close(e);
-            e.stopPropagation();
-        }
-    }, true);
-
-    return {
-        container,
-        startWaiting: () => {
-            dom(modalWindow).addClass('wait');
-        },
-        stopWaiting: () => {
-            dom(modalWindow).removeClass('wait');
-        },
-        close: () => {
-            return new Promise((resolve) => {
-                _close(null, resolve);
-            });
-        }
-    };
-}
+//function _open2 () {
+//    closeButton.addEventListener('click', _close, true);
+//    shader.addEventListener('click', (e) => {
+//        if (e.target === e.currentTarget || e.target === modalWrapper) {
+//            _close(e);
+//            e.stopPropagation();
+//        }
+//    }, true);
+//
+//    return {
+//        container,
+//        startWaiting: () => {
+//            dom(modalWindow).addClass('wait');
+//        },
+//        stopWaiting: () => {
+//            dom(modalWindow).removeClass('wait');
+//        },
+//        close: () => {
+//            return new Promise((resolve) => {
+//                _close(null, resolve);
+//            });
+//        }
+//    };
+//}
 
 function _getCloseHandler (component) {
-    return (e, callback) => {
+    return (/*e, callback*/) => {
         component._$shader.removeClass('appear');
         setTimeout(() => {
             ReactDom.unmountComponentAtNode(component._$shader[0]);
             document.body.removeChild(component._$shader[0]);
-            if (typeof callback === 'function') {
-                callback();
-            }
+            //if (typeof callback === 'function') {
+            //    callback();
+            //}
         }, 300); // respect the animation
     };
 
