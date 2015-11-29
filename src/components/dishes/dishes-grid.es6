@@ -1,7 +1,12 @@
 import React from 'react';
 import Row from './dishes-row.es6';
+import { getDishes } from '../../actions.es6';
 
 export default React.createClass({
+    componentDidMount () {
+        getDishes();
+    },
+
     render () {
         const rows = this.props.dishes.map((dish) => {
             return <Row key={dish.id} name={dish.name} price={dish.price} id={dish.id}/>

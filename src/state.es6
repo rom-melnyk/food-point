@@ -1,0 +1,48 @@
+const _state = {
+    dishes: [],
+    users: [],
+    orders: [],
+    me: {}
+};
+
+const _listeners = [];
+
+export function getState () {
+    return _state;
+}
+
+export function addChengeListener (callback) {
+    if (_listeners.indexOf(callback) === -1 && typeof callback === 'function') {
+        _listeners.push(callback);
+    }
+}
+
+export function removeChengeListener (callback) {
+    const index = _listeners.indexOf(callback);
+    if (index !== -1) {
+        _listeners.splice(index, 1);
+    }
+}
+
+export function update (path, value, root = _state) {
+    const dotPosition = path.indexOf('.');
+
+    if (dotPosition === -1) {
+        root[path] = value;
+    } else {
+        const key = path.substring(0, dotPosition);
+        const reminder = path.substr(dotPosition + 1);
+        if (typeof root[key] !== 'object') {
+            root[key] = {};
+        }
+        update(reminder, value, root[key]);
+    }
+
+    _triggerChangeEvent();
+}
+
+function _triggerChangeEvent () {
+    _listeners.forEach((listener) => {
+        listener(_state);
+    })
+}
