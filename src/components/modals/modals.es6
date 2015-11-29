@@ -17,6 +17,7 @@ const Modal = React.createClass({
             <div className="modal-wrapper">
                 <div className="modal-window">
                     <div className="close" onClick={_getCloseHandler(this)}></div>
+                    <div className="wait-indicator"></div>
                     <div className="modal-container">
                         Test String
                     </div>

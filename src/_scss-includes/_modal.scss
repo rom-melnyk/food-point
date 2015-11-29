@@ -24,16 +24,20 @@ $modal-shadow-color: #000;
       opacity: 1;
     }
 
-    &.wait .modal-wrapper .model-window {
-      &::after {
+    &.wait .modal-wrapper .modal-window {
+      .wait-indicator {
         @include vertically-centered();
-        @include animate-spin();
+        @include icon-update();
 
-        content: 'Wait';
+        font-size: 200%;
         text-align: center;
+
+        &::before {
+          @include animate-spin();
+        }
       }
 
-      .modal-content {
+      .modal-container {
         visibility: hidden;
       }
     }
@@ -73,7 +77,7 @@ $modal-shadow-color: #000;
         }
       }
 
-      .modal-content {}
+      .modal-container {}
     }
   }
 
