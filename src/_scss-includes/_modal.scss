@@ -16,15 +16,34 @@ $modal-shadow-color: #000;
 
   &.appear {
     background-color: $modal-background-color;
+
+    .modal-wrapper {
+      top: 50%;
+      opacity: 1;
+    }
+
+    &.wait .model-window {
+      &::after {
+        @include vertically-centered();
+        @include animate-spin;
+
+        content: 'Wait';
+        text-align: center;
+      }
+
+      .modal-content {
+        visibility: hidden;
+      }
+    }
   }
 
   .modal-wrapper {
-    @extend .vertically-centered;
+    @include vertically-centered();
     top: -50%;
 
     opacity: 0;
 
-    transition: opacity .3s, top 0.3s;
+    transition: opacity .3s, top .3s;
 
     .modal-window {
       position: relative;
@@ -35,19 +54,6 @@ $modal-shadow-color: #000;
 
       background-color: #fff;
       box-shadow: 0 0 3em $modal-shadow-color;
-
-      &.wait {
-        &::after {
-          @extend .vertically-centered;
-          @extend .animate-spin;
-
-          content: 'Wait';
-        }
-
-        .modal-content {
-          visibility: hidden;
-        }
-      }
 
       .icon-x {
         @include in-out-fast(opacity);
@@ -66,11 +72,6 @@ $modal-shadow-color: #000;
 
       .modal-content {}
     }
-  }
-
-  &.appear .modal-wrapper {
-    top: 50%;
-    opacity: 1;
   }
 
 }

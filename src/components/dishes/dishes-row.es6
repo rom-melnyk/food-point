@@ -1,6 +1,9 @@
 import React from 'react';
+import Modals from '../modals/modals.es6';
 
 export default React.createClass({
+    componentDiMount () {},
+
     render () {
         return (
             <li>
@@ -10,11 +13,23 @@ export default React.createClass({
                 <div className="right">
                     <span className="price"> {this.props.price}</span>
                     <span className="controls">
-                        <span className="button edit icon-edit" data-id="{this.props.id}"></span>
-                        <span className="button delete icon-x" data-id="{this.props.id}"></span>
+                        <span
+                            className="button edit icon-edit"
+                            data-id="{this.props.id}"
+                            onClick={this._onEditHandler}
+                        ></span>
+                        <span
+                            className="button delete icon-x"
+                            data-id="{this.props.id}"
+                            onClick={this._onEditHandler}
+                        ></span>
                     </span>
                 </div>
             </li>
         );
+    },
+
+    _onEditHandler () {
+        Modals.open();
     }
 });

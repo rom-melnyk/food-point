@@ -10,7 +10,11 @@ window.FoodPoint = {
 };
 
 function _init () {
-    const TopLevel = React.createClass({
+    const container = document.createElement('div');
+    container.id = 'main';
+    document.body.appendChild(container);
+
+    const Main = React.createClass({
         getInitialState () {
             return getState();
         },
@@ -36,6 +40,6 @@ function _init () {
         }
     });
 
-    ReactDom.render(<TopLevel/>, document.body);
+    ReactDom.render(<Main/>, container);
 }
 

@@ -1,13 +1,14 @@
 /**
  * @param {String|Element} selector
+ * @param {Element} [parent=document]
  * @returns {Array<Element>}
  */
-function Dom (selector) {
+function Dom (selector, parent = document) {
     let result = [];
     if (typeof selector === 'string') {
         try {
             result = Array.prototype.slice.call(
-                document.querySelectorAll(selector)
+                parent.querySelectorAll(selector)
             );
         } catch (e) {
             console.error(`[ DOM ] Bad selector: "${selector}"`);
@@ -64,7 +65,7 @@ module.exports = Dom;
 function _getParent (el, count = 1) {
     let parent = el.parentNode;
 
-    while (count-- > 0 && parent) {
+    while (--count > 0 && parent) {
         parent = parent.parentNode;
     }
 
