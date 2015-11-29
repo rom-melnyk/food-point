@@ -17,11 +17,14 @@ function _open () {
     const closeButton = document.createElement('div');
     const container = document.createElement('div');
 
-    const close = (e) => {
+    const _close = (e, callback) => {
         dom(shader).removeClass('appear');
         dom(modalWindow).removeClass('appear');
         setTimeout(() => {
             document.body.removeChild(shader);
+            if (typeof callback === 'function') {
+                callback();
+            }
         }, 300);
     };
 
@@ -31,10 +34,10 @@ function _open () {
     closeButton.className = 'icon-x';
     container.className = 'modal-content';
 
-    closeButton.addEventListener('click', close, true);
+    closeButton.addEventListener('click', _close, true);
     shader.addEventListener('click', (e) => {
         if (e.target === e.currentTarget || e.target === modalWrapper) {
-            close(e);
+            _close(e);
             e.stopPropagation();
         }
     }, true);
@@ -53,6 +56,16 @@ function _open () {
 
     return {
         container,
-        close
+        startWaiting: () => {
+            dom(modalWindow).addClass('wait');
+        },
+        stopWaiting: () => {
+            dom(modalWindow).removeClass('wait');
+        },
+        close: () => {
+            return new Promise((resolve) => {
+                _close(null, resolve);
+            });
+        }
     };
 }

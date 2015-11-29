@@ -19,16 +19,8 @@ $modal-shadow-color: #000;
   }
 
   .modal-wrapper {
-    position: absolute;
+    @extend .vertically-centered;
     top: -50%;
-    left: 0;
-    right: 0;
-
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
 
     opacity: 0;
 
@@ -43,6 +35,19 @@ $modal-shadow-color: #000;
 
       background-color: #fff;
       box-shadow: 0 0 3em $modal-shadow-color;
+
+      &.wait {
+        &::after {
+          @extend .vertically-centered;
+          @extend .animate-spin;
+
+          content: 'Wait';
+        }
+
+        .modal-content {
+          visibility: hidden;
+        }
+      }
 
       .icon-x {
         @include in-out-fast(opacity);

@@ -5,9 +5,11 @@ const Mustache = require('mustache');
 const fs = require('fs');
 const gridTemplate = fs.readFileSync(__dirname + '/dishes-grid.mustache', 'utf8');
 const editTemplate = fs.readFileSync(__dirname + '/edit-dish.mustache', 'utf8');
+const deleteTemplate = fs.readFileSync(__dirname + '/delete-dish.mustache', 'utf8');
 
 Mustache.parse(gridTemplate);
 Mustache.parse(editTemplate);
+Mustache.parse(deleteTemplate);
 
 const Dishes = {
     open () {
@@ -34,13 +36,19 @@ function _loadGridView () {
                 document.body.innerHTML = Mustache.render(gridTemplate, dishes);
 
                 setTimeout(() => {
-                    dom('.dishes .button').forEach((el, idx) => {
+                    dom('.dishes .button').forEach((el) => {
+                        const dishData = _getDishById(dishes, el.getAttribute('data-id'));
+                        if (!dishData) {
+                            return;
+                        }
+
                         if (dom(el).hasClass('delete')) {
-                            _assignDeleteHandler(el);
+                            _assignDeleteHandler(el, dishData);
                         } else if (dom(el).hasClass('edit')) {
-                            _assignEditHandler(el, dishes[idx]);
+                            _assignEditHandler(el, dishData);
                         }
                     });
+
                     resolve();
                 }, 1);
             });
@@ -64,16 +72,37 @@ function _assignEditHandler (el, dishData) {
                     price: priceField.value
                 };
 
-                console.log(data);
-                //Ajax.put('/api/dishes/${dishData.id}');
+                modal.startWaiting();
+                Ajax.put(`/api/dishes/${dishData.id}`, data)
+                    .then((response) => {
+                        modal.stopWaiting();
+                        return modal.close();
+                    })
+                    .then(() => {
+                        _loadGridView();
+                    });
             });
         }, 1);
     });
 }
 
-function _assignDeleteHandler (el) {
-    const id = el.getAttribute('data-id');
+function _assignDeleteHandler (el, dishData) {
     el.addEventListener('click', (e) => {
-        console.log(`Deleting "${id}"`);
+        const modal = Modal.open();
+        modal.container.innerHTML = Mustache.render(deleteTemplate, dishData);
+
+        modal.startWaiting();
+        Ajax.delete(`/api/dishes/${dishData.id}`)
+            .then((response) => {
+                modal.stopWaiting();
+                return modal.close();
+            })
+            .then(() => {
+                _loadGridView();
+            });
     });
+}
+
+function _getDishById(dishes, id) {
+    return dishes.filter(dish => dish.id == id)[0];
 }

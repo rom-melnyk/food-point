@@ -105,7 +105,19 @@
       }
     }
   }
+}
 
+.delete-dish {
+  .label {
+    padding: .3em 0;
+
+    .name {
+      font-style: italic;
+    }
+  }
+}
+
+.edit-dish, .delete-dish {
   .controls {
     padding-top: .3em;
     text-align: center;
