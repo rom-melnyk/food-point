@@ -23,29 +23,6 @@ $modal-shadow-color: #000;
       top: 50%;
       opacity: 1;
     }
-
-    &.wait .modal-wrapper .modal-window {
-      .close {
-        visibility: hidden;
-      }
-
-      .wait-indicator {
-        @include vertically-centered();
-        @include icon-update();
-
-        font-size: 200%;
-        text-align: center;
-        color: $modal-background-color;
-
-        &::before {
-          @include animate-spin();
-        }
-      }
-
-      .modal-container {
-        visibility: hidden;
-      }
-    }
   }
 
   .modal-wrapper {
@@ -66,6 +43,30 @@ $modal-shadow-color: #000;
       background-color: #fff;
       box-shadow: 0 0 3em $modal-shadow-color;
 
+
+      &.wait {
+        .close {
+          visibility: hidden;
+        }
+
+        .wait-indicator {
+          @include vertically-centered();
+          @include icon-update();
+
+          font-size: 200%;
+          text-align: center;
+          color: $modal-background-color;
+
+          &::before {
+            @include animate-spin();
+          }
+        }
+
+        .modal-container {
+          visibility: hidden;
+        }
+      }
+
       .close {
         @include in-out-fast(opacity);
         @include icon-x();
@@ -81,6 +82,8 @@ $modal-shadow-color: #000;
           opacity: 1;
         }
       }
+
+      .wait-indicator {}
 
       .modal-container {}
     }

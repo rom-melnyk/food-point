@@ -24,8 +24,8 @@ export function editDish (id, name, price) {
         });
 }
 
-export function setModalCommand (command) {
-    update('modal', command ? { command } : null);
+export function setModalCommand (modalType, command) {
+    update(`modals.${modalType}`, command);
 }
 
 window.setModalCommand = setModalCommand;

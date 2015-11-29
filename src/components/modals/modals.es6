@@ -1,24 +1,42 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { getState, addChengeListener, removeChengeListener } from '../../state.es6';
+import { getState, addChangeListener, removeChangeListener } from '../../state.es6';
+import { setModalCommand } from '../../actions.es6';
 import EditDish from '../dishes/edit-dish.es6';
 import dom from '../../utils/dom.es6';
 
 const Modal = React.createClass({
+    getInitialState () {
+        return {command: getState().modals[this.props.type]};
+    },
+
     componentDidMount () {
         const shader = dom( ReactDom.findDOMNode(this) ).parent();
         this._$shader = shader;
         setTimeout(() => {
             shader.addClass('appear');
         }, 1);
+
+        addChangeListener(this._getState);
+    },
+
+    componentWillUpdate (newProps, newState) {
+        if (newState.command === 'close') {
+            this._onCloseHandler();
+        }
+    },
+
+    componentWillUnmount () {
+        removeChangeListener(this._getState);
+        setModalCommand(this.props.type, null);
     },
 
     render () {
         const payload = _getModal(this.props.type, this.props.data);
         return (
             <div className="modal-wrapper">
-                <div className="modal-window">
-                    <div className="close" onClick={_getCloseHandler(this)}></div>
+                <div className={'modal-window' + (this.state.command === 'wait' ? ' wait' : '')}>
+                    <div className="close" onClick={this._onCloseHandler}></div>
                     <div className="wait-indicator"></div>
                     <div className="modal-container">
                         {payload}
@@ -28,7 +46,22 @@ const Modal = React.createClass({
         );
     },
 
-    _$shader: null
+    _getState (state) {
+        this.setState({
+            command: state.modals[this.props.type]
+        });
+    },
+
+    _$shader: null,
+
+    _onCloseHandler () {
+        this._$shader.removeClass('appear');
+        const shader = this._$shader[0];
+        setTimeout(() => {
+            ReactDom.unmountComponentAtNode(shader);
+            document.body.removeChild(shader);
+        }, 300); // respect the animation
+    }
 });
 
 export default {
@@ -42,48 +75,6 @@ function _open (type, data) {
     document.body.appendChild(shader);
 
     ReactDom.render(<Modal type={type} data={data}/>, shader);
-}
-
-/**
- * @return {{container: {Element}, close: {Function}}}
- */
-//function _open2 () {
-//    closeButton.addEventListener('click', _close, true);
-//    shader.addEventListener('click', (e) => {
-//        if (e.target === e.currentTarget || e.target === modalWrapper) {
-//            _close(e);
-//            e.stopPropagation();
-//        }
-//    }, true);
-//
-//    return {
-//        container,
-//        startWaiting: () => {
-//            dom(modalWindow).addClass('wait');
-//        },
-//        stopWaiting: () => {
-//            dom(modalWindow).removeClass('wait');
-//        },
-//        close: () => {
-//            return new Promise((resolve) => {
-//                _close(null, resolve);
-//            });
-//        }
-//    };
-//}
-
-function _getCloseHandler (component) {
-    return (/*e, callback*/) => {
-        component._$shader.removeClass('appear');
-        setTimeout(() => {
-            ReactDom.unmountComponentAtNode(component._$shader[0]);
-            document.body.removeChild(component._$shader[0]);
-            //if (typeof callback === 'function') {
-            //    callback();
-            //}
-        }, 300); // respect the animation
-    };
-
 }
 
 function _getModal (type, props) {

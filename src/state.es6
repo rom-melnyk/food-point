@@ -3,7 +3,7 @@ const _state = {
     users: [],
     orders: [],
     me: {},
-    modal: null
+    modals: {}
 };
 
 const _listeners = [];
@@ -30,6 +30,8 @@ export function update (path, value, root = _state) {
 
     if (dotPosition === -1) {
         root[path] = value;
+
+        _triggerChangeEvent();
     } else {
         const key = path.substring(0, dotPosition);
         const reminder = path.substr(dotPosition + 1);
@@ -38,8 +40,6 @@ export function update (path, value, root = _state) {
         }
         update(reminder, value, root[key]);
     }
-
-    _triggerChangeEvent();
 }
 
 function _triggerChangeEvent () {
