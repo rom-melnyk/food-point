@@ -1,3 +1,7 @@
-const Dishes = require('./components/dishes/dishes.es6');
+import Dishes from './components/dishes/dishes.es6';
 
-Dishes.open();
+window.FoodPoint = {
+    init: () => {
+        Dishes.open();
+    }
+};

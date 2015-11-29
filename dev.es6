@@ -125,8 +125,8 @@ function _transpileEs (es6FileName) {
     });
 
     browserify(`${config.src.dir}/${config.src.es}`, { debug: true })
-        .transform(babelify, {presets: ['es2015']})
-        .transform('brfs')
+        .transform(babelify, {presets: ['es2015', 'react']})
+        //.transform('brfs')
         .bundle()
         .on('error', (err) => {
             console.error(`\t${err.message}`);
