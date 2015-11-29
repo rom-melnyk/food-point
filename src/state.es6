@@ -2,7 +2,8 @@ const _state = {
     dishes: [],
     users: [],
     orders: [],
-    me: {}
+    me: {},
+    modal: null
 };
 
 const _listeners = [];
@@ -11,13 +12,13 @@ export function getState () {
     return _state;
 }
 
-export function addChengeListener (callback) {
+export function addChangeListener (callback) {
     if (_listeners.indexOf(callback) === -1 && typeof callback === 'function') {
         _listeners.push(callback);
     }
 }
 
-export function removeChengeListener (callback) {
+export function removeChangeListener (callback) {
     const index = _listeners.indexOf(callback);
     if (index !== -1) {
         _listeners.splice(index, 1);

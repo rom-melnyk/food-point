@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { getState, addChengeListener, removeChengeListener } from './state.es6';
+import { getState, addChangeListener, removeChangeListener } from './state.es6';
 import DishesGrid from './components/dishes/dishes-grid.es6';
 
 window.FoodPoint = {
@@ -20,11 +20,11 @@ function _init () {
         },
 
         componentDidMount () {
-            addChengeListener(this._updateState);
+            addChangeListener(this._updateState);
         },
 
         componentWillUnmount () {
-            removeChengeListener(this._updateState);
+            removeChangeListener(this._updateState);
         },
 
         render () {
