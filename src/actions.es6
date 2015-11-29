@@ -12,12 +12,15 @@ export function getDishes () {
 }
 
 export function editDish (id, name, price) {
+    setModalCommand('edit-dish', 'wait');
+
     Ajax.put(`/api/dishes/${id}`, {name, price})
         .then((res) => {
             return Ajax.get('/api/dishes/');
         })
         .then((dishes) => {
             update('dishes', dishes);
+            setModalCommand('edit-dish', 'close');
         })
         .catch((err) => {
             console.log(err);
