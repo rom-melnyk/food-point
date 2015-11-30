@@ -31,7 +31,7 @@ export function update (path, value, root = _state) {
     if (dotPosition === -1) {
         root[path] = value;
 
-        _triggerChangeEvent();
+        triggerChangeEvent();
     } else {
         const key = path.substring(0, dotPosition);
         const reminder = path.substr(dotPosition + 1);
@@ -42,7 +42,9 @@ export function update (path, value, root = _state) {
     }
 }
 
-function _triggerChangeEvent () {
+
+
+export function triggerChangeEvent () {
     _listeners.forEach((listener) => {
         listener(_state);
     })

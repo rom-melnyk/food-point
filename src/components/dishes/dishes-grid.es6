@@ -10,7 +10,7 @@ export default React.createClass({
 
     render () {
         const rows = this.props.dishes.map((dish) => {
-            return <Row key={dish.id} name={dish.name} price={dish.price} id={dish.id}/>
+            return <Row key={dish.id} id={dish.id} name={dish.name} price={dish.price} attr={dish.attr}/>
         });
 
         return (

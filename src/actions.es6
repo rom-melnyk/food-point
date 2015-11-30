@@ -1,9 +1,11 @@
-import { update } from './state.es6';
+ import { getState, update, triggerChangeEvent } from './state.es6';
 import Ajax from './utils/ajax.es6';
+import { parseAttribsForAllDishes, stringifyAttribsForOneDish } from './formatters/dishes-formatter.es6';
 
 export function getDishes () {
     Ajax.get('/api/dishes')
         .then((dishes) => {
+            dishes = parseAttribsForAllDishes(dishes);
             update('dishes', dishes);
         })
         .catch((err) => {
@@ -25,6 +27,16 @@ export function editDish (id, name, price) {
 
 export function deleteDish (id) {
     _doDishApiCall('delete', `/api/dishes/${id}`, null, 'delete-dish');
+}
+
+export function moveDishUp (index) {
+    const dishes = getState().dishes;
+    const dish_1 = dishes[index - 1];
+    const dish_2 = dishes[index];
+    dishes.splice(index - 1, 2, dish_2, dish_1);
+    dish_1.attr.ordinal = index;
+    dish_2.attr.ordinal = index - 1;
+    triggerChangeEvent();
 }
 
 export function setModalCommand (modalType, command) {

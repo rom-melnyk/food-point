@@ -27,6 +27,21 @@
 
         &.left {
           width: 70%;
+
+          .ordinal {
+            display: inline-block;
+            width: 2em;
+            margin-right: 1em;
+
+            font-size: .75em;
+            line-height: 1.33em;
+            text-align: right;
+            opacity: .3;
+
+            &::after {
+              content: ")";
+            }
+          }
         }
 
         &.right {
@@ -105,6 +120,14 @@
             opacity: 1;
           }
         }
+      }
+
+      &:first-child .up-down .up {
+        visibility: hidden;
+      }
+
+      &:last-child .up-down .down {
+        visibility: hidden;
       }
     }
   }
