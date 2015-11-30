@@ -9,8 +9,8 @@ export default React.createClass({
         this._name = container.querySelector('[name=name]');
         this._price = container.querySelector('[name=price]');
 
-        this._name.value = this.props.name;
-        this._price.value = this.props.price;
+        this._name.value = this.props.name || '';
+        this._price.value = this.props.price || 0;
     },
 
     componentWillUnmount () {

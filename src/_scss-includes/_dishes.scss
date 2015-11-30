@@ -67,6 +67,20 @@
       }
     }
   }
+
+  .create-dish {
+    padding: .3em 0;
+    text-align: center;
+
+    .button {
+      @include icon-edit();
+      padding: .3em 1.2em .3em 1em;
+
+      &::before {
+        margin-right: .5em;
+      }
+    }
+  }
 }
 
 .edit-dish {

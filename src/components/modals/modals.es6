@@ -70,7 +70,7 @@ export default {
 }
 
 // -------------------------------- private methods --------------------------------
-function _open (type, data) {
+function _open (type, data = {}) {
     const shader = document.createElement('div');
     shader.className = 'modal-shader';
     document.body.appendChild(shader);

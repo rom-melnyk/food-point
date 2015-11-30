@@ -1,6 +1,7 @@
 import React from 'react';
 import Row from './dish-row.es6';
 import { getDishes } from '../../actions.es6';
+import Modal from '../modals/modals.es6';
 
 export default React.createClass({
     componentDidMount () {
@@ -18,7 +19,16 @@ export default React.createClass({
                 <ul>
                     {rows}
                 </ul>
+                <div className="create-dish">
+                    <span className="button create" onClick={this._onCreateHandler}>
+                        Додати стравy
+                    </span>
+                </div>
             </div>
         );
+    },
+
+    _onCreateHandler () {
+        Modal.open('edit-dish');
     }
 });

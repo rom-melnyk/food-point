@@ -11,8 +11,16 @@ export function getDishes () {
         });
 }
 
+export function createDish (name, price) {
+    _doDishApiCall('push', `/api/dishes`, {name, price}, 'edit-dish');
+}
+
 export function editDish (id, name, price) {
-    _doDishApiCall('put', `/api/dishes/${id}`, {name, price}, 'edit-dish');
+    if (typeof id === 'undefined') {
+        _doDishApiCall('post', `/api/dishes`, {name, price}, 'edit-dish');
+    } else {
+        _doDishApiCall('put', `/api/dishes/${id}`, {name, price}, 'edit-dish');
+    }
 }
 
 export function deleteDish (id) {
