@@ -43,14 +43,55 @@
 
             .button {
               padding: .3em .5em;
+              margin-right: .3em;
 
               &.edit {
                 @include icon-edit();
-                margin-right: .3em;
               }
 
               &.delete {
                 @include icon-x();
+              }
+            }
+
+            .up-down {
+              display: inline-block;
+              vertical-align: middle;
+              margin-top: -0.1em;
+
+              font-size: 1.5em;
+
+              * {
+                @include in-out-fast(opacity);
+                display: block;
+                height: .6em;
+
+                overflow: hidden;
+                cursor: pointer;
+                opacity: .3;
+
+                &:hover {
+                  opacity: 1;
+                }
+              }
+
+              .up {
+                @include icon-up();
+
+                &::before {
+                  position: relative;
+                  bottom: 0.2em;
+                  margin: 0;
+                }
+              }
+              .down {
+                @include icon-down();
+
+                &::before {
+                  position: relative;
+                  bottom: 0.3em;
+                  margin: 0;
+                }
               }
             }
           }

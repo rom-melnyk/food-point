@@ -11,16 +11,12 @@ export default React.createClass({
                 <div className="right">
                     <span className="price"> {this.props.price}</span>
                     <span className="controls">
-                        <span
-                            className="button edit"
-                            data-id="{this.props.id}"
-                            onClick={this._onEditHandler}
-                        ></span>
-                        <span
-                            className="button delete"
-                            data-id="{this.props.id}"
-                            onClick={this._onDeleteHandler}
-                        ></span>
+                        <span className="button edit" onClick={this._onEditHandler}></span>
+                        <span className="button delete" onClick={this._onDeleteHandler}></span>
+                        <span className="up-down">
+                            <span className="up" onClick={this._onDeleteHandler}></span>
+                            <span className="down" onClick={this._onDeleteHandler}></span>
+                        </span>
                     </span>
                 </div>
             </li>
