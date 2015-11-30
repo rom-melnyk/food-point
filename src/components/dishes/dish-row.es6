@@ -2,8 +2,6 @@ import React from 'react';
 import Modals from '../modals/modals.es6';
 
 export default React.createClass({
-    componentDidMount () {},
-
     render () {
         return (
             <li>
@@ -38,6 +36,9 @@ export default React.createClass({
     },
 
     _onDeleteHandler () {
-        Modals.open('delete-dish');
+        Modals.open('delete-dish', {
+            id: this.props.id,
+            name: this.props.name
+        });
     }
 });

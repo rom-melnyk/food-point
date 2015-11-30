@@ -12,19 +12,11 @@ export function getDishes () {
 }
 
 export function editDish (id, name, price) {
-    setModalCommand('edit-dish', 'wait');
+    _doDishApiCall('put', `/api/dishes/${id}`, {name, price}, 'edit-dish');
+}
 
-    Ajax.put(`/api/dishes/${id}`, {name, price})
-        .then((res) => {
-            return Ajax.get('/api/dishes/');
-        })
-        .then((dishes) => {
-            update('dishes', dishes);
-            setModalCommand('edit-dish', 'close');
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+export function deleteDish (id) {
+    _doDishApiCall('delete', `/api/dishes/${id}`, null, 'delete-dish');
 }
 
 export function setModalCommand (modalType, command) {
@@ -32,3 +24,20 @@ export function setModalCommand (modalType, command) {
 }
 
 window.setModalCommand = setModalCommand;
+
+// ---------------------------------- private methods ----------------------------------
+function _doDishApiCall (method, url, params, modalName) {
+    setModalCommand(modalName, 'wait');
+
+    Ajax[method](url, params)
+        .then((res) => {
+            return Ajax.get('/api/dishes/');
+        })
+        .then((dishes) => {
+            update('dishes', dishes);
+            setModalCommand(modalName, 'close');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}

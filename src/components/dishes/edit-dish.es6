@@ -11,7 +11,11 @@ export default React.createClass({
 
         this._name.value = this.props.name;
         this._price.value = this.props.price;
-        // this.props.id
+    },
+
+    componentWillUnmount () {
+        this._name = null;
+        this._price = null;
     },
 
     render () {
@@ -35,9 +39,11 @@ export default React.createClass({
                     <span className="button submit" onClick={this._onOkHandler}></span>
                 </div>
             </div>
-
         );
     },
+
+    _name: null,
+    _price: null,
 
     _onOkHandler () {
         editDish(this.props.id, this._name.value, this._price.value);

@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import { getState, addChangeListener, removeChangeListener } from '../../state.es6';
 import { setModalCommand } from '../../actions.es6';
 import EditDish from '../dishes/edit-dish.es6';
+import DeleteDish from '../dishes/delete-dish.es6';
 import dom from '../../utils/dom.es6';
 
 const Modal = React.createClass({
@@ -80,6 +81,9 @@ function _open (type, data) {
 function _getModal (type, props) {
     if (type === 'edit-dish') {
         return <EditDish {...props} />;
+    }
+    if (type === 'delete-dish') {
+        return <DeleteDish {...props} />;
     }
 
     return null;
