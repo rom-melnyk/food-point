@@ -21,8 +21,8 @@ Ajax.delete = (url) => {
  * @param {Object} [data]
  * @return {Promise}
  */
-Ajax.push = (url, data) => {
-    return _doRequest('PUSH', url, data);
+Ajax.post = (url, data) => {
+    return _doRequest('POST', url, data);
 };
 
 /**
