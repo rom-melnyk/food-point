@@ -91,6 +91,6 @@
 @mixin icon-down {
   &::before {
     @include __icon-general__();
-    content: '\e800';
+    content: '\e801';
   }
 }
