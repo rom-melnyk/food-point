@@ -9,7 +9,7 @@ export default React.createClass({
             FB.init({
                 appId      : '1649156238676800',
                 cookie     : true,
-                xfbml      : true,
+                //xfbml      : true,
                 version    : 'v2.5'
             });
 

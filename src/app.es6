@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { getState, addChangeListener, removeChangeListener } from './state.es6';
+import Router from './router.es6';
 import DishesGrid from './components/dishes/dishes-grid.es6';
 import Header from './components/header/header.es6';
 import Footer from './components/footer/footer.es6';
@@ -13,7 +14,7 @@ window.FoodPoint = {
 
 function _init () {
     const container = document.createElement('div');
-    container.id = 'main';
+    container.id = 'application';
     document.body.appendChild(container);
 
     const Main = React.createClass({
@@ -30,10 +31,11 @@ function _init () {
         },
 
         render () {
+            const view = this._getView();
             return (
                 <div>
                     <Header></Header>
-                    <DishesGrid dishes={this.state.dishes}/>
+                    {view}
                     <Footer></Footer>
                 </div>
             );
@@ -41,6 +43,12 @@ function _init () {
 
         _updateState (state) {
             this.setState(state);
+        },
+
+        _getView () {
+            if (this.state.route === Router.DISHES) {
+                return <DishesGrid dishes={this.state.dishes}/>;
+            }
         }
     });
 

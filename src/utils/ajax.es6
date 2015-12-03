@@ -34,7 +34,7 @@ Ajax.put = (url, data) => {
     return _doRequest('PUT', url, data);
 };
 
-module.exports = Ajax;
+export default Ajax;
 
 function _doRequest (method, url, data) {
     let reqBody = null;

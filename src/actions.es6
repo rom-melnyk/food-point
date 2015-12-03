@@ -43,7 +43,9 @@ export function setModalCommand (modalType, command) {
     update(`modals.${modalType}`, command);
 }
 
-window.setModalCommand = setModalCommand;
+export function updateRoute (route) {
+    update('route', route);
+}
 
 // ---------------------------------- private methods ----------------------------------
 function _doDishApiCall (method, url, params, modalName) {
