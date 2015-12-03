@@ -1,3 +1,6 @@
+$grey: hsl(200, 20%, 70%);
+
+// --------------------- mixins ---------------------
 @mixin clear-fix {
   &::after {
     content: "";

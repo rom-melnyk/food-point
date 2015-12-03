@@ -1,0 +1,28 @@
+@import "general";
+
+.footer {
+  @include clear-fix;
+
+  padding-top: 2em;
+  padding-bottom: 2em;
+
+  background-color: $grey;
+  border-top: 1px solid darken($grey, 20%);
+
+  & > div {
+    float: left;
+  }
+
+  .left {
+    width: 30%;
+    padding-left: 2em;
+  }
+  .middle {
+    width: 40%;
+    text-align: center;
+  }
+  .right {
+    width: 30%;
+    padding-right: 2em;
+  }
+}
