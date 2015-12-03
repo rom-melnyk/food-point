@@ -8,37 +8,5 @@
   <script src="/auto-reload.js"></script>
 </head>
 <body onload="FoodPoint.init();">
-  <!-- Facebook scripts -->
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '1649156238676800',
-        cookie     : true,
-        xfbml      : true,
-        version    : 'v2.5'
-      });
-
-      FB.getLoginStatus(function(response) {
-        FoodPoint.fb.statusChangeCallback(response);
-      });
-    };
-
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/uk_UA/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
-  <!-- End of Facebook scripts -->
-  <div
-    class="fb-like"
-    data-share="true"
-    data-width="450"
-    data-show-faces="true">
-  </div>
-  <fb:login-button scope="public_profile,email" onlogin="FoodPoint.fb.checkLoginState();"></fb:login-button>
-
 </body>
 </html>

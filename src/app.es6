@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { getState, addChangeListener, removeChangeListener } from './state.es6';
 import DishesGrid from './components/dishes/dishes-grid.es6';
-
-import FbLogin from './facebook/fb-login.es6';
+import Header from './components/header/header.es6';
+import Footer from './components/footer/footer.es6';
 
 window.FoodPoint = {
     init: () => {
         _init();
-    },
-    fb: FbLogin
+    }
 };
 
 function _init () {
@@ -33,7 +32,9 @@ function _init () {
         render () {
             return (
                 <div>
+                    <Header></Header>
                     <DishesGrid dishes={this.state.dishes}/>
+                    <Footer></Footer>
                 </div>
             );
         },

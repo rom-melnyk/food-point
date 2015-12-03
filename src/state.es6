@@ -1,4 +1,5 @@
 const _state = {
+    route: {},
     dishes: [],
     users: [],
     orders: [],
