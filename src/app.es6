@@ -3,10 +3,13 @@ import ReactDom from 'react-dom';
 import { getState, addChangeListener, removeChangeListener } from './state.es6';
 import DishesGrid from './components/dishes/dishes-grid.es6';
 
+import FbLogin from './facebook/fb-login.es6';
+
 window.FoodPoint = {
     init: () => {
         _init();
-    }
+    },
+    fb: FbLogin
 };
 
 function _init () {
