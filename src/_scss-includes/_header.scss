@@ -1,0 +1,36 @@
+@import "general";
+
+.header {
+  @include clear-fix;
+
+  padding-top: 2em;
+  padding-bottom: 2em;
+
+  background-color: $grey;
+  border-bottom: 1px solid darken($grey, 20%);
+
+  .app-menu {
+    float: left;
+    width-max: 80%;
+    padding: 0 2em;
+
+    & > span {
+      @extend .button;
+      margin-right: 1em;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .me {
+    float: right;
+    width: 20%;
+    padding-right: 2em;
+
+    .fb-login {
+      @extend .button;
+    }
+  }
+}

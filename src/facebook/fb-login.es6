@@ -1,8 +1,32 @@
 export default {
+    init: _init,
     statusChangeCallback: _statusChangeCallback,
     checkLoginState: _checkLoginState,
     testApi: _testAPI
 };
+
+function _init () {
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1649156238676800',
+            cookie     : true,
+            //xfbml      : true,
+            version    : 'v2.5'
+        });
+
+        FB.getLoginStatus(function(response) {
+            _statusChangeCallback(response);
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/uk_UA/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+}
 
 // This is called with the results from from FB.getLoginStatus().
 function _statusChangeCallback(response) {
