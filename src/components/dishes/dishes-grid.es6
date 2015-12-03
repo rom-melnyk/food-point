@@ -14,7 +14,7 @@ export default React.createClass({
         });
 
         return (
-            <div className="page dishes">
+            <div className="view dishes">
                 <h1>Страви</h1>
                 <ul>
                     {rows}
