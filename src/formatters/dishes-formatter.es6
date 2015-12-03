@@ -34,3 +34,33 @@ export function stringifyAttribsForOneDish (dish) {
 export function stringifyAttribsForAllDishes (dishes) {
     return dishes.map(dish => stringifyAttribsForOneDish(dish));
 }
+
+// -------------------------------------------
+
+const DishesStruc = {
+    id: null,               // root
+    parent: null,           // ref to the parent
+    relativeIndex: -1,              // index of this element among parent's `items`
+    absoluteIndex: -1,              // absolute index among all the elements
+    items: [
+        {},
+        {}
+    ]
+};
+
+/****
+ H1 H1 H1 H1 H1 H1 H1
+   name
+   name
+   name
+   H2 H2 H2 H2 H2 H2 H2 H2
+     name
+     name
+     name
+   H2 H2 H2 H2 H2 H2 H2 H2
+     name
+     name
+     name
+     H3 H3 H3 H3 H3 H3 H3 H3 H3
+       name
+ *****/
