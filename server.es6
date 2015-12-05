@@ -3,14 +3,18 @@ const dev = require('./dev.es6');
 const express = require('express');
 const config = require('./package.json').config;
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('./api/session.es6');
 const users = require('./api/users.es6');
 const dishes = require('./api/dishes.es6');
 
 const app = express();
 
-app.use(express.static(__dirname + '/static'));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(express.static(__dirname + '/static'));
+app.use(session());
 
 app.get('/api/users', users.getUsers);
 
