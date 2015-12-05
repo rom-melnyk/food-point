@@ -1,3 +1,5 @@
+import Ajax from '../utils/ajax.es6';
+
 export default {
     init: _init,
     statusChangeCallback: _statusChangeCallback,
@@ -38,7 +40,14 @@ function _statusChangeCallback(response) {
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
-        _testAPI();
+        //_testAPI();
+        Ajax.post('/api/authenticate', {
+            authType: 'facebook',
+            userId: response.authResponse.userID,
+            accessToken: response.authResponse.accessToken
+        }).then((res) => {
+            console.log(res);
+        });
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         console.log('Please log into this app.');
