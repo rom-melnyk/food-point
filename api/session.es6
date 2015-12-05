@@ -2,7 +2,7 @@
 const Token = require('./token.es6');
 
 const COOKIE_NAME = 'session';
-const COOKIE_MAX_AGE = 30 * 1000; // TODO add meaningful value
+const COOKIE_MAX_AGE = 24 * 60 * 60 * 1000; // 1 day
 
 module.exports = {
     // we respect the principle that other middleware use, say `app.use(cookieParser());`
@@ -19,16 +19,17 @@ function _sessionFn (req, res, next) {
     }
 
     let cookie = req.cookies[COOKIE_NAME];
-    const userId = Token.verify(cookie);
-    _enrichRequestAndResponse(req, res, userId);
+    const userData = Token.verify(cookie);
+    // console.log(`URL: ${req.path}, userId: ${userData.userId}`);
+    _enrichRequestAndResponse(req, res, userData);
     next();
 }
 
-function _enrichRequestAndResponse (req, res, userId) {
-    if (userId) {
+function _enrichRequestAndResponse (req, res, userData) {
+    if (userData) {
         // TODO add time to the session cookie
-        req.userId = userId.userId;
-        res.cookie(COOKIE_NAME, Token.generate(userId.userId), {httpOnly: true, maxAge: COOKIE_MAX_AGE});
+        req.userId = userData.userId;
+        res.cookie(COOKIE_NAME, Token.generate(userData.userId), {httpOnly: true, maxAge: COOKIE_MAX_AGE});
     } else {
         res.clearCookie(COOKIE_NAME);
     }

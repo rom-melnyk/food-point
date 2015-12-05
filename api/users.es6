@@ -3,27 +3,60 @@ const escape = require('./mysql-shim.es6').escape;
 const authentication = require('./authentication.es6');
 const Session = require('./session.es6');
 
+// For most methods we expect `session` middleware to take care about `req.userId`
+
 function getUsers (req, res) {
-    doResponse('SELECT * from users', res);
-}
-
-function getUserById (req, res) {
-    const authId = escape(req.params.id);
-    doResponse(`SELECT * FROM users WHERE authId="${authId}"`, res);
-}
-
-function createUser (req, res) {
-
-}
-
-function getMyData (req, res) {
-    // we expect `session` middleware to take care about `userId`
     if (!req.userId) {
         res.json({error: true, message: 'Not authenticated', debug: null});
     } else {
-        doResponse(`SELECT * FROM users WHERE authId="${req.userId}"`, res);
+        doResponse('SELECT * from users', res);
     }
 }
+
+function getUserById (req, res) {
+    if (!req.userId) {
+        res.json({error: true, message: 'Not authenticated', debug: null});
+    } else {
+        const id = escape(req.params.id);
+        doResponse(`SELECT * FROM users WHERE id="${id}"`, res);
+    }
+}
+
+function getMyData (req, res) {
+    if (!req.userId) {
+        res.json({error: true, message: 'Not authenticated', debug: null});
+    } else {
+        doResponse(`SELECT * FROM users WHERE id="${req.userId}"`, res);
+    }
+}
+
+function updateUser(req, res) {
+    if (!req.userId) {
+        res.json({error: true, message: 'Not authenticated', debug: null});
+    } else {
+        const id = escape(req.params.id);
+        const name = escape(req.body.name);
+        const address = escape(req.body.address);
+        const email = escape(req.body.email);
+        const phone = escape(req.body.phone);
+        const query = 'UPDATE users SET ' +
+            `name="${name}", address="${address}", email="${email}" , phone="${phone}" ` +
+            `WHERE id="${id}";`;
+
+        doResponse(query, res);
+    }
+}
+
+function deleteUser(req, res) {
+    if (!req.userId) {
+        res.json({error: true, message: 'Not authenticated', debug: null});
+    } else {
+        const id = escape(req.params.id);
+        const query = `DELETE FROM users WHERE id="${id}";`;
+        doResponse(query, res);
+    }
+}
+
 
 function authenticate (req, res) {
     const authType = escape(req.body.authType);
@@ -38,7 +71,7 @@ function authenticate (req, res) {
                     if (res.error) {
                         res.json(result);
                     } else {
-                        Session.enrichRequestAndResponse(req, res, result.authId);
+                        Session.enrichRequestAndResponse(req, res, {userId: result.id});
                         res.json(result);
                     }
                 },
@@ -53,6 +86,9 @@ function authenticate (req, res) {
 
 module.exports = {
     getUsers,
+    getUserById,
     getMyData,
+    updateUser,
+    deleteUser,
     authenticate
  };

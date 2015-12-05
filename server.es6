@@ -25,7 +25,11 @@ app.put('/api/dishes/:id', dishes.updateDish);
 app.delete('/api/dishes/:id', dishes.deleteDish);
 
 app.get('/api/users', users.getUsers);
+app.get('/api/users/:id', users.getUserById);
 app.get('/api/me', users.getMyData);
+app.put('/api/users/:id', users.updateUser);
+app.delete('/api/users/:id', users.deleteUser);
+
 app.post('/api/authenticate', users.authenticate);
 
 const server = app.listen(config.port, () => {
