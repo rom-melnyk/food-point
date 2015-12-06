@@ -5,7 +5,7 @@ const config = require('../package.json').config;
 const COOKIE_NAME = 'session';
 let COOKIE_MAX_AGE = 24 * 60 * 60 * 1000; // 1 day
 
-_parseConfig(config.authDuration);
+_parseAuthDuration(config.authDuration);
 
 module.exports = {
     // we respect the principle that other middleware use, say `app.use(cookieParser());`
@@ -14,8 +14,10 @@ module.exports = {
 };
 
 // -------------------------- private methods --------------------------
-function _parseConfig (config) {
-    const parsed = /^([0-9]+)([smhdw])$/i.exec(config || '');
+function _parseAuthDuration (string) {
+    // '12w' ---> ["12w", "12", "w"]
+    const parsed = /^([0-9]+)([smhdw])$/i.exec(string || '');
+
     if (!parsed) {
         return;
     }
