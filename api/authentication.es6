@@ -22,7 +22,7 @@ function facebookAuthenticate (userId, accessToken) {
             } else if (result && result.id === userId) {
                 facebookData.authId = result.id;
                 facebookData.name = result.name;
-                return Promise.resolve(facebookData);
+                return facebookData;
             } else {
                 return {error: true, message: 'userId/accessToken pair does not match', debug: null};
             }
