@@ -1,13 +1,8 @@
 import React from 'react';
 import Router from '../../router.es6';
-import Modals from '../modals/modals.es6';
-import FbLogin from '../../facebook/fb-login.es6';
+import MeMenu from './me-menu.es6';
 
 export default React.createClass({
-    componentDidMount () {
-        FbLogin.init();
-    },
-
     render () {
         return (
             <div className="header">
@@ -18,9 +13,7 @@ export default React.createClass({
                     <span className="my-orders">Мої замовлення</span>
                     <span className="users">Користувачі</span>
                 </div>
-                <div className="me">
-                    <span className="fb-login" onClick={this._onFbLoginClick}>Зайти через Facebook</span>
-                </div>
+                <MeMenu me={this.props.me} />
             </div>
         );
     },
@@ -31,15 +24,5 @@ export default React.createClass({
 
     _onMenuClick () {
         Router.goTo(Router.DISHES);
-    },
-
-    _onFbLoginClick () {
-        FB.login(
-            FbLogin.checkLoginState,
-            {
-                scope: 'public_profile,email',
-                auth_type: 'rerequest'
-            }
-        );
     }
 });

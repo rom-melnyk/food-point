@@ -7,8 +7,11 @@ import Home from './components/home/home.es6';
 import Header from './components/header/header.es6';
 import Footer from './components/footer/footer.es6';
 
+import FbLogin from './facebook/fb-login.es6';
+
 window.FoodPoint = {
     init: () => {
+        FbLogin.init();
         _init();
     }
 };
@@ -30,9 +33,9 @@ const Main = React.createClass({
         const view = this._getView();
         return (
             <div className="application">
-                <Header></Header>
+                <Header me={this.state.me} />
                 {view}
-                <Footer></Footer>
+                <Footer />
             </div>
         );
     },
@@ -45,7 +48,7 @@ const Main = React.createClass({
         if (this.state.route === Router.DISHES) {
             return <DishesGrid dishes={this.state.dishes}/>;
         } else if (this.state.route === Router.HOME) {
-            return <Home></Home>;
+            return <Home/>;
         }
 
         return null;

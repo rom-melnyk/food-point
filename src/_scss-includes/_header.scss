@@ -11,7 +11,7 @@
 
   .app-menu {
     float: left;
-    width-max: 80%;
+    max-width: 80%;
     padding: 0 2em;
 
     & > span {
@@ -28,6 +28,20 @@
     float: right;
     width: 20%;
     padding-right: 2em;
+
+    .picture {
+      display: inline-block;
+      width: 2em;
+      height: 2em;
+      margin-right: 1em;
+
+      line-height: 2em;
+      text-align: center;
+      vertical-align: middle;
+
+      background-color: #fff;
+      box-shadow: 0 0 3em $modal-shadow-color;
+    }
 
     .fb-login {
       @extend .button;
