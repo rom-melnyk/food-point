@@ -11,6 +11,7 @@
       "password": "",
       "database": "food_point"
     },
+    "authDuration": "1d",
     "src": {
       "dir": "./src",
       "es": "app.es6",

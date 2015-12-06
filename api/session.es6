@@ -1,8 +1,11 @@
 'use strict';
 const Token = require('./token.es6');
+const config = require('../package.json').config;
 
 const COOKIE_NAME = 'session';
-const COOKIE_MAX_AGE = 24 * 60 * 60 * 1000; // 1 day
+let COOKIE_MAX_AGE = 24 * 60 * 60 * 1000; // 1 day
+
+_parseConfig(config.authDuration);
 
 module.exports = {
     // we respect the principle that other middleware use, say `app.use(cookieParser());`
@@ -11,6 +14,23 @@ module.exports = {
 };
 
 // -------------------------- private methods --------------------------
+function _parseConfig (config) {
+    const parsed = /^([0-9]+)([smhdw])$/i.exec(config || '');
+    if (!parsed) {
+        return;
+    }
+
+    let coef = parsed[2].toLowerCase();
+    coef =
+        coef === 's' ? 1000 :
+        coef === 'm' ? 1000 * 60 :
+        coef === 'h' ? 1000 * 60 * 60 :
+        coef === 'd' ? 1000 * 60 * 60 * 24 :
+        /* coef === 'w' */ 1000 * 60 * 60 * 24 * 7;
+
+    COOKIE_MAX_AGE = parseInt(parsed[1], 10) * coef;
+}
+
 function _sessionFn (req, res, next) {
     if (!/^\/api\//.test(req.path)) {
         // we don't need authorization for static calls
