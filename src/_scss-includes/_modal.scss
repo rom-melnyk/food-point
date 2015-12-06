@@ -2,9 +2,6 @@
 @import "icon-font/fontello";
 @import "icon-font/animations";
 
-$modal-background-color: hsla(200, 20, 20, .9);
-$modal-shadow-color: #000;
-
 .modal-shader {
   @include in-out-fast(background-color);
 
