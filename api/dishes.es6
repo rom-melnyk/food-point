@@ -7,7 +7,7 @@ function getDishes(req, res) {
 
 function getDishById(req, res) {
     const id = escape(req.params.id);
-    doResponse(`SELECT * FROM dishes WHERE id="${id}";`, res);
+    doResponse(`SELECT * FROM dishes WHERE id="${id}";`, res, true);
 }
 
 function createDish(req, res) {

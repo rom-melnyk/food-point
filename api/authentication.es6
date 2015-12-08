@@ -31,10 +31,10 @@ function facebookAuthenticate (userId, accessToken) {
         }).then((result) => {
             if (result.error) {
                 return result;
-            } else if (result.length === 0) {
+            } else if (result.id === undefined) {
                 return doCreateUserQuery(facebookData);
             } else {
-                return result[0];
+                return result;
             }
         });
 }

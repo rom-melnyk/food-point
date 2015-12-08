@@ -18,7 +18,7 @@ function getUserById (req, res) {
         res.json({error: true, message: 'Not authenticated', debug: null});
     } else {
         const id = escape(req.params.id);
-        doResponse(`SELECT * FROM users WHERE id="${id}"`, res);
+        doResponse(`SELECT * FROM users WHERE id="${id}"`, res, true);
     }
 }
 
@@ -26,7 +26,7 @@ function getMyData (req, res) {
     if (!req.userId) {
         res.json({error: true, message: 'Not authenticated', debug: null});
     } else {
-        doResponse(`SELECT * FROM users WHERE id="${req.userId}"`, res);
+        doResponse(`SELECT * FROM users WHERE id="${req.userId}"`, res, true);
     }
 }
 
