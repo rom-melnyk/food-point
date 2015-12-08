@@ -1,8 +1,13 @@
 import Ajax from '../utils/ajax.es6';
 
+const POLL_INTERVAL = 100; // ms
+
 export default {
     init: _init,
-    checkLoginState: _checkLoginState
+    doSafeRequest: _doSafeRequest,
+    checkState: _checkState,
+    authenticate: _authenticate,
+    doLoginSequence: _doLoginSequence
 };
 
 function _init () {
@@ -24,16 +29,56 @@ function _init () {
     }(document, 'script', 'facebook-jssdk'));
 }
 
-function _checkLoginState() {
-    return new Promise((resolve) => {
-            FB.getLoginStatus((response) => {
-                resolve(response);
-            });
-        }).then((response) => {
-            return response.status === 'connected';
-        });
-}
-
 //FB.api('/me', function(response) {
 //    console.log('Successful login for: ' + response.name);
 //});
+
+/**
+ * @resolve {null} at this moment `window.FB` is defined
+ * @returns {Promise}
+ * @private
+ */
+function _doSafeRequest() {
+    return new Promise((resolve, reject) => {
+        function __poll__ () {
+            if (window.FB) {
+                resolve();
+            } else {
+                setTimeout(__poll__, POLL_INTERVAL);
+            }
+        }
+
+        __poll__();
+    });
+}
+
+function _checkState() {
+    return new Promise((resolve, reject) => {
+        FB.getLoginStatus((response) => {
+            resolve(response);
+        });
+    });
+}
+
+function _authenticate(authResponse) {
+    return authResponse && authResponse.userID && authResponse.accessToken
+        ? Ajax.post('/api/authenticate', {
+                authType: 'facebook',
+                userId: authResponse.userID,
+                accessToken: authResponse.accessToken
+            })
+        : {error: true, message: 'Not logged into Facebook', debug: null};
+}
+
+function _doLoginSequence() {
+    return _doSafeRequest()
+        .then(_checkState)
+        .then((state) => {
+            return state.status === 'connected'
+                ? _authenticate(state.authResponse)
+                : state.status;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}

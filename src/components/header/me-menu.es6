@@ -1,7 +1,7 @@
 import React from 'react';
 import Router from '../../router.es6';
 import { getState } from '../../state.es6';
-import { getMyData } from '../../actions.es6';
+import { getMyData, updateMyData } from '../../actions.es6';
 import Modals from '../modals/modals.es6';
 import FbLogin from '../../facebook/fb-login.es6';
 
@@ -28,7 +28,15 @@ export default React.createClass({
 
     _onFbLoginClick () {
         FB.login(
-            FbLogin.checkLoginState,
+            () => {
+                FbLogin.doLoginSequence()
+                    .then((response) => {
+                        updateMyData(response);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            },
             {
                 scope: 'public_profile,email',
                 auth_type: 'rerequest'

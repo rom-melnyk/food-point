@@ -5,37 +5,16 @@ import FbLogin from './facebook/fb-login.es6';
 
 export function getMyData () {
     Ajax.get('/api/me')
-    .then((response) => {
-        if (response[0]) {
-            update('me', response[0]);
-            return -1; // proceed with further promises
-        } else {
-            return new Promise((resolve) => {
-                FB.getLoginStatus((response) => {
-                    resolve(response);
-                });
-            });
-        }
-    }).then((fbLoginStatus) => {
-        return fbLoginStatus === -1 || fbLoginStatus.status !== 'connected'
-            ? -1
-            : Ajax.post('/api/authenticate', {
-                authType: 'facebook',
-                userId: fbLoginStatus.authResponse.userID,
-                accessToken: fbLoginStatus.authResponse.accessToken
-            });
-    }).then((response) => {
-        if (response === -1) {
-            // do nothing;
-        } else if (response.error) {
-            console.log(response);
-            update('me', {});
-        } else {
-            update('me', response[0]);
-        }
-    }).catch((err) => {
-        console.log(err);
-    });
+        .then((response) => {
+            updateMyData(response);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
+export function updateMyData (data) {
+    update('me', data && !data.error ? data : {});
 }
 
 export function getDishes () {
