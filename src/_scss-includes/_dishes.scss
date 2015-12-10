@@ -1,10 +1,7 @@
-@import "general";
+@import "shared";
 @import "icon-font/fontello";
 
 .view.dishes {
-  padding: 2em;
-  min-width: 30em;
-
   ul {
     li {
       @include in-out-fast(background-color);
