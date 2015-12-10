@@ -16,22 +16,11 @@ export default React.createClass({
 
     render () {
         const afterInput = <span className="currency">грн.</span>;
-        const nameEl = (<ModalSection
-            label="Страва"
-            name="name"
-            ref={(cmp) => { this._name = cmp; }}
-        />);
-        const priceEl = (<ModalSection
-            label="Ціна"
-            name="price"
-            extraContent={{afterInput}}
-            ref={(cmp) => { this._price = cmp; }}
-        />);
 
         return (
             <div className="edit-dish">
-                {nameEl}
-                {priceEl}
+                <ModalSection label="Страва" name="name" ref={(cmp) => { this._name = cmp; }} />
+                <ModalSection label="Ціна" name="price" extraContent={{afterInput}} ref={(cmp) => { this._price = cmp; }} />
                 <ModalControls onBackHandler={this._onBackHandler} onOkHandler={this._onOkHandler}/>
             </div>
         );
