@@ -93,3 +93,54 @@
   }
 
 }
+
+.input-section {
+  display: table;
+  width: 100%;
+  padding: .3em 0;
+
+  label, .input-wrapper {
+    display: table-cell;
+  }
+
+  label {
+    width: 20%;
+  }
+
+  .input-wrapper {
+    width: 80%;
+
+    input {
+      @include in-out-fast(background-color);
+
+      width: 100%;
+      padding: .3em .7em;
+
+      font: inherit;
+      border: 1px solid #eee;
+      background-color: #eee;
+
+      &:focus {
+        background-color: #fff;
+      }
+    }
+  }
+}
+
+.controls {
+  padding-top: .3em;
+  text-align: center;
+
+  .button {
+    padding: .3em .5em;
+
+    &.cancel {
+      @include icon-back();
+      margin-right: 2em;
+    }
+
+    &.submit {
+      @include icon-ok();
+    }
+  }
+}

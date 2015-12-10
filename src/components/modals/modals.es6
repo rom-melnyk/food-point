@@ -39,7 +39,7 @@ const Modal = React.createClass({
         return (
             <div className="modal-wrapper">
                 <div className={'modal-window' + (this.state.command === 'wait' ? ' wait' : '')}>
-                    <div className="close" onClick={this._onCloseHandler}></div>
+                    <div className="close" onClick={this._onCloseHandler} title="Закрити"></div>
                     <div className="wait-indicator"></div>
                     <div className="modal-container">
                         {payload}

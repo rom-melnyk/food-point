@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { deleteDish, setModalCommand } from '../../actions.es6';
+import ModalControls from '../modals/controls.es6';
 
 export default React.createClass({
     render () {
@@ -9,10 +10,7 @@ export default React.createClass({
                 <div className="label">
                     Видалити <span className="name">{this.props.name}</span>?
                 </div>
-                <div className="controls">
-                    <span className="button cancel" onClick={this._onBackHandler}></span>
-                    <span className="button submit" onClick={this._onOkHandler}></span>
-                </div>
+                <ModalControls onBackHandler={this._onBackHandler} onOkHandler={this._onOkHandler}/>
             </div>
         );
     },
