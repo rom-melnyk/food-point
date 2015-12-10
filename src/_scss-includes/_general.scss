@@ -31,3 +31,7 @@ $modal-shadow-color: #000;
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
+@mixin shadow($size: 3em, $color: $modal-shadow-color) {
+  box-shadow: 0 0 $size $color;
+}

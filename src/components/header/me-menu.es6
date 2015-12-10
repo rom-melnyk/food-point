@@ -11,19 +11,32 @@ export default React.createClass({
     },
 
     render () {
-        const meOrLoginButton = this.props.me.id
-            ? <span className="picture">{this._getPersonInitials()}</span>
-            : <span className="fb-login" onClick={this._onFbLoginClick}>Зайти через Facebook</span>;
-
         return (
             <div className="me">
-                {meOrLoginButton}
+                {this.props.me.id ? this._getPersonSection() : this._getLoginSection()}
             </div>
         );
     },
 
-    _getPersonInitials () {
-        return this.props.me.name.charAt(0).toUpperCase();
+    _getLoginSection () {
+        return (
+            <span className="login-section">
+                Зайти через
+                <span className="fb-login" onClick={this._onFbLoginClick}></span>
+            </span>
+        );
+    },
+
+    _getPersonSection () {
+        const initials = this.props.me.name.charAt(0).toUpperCase();
+        return (
+            <span className="picture-section">
+                <span className="picture" title={this.props.me.name}>{initials}</span>
+                <a className="logout" href="javascript://" onClick={this._onLogoutClick} title="Вийти">
+                    Вийти
+                </a>
+            </span>
+        );
     },
 
     _onFbLoginClick () {
@@ -42,5 +55,10 @@ export default React.createClass({
                 auth_type: 'rerequest'
             }
         );
+    },
+
+    _onLogoutClick () {
+        const beginOfTime = new Date(0).toString();
+        document.cookie = `session=; expires=${beginOfTime};`;
     }
 });
