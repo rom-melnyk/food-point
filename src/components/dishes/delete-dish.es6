@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { deleteDish, setModalCommand } from '../../actions.es6';
-import ModalControls from '../modals/controls.es6';
+import ModalControls from '../modals/form-controls.es6';
 
 export default React.createClass({
     render () {
