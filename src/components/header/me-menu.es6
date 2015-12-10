@@ -22,7 +22,7 @@ export default React.createClass({
         return (
             <span className="login-section">
                 Зайти через
-                <span className="fb-login" onClick={this._onFbLoginClick} />
+                <span className="fb-login" onClick={this._onFbLoginClick}></span>
             </span>
         );
     },
@@ -32,7 +32,7 @@ export default React.createClass({
         return (
             <span className="picture-section">
                 <span className="picture" title={this.props.me.name}>{initials}</span>
-                <span className="logout" onClick={this._onLogoutClick} title="Вийти" />
+                <span className="logout" onClick={this._onLogoutClick} title="Вийти"></span>
             </span>
         );
     },
