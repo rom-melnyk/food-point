@@ -31,10 +31,14 @@ export default React.createClass({
         const initials = this.props.me.name.charAt(0).toUpperCase();
         return (
             <span className="picture-section">
-                <span className="picture" title={this.props.me.name}>{initials}</span>
+                <span className="picture" title={this.props.me.name} onClick={this._onPictureClick}>{initials}</span>
                 <span className="logout" onClick={this._onLogoutClick} title="Вийти"></span>
             </span>
         );
+    },
+
+    _onPictureClick () {
+        Modals.open('edit-me', this.props.me);
     },
 
     _onFbLoginClick () {
