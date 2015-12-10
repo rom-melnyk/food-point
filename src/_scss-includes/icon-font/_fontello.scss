@@ -93,7 +93,7 @@
 @mixin icon-logout {
   &::before {
     @include __icon-general__();
-    content: '\805'; /* '...' */
+    content: '\e805'; /* '...' */
   }
 }
 

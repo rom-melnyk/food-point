@@ -32,6 +32,7 @@
     .login-section {
       .fb-login {
         @extend .button;
+        @include icon-facebook();
         margin-left: .4em;
       }
     }
@@ -50,6 +51,11 @@
 
         background-color: #fff;
         cursor: pointer;
+      }
+
+      .logout {
+        @extend .button;
+        @include icon-logout();
       }
     }
 
