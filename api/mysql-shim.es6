@@ -12,9 +12,10 @@ const pool = mysql.createPool({
 
 /**
  * @param {String} query
+ * @param {Boolean} [expectSingleObject=false]
  * @return Promise
  */
-function doQuery (query) {
+function doQuery (query, expectSingleObject) {
     return new Promise((resolve, reject) => {
         pool.getConnection((err, connection) => {
             if (err) {
@@ -28,6 +29,10 @@ function doQuery (query) {
                 if (err) {
                     resolve({error: true, message: 'Error querying the database', debug: err});
                 } else {
+                    if (expectSingleObject) {
+                        rows = rows[0] || {};
+                    }
+
                     resolve(rows);
                 }
             });

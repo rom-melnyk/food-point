@@ -69,7 +69,8 @@ function doFacebookRequest (accessToken) {
 }
 
 function doGetUserByAuthIdQuery (data) {
-    return MySQL.doQuery(`SELECT * FROM users WHERE authId="${data.authId}" AND authType="${data.authType}"`);
+    const query = `SELECT * FROM users WHERE authId="${data.authId}" AND authType="${data.authType}"`;
+    return MySQL.doQuery(query, true);
 }
 
 function doCreateUserQuery (data) {
@@ -80,8 +81,8 @@ function doCreateUserQuery (data) {
         .then((result) => {
             return result.error ? result : doGetUserByAuthIdQuery(data);
         }).then((result) => {
-            return result.error || result.length === 0
+            return result.error || result.id === undefined
                 ? {error: true, message: 'Error creating user', debug: result.debug}
-                : result[0];
+                : result;
         });
 }
