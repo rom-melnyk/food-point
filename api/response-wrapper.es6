@@ -3,9 +3,10 @@ const doQuery = require('./mysql-shim.es6').doQuery;
 /**
  * @param {String} query
  * @param {Object} response
+ * @param {Boolean} [expectSingleObject=false]
  */
-function doResponse (query, response) {
-    doQuery(query)
+function doResponse (query, response, expectSingleObject) {
+    doQuery(query, expectSingleObject)
         .then((rows) => {
             response.json(rows);
         })
