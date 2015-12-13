@@ -1,5 +1,5 @@
 import React from 'react';
-import { editMe, setModalCommand } from '../../actions.es6';
+import { editMyData, setModalCommand } from '../../actions.es6';
 import ModalControls from '../modals/form-controls.es6';
 import ModalSection from '../modals/form-section.es6';
 
@@ -36,7 +36,12 @@ export default React.createClass({
     _phone: null,
 
     _onOkHandler () {
-        editMe(this.props.data.id, this._name.getValue, this._email.getValue, this._address.getValue, this._phone.getValue);
+        editMyData(this.props.data.id, {
+            name: this._name.getValue(),
+            email: this._email.getValue(),
+            address: this._address.getValue(),
+            phone: this._phone.getValue()
+        });
     },
 
     _onBackHandler () {
