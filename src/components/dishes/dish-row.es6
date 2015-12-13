@@ -1,14 +1,24 @@
 import React from 'react';
 import Modals from '../modals/modals.es6';
-import { moveDishUp } from '../../actions.es6';
+import { moveDishUp } from './dish-actions.es6';
 
 export default React.createClass({
     render () {
+        const description = this.props.description
+            ? <span className="description">({this.props.description})</span>
+            : null;
+
+        const image = this.props.image
+            ? <span className="image">{this.props.image}</span>
+            : null;
+
         return (
             <li>
                 <div className="left">
                     <span className="ordinal">{this.props.attr.ordinal + 1}</span>
                     <span className="name">{this.props.name}</span>
+                    {description}
+                    {image}
                 </div>
                 <div className="right">
                     <span className="price"> {this.props.price}</span>

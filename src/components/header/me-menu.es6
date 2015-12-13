@@ -1,7 +1,6 @@
 import React from 'react';
 import Router from '../../router.es6';
-import { getState } from '../../state.es6';
-import { getMyData, updateMyData } from '../../actions.es6';
+import { getMyData, updateMyData } from './me-actions.es6';
 import Modals from '../modals/modals.es6';
 import FbLogin from '../../facebook/fb-login.es6';
 

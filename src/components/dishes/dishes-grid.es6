@@ -1,6 +1,6 @@
 import React from 'react';
 import Row from './dish-row.es6';
-import { getDishes } from '../../actions.es6';
+import { getDishes } from './dish-actions.es6';
 import Modal from '../modals/modals.es6';
 
 export default React.createClass({
@@ -10,7 +10,7 @@ export default React.createClass({
 
     render () {
         const rows = this.props.dishes.map((dish) => {
-            return <Row key={dish.id} id={dish.id} name={dish.name} price={dish.price} attr={dish.attr}/>
+            return <Row key={dish.id} {...dish}/>
         });
 
         return (

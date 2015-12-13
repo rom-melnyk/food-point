@@ -1,5 +1,6 @@
 import React from 'react';
-import { editMyData, setModalCommand } from '../../actions.es6';
+import { editMyData } from './me-actions.es6';
+import { setModalCommand } from '../../actions.es6';
 import ModalControls from '../modals/form-controls.es6';
 import ModalSection from '../modals/form-section.es6';
 
