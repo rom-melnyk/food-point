@@ -1,4 +1,8 @@
 const _ = {
+    clone (source) {
+        return Object.assign({}, source);
+    },
+
     /**
      * @param {Object} source
      * @param {String[]} keys
