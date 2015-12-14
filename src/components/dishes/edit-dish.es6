@@ -8,8 +8,8 @@ export default React.createClass({
     componentDidMount () {
         this._name.setValue(this.props.name || '');
         this._price.setValue(this.props.price || 0);
-        this._description.setValue(this.props.price || '');
-        this._image.setValue(this.props.price || '');
+        this._description.setValue(this.props.description || '');
+        this._image.setValue(this.props.image || '');
     },
 
     componentWillUnmount () {
@@ -25,7 +25,7 @@ export default React.createClass({
         return (
             <div className="edit-dish">
                 <ModalSection label="Страва" name="name" ref={(cmp) => { this._name = cmp; }} />
-                <ModalSection label="Ціна" name="price" extraContent={{priceTrail}} ref={(cmp) => { this._price = cmp; }} />
+                <ModalSection label="Ціна" name="price" extraContent={{afterInput: priceTrail}} ref={(cmp) => { this._price = cmp; }} />
                 <ModalSection label="Опис" name="description" ref={(cmp) => { this._description = cmp; }} />
                 <ModalSection label="Фото" name="image" ref={(cmp) => { this._image = cmp; }} />
                 <ModalControls onBackHandler={this._onBackHandler} onOkHandler={this._onOkHandler}/>

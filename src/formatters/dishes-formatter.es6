@@ -1,18 +1,18 @@
+import _ from '../utils/_.es6';
+
 export function parseAttribsForOneDish (dish, idx) {
-    return {
-        id: dish.id,
-        name: dish.name,
-        price: dish.price,
-        attr: ((attr) => {
-            try {
-                return JSON.parse(attr);
-            } catch (e) {
-                return {
-                    ordinal: idx
-                };
-            }
-        })(dish.attr)
-    };
+    const result = _.clone(dish);
+
+    try {
+        result.attr = JSON.parse(attr);
+    } catch (e) {
+        result.attr = {
+            ordinal: idx,
+            isCategory: false
+        };
+    }
+
+    return result;
 }
 
 export function parseAttribsForAllDishes (dishes) {
@@ -23,12 +23,10 @@ export function parseAttribsForAllDishes (dishes) {
 }
 
 export function stringifyAttribsForOneDish (dish) {
-    return {
-        id: dish.id,
-        name: dish.name,
-        price: dish.price,
-        attr: JSON.stringify(dish.attr)
-    };
+    const result = _.clone(dish);
+    result.attr = JSON.stringify(dish.attr);
+
+    return result;
 }
 
 export function stringifyAttribsForAllDishes (dishes) {
