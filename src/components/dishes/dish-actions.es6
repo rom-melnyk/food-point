@@ -1,11 +1,11 @@
 import { getState, update, triggerChangeEvent } from '../../state.es6';
 import Ajax from '../../utils/ajax.es6';
-import { parseAttribsForAllDishes, stringifyAttribsForOneDish } from '../../formatters/dishes-formatter.es6';
+import { parseDishes, stringifyDishes } from '../../formatters/dishes-formatter.es6';
 
 export function getDishes () {
     Ajax.get('/api/dishes')
         .then((dishes) => {
-            dishes = parseAttribsForAllDishes(dishes);
+            dishes = parseDishes(dishes);
             update('dishes', dishes);
         })
         .catch((err) => {
@@ -52,7 +52,7 @@ function _doDishApiCall (method, url, data, modalName) {
             return Ajax.get('/api/dishes');
         })
         .then((dishes) => {
-            dishes = parseAttribsForAllDishes(dishes);
+            dishes = parseDishes(dishes);
             update('dishes', dishes);
             setModalCommand(modalName, 'close');
         })
