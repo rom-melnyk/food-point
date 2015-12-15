@@ -2,7 +2,7 @@ import React from 'react';
 import Modals from '../modals/modals.es6';
 import { moveDishUp } from './dish-actions.es6';
 
-export default React.createClass({
+const Row = React.createClass({
     render () {
         const description = this.props.description
             ? <span className="description">({this.props.description})</span>
@@ -15,7 +15,7 @@ export default React.createClass({
         return (
             <li>
                 <div className="left">
-                    <span className="ordinal">{this.props.attr.ordinal + 1}</span>
+                    <span className="ordinal">{this.props.ordinal}</span>
                     <span className="name">{this.props.name}</span>
                     {description}
                     {image}
@@ -31,8 +31,22 @@ export default React.createClass({
                         </span>
                     </span>
                 </div>
+
+                {this._getChildren(this.props.children)}
             </li>
         );
+    },
+
+    _getChildren (children) {
+        if (children) {
+            const rows = children.map((dish) => {
+                return <Row key={dish.id} {...dish}/>;
+            });
+
+            return <ul>{rows}</ul>;
+        }
+
+        return null;
     },
 
     _onEditHandler () {
@@ -52,10 +66,12 @@ export default React.createClass({
     },
 
     _onUpHandler () {
-        moveDishUp(this.props.attr.ordinal);
+        moveDishUp(this.props.parent, this.props.ordinal);
     },
 
     _onDownHandler () {
-        moveDishUp(this.props.attr.ordinal + 1);
+        moveDishUp(this.props.parent, this.props.ordinal + 1);
     }
 });
+
+export default Row;

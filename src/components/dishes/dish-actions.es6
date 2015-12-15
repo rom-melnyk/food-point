@@ -25,13 +25,12 @@ export function deleteDish (id) {
     _doDishApiCall('delete', `/api/dishes/${id}`, null, 'delete-dish');
 }
 
-export function moveDishUp (index) {
-    const dishes = getState().dishes;
-    const dish_1 = dishes[index - 1];
-    const dish_2 = dishes[index];
-    dishes.splice(index - 1, 2, dish_2, dish_1);
-    dish_1.attr.ordinal = index;
-    dish_2.attr.ordinal = index - 1;
+export function moveDishUp (parent, index) {
+    const dish_1 = parent[index - 1];
+    const dish_2 = parent[index];
+    parent.splice(index - 1, 2, dish_2, dish_1);
+    dish_1.ordinal = index;
+    dish_2.ordinal = index - 1;
     triggerChangeEvent();
 }
 

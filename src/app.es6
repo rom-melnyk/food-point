@@ -46,7 +46,7 @@ const Main = React.createClass({
 
     _getView () {
         if (this.state.route === Router.DISHES) {
-            return <DishesGrid dishes={this.state.dishes}/>;
+            return <DishesGrid data={this.state.dishes}/>;
         } else if (this.state.route === Router.HOME) {
             return <Home/>;
         }
