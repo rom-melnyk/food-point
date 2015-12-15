@@ -15,7 +15,7 @@ const Row = React.createClass({
         return (
             <li>
                 <div className="left">
-                    <span className="ordinal">{this.props.ordinal}</span>
+                    <span className="ordinal">{this.props.ordinal + 1}</span>
                     <span className="name">{this.props.name}</span>
                     {description}
                     {image}

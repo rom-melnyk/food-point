@@ -1,6 +1,6 @@
 import { getState, update, triggerChangeEvent } from '../../state.es6';
 import Ajax from '../../utils/ajax.es6';
-import { parseDishes, stringifyDishes } from '../../formatters/dishes-formatter.es6';
+import { parseDishes, stringifyDishes, stringifyDish } from '../../formatters/dishes-formatter.es6';
 
 export function getDishes () {
     Ajax.get('/api/dishes')
@@ -26,12 +26,21 @@ export function deleteDish (id) {
 }
 
 export function moveDishUp (parent, index) {
-    const dish_1 = parent[index - 1];
-    const dish_2 = parent[index];
-    parent.splice(index - 1, 2, dish_2, dish_1);
+    const dish_1 = parent.children[index - 1];
+    const dish_2 = parent.children[index];
+    parent.children.splice(index - 1, 2, dish_2, dish_1);
     dish_1.ordinal = index;
     dish_2.ordinal = index - 1;
     triggerChangeEvent();
+
+    parent = stringifyDish(parent);
+    Ajax.put(`/api/dishes/${parent.id}`, parent)
+        .then((res) => {
+            console.log(`"${parent.name}" updated`);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }
 
 export function setModalCommand (modalType, command) {

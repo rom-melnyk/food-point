@@ -19,10 +19,15 @@ function createDish(req, res) {
 
 function updateDish(req, res) {
     const id = escape(req.params.id);
-    const name = escape(req.body.name);
-    const price = escape(req.body.price);
-    const attr = escape(req.body.attr);
-    const query = `UPDATE dishes SET name="${name}", price="${price}", attr="${attr}" WHERE id="${id}";`;
+
+    const fields = ['name', 'price', 'description', 'image', 'isVisible', 'children'];
+    const paramList = [];
+
+    fields.forEach((fld) => {
+        paramList.push(`${fld}="${escape(req.body[fld])}"`)
+    });
+
+    const query = `UPDATE dishes SET ${paramList.join(', ')} WHERE id="${id}";`;
     doResponse(query, res);
 }
 

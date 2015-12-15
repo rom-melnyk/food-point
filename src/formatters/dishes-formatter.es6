@@ -9,18 +9,21 @@ export function parseDishes (dishes, section = null, parent = null, ordinal = 0)
     const parsed = _generateItem(section, parent, ordinal);
     parsed.children = [];
 
-    const childrenIds = _parseChildrenString(section.children);
+    let childOrdinal = 0;
+    _parseChildrenString(section.children)
+        .forEach((id) => {
+            const dish = dishes.filter(d => d.id === id)[0];
 
-    dishes
-        .filter((dish) => {
-            return childrenIds.indexOf(dish.id) !== -1;
-        })
-        .forEach((dish, ordinal) => {
-            const item = dish.children !== null
-                ? parseDishes(dishes, dish, parsed)
-                : _generateItem(dish, parsed, ordinal + 1);
+            if (!dish) {
+                return;
+            }
+
+            const item = dish.children === null
+                ? _generateItem(dish, parsed, childOrdinal)
+                : parseDishes(dishes, dish, parsed, childOrdinal);
 
             parsed.children.push(item);
+            childOrdinal++;
         });
 
     return parsed;
