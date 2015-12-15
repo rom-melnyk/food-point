@@ -1,6 +1,8 @@
 const _state = {
     route: 'dishes',
-    dishes: [],
+    dishes: {
+        children: []
+    },
     users: [],
     orders: [],
     me: {},
