@@ -1,20 +1,24 @@
 import _ from '../utils/_.es6';
 
-export function parseDishes (dishes, section = null, parent = null) {
+export function parseDishes (dishes, section = null, parent = null, ordinal = 0) {
     section = section || dishes.find(dish => dish.name === '/');
     if (!section) {
         throw new Error('The top level section of Dishes is not found');
     }
 
-    const parsed = _generateItem(section, parent);
+    const parsed = _generateItem(section, parent, ordinal);
     parsed.children = [];
 
-    _parseChildrenString(parent.children)
-        .map(id => dishes.filter(dish => dish.id === id))
-        .forEach((dish) => {
+    const childrenIds = _parseChildrenString(section.children);
+
+    dishes
+        .filter((dish) => {
+            return childrenIds.indexOf(dish.id) !== -1;
+        })
+        .forEach((dish, ordinal) => {
             const item = dish.children !== null
                 ? parseDishes(dishes, dish, parsed)
-                : _generateItem(dish, parsed);
+                : _generateItem(dish, parsed, ordinal + 1);
 
             parsed.children.push(item);
         });
@@ -28,7 +32,7 @@ export function stringifyDishes (dishes) {
     dishes.children.forEach((dish) => {
         const _dish = stringifyDish(dish);
 
-        if (dish.children != null) {
+        if (dish.children !== null) {
             result.push( ...dish.children.map(d => stringifyDishes(d)) );
         }
 
@@ -39,16 +43,17 @@ export function stringifyDishes (dishes) {
 }
 
 export function stringifyDish (dish) {
-    const _dish = _.omit(dish, ['parent']);
+    const _dish = _.omit(dish, ['parent', 'ordinal']);
     // null or undefined matters
-    _dish.children = dish.children != null ? _stringifyChildrenInfo(dish.children) : null;
+    _dish.children = dish.children !== null ? _stringifyChildrenInfo(dish.children) : null;
     return _dish;
 }
 
 // -------------------------------------------
-function _generateItem (dish, parent) {
-    const item = _.omit(dish, ['children']);
+function _generateItem (dish, parent, ordinal = 0) {
+    const item = _.clone(dish);
     item.parent = parent;
+    item.ordinal = ordinal;
 
     return item;
 }
