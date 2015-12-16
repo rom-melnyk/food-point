@@ -45,8 +45,6 @@ export function update (path, value, root = _state) {
     }
 }
 
-
-
 export function triggerChangeEvent () {
     _listeners.forEach((listener) => {
         listener(_state);
