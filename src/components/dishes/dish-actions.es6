@@ -1,6 +1,11 @@
 import { getState, update, triggerChangeEvent } from '../../state.es6';
 import Ajax from '../../utils/ajax.es6';
 import { parseDishes, stringifyDishes, stringifyDish } from '../../formatters/dishes-formatter.es6';
+import { getRoot } from '../../selectors/dishes-selectors.es6';
+import Modals from '../modals/modals.es6';
+
+const MODEL_NAME_EDIT_DISH = 'edit-dish';
+const MODEL_NAME_DELETE_DISH = 'delete-dish';
 
 export function getDishes () {
     Ajax.get('/api/dishes')
@@ -13,16 +18,29 @@ export function getDishes () {
         });
 }
 
-export function editDish (id, data) {
+export function openEditDishModal (dish) {
+    if (!dish) {
+        dish = {};
+        dish.parent = getRoot();
+    }
+
+    Modals.open(MODEL_NAME_EDIT_DISH, dish);
+}
+
+export function updateDish (id, dish) {
     if (id === undefined) {
-        _doDishApiCall('post', `/api/dishes`, data, 'edit-dish');
+        _doDishApiCall('post', `/api/dishes`, dish, MODEL_NAME_EDIT_DISH);
     } else {
-        _doDishApiCall('put', `/api/dishes/${id}`, data, 'edit-dish');
+        _doDishApiCall('put', `/api/dishes/${id}`, dish, MODEL_NAME_EDIT_DISH);
     }
 }
 
-export function deleteDish (id) {
-    _doDishApiCall('delete', `/api/dishes/${id}`, null, 'delete-dish');
+export function openDeleteDishModal (dish) {
+    Modals.open(MODEL_NAME_DELETE_DISH, { id: dish.id, name: dish.name });
+}
+
+export function deleteDish (dish) {
+    _doDishApiCall('delete', `/api/dishes/${dish.id}`, null, MODEL_NAME_DELETE_DISH);
 }
 
 export function moveDishUp (parent, index) {

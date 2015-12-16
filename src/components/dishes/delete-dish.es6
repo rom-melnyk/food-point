@@ -16,7 +16,7 @@ export default React.createClass({
     },
 
     _onOkHandler () {
-        deleteDish(this.props.id);
+        deleteDish(props);
     },
 
     _onBackHandler () {

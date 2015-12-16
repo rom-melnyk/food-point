@@ -10,6 +10,10 @@ export function getAllSections () {
     return _pickAllItems(dishes, dish => !!dish.children);
 }
 
+export function getRoot () {
+    return getState().dishes;
+}
+
 // -------------------------- private methods --------------------------
 function _pickOneItem (item, predicate) {
     let result = null;

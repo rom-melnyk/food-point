@@ -1,7 +1,6 @@
 import React from 'react';
 import Row from './dish-row.es6';
-import { getDishes } from './dish-actions.es6';
-import Modal from '../modals/modals.es6';
+import { getDishes, openEditDishModal } from './dish-actions.es6';
 
 export default React.createClass({
     componentDidMount () {
@@ -29,6 +28,6 @@ export default React.createClass({
     },
 
     _onCreateHandler () {
-        Modal.open('edit-dish');
+        openEditDishModal();
     }
 });

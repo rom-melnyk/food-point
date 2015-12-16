@@ -1,6 +1,5 @@
 import React from 'react';
-import Modals from '../modals/modals.es6';
-import { moveDishUp } from './dish-actions.es6';
+import { openEditDishModal, openDeleteDishModal, moveDishUp } from './dish-actions.es6';
 
 const Row = React.createClass({
     render () {
@@ -50,19 +49,11 @@ const Row = React.createClass({
     },
 
     _onEditHandler () {
-        Modals.open('edit-dish', {
-            id: this.props.id,
-            name: this.props.name,
-            price: this.props.price,
-            attr: this.props.attr
-        });
+        openEditDishModal(this.props);
     },
 
     _onDeleteHandler () {
-        Modals.open('delete-dish', {
-            id: this.props.id,
-            name: this.props.name
-        });
+        openDeleteDishModal(this.props);
     },
 
     _onUpHandler () {
