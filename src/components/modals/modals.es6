@@ -4,8 +4,8 @@ import { getState, addChangeListener, removeChangeListener } from '../../state.e
 import { setModalCommand } from '../../actions.es6';
 import dom from '../../utils/dom.es6';
 
-import EditDish from '../dishes/edit-dish.es6';
-import DeleteDish from '../dishes/delete-dish.es6';
+import EditDish from '../dishes/edit-dish-modal.es6';
+import DeleteDish from '../dishes/delete-dish-modal.es6';
 import EditMe from '../header/edit-me.es6';
 
 const Modal = React.createClass({
