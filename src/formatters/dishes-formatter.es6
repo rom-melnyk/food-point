@@ -1,7 +1,7 @@
 import _ from '../utils/_.es6';
 
-export function parseDishes (dishes, section = null, parent = null, ordinal = 0) {
-    section = section || dishes.find(dish => dish.name === '/');
+export function parseDishes (dataFromServer, section = null, parent = null, ordinal = 0) {
+    section = section || dataFromServer.find(dish => dish.name === '/');
     if (!section) {
         throw new Error('The top level section of Dishes is not found');
     }
@@ -12,7 +12,7 @@ export function parseDishes (dishes, section = null, parent = null, ordinal = 0)
     let childOrdinal = 0;
     _parseChildrenString(section.children)
         .forEach((id) => {
-            const dish = dishes.filter(d => d.id === id)[0];
+            const dish = dataFromServer.filter(d => d.id === id)[0];
 
             if (!dish) {
                 return;
@@ -20,7 +20,7 @@ export function parseDishes (dishes, section = null, parent = null, ordinal = 0)
 
             const item = dish.children === null
                 ? _generateItem(dish, parsed, childOrdinal)
-                : parseDishes(dishes, dish, parsed, childOrdinal);
+                : parseDishes(dataFromServer, dish, parsed, childOrdinal);
 
             parsed.children.push(item);
             childOrdinal++;
