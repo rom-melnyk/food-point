@@ -12,15 +12,16 @@ export default React.createClass({
     },
 
     render () {
-        const beforeInput = this.props.extraContent && this.props.extraContent.beforeInput;
-        const afterInput = this.props.extraContent && this.props.extraContent.afterInput;
+        const beforeInput = this.props.content && this.props.content.beforeInput;
+        const afterInput = this.props.content && this.props.content.afterInput;
+        const input = this.props.content && this.props.content.input || <input type="text" name={this.props.name}/>;
 
         return (
             <div className="input-section">
                 <label>{this.props.label}</label>
                     <span className="input-wrapper">
                         {beforeInput}
-                        <input type="text" name={this.props.name}/>
+                        {input}
                         {afterInput}
                     </span>
             </div>
