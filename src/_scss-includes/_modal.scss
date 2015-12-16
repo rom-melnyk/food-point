@@ -110,7 +110,7 @@
   .input-wrapper {
     width: 80%;
 
-    input {
+    input, select {
       @include in-out-fast(background-color);
 
       width: 100%;
