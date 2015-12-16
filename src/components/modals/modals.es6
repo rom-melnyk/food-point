@@ -10,7 +10,7 @@ import EditMe from '../header/edit-me.es6';
 
 const Modal = React.createClass({
     getInitialState () {
-        return {command: getState().modals[this.props.type]};
+        return {command: getState().modals[this.props.name]};
     },
 
     componentDidMount () {
@@ -31,11 +31,11 @@ const Modal = React.createClass({
 
     componentWillUnmount () {
         removeChangeListener(this._getState);
-        setModalCommand(this.props.type, null);
+        setModalCommand(this.props.name, null);
     },
 
     render () {
-        const payload = _getModal(this.props.type, this.props.data);
+        const payload = _getModal(this.props.name, this.props.data);
         return (
             <div className="modal-wrapper">
                 <div className={'modal-window' + (this.state.command === 'wait' ? ' wait' : '')}>
@@ -51,7 +51,7 @@ const Modal = React.createClass({
 
     _getState (state) {
         this.setState({
-            command: state.modals[this.props.type]
+            command: state.modals[this.props.name]
         });
     },
 
@@ -72,24 +72,24 @@ export default {
 }
 
 // -------------------------------- private methods --------------------------------
-function _open (type, data = {}) {
+function _open (name, data = {}) {
     const shader = document.createElement('div');
     shader.className = 'modal-shader';
     document.body.appendChild(shader);
 
-    ReactDom.render(<Modal type={type} data={data}/>, shader);
+    ReactDom.render(<Modal name={name} data={data}/>, shader);
 }
 
-function _getModal (type, props) {
-    if (type === 'edit-dish') {
-        return <EditDish {...props} />;
+function _getModal (name, data) {
+    if (name === 'edit-dish') {
+        return <EditDish {...data} />;
     }
-    if (type === 'delete-dish') {
-        return <DeleteDish {...props} />;
+    if (name === 'delete-dish') {
+        return <DeleteDish {...data} />;
     }
 
-    if (type === 'edit-me') {
-        return <EditMe data={props} />;
+    if (name === 'edit-me') {
+        return <EditMe data={data} />;
     }
 
     return null;
