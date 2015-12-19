@@ -1,6 +1,6 @@
 import { getState } from '../state.es6';
 
-export function pickItemById (id) {
+export function getItemById (id) {
     const dishes = getState().dishes;
     return _pickOneItem(dishes, dish => dish.id === id);
 }
@@ -16,7 +16,11 @@ export function getRoot () {
 
 // -------------------------- private methods --------------------------
 function _pickOneItem (item, predicate) {
-    let result = null;
+    let result = predicate(item);
+
+    if (result) {
+        return item;
+    }
 
     if (item.children) {
         item.children.some((child) => {
@@ -25,7 +29,7 @@ function _pickOneItem (item, predicate) {
         });
     }
 
-    return result || predicate(item) || null;
+    return result ? result : null;
 }
 
 function _pickAllItems (item, predicate) {
