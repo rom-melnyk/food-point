@@ -8,11 +8,7 @@ const MODEL_NAME_EDIT_DISH = 'edit-dish';
 const MODEL_NAME_DELETE_DISH = 'delete-dish';
 
 export function getDishes () {
-    Ajax.get('/api/dishes')
-        .then((dishes) => {
-            dishes = parseDishes(dishes);
-            update('dishes', dishes);
-        })
+    _doGetAllDishes()
         .catch((err) => {
             console.log(err);
         });
@@ -25,6 +21,29 @@ export function openEditDishModal (dish) {
     }
 
     Modals.open(MODEL_NAME_EDIT_DISH, dish);
+}
+
+export function createDish (dish) {
+    Ajax.post('/api/dishes', stringifyDish(dish))
+        .then((res) => {
+            if (res.error) {
+                throw new Error(res); // exit the Promise chain
+            }
+
+            // append child
+            dish.id = res.insertId;
+            dish.parent.children.push(dish);
+            return Ajax.put(`/api/dishes/${dish.parent.id}`, stringifyDish(dish.parent));
+        })
+        .then(() => {
+            return _doGetAllDishes();
+        })
+        .then(() => {
+            setModalCommand(MODEL_NAME_EDIT_DISH, 'close');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }
 
 export function updateDish (id, dish) {
@@ -84,5 +103,13 @@ function _doDishApiCall (method, url, data, modalName) {
         })
         .catch((err) => {
             console.log(err);
+        });
+}
+
+function _doGetAllDishes () {
+    return Ajax.get('/api/dishes')
+        .then((dishes) => {
+            dishes = parseDishes(dishes);
+            update('dishes', dishes);
         });
 }
