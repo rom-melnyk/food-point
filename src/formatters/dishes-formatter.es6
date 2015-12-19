@@ -47,7 +47,6 @@ export function stringifyDishes (dishes) {
 
 export function stringifyDish (dish) {
     const _dish = _.omit(dish, ['parent', 'ordinal']);
-    // null or undefined matters
     _dish.children = dish.children !== null ? _stringifyChildrenInfo(dish.children) : null;
     return _dish;
 }
