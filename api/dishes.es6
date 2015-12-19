@@ -1,6 +1,8 @@
 const doResponse = require('./response-wrapper.es6').doResponse;
 const escape = require('./mysql-shim.es6').escape;
 
+const FIELDS = ['name', 'price', 'description', 'image', 'isVisible', 'children'];
+
 function getDishes(req, res) {
     doResponse('SELECT * FROM dishes;', res);
 }
@@ -11,20 +13,18 @@ function getDishById(req, res) {
 }
 
 function createDish(req, res) {
-    const name = escape(req.body.name);
-    const price = escape(req.body.price);
-    const query = `INSERT INTO dishes (name, price, attr) VALUES ("${name}", "${price}", "");`;
+    const values = FIELDS.map((fld) => {
+        return `"${escape(req.body[fld])}"`;
+    });
+    const query = `INSERT INTO dishes (${FIELDS.join(', ')}) VALUES (${values.join(', ')});`;
     doResponse(query, res);
 }
 
 function updateDish(req, res) {
     const id = escape(req.params.id);
 
-    const fields = ['name', 'price', 'description', 'image', 'isVisible', 'children'];
-    const paramList = [];
-
-    fields.forEach((fld) => {
-        paramList.push(`${fld}="${escape(req.body[fld])}"`)
+    const paramList = FIELDS.map((fld) => {
+        return `${fld}="${escape(req.body[fld])}"`;
     });
 
     const query = `UPDATE dishes SET ${paramList.join(', ')} WHERE id="${id}";`;
