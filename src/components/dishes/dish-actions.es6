@@ -64,7 +64,12 @@ export function updateDish (dish, previousParent) {
             return {}; // proceed with further steps
         })
         .then((res) => {
+            if (res.length === 2 && (res.find(r => r.error) > -1)) {
+                // emulating error after receiving result of Promise.all
+                res.error = true;
+            }
             _handleResponseError(res, 'update', dish.name + '\'s parent(-s)');
+
             return _doGetAllDishes();
         })
         .then(() => {
