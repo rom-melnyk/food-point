@@ -56,11 +56,31 @@ export function updateDish (id, dish) {
 }
 
 export function openDeleteDishModal (dish) {
-    Modals.open(MODEL_NAME_DELETE_DISH, { id: dish.id, name: dish.name });
+    Modals.open(MODEL_NAME_DELETE_DISH, dish);
 }
 
 export function deleteDish (dish) {
-    _doDishApiCall('delete', `/api/dishes/${dish.id}`, null, MODEL_NAME_DELETE_DISH);
+    Ajax.delete(`/api/dishes/${dish.id}`)
+        .then((res) => {
+            if (res.error) {
+                console.log(res);
+                throw new Error('Unable to delete the dish'); // exit the Promise chain
+            }
+
+            // remove child
+            const idx = dish.parent.children.findIndex(child => child.id === dish.id);
+            dish.parent.children.splice(idx, 1);
+            return Ajax.put(`/api/dishes/${dish.parent.id}`, stringifyDish(dish.parent));
+        })
+        .then(() => {
+            return _doGetAllDishes();
+        })
+        .then(() => {
+            setModalCommand(MODEL_NAME_DELETE_DISH, 'close');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }
 
 export function moveDishUp (parent, index) {
