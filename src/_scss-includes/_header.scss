@@ -1,6 +1,6 @@
 @import "shared";
 
-.header {
+.application > .header {
   @include clear-fix;
 
   padding-top: 2em;

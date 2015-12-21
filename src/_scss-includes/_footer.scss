@@ -1,6 +1,6 @@
 @import "shared";
 
-.footer {
+.application > .footer {
   @include clear-fix;
 
   padding-top: 2em;

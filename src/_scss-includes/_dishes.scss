@@ -4,119 +4,112 @@
 .view.dishes {
   ul {
     li {
-      @include in-out-fast(background-color);
-      display: table;
-      width: 100%;
       margin-bottom: .5em;
-      padding: .3em 1em;
-
-      &:hover {
-        background-color: #f3f3f5;
-      }
 
       &:last-child {
         margin-bottom: 0;
       }
 
-      div {
-        display: table-cell;
-        vertical-align: middle;
+      .header {
+        @include in-out-fast(background-color);
+        display: table;
+        width: 100%;
+        padding: .3em 1em;
 
-        &.left {
-          width: 70%;
-
-          .ordinal {
-            display: inline-block;
-            width: 2em;
-            margin-right: 1em;
-
-            font-size: .75em;
-            line-height: 1.33em;
-            text-align: right;
-            opacity: .3;
-
-            &::after {
-              content: ")";
-            }
-          }
+        &:hover {
+          background-color: #f3f3f5;
         }
 
-        &.right {
-          width: 30%;
-          text-align: right;
+        .left, .right {
+          display: table-cell;
+          vertical-align: middle;
 
-          .price::after {
-            content: " грн.";
-          }
-          .controls {
-            @include in-out-fast(opacity);
-            padding-left: 1em;
-            opacity: 0;
+          &.left {
+            width: 70%;
 
-            .button {
-              padding: .3em .5em;
-              margin-right: .3em;
-
-              &.edit {
-                @include icon-edit();
-              }
-
-              &.delete {
-                @include icon-x();
-              }
-            }
-
-            .up-down {
+            .ordinal {
               display: inline-block;
-              vertical-align: middle;
-              margin-top: -0.1em;
+              width: 2em;
+              margin-right: 1em;
 
-              font-size: 1.5em;
+              font-size: .75em;
+              line-height: 1.33em;
+              text-align: right;
+              opacity: .3;
+            }
+          }
 
-              * {
-                @include in-out-fast(opacity);
-                display: block;
-                height: .6em;
+          &.right {
+            width: 30%;
+            text-align: right;
 
-                overflow: hidden;
-                cursor: pointer;
-                opacity: .3;
+            .controls {
+              @include in-out-fast(opacity);
+              padding-left: 1em;
+              opacity: 0;
 
-                &:hover {
-                  opacity: 1;
+              .button {
+                padding: .3em .5em;
+                margin-right: .3em;
+
+                &.edit {
+                  @include icon-edit();
+                }
+
+                &.delete {
+                  @include icon-x();
                 }
               }
 
-              .up {
-                @include icon-up();
+              .up-down {
+                display: inline-block;
+                vertical-align: middle;
+                margin-top: -0.1em;
 
-                &::before {
-                  position: relative;
-                  bottom: 0.2em;
-                  margin: 0;
+                font-size: 1.5em;
+
+                * {
+                  @include in-out-fast(opacity);
+                  display: block;
+                  height: .6em;
+
+                  overflow: hidden;
+                  cursor: pointer;
+                  opacity: .3;
+
+                  &:hover {
+                    opacity: 1;
+                  }
                 }
-              }
-              .down {
-                @include icon-down();
 
-                &::before {
-                  position: relative;
-                  bottom: 0.3em;
-                  margin: 0;
+                .up {
+                  @include icon-up();
+
+                  &::before {
+                    position: relative;
+                    bottom: 0.2em;
+                    margin: 0;
+                  }
+                }
+                .down {
+                  @include icon-down();
+
+                  &::before {
+                    position: relative;
+                    bottom: 0.3em;
+                    margin: 0;
+                  }
                 }
               }
             }
           }
-        }
 
+        }
       }
 
-      &:hover {
-        div {
-          .controls {
-            opacity: 1;
-          }
-        }
+
+      &:hover > .header .right .controls {
+        opacity: 1;
       }
 
       &:first-child .up-down .up {
@@ -126,6 +119,10 @@
       &:last-child .up-down .down {
         visibility: hidden;
       }
+    }
+
+    ul {
+      margin-left: 1em;
     }
   }
 
