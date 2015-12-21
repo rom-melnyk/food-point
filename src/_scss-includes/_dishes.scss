@@ -122,6 +122,10 @@
           }
 
         }
+
+        &:hover .right .controls {
+          opacity: 1;
+        }
       }
 
       &.section {
@@ -131,10 +135,6 @@
         & > .header .left .name {
           font-size: 150%;
         }
-      }
-
-      &:hover > .header .right .controls {
-        opacity: 1;
       }
 
       &:first-child .up-down .up {
