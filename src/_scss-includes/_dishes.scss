@@ -37,6 +37,23 @@
               text-align: right;
               opacity: .3;
             }
+
+            .description {
+              display: inline-block;
+              max-width: 20em;
+              margin-left: 1em;
+              font-style: italic;
+              text-overflow: ellipsis;
+              opacity: .3;
+
+              &::before {
+                content: "(";
+              }
+
+              &::after {
+                content: ")";
+              }
+            }
           }
 
           &.right {
@@ -107,6 +124,14 @@
         }
       }
 
+      &.section {
+        margin-top: 2em;
+        margin-bottom: 2em;
+
+        & > .header .left .name {
+          font-size: 150%;
+        }
+      }
 
       &:hover > .header .right .controls {
         opacity: 1;
@@ -123,6 +148,10 @@
 
     ul {
       margin-left: 1em;
+
+      li:last-child {
+        border-bottom: 1px solid $grey;
+      }
     }
   }
 

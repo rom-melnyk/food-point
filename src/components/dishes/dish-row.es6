@@ -5,7 +5,9 @@ const Row = React.createClass({
     render () {
         const toggleArea = this.props.children ? <span className="toggle"></span> : null;
 
-        const description = this.props.description ? <span className="description">({this.props.description})</span> : null;
+        const description = this.props.description
+            ? <span className="description" title={this.props.description}>{this.props.description}</span>
+            : null;
 
         const image = this.props.image ? <span className="image">{this.props.image}</span> : null;
 
@@ -34,7 +36,7 @@ const Row = React.createClass({
     },
 
     _getChildren (children) {
-        if (children) {
+        if (children && children.length > 0) {
             const rows = children.map((dish) => {
                 return <Row key={dish.id} {...dish}/>;
             });
