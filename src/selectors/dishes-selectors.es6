@@ -1,8 +1,18 @@
 import { getState } from '../state.es6';
 
-export function getItemById (id) {
-    const dishes = getState().dishes;
-    return _pickOneItem(dishes, dish => dish.id === id);
+export function getItemById (id, parent) {
+    parent = parent || getState().dishes;
+    return _pickOneItem(parent, dish => dish.id === id);
+}
+
+export function getIndexById (id, parent) {
+    parent = parent || getState().dishes;
+
+    if (!parent.children) {
+        return -1;
+    }
+
+    return parent.children.findIndex(dish => dish.id === id);
 }
 
 export function getAllSections () {

@@ -64,29 +64,22 @@ export default React.createClass({
             );
         });
 
-        options.push(
-            <option key={555} value="555">555</option>,
-            <option key={666} value="666">666</option>
-        );
-        options.unshift(
-            <option key={444} value="444">444</option>,
-            <option key={333} value="333">333</option>
-        );
         return options;
     },
 
     _onOkHandler () {
-        const dish = {};
+        const newDishData = {};
 
         ['name', 'price', 'description', 'image'].forEach((field) => {
-            dish[field] = this[`_${field}`].getValue();
+            newDishData[field] = this[`_${field}`].getValue();
         }, this);
-        dish.parent = getItemById( +this._parent.getValue() );
+        newDishData.parent = getItemById( +this._parent.getValue() );
 
-        if (this.props.id === undefined) {
-            createDish(dish);
+        if (this.props.id === undefined) { // crete new dish
+            createDish(newDishData);
         } else {
-            updateDish(this.props.id, dish);
+            newDishData.id = this.props.id;
+            updateDish(newDishData, this.props.parent);
         }
     },
 

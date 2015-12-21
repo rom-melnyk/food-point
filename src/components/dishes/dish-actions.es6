@@ -1,7 +1,7 @@
 import { getState, update, triggerChangeEvent } from '../../state.es6';
 import Ajax from '../../utils/ajax.es6';
 import { parseDishes, stringifyDishes, stringifyDish } from '../../formatters/dishes-formatter.es6';
-import { getRoot } from '../../selectors/dishes-selectors.es6';
+import { getRoot, getIndexById } from '../../selectors/dishes-selectors.es6';
 import Modals from '../modals/modals.es6';
 
 const MODEL_NAME_EDIT_DISH = 'edit-dish';
@@ -26,17 +26,15 @@ export function openEditDishModal (dish) {
 export function createDish (dish) {
     Ajax.post('/api/dishes', stringifyDish(dish))
         .then((res) => {
-            if (res.error) {
-                console.log(res);
-                throw new Error('Unable to create the dish'); // exit the Promise chain
-            }
+            _handleResponseError(res, 'create', dish.name);
 
             // append child
             dish.id = res.insertId;
             dish.parent.children.push(dish);
             return Ajax.put(`/api/dishes/${dish.parent.id}`, stringifyDish(dish.parent));
         })
-        .then(() => {
+        .then((res) => {
+            _handleResponseError(res, 'create', dish.name + '\'s parent(-s)');
             return _doGetAllDishes();
         })
         .then(() => {
@@ -47,12 +45,34 @@ export function createDish (dish) {
         });
 }
 
-export function updateDish (id, dish) {
-    if (id === undefined) {
-        _doDishApiCall('post', `/api/dishes`, dish, MODEL_NAME_EDIT_DISH);
-    } else {
-        _doDishApiCall('put', `/api/dishes/${id}`, dish, MODEL_NAME_EDIT_DISH);
-    }
+export function updateDish (dish, previousParent) {
+    Ajax.put(`/api/dishes/${dish.id}`, stringifyDish(dish))
+        .then((res) => {
+            _handleResponseError(res, 'update', dish.name);
+
+            if (dish.parent !== previousParent) {
+                // remove child from one parent and append it to another
+                const idx = getIndexById(dish.id, previousParent);
+                previousParent.children.splice(idx, 1);
+                dish.parent.children.push(dish);
+                return Promise.all([
+                    Ajax.put(`/api/dishes/${previousParent.id}`, stringifyDish(previousParent)),
+                    Ajax.put(`/api/dishes/${dish.parent.id}`, stringifyDish(dish.parent))
+                ]);
+            }
+
+            return {}; // proceed with further steps
+        })
+        .then((res) => {
+            _handleResponseError(res, 'update', dish.name + '\'s parent(-s)');
+            return _doGetAllDishes();
+        })
+        .then(() => {
+            setModalCommand(MODEL_NAME_EDIT_DISH, 'close');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }
 
 export function openDeleteDishModal (dish) {
@@ -62,17 +82,15 @@ export function openDeleteDishModal (dish) {
 export function deleteDish (dish) {
     Ajax.delete(`/api/dishes/${dish.id}`)
         .then((res) => {
-            if (res.error) {
-                console.log(res);
-                throw new Error('Unable to delete the dish'); // exit the Promise chain
-            }
+            _handleResponseError(res, 'delete', dish.name);
 
             // remove child
-            const idx = dish.parent.children.findIndex(child => child.id === dish.id);
+            const idx = getIndexById(dish.id, dish.parent);
             dish.parent.children.splice(idx, 1);
             return Ajax.put(`/api/dishes/${dish.parent.id}`, stringifyDish(dish.parent));
         })
-        .then(() => {
+        .then((res) => {
+            _handleResponseError(res, 'delete', dish.name + '\'s parent(-s)');
             return _doGetAllDishes();
         })
         .then(() => {
@@ -91,9 +109,9 @@ export function moveDishUp (parent, index) {
     dish_2.ordinal = index - 1;
     triggerChangeEvent();
 
-    parent = stringifyDish(parent);
-    Ajax.put(`/api/dishes/${parent.id}`, parent)
+    Ajax.put(`/api/dishes/${parent.id}`, stringifyDish(parent))
         .then((res) => {
+            // TODO toast msg from this
             console.log(`"${parent.name}" updated`);
         })
         .catch((err) => {
@@ -110,26 +128,18 @@ export function updateRoute (route) {
 }
 
 // ---------------------------------- private methods ----------------------------------
-function _doDishApiCall (method, url, data, modalName) {
-    setModalCommand(modalName, 'wait');
-
-    Ajax[method](url, data)
-        .then((res) => {
-            return Ajax.get('/api/dishes');
-        })
-        .then((dishes) => {
-            dishes = parseDishes(dishes);
-            update('dishes', dishes);
-            setModalCommand(modalName, 'close');
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+function _handleResponseError(res, method, message = '') {
+    if (res.error) {
+        console.log(res);
+        throw new Error(`Unable to ${method} the dish "${message}"`); // exit the Promise chain
+    }
 }
 
 function _doGetAllDishes () {
     return Ajax.get('/api/dishes')
         .then((dishes) => {
+            _handleResponseError(dishes, 'retrieve', 'all dishes');
+
             dishes = parseDishes(dishes);
             update('dishes', dishes);
         });
