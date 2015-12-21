@@ -3,37 +3,46 @@ import { openEditDishModal, openDeleteDishModal, moveDishUp } from './dish-actio
 
 const Row = React.createClass({
     render () {
-        const description = this.props.description
-            ? <span className="description">({this.props.description})</span>
-            : null;
+        const toggleArea = this.props.children ? <span className="toggle"></span> : null;
 
-        const image = this.props.image
-            ? <span className="image">{this.props.image}</span>
-            : null;
+        const description = this.props.description ? <span className="description">({this.props.description})</span> : null;
 
-        return (
-            <li>
-                <div className="left">
-                    <span className="ordinal">{this.props.ordinal + 1}</span>
-                    <span className="name">{this.props.name}</span>
-                    {description}
-                    {image}
-                </div>
-                <div className="right">
-                    <span className="price"> {this.props.price}</span>
-                    <span className="controls">
-                        <span className="button edit" onClick={this._onEditHandler}></span>
-                        <span className="button delete" onClick={this._onDeleteHandler}></span>
-                        <span className="up-down">
-                            <span className="up" onClick={this._onUpHandler}></span>
-                            <span className="down" onClick={this._onDownHandler}></span>
-                        </span>
-                    </span>
-                </div>
+        const image = this.props.image ? <span className="image">{this.props.image}</span> : null;
 
-                {this._getChildren(this.props.children)}
-            </li>
+        const ordinal = <span className="ordinal">{this.props.ordinal + 1}</span>;
+        const name = <span className="name">{this.props.name}</span>;
+
+        const price = this.props.children ? null : <span className="price">{this.props.price}</span>;
+
+        const controlsArea = (
+            <span className="controls">
+                <span className="button edit" onClick={this._onEditHandler}></span>
+                <span className="button delete" onClick={this._onDeleteHandler}></span>
+                <span className="up-down">
+                    <span className="up" onClick={this._onUpHandler}></span>
+                    <span className="down" onClick={this._onDownHandler}></span>
+                </span>
+            </span>
         );
+
+        const headerLeft = <div className="left">{toggleArea}{ordinal}{name}{description}{image}</div>;
+        const headerRight = <div className="right">{price}{controlsArea}</div>;
+
+        return this.props.children
+            ? (
+                <li className={this.props.children ? 'section' : ''}>
+                    <div className="header">
+                        {headerLeft}
+                        {headerRight}
+                    </div>
+                    <div className="children">{this._getChildren(this.props.children)}</div>
+                </li>
+            ) : (
+                <li>
+                    {headerLeft}
+                    {headerRight}
+                </li>
+            );
     },
 
     _getChildren (children) {
