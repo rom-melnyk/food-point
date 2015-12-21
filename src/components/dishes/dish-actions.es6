@@ -27,7 +27,8 @@ export function createDish (dish) {
     Ajax.post('/api/dishes', stringifyDish(dish))
         .then((res) => {
             if (res.error) {
-                throw new Error(res); // exit the Promise chain
+                console.log(res);
+                throw new Error('Unable to create the dish'); // exit the Promise chain
             }
 
             // append child
