@@ -131,10 +131,21 @@
         & > .header .left {
           .toggle {
             @include icon-down;
-            margin-right: 1em;
+            @include in-out-fast(opacity);
+            font-size: 200%;
+            opacity: .3;
             cursor: pointer;
+
+            &::before {
+              @include in-out-fast(transform);
+            }
+
+            &:hover {
+              opacity: 1;
+            }
           }
           .name {
+            padding-left: .5em;
             font-size: 200%;
           }
         }
@@ -146,7 +157,9 @@
 
         &.collapsed {
           & > .header .left .toggle {
-            @include icon-right;
+            &::before {
+              transform: rotate(-90deg);
+            }
           }
           .children {
             height: 0;
@@ -164,12 +177,8 @@
       }
     }
 
+    // TODO Maybe different font-size for sections of different depth?
     //ul {
-    //  //margin-left: 1em;
-    //
-    //  li:last-child {
-    //    border-bottom: 1px solid $grey;
-    //  }
     //}
   }
 
