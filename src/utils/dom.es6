@@ -59,7 +59,7 @@ function Dom (selector, parent = document) {
     return result;
 }
 
-module.exports = Dom;
+export default Dom;
 
 // ------------------------------ private methods ------------------------------
 function _getParent (el, count = 1) {

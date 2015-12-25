@@ -6,10 +6,6 @@
     li {
       margin-bottom: .5em;
 
-      &:last-child {
-        margin-bottom: 0;
-      }
-
       .header {
         @include in-out-fast(background-color);
         display: table;
@@ -129,11 +125,33 @@
       }
 
       &.section {
-        margin-top: 2em;
-        margin-bottom: 2em;
+        margin-top: 3em;
+        margin-bottom: 3em;
 
-        & > .header .left .name {
-          font-size: 150%;
+        & > .header .left {
+          .toggle {
+            @include icon-down;
+            margin-right: 1em;
+            cursor: pointer;
+          }
+          .name {
+            font-size: 200%;
+          }
+        }
+
+        .children {
+          @include in-out-fast(height);
+          border-bottom: 1px solid $grey;
+        }
+
+        &.collapsed {
+          & > .header .left .toggle {
+            @include icon-right;
+          }
+          .children {
+            height: 0;
+            overflow: hidden;
+          }
         }
       }
 
@@ -146,13 +164,13 @@
       }
     }
 
-    ul {
-      margin-left: 1em;
-
-      li:last-child {
-        border-bottom: 1px solid $grey;
-      }
-    }
+    //ul {
+    //  //margin-left: 1em;
+    //
+    //  li:last-child {
+    //    border-bottom: 1px solid $grey;
+    //  }
+    //}
   }
 
   .create-dish {

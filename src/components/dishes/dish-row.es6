@@ -1,9 +1,10 @@
 import React from 'react';
 import RowControls from './dish-row-controls.es6';
+import dom from '../../utils/dom.es6'
 
 const Row = React.createClass({
     render () {
-        const toggleArea = this.props.children ? <span className="toggle"></span> : null;
+        const toggleArea = this.props.children ? <span className="toggle" onClick={this._onToggleClick}></span> : null;
 
         const description = this.props.description
             ? <span className="description" title={this.props.description}>{this.props.description}</span>
@@ -11,7 +12,7 @@ const Row = React.createClass({
 
         const image = this.props.image ? <span className="image">{this.props.image}</span> : null;
 
-        const ordinal = <span className="ordinal">{this.props.ordinal + 1})</span>;
+        const ordinal = null; //<span className="ordinal">{this.props.ordinal + 1})</span>;
         const name = <span className="name">{this.props.name}</span>;
 
         const price = this.props.children ? null : <span className="price">{this.props.price} грн.</span>;
@@ -45,6 +46,10 @@ const Row = React.createClass({
         }
 
         return null;
+    },
+
+    _onToggleClick (e) {
+        dom(e.target).parent(3).toggleClass('collapsed');
     }
 });
 
