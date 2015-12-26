@@ -113,7 +113,7 @@ function _generateAutoReloadJs () {
  * @private
  */
 function _transpileEs (es6FileName) {
-    const jsFileName = `${config.output.dir}/${config.output.js}`;
+    const jsFileName = `${config.output['dir.js']}/${config.output.js}`;
     const writeStream = fs.createWriteStream(jsFileName);
 
     writeStream.on('error', (err) => {
@@ -148,7 +148,7 @@ function _compileScss (scssFileName) {
         if (err) {
             console.error(`\t${err.message}`);
         } else {
-            const cssFileName = `${config.output.dir}/${config.output.css}`;
+            const cssFileName = `${config.output['dir.css']}/${config.output.css}`;
             fs.writeFile(cssFileName, result.css, (err) => {
                 if (!err) {
                     console.info(`<<< Wrote ${cssFileName}; emitting "update" event`);
