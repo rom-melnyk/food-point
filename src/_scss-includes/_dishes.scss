@@ -132,7 +132,7 @@
           .toggle {
             @include icon-down;
             @include in-out-fast(opacity);
-            font-size: 200%;
+            font-size: 150%;
             opacity: .3;
             cursor: pointer;
 
@@ -151,7 +151,8 @@
         }
 
         .children {
-          @include in-out-fast(height);
+          @include in-out-fast(height); // height is set by JS
+          overflow: hidden;
           border-bottom: 1px solid $grey;
         }
 
@@ -160,10 +161,6 @@
             &::before {
               transform: rotate(-90deg);
             }
-          }
-          .children {
-            height: 0;
-            overflow: hidden;
           }
         }
       }

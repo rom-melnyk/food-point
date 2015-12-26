@@ -1,10 +1,32 @@
 import React from 'react';
+import ReactDom from 'react-dom';
 import RowControls from './dish-row-controls.es6';
 import dom from '../../utils/dom.es6'
 
+const COLLAPSED_CLASS_NAME = 'collapsed';
+const COLLAPSED_TITLE = 'Розгорнути';
+const EXPANDED_TITLE = 'Згорнути';
+
 const Row = React.createClass({
+    componentDidMount () {
+        if (!this.props.children) {
+            return;
+        }
+
+        this._$section = dom(ReactDom.findDOMNode(this));
+        this._children = dom('.children', this._$section[0])[0];
+        this._children.style.height = this._children.scrollHeight + 'px';
+    },
+
+    componentWillUnmount () {
+        this._$section = null;
+        this._children = null;
+    },
+
     render () {
-        const toggleArea = this.props.children ? <span className="toggle" onClick={this._onToggleClick}></span> : null;
+        const toggleArea = this.props.children
+            ? <span className="toggle" title={EXPANDED_TITLE} onClick={this._onToggleClick}></span>
+            : null;
 
         const description = this.props.description
             ? <span className="description" title={this.props.description}>{this.props.description}</span>
@@ -49,8 +71,19 @@ const Row = React.createClass({
     },
 
     _onToggleClick (e) {
-        dom(e.target).parent(3).toggleClass('collapsed');
-    }
+        if (this._$section.hasClass(COLLAPSED_CLASS_NAME)) {
+            this._$section.removeClass(COLLAPSED_CLASS_NAME);
+            this._$section[0].setAttribute('title', COLLAPSED_TITLE);
+            this._children.style.height = this._children.scrollHeight + 'px';
+        } else {
+            this._$section.addClass(COLLAPSED_CLASS_NAME);
+            this._$section[0].setAttribute('title', EXPANDED_TITLE);
+            this._children.style.height = 0;
+        }
+    },
+
+    _$section: null, // this is Element[]
+    _children: null // this is single Element
 });
 
 export default Row;
