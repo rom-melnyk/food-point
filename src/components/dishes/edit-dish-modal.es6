@@ -31,8 +31,8 @@ export default React.createClass({
             <select className="section" name="section">{this._generateSectionList()}</select>
         );
 
-        if (this.props.shouldCreateCategory) {
-            console.log('Category expected!');
+        if (this.props.shouldCreateSection) {
+            console.log('Section expected!');
         }
 
         return (

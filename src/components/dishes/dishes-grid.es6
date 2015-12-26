@@ -22,8 +22,8 @@ export default React.createClass({
                     <span className="button create-dish" onClick={this._onCreateDishHandler}>
                         Додати стравy
                     </span>
-                    <span className="button create-category" onClick={this._onCreateCategoryHandler}>
-                        Додати категорію
+                    <span className="button create-section" onClick={this._onCreateSectionHandler}>
+                        Додати секцію
                     </span>
                 </div>
             </div>
@@ -34,7 +34,7 @@ export default React.createClass({
         openEditDishModal();
     },
 
-    _onCreateCategoryHandler () {
-        openEditDishModal({shouldCreateCategory: true});
+    _onCreateSectionHandler () {
+        openEditDishModal({shouldCreateSection: true});
     }
 });
