@@ -179,7 +179,7 @@
     //}
   }
 
-  .create-dish {
+  .create {
     padding: .3em 0;
     text-align: center;
 
@@ -189,6 +189,10 @@
 
       &::before {
         margin-right: .5em;
+      }
+
+      &.create-dish {
+        margin-right: 2em;
       }
     }
   }

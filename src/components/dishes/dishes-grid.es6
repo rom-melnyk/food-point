@@ -18,16 +18,23 @@ export default React.createClass({
                 <ul>
                     {rows}
                 </ul>
-                <div className="create-dish">
-                    <span className="button create" onClick={this._onCreateHandler}>
+                <div className="create">
+                    <span className="button create-dish" onClick={this._onCreateDishHandler}>
                         Додати стравy
+                    </span>
+                    <span className="button create-category" onClick={this._onCreateCategoryHandler}>
+                        Додати категорію
                     </span>
                 </div>
             </div>
         );
     },
 
-    _onCreateHandler () {
+    _onCreateDishHandler () {
         openEditDishModal();
+    },
+
+    _onCreateCategoryHandler () {
+        openEditDishModal({shouldCreateCategory: true});
     }
 });

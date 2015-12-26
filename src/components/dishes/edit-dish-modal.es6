@@ -31,6 +31,10 @@ export default React.createClass({
             <select className="section" name="section">{this._generateSectionList()}</select>
         );
 
+        if (this.props.shouldCreateCategory) {
+            console.log('Category expected!');
+        }
+
         return (
             <div className="edit-dish">
                 <ModalSection label="Страва" name="name" ref={(cmp) => { this._name = cmp; }} />
