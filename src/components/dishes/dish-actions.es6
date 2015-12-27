@@ -1,4 +1,5 @@
 import { getState, update, triggerChangeEvent } from '../../state.es6';
+import { setModalCommand } from '../../actions.es6';
 import Ajax from '../../utils/ajax.es6';
 import { parseDishes, stringifyDishes, stringifyDish } from '../../formatters/dishes-formatter.es6';
 import { getRoot, getIndexById } from '../../selectors/dishes-selectors.es6';
@@ -122,14 +123,6 @@ export function moveDishUp (parent, index) {
         .catch((err) => {
             console.log(err);
         });
-}
-
-export function setModalCommand (modalType, command) {
-    update(`modals.${modalType}`, command);
-}
-
-export function updateRoute (route) {
-    update('route', route);
 }
 
 // ---------------------------------- private methods ----------------------------------

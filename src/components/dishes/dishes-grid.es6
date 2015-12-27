@@ -35,6 +35,6 @@ export default React.createClass({
     },
 
     _onCreateSectionHandler () {
-        openEditDishModal({shouldCreateSection: true});
+        openEditDishModal({children: []});
     }
 });

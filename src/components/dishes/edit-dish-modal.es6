@@ -2,16 +2,24 @@ import _ from '../../utils/_.es6';
 import React from 'react';
 import { openEditDishModal, createDish, updateDish } from './dish-actions.es6';
 import { setModalCommand } from '../../actions.es6';
-import { getAllSections, getItemById } from '../../selectors/dishes-selectors.es6';
+import { getAllSections, getItemById, getRoot } from '../../selectors/dishes-selectors.es6';
 import ModalControls from '../modals/form-controls.es6';
 import ModalSection from '../modals/form-section.es6';
 
 export default React.createClass({
     componentDidMount () {
         this._name.setValue(this.props.name || '');
-        this._price.setValue(this.props.price || 0);
-        this._description.setValue(this.props.description || '');
-        this._image.setValue(this.props.image || '');
+
+        if (this._price) {
+            this._price.setValue(this.props.price || 0);
+        }
+
+        if (this._description) {
+            this._description.setValue(this.props.description || '');
+        }
+
+        //this._image.setValue(this.props.image || '');
+
         if (this.props.parent) {
             this._parent.setValue(this.props.parent.id);
         }
@@ -21,7 +29,7 @@ export default React.createClass({
         this._name = null;
         this._price = null;
         this._description = null;
-        this._image = null;
+        //this._image = null;
         this._parent= null;
     },
 
@@ -31,17 +39,40 @@ export default React.createClass({
             <select className="section" name="section">{this._generateSectionList()}</select>
         );
 
-        if (this.props.shouldCreateSection) {
-            console.log('Section expected!');
+        let nameLabel = 'Страва';
+
+        let priceElement = <ModalSection
+            label="Ціна"
+            name="price"
+            content={{afterInput: priceTrail}}
+            ref={(cmp) => { this._price = cmp; }}
+        />;
+        let descriptionElement = <ModalSection label="Опис" name="description" ref={(cmp) => { this._description = cmp; }}/>;
+        let imageElement = null; // <ModalSection label="Фото" name="image" ref={(cmp) => { this._image = cmp; }}/>;
+        let sectionElement = <ModalSection
+            label="Помістити у"
+            name="section"
+            content={{input: parentInput}}
+            ref={(cmp) => { this._parent= cmp; }}
+        />;
+
+        if (this.props.children) {
+            nameLabel = 'Секція';
+            priceElement = null;
+            descriptionElement = null;
+            imageElement = null;
+            sectionElement = null;
         }
+
+        const nameSection = <ModalSection label={nameLabel} name="name" ref={(cmp) => { this._name = cmp; }} />;
 
         return (
             <div className="edit-dish">
-                <ModalSection label="Страва" name="name" ref={(cmp) => { this._name = cmp; }} />
-                <ModalSection label="Ціна" name="price" content={{afterInput: priceTrail}} ref={(cmp) => { this._price = cmp; }} />
-                <ModalSection label="Опис" name="description" ref={(cmp) => { this._description = cmp; }} />
-                <ModalSection label="Фото" name="image" ref={(cmp) => { this._image = cmp; }} />
-                <ModalSection label="Помістити у" name="section" content={{input: parentInput}} ref={(cmp) => { this._parent= cmp; }} />
+                {nameSection}
+                {priceElement}
+                {descriptionElement}
+                {imageElement}
+                {sectionElement}
                 <ModalControls onBackHandler={this._onBackHandler} onOkHandler={this._onOkHandler}/>
             </div>
         );
@@ -50,7 +81,7 @@ export default React.createClass({
     _name: null,
     _price: null,
     _description: null,
-    _image: null,
+    //_image: null,
     _parent: null,
 
     _generateSectionList () {
@@ -75,11 +106,18 @@ export default React.createClass({
         const newDishData = {};
 
         ['name', 'price', 'description', 'image'].forEach((field) => {
-            newDishData[field] = this[`_${field}`].getValue();
+            newDishData[field] = this[`_${field}`] ? this[`_${field}`].getValue() : null;
         }, this);
-        newDishData.parent = getItemById( +this._parent.getValue() );
 
-        if (this.props.id === undefined) { // crete new dish
+        newDishData.children = this.props.children;
+
+        if (newDishData.children) {
+            newDishData.parent = getRoot(); // one-level tree
+        } else {
+            newDishData.parent = getItemById(+this._parent.getValue());
+        }
+
+        if (this.props.id === undefined) { // crete new dish or section
             createDish(newDishData);
         } else {
             newDishData.id = this.props.id;
