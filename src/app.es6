@@ -16,6 +16,8 @@ window.FoodPoint = {
     }
 };
 
+includeAutoReloadScript();
+
 const Main = React.createClass({
     getInitialState () {
         return getState();
@@ -63,3 +65,14 @@ function _init () {
     ReactDom.render(<Main/>, container);
 }
 
+function includeAutoReloadScript () {
+    if (
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        /[?&]debug(&.+)?/i.test(window.location.search))
+    {
+        const script = document.createElement('script');
+        document.head.appendChild(script);
+        script.src = '/auto-reload.js';
+    }
+}

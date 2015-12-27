@@ -84,6 +84,7 @@ function _generateAutoReloadJs () {
     var script = document.createElement('script');
     script.onload = function () {
         var socket = io();
+        console.log(' [ LiveReload ] Initialized');
         socket.on('update', function (message) {
             console.log(' [ LiveReload ] Got "' + message + '"');
             if (/\\.css$/.test(message)) {
