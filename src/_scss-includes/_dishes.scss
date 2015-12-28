@@ -128,6 +128,10 @@
         margin-top: 3em;
         margin-bottom: 3em;
 
+        &:first-child {
+          margin-top: 0;
+        }
+
         & > .header .left {
           .toggle {
             @include icon-down;
@@ -165,11 +169,11 @@
         }
       }
 
-      &:first-child .up-down .up {
+      &:first-child > .header > .right .controls > .up-down > .up {
         visibility: hidden;
       }
 
-      &:last-child .up-down .down {
+      &:last-child > .header > .right .controls > .up-down > .down {
         visibility: hidden;
       }
     }

@@ -20,7 +20,7 @@ export default React.createClass({
 
         //this._image.setValue(this.props.image || '');
 
-        if (this.props.parent) {
+        if (!this.props.children && this.props.parent) {
             this._parent.setValue(this.props.parent.id);
         }
     },
@@ -39,29 +39,30 @@ export default React.createClass({
             <select className="section" name="section">{this._generateSectionList()}</select>
         );
 
-        let nameLabel = 'Страва';
+        let nameLabel;
 
-        let priceElement = <ModalSection
-            label="Ціна"
-            name="price"
-            content={{afterInput: priceTrail}}
-            ref={(cmp) => { this._price = cmp; }}
-        />;
-        let descriptionElement = <ModalSection label="Опис" name="description" ref={(cmp) => { this._description = cmp; }}/>;
+        let priceElement = null;
+        let descriptionElement = null;
         let imageElement = null; // <ModalSection label="Фото" name="image" ref={(cmp) => { this._image = cmp; }}/>;
-        let sectionElement = <ModalSection
-            label="Помістити у"
-            name="section"
-            content={{input: parentInput}}
-            ref={(cmp) => { this._parent= cmp; }}
-        />;
+        let sectionElement = null;
 
         if (this.props.children) {
             nameLabel = 'Секція';
-            priceElement = null;
-            descriptionElement = null;
-            imageElement = null;
-            sectionElement = null;
+        } else {
+            nameLabel = 'Страва';
+            priceElement = <ModalSection
+                label="Ціна"
+                name="price"
+                content={{afterInput: priceTrail}}
+                ref={(cmp) => { this._price = cmp; }}
+            />;
+            descriptionElement = <ModalSection label="Опис" name="description" ref={(cmp) => { this._description = cmp; }}/>;
+            sectionElement = <ModalSection
+                label="Помістити у"
+                name="section"
+                content={{input: parentInput}}
+                ref={(cmp) => { this._parent= cmp; }}
+            />;
         }
 
         const nameSection = <ModalSection label={nameLabel} name="name" ref={(cmp) => { this._name = cmp; }} />;
