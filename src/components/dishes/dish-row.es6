@@ -18,6 +18,20 @@ const Row = React.createClass({
         this._children.style.height = this._children.scrollHeight + 'px';
     },
 
+    componentDidUpdate () {
+        // update both section heights if the component migrated through 'em
+        const childrenEl = this._children;
+
+        if (!childrenEl) {
+            return;
+        }
+
+        if (this.props.children && !this._$section.hasClass(COLLAPSED_CLASS_NAME)) {
+            childrenEl.style.height = 'auto';
+            setTimeout(() => { childrenEl.style.height = childrenEl.scrollHeight + 'px'; }, 1);
+        }
+    },
+
     componentWillUnmount () {
         this._$section = null;
         this._children = null;
@@ -39,7 +53,7 @@ const Row = React.createClass({
 
         const price = this.props.children ? null : <span className="price">{this.props.price} грн.</span>;
 
-        const controlsArea = true ? <RowControls {...this.props}></RowControls> : null;
+        const controlsArea = this.props.role === 'admin' ? <RowControls {...this.props}></RowControls> : null;
 
         const headerLeft = <div className="left">{toggleArea}{ordinal}{name}{description}{image}</div>;
         const headerRight = <div className="right">{price}{controlsArea}</div>;
@@ -59,9 +73,10 @@ const Row = React.createClass({
     },
 
     _getChildren (children) {
+        const role = this.props.role;
         if (children && children.length > 0) {
             const rows = children.map((dish) => {
-                return <Row key={dish.id} {...dish}/>;
+                return <Row key={dish.id} {...dish} role={role}/>;
             });
 
             return <ul>{rows}</ul>;

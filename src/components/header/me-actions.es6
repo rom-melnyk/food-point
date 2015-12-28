@@ -1,4 +1,5 @@
 import { getState, update, triggerChangeEvent } from '../../state.es6';
+import { setModalCommand } from '../../actions.es6';
 import Ajax from '../../utils/ajax.es6';
 import FbLogin from '../../facebook/fb-login.es6';
 
@@ -19,10 +20,6 @@ export function updateMyData (data) {
 
 export function editMyData (id, data) {
     _doUserApiCall('put', `/api/users/${id}`, data, 'edit-me');
-}
-
-export function setModalCommand (modalType, command) {
-    update(`modals.${modalType}`, command);
 }
 
 // ---------------------------------- private methods ----------------------------------

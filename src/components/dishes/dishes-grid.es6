@@ -9,7 +9,7 @@ export default React.createClass({
 
     render () {
         const rows = this.props.data.children.map((dish) => {
-            return <Row key={dish.id} {...dish}/>
+            return <Row key={dish.id} {...dish} role={this.props.user.role}/>
         });
 
         return (

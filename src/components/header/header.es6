@@ -4,16 +4,21 @@ import MeMenu from './me-menu.es6';
 
 export default React.createClass({
     render () {
+        const homeEl = <span className="home" onClick={this._onHomeClick}>FP</span>;
+        const dishesEl = <span className="dishes" onClick={this._onDishesClick}>Меню</span>;
+        const orderEl = <span className="order" onClick={this._onOrderClick}>Замовити їжу</span>;
+        const meyOrdersEl = null; // <span className="my-orders">Мої замовлення</span>;
+        const usersEl = null; // <span className="users">Користувачі</span>;
         return (
             <div className="header">
                 <div className="app-menu">
-                    <span className="home" onClick={this._onHomeClick}>FP</span>
-                    <span className="menu" onClick={this._onMenuClick}>Меню</span>
-                    <span className="order">Замовити їжу</span>
-                    <span className="my-orders">Мої замовлення</span>
-                    <span className="users">Користувачі</span>
+                    {homeEl}
+                    {dishesEl}
+                    {orderEl}
+                    {meyOrdersEl}
+                    {usersEl}
                 </div>
-                <MeMenu me={this.props.me} />
+                <MeMenu me={this.props.me}/>
             </div>
         );
     },
@@ -22,7 +27,11 @@ export default React.createClass({
         Router.goTo(Router.HOME);
     },
 
-    _onMenuClick () {
+    _onDishesClick () {
         Router.goTo(Router.DISHES);
+    },
+
+    _onOrderClick () {
+        Router.goTo(Router.ORDER);
     }
 });

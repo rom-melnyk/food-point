@@ -2,9 +2,18 @@
 @import "icon-font/fontello";
 
 .view.dishes {
+  h1 {
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
   ul {
     li {
       margin-bottom: .5em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
 
       .header {
         @include in-out-fast(background-color);
@@ -61,8 +70,8 @@
               padding-left: 1em;
               opacity: 0;
 
-              .button {
-                padding: .3em .5em;
+              .link {
+                //padding: .3em .5em;
                 margin-right: .3em;
 
                 &.edit {
@@ -132,25 +141,30 @@
           margin-top: 0;
         }
 
-        & > .header .left {
-          .toggle {
-            @include icon-down;
-            @include in-out-fast(opacity);
-            font-size: 150%;
-            opacity: .3;
-            cursor: pointer;
+        & > .header {
+          padding-left: .5em;
 
-            &::before {
-              @include in-out-fast(transform);
+          .left {
+            .toggle {
+              @include icon-down;
+              @include in-out-fast(opacity);
+              font-size: 125%;
+              opacity: .3;
+              cursor: pointer;
+
+              &::before {
+                @include in-out-fast(transform);
+              }
+
+              &:hover {
+                opacity: 1;
+              }
             }
 
-            &:hover {
-              opacity: 1;
+            .name {
+              padding-left: .3em;
+              font-size: 150%;
             }
-          }
-          .name {
-            padding-left: .5em;
-            font-size: 200%;
           }
         }
 
@@ -184,7 +198,7 @@
   }
 
   .create {
-    padding: .3em 0;
+    margin-top: 1em;
     text-align: center;
 
     .button {

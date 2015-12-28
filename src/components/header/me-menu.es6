@@ -21,7 +21,7 @@ export default React.createClass({
         return (
             <span className="login-section">
                 Зайти через
-                <span className="fb-login" onClick={this._onFbLoginClick}></span>
+                <span className="link fb-login" onClick={this._onFbLoginClick}></span>
             </span>
         );
     },
@@ -31,7 +31,7 @@ export default React.createClass({
         return (
             <span className="picture-section">
                 <span className="picture" title={this.props.me.name} onClick={this._onPictureClick}>{initials}</span>
-                <span className="logout" onClick={this._onLogoutClick} title="Вийти"></span>
+                <span className="link logout" onClick={this._onLogoutClick} title="Вийти"></span>
             </span>
         );
     },
@@ -41,6 +41,7 @@ export default React.createClass({
     },
 
     _onFbLoginClick () {
+        // TODO add safe FB call
         FB.login(
             () => {
                 FbLogin.doLoginSequence()

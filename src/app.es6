@@ -4,6 +4,7 @@ import { getState, addChangeListener, removeChangeListener } from './state.es6';
 import Router from './router.es6';
 import DishesGrid from './components/dishes/dishes-grid.es6';
 import Home from './components/home/home.es6';
+import Order from './components/order/order.es6';
 import Header from './components/header/header.es6';
 import Footer from './components/footer/footer.es6';
 
@@ -47,10 +48,12 @@ const Main = React.createClass({
     },
 
     _getView () {
-        if (this.state.route === Router.DISHES) {
-            return <DishesGrid data={this.state.dishes}/>;
-        } else if (this.state.route === Router.HOME) {
+        if (this.state.route === Router.HOME) {
             return <Home/>;
+        } else if (this.state.route === Router.DISHES) {
+            return <DishesGrid data={this.state.dishes} user={this.state.me} />;
+        } else if (this.state.route === Router.ORDER) {
+            return <Order/>;
         }
 
         return null;

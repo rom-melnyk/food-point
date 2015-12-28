@@ -31,7 +31,6 @@
 
     .login-section {
       .fb-login {
-        @extend .button;
         @include icon-facebook();
         margin-left: .4em;
       }
@@ -39,7 +38,7 @@
 
     .picture-section {
       .picture {
-        @include shadow(.3em);
+        @include in-out-fast(border-color);
         display: inline-block;
         width: 2em;
         height: 2em;
@@ -50,11 +49,15 @@
         vertical-align: middle;
 
         background-color: #fff;
+        border: 1px solid transparent;
         cursor: pointer;
+
+        &:hover {
+          border-color: inherit;
+        }
       }
 
       .logout {
-        @extend .button;
         @include icon-logout();
       }
     }

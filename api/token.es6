@@ -92,7 +92,6 @@ function _parseToken (token) {
         result.random = token.substr(32, RANDOM_LENGTH);
         result.userId = token.substr(32 + RANDOM_LENGTH);
     }
-    console.log(result);
 
     return result;
 }

@@ -5,20 +5,41 @@ $button-gradient-to: lighten($button-gradient-from, 10%);
 $button-gradient-from-hover: lighten($button-gradient-from, 5%);
 $button-gradient-to-hover: lighten($button-gradient-to, 2%);
 
+@mixin __clickable__ {
+  display: inline-block;
+  line-height: 1em;
+
+  border-radius: .2em;
+  cursor: pointer;
+}
+
 .button {
+  @include __clickable__();
   @include in-out-fast(border-color);
 
-  display: inline-block;
   padding: .5em;
 
   background: linear-gradient($button-gradient-from, $button-gradient-to, $button-gradient-from);
   border: 1px solid $button-gradient-from;
-  border-radius: .2em;
-  cursor: pointer;
 
   &:hover {
     background: linear-gradient($button-gradient-from-hover, $button-gradient-to-hover, $button-gradient-from-hover);
     border-color: $button-gradient-from-hover;
+  }
+}
+
+.link {
+  @include __clickable__();
+  transition: background-color .3s, border-color .3s, opacity .3s;
+
+  padding: .3em .5em;
+  border: 1px solid transparent;
+  opacity: .3;
+
+  &:hover {
+    background-color: white;
+    opacity: 1;
+    border-color: inherit;
   }
 }
 
