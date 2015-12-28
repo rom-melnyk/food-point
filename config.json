@@ -8,5 +8,8 @@
     "database": "food_point"
   },
 
-  "authDuration": "1d"
+  "session": {
+    "secret": "FoodPoint is awesome!",
+    "duration": "1d"
+  }
 }

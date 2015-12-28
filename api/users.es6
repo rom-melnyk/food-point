@@ -68,7 +68,7 @@ function authenticate (req, res) {
             .facebookAuthenticate(userId, accessToken)
             .then(
                 (result) => {
-                    if (res.error) {
+                    if (result.error) {
                         res.json(result);
                     } else {
                         Session.enrichRequestAndResponse(req, res, {userId: result.id});

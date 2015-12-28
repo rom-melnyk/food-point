@@ -4,6 +4,7 @@
 1. `npm i`
 1. `npm run` to check options
 1. `npm run dev` to start the development
+1. Make sure to `set NODE_ENV=PROD` for production
 
 # the default `./config.json`
 ```json
@@ -17,6 +18,9 @@
     "database": "food_point"
   },
 
-  "authDuration": "1d"
+  "session": {
+    "secret": "FoodPoint is awesome!",
+    "duration": "1d"
+  }
 }
 ```

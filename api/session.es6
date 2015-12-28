@@ -1,11 +1,11 @@
 'use strict';
 const Token = require('./token.es6');
-const config = require('../config.json');
+const config = require('../config.json').session;
 
 const COOKIE_NAME = 'session';
 let COOKIE_MAX_AGE = 24 * 60 * 60 * 1000; // 1 day
 
-_parseAuthDuration(config.authDuration);
+_parseAuthDuration(config.duration);
 
 module.exports = {
     // we respect the principle that other middleware use, say `app.use(cookieParser());`

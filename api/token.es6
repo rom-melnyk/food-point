@@ -1,8 +1,10 @@
 'use strict';
 
 const Crypto = require('crypto');
+const SECRET = require('../config.json').session.secret;
 
-const SECRET = 'FoodPoint is awesome!';
+const RANDOM_LENGTH = 5;
+
 const Token = {
     /**
      * @param {String} userId
@@ -56,25 +58,41 @@ function _unhex (string) {
     return value;
 }
 
-function  _generateHash (userId) {
-    return _md5(userId + SECRET);
+function _generateRandom () {
+    let rnd = '';
+
+    for (let i = 0; i < RANDOM_LENGTH; i++) {
+        rnd += Math.floor(Math.random() * 10);
+    }
+
+    return rnd;
 }
 
-function  _generateToken (userId) {
-    return _hex(_generateHash(userId) + userId);
+function  _generateHash (userId, random) {
+    return _md5(userId + SECRET + random);
+}
+
+function  _generateToken (userId, random) {
+    if (!random) {
+        random = _generateRandom();
+    }
+    return _hex(_generateHash(userId, random) + random + userId);
 }
 
 function _parseToken (token) {
     const result = {
         hash: null,
+        random: null,
         userId: null
     };
 
     if (typeof token === 'string') {
         token = _unhex(token);
         result.hash = token.substr(0, 32);
-        result.userId = token.substring(32);
+        result.random = token.substr(32, RANDOM_LENGTH);
+        result.userId = token.substr(32 + RANDOM_LENGTH);
     }
+    console.log(result);
 
     return result;
 }
@@ -85,6 +103,6 @@ function _verifyToken (token) {
     }
 
     let parsed = _parseToken(token);
-    return _generateHash(parsed.userId) === parsed.hash ? {userId: parsed.userId} : false;
+    return _generateHash(parsed.userId, parsed.random) === parsed.hash ? {userId: parsed.userId} : false;
 }
 
