@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const config = require('../package.json').config.mysql;
+const config = require('../config.json').mysql;
 
 const pool = mysql.createPool({
     connectionLimit: 100, //important

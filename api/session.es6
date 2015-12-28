@@ -1,6 +1,6 @@
 'use strict';
 const Token = require('./token.es6');
-const config = require('../package.json').config;
+const config = require('../config.json');
 
 const COOKIE_NAME = 'session';
 let COOKIE_MAX_AGE = 24 * 60 * 60 * 1000; // 1 day

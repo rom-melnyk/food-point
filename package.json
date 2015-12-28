@@ -4,14 +4,6 @@
   "description": "Food Point site",
   "main": "server.es6",
   "config": {
-    "port": 8080,
-    "mysql": {
-      "host": "localhost",
-      "user": "root",
-      "password": "",
-      "database": "food_point"
-    },
-    "authDuration": "1d",
     "src": {
       "dir": "./src",
       "es": "app.es6",
