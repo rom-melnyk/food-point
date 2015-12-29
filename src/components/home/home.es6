@@ -4,8 +4,10 @@ export default React.createClass({
     render () {
         return (
             <div className="view home">
-                Йо!
-                То є домашня сторінка.
+                <div className="wrapper">
+                    Йо!
+                    То є домашня сторінка.
+                </div>
             </div>
         );
     }

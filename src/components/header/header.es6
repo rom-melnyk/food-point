@@ -11,14 +11,16 @@ export default React.createClass({
         const usersEl = null; // <span className="users">Користувачі</span>;
         return (
             <div className="header">
-                <div className="app-menu">
-                    {homeEl}
-                    {dishesEl}
-                    {orderEl}
-                    {meyOrdersEl}
-                    {usersEl}
+                <div className="wrapper">
+                    <div className="app-menu">
+                        {homeEl}
+                        {dishesEl}
+                        {orderEl}
+                        {meyOrdersEl}
+                        {usersEl}
+                    </div>
+                    <MeMenu me={this.props.me}/>
                 </div>
-                <MeMenu me={this.props.me}/>
             </div>
         );
     },

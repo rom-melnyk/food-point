@@ -12,12 +12,8 @@ export default React.createClass({
             return <Row key={dish.id} {...dish} role={this.props.user.role}/>
         });
 
-        return (
-            <div className="view dishes">
-                <h1>Страви</h1>
-                <ul>
-                    {rows}
-                </ul>
+        const createEl = this.props.role === 'admin'
+            ? (
                 <div className="create">
                     <span className="button create-dish" onClick={this._onCreateDishHandler}>
                         Додати стравy
@@ -25,6 +21,18 @@ export default React.createClass({
                     <span className="button create-section" onClick={this._onCreateSectionHandler}>
                         Додати секцію
                     </span>
+                </div>
+            )
+            : null;
+
+        return (
+            <div className="view dishes">
+                <div className="wrapper">
+                    <h1>Страви</h1>
+                    <ul>
+                        {rows}
+                    </ul>
+                    {createEl}
                 </div>
             </div>
         );

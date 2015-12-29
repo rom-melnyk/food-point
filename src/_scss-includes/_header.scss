@@ -1,18 +1,13 @@
 @import "shared";
 
 .application > .header {
-  @include clear-fix;
-
-  padding-top: 2em;
-  padding-bottom: 2em;
-
   background-color: $grey;
   border-bottom: 1px solid darken($grey, 20%);
 
   .app-menu {
     float: left;
-    max-width: 80%;
-    padding: 0 2em;
+    width: 70%;
+    padding-right: 2em;
 
     & > span {
       @extend .button;
@@ -26,8 +21,9 @@
 
   .me {
     float: right;
-    max-width: 20%;
-    padding-right: 2em;
+    width: 30%;
+
+    text-align: right;
 
     .login-section {
       .fb-login {
