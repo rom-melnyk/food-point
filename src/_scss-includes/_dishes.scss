@@ -71,8 +71,7 @@
               opacity: 0;
 
               .link {
-                //padding: .3em .5em;
-                margin-right: .3em;
+                margin-right: .7em;
 
                 &.edit {
                   @include icon-edit();

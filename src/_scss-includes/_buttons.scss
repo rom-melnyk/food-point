@@ -29,17 +29,33 @@ $button-gradient-to-hover: lighten($button-gradient-to, 2%);
 }
 
 .link {
-  @include __clickable__();
-  transition: background-color .3s, border-color .3s, opacity .3s;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
 
-  padding: .3em .5em;
-  border: 1px solid transparent;
+  font-size: 75%;
+  line-height: 2em;
+  text-align: center;
+  vertical-align: middle;
+
   opacity: .3;
+  cursor: pointer;
+
+  transition: background-color .3s, color .3s, opacity .3s, transform .3s;
+
+  &::before {
+    transition: transform .3s;
+  }
 
   &:hover {
-    background-color: white;
+    background-color: #000;
     opacity: 1;
-    border-color: inherit;
+    color: white;
+    transform: rotate(45deg);
+
+    &::before {
+      transform: rotate(-45deg);
+    }
   }
 }
 

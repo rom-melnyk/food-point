@@ -28,28 +28,22 @@
     .login-section {
       .fb-login {
         @include icon-facebook();
-        margin-left: .4em;
+        margin-left: 1em;
       }
     }
 
-    .picture-section {
-      .picture {
-        @include in-out-fast(border-color);
-        display: inline-block;
-        width: 2em;
-        height: 2em;
+    .avatar-section {
+      .avatar {
+        @extend .link;
         margin-right: 1em;
 
-        line-height: 2em;
-        text-align: center;
-        vertical-align: middle;
-
+        font-size: 100%;
         background-color: #fff;
-        border: 1px solid transparent;
-        cursor: pointer;
+        opacity: 1;
 
-        &:hover {
-          border-color: inherit;
+        &::before {
+          display: inline-block;
+          // content is set dynamically
         }
       }
 

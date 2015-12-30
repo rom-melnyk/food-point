@@ -28,9 +28,11 @@ export default React.createClass({
 
     _getPersonSection () {
         const initials = this.props.me.name.charAt(0).toUpperCase();
+        const cssString = `.avatar::before { content: "${initials}"; }`;
         return (
-            <span className="picture-section">
-                <span className="picture" title={this.props.me.name} onClick={this._onPictureClick}>{initials}</span>
+            <span className="avatar-section">
+                <span className="avatar" title={this.props.me.name} onClick={this._onPictureClick}></span>
+                <style dangerouslySetInnerHTML={{__html: cssString}}></style>
                 <span className="link logout" onClick={this._onLogoutClick} title="Вийти"></span>
             </span>
         );
