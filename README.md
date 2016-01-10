@@ -44,7 +44,7 @@ module.exports = {
 
     /**
      * @param {String} token
-     * @return {{hash: String|null, userId: String|null, ...}}      other key-value pairs are velcome
+     * @return {{hash: String|null, userId: String|null, ...}}      other key-value pairs are welcome
      */
     parse (token) {/*...*/},
 

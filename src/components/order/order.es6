@@ -5,7 +5,14 @@ export default React.createClass({
         return (
             <div className="view order">
                 <div className="wrapper">
-                    Щоби зробити замовлення, з’їж гімна.
+                    <h1>Щоби замовити їжу,</h1>
+                    <section>
+                        &hellip;зателефонуйте нам:
+                        <ul>
+                            <li>+38 (067) 111-22-33</li>
+                            <li>+38 (095) 444-55-66</li>
+                        </ul>
+                    </section>
                 </div>
             </div>
         );

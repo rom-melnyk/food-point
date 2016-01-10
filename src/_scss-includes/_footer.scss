@@ -1,20 +1,35 @@
 @import "shared";
 
+$footer-logo-size: 3em;
+
 .application > .footer {
   background-color: $grey;
   border-top: 1px solid darken($grey, 20%);
 
   .left, .middle, .right {
     float: left;
+    font-size: .75em;
   }
 
   .left {
     width: 30%;
+    text-align: right;
   }
+
   .middle {
     width: 40%;
+    margin: -.5em 0;
     text-align: center;
+
+    .logo {
+      display: inline-block;
+      width: $footer-logo-size;
+      height: $footer-logo-size;
+      background: url("../img/logo.png") no-repeat;
+      background-size: $footer-logo-size $footer-logo-size;
+    }
   }
+
   .right {
     width: 30%;
   }

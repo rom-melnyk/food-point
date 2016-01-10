@@ -5,8 +5,11 @@ export default React.createClass({
         return (
             <div className="view home">
                 <div className="wrapper">
-                    Йо!
-                    То є домашня сторінка.
+                    <h1>Усім привіт!</h1>
+                    <section>
+                        Зголодніли? Щож, ми готуємо та привозимо вам смачну їжу.<br/>
+                        Виберіть щось з меню, зателефонуйте нам&nbsp;&mdash; і ми потурбуємося про все решту :)
+                    </section>
                 </div>
             </div>
         );

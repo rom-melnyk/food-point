@@ -1,5 +1,7 @@
 @import "shared";
 
+$header-logo-size: 2em;
+
 .application > .header {
   background-color: $grey;
   border-bottom: 1px solid darken($grey, 20%);
@@ -9,13 +11,30 @@
     width: 70%;
     padding-right: 2em;
 
-    & > span {
+    .home, .dishes, .order {
+      display: inline-block;
+    }
+
+    .home {
+      width: $header-logo-size;
+      height: $header-logo-size;
+      margin-right: 1em;
+      line-height: $header-logo-size;
+
+      background: url("../img/logo.png") no-repeat;
+      background-size: $header-logo-size $header-logo-size;
+
+      cursor: pointer;
+    }
+
+    .dishes {
       @extend .button;
       margin-right: 1em;
+    }
 
-      &:last-child {
-        margin-right: 0;
-      }
+    // last menu item
+    .order {
+      @extend .button;
     }
   }
 

@@ -4,7 +4,7 @@ import MeMenu from './me-menu.es6';
 
 export default React.createClass({
     render () {
-        const homeEl = <span className="home" onClick={this._onHomeClick}>FP</span>;
+        const homeEl = <span className="home" title="FoodPoint" onClick={this._onHomeClick}>&nbsp;</span>;
         const dishesEl = <span className="dishes" onClick={this._onDishesClick}>Меню</span>;
         const orderEl = <span className="order" onClick={this._onOrderClick}>Замовити їжу</span>;
         const meyOrdersEl = null; // <span className="my-orders">Мої замовлення</span>;
