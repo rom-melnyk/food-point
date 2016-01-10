@@ -18,7 +18,7 @@ This file contains the server config. It's very private and sensitive so I don't
     "comment": "----- Place MySQL auth params here -----",
     "host": "localhost",
     "user": "mysql_username",
-    "password": ""mysql_password,
+    "password": "mysql_password",
     "database": "food_point"
   },
 
@@ -38,17 +38,18 @@ So you have to implement it by yourself according to following interface.
 module.exports = {
     /**
      * @param {String} userId
+     * @param {*} [...params]           other optional params to generate tokens from (e.g., `timestamp`)
      */
     generate (userId) {/*...*/},
 
     /**
      * @param {String} token
-     * @return {{userId: String|null, hash: String|null}}
+     * @return {{hash: String|null, userId: String|null, ...}}      other key-value pairs are velcome
      */
     parse (token) {/*...*/},
 
     /**
-     * @param {Object} parsed
+     * @param {Object} parsed           same what {@link #parse} returns
      * @return {Boolean}
      */
     verify (parsed) {/*...*/}
