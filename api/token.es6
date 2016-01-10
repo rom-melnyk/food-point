@@ -2,8 +2,11 @@
 
 const Crypto = require('crypto');
 const SECRET = require('../config.json').session.secret;
+const MAX_DURATION = require('./session-duration.es6').duration;
 
+const MD5_LENGTH = 32;
 const RANDOM_LENGTH = 5;
+const DATE_LENGTH = 13; // console.log( (Date.now() + '').length );
 
 const Token = {
     /**
@@ -18,10 +21,10 @@ const Token = {
     parse: _parseToken,
 
     /**
-     * @param {String} token
-     * @return {{userId: String}|Boolean}
+     * @param {Object} parsed
+     * @return {Boolean}
      */
-    verify: _verifyToken
+    verify: _verifyParsedToken
 };
 
 module.exports = Token;
@@ -68,40 +71,47 @@ function _generateRandom () {
     return rnd;
 }
 
-function  _generateHash (userId, random) {
-    return _md5(userId + SECRET + random);
+function  _generateHash (userId, random, date) {
+    return _md5(userId + SECRET + random + date);
 }
 
-function  _generateToken (userId, random) {
+function  _generateToken (userId, random, date) {
     if (!random) {
         random = _generateRandom();
     }
-    return _hex(_generateHash(userId, random) + random + userId);
+    if (!date) {
+        date = Date.now();
+    }
+    return _hex(_generateHash(userId, random, date) + random + date + userId);
 }
 
 function _parseToken (token) {
     const result = {
         hash: null,
         random: null,
+        date: null,
         userId: null
     };
 
     if (typeof token === 'string') {
         token = _unhex(token);
-        result.hash = token.substr(0, 32);
-        result.random = token.substr(32, RANDOM_LENGTH);
-        result.userId = token.substr(32 + RANDOM_LENGTH);
+        result.hash = token.substr(0, MD5_LENGTH);
+        result.random = token.substr(MD5_LENGTH, RANDOM_LENGTH);
+        result.date = Number( token.substr(MD5_LENGTH + RANDOM_LENGTH, DATE_LENGTH) );
+        result.userId = token.substr(MD5_LENGTH + RANDOM_LENGTH + DATE_LENGTH);
     }
 
     return result;
 }
 
-function _verifyToken (token) {
-    if (typeof token !== 'string') {
+function _verifyParsedToken (parsed) {
+    if (!parsed) {
         return false;
     }
 
-    let parsed = _parseToken(token);
-    return _generateHash(parsed.userId, parsed.random) === parsed.hash ? {userId: parsed.userId} : false;
-}
+    if (!parsed.date || parsed.date < Date.now() - MAX_DURATION) {
+        return false;
+    }
 
+    return _generateHash(parsed.userId, parsed.random, parsed.date) === parsed.hash;
+}
