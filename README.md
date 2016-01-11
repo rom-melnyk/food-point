@@ -1,11 +1,25 @@
 # Installation
-1. Install NodeJS, MySQL.
-1. Create your `./config.json`. See the structure below.
-1. Create your `./api/token.es6`. See the structure below.
-1. `npm i`
+1. Install NodeJS, MySQL
+1. Create your `./config.json`. See the structure below
+1. Create your `./api/token.es6`. See the structure below
+1. `npm install`
 1. `npm run` to check options
 1. `npm run dev` to start the development
-1. Make sure to `set NODE_ENV=PROD` for production
+
+# Deploy new version to Production
+1. Make sure to `set NODE_ENV=production`
+1. Stop the server
+  - if it's installed as service, do `systemctl stop node-server` (the process name may vary),
+  - otherwise press `Ctrl-C`
+1. Check out new version from appropriate tag: `git checkout -b v### v###`
+1. Clean libraries: `git clean -df && npm cache clean`
+1. Compile static resources: `npm run compile-js && npm run compile-css`
+1. Apply MySQL if necessary: `mysql -uXXX -pYYY < sql/v###.sql` (replace "XXX" and "YYY" with appropriate values)
+1. If no errors happened, start the server again
+  - if it's installed as service, do `systemctl start node-server` (the process name may vary),
+  - otherwise run `node --harmony server.es6`
+
+---
 
 # The default `./config.json`
 This file contains the server config. It's very private and sensitive so I don't share it. Create it by yourself.
@@ -31,8 +45,9 @@ This file contains the server config. It's very private and sensitive so I don't
 ```
 
 # The `api/token.es6`
-For the security reason I don't share the mechanism of generating the token string _(SESSION cookie)._
-So you have to implement it by yourself according to following interface.
+For the security reason I don't share the mechanism of generating the token string _(SESSION cookie)._ So you have to implement it by yourself according to following interface.
+You can use, for example, `md5(userId + timestamp + secret) + userId`; that provides the mechanism of transferring the `userId`, verifying it and invalidating the cookie value if it's _(?)_ spoiled.
+Feel free to implement it on your own.
 
 ```js
 module.exports = {
