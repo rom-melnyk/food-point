@@ -43,6 +43,39 @@
               opacity: .3;
             }
 
+            .order {
+              //width: 5em;
+
+              input {
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 1em;
+              }
+
+              input[type=checkbox] {
+                width: 1.5em;
+                height: 1.5em;
+              }
+
+              input[type=checkbox]:checked ~ * {
+                visibility: visible;
+              }
+
+              input[type=text] {
+                width: 2em;
+                height: 1.5em;
+                text-align: right;
+                padding: .2em;
+
+                visibility: hidden;
+              }
+
+              span {
+                margin-right: 1em;
+                visibility: hidden;
+              }
+            }
+
             .description {
               display: inline-block;
               max-width: 20em;

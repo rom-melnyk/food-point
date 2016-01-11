@@ -42,20 +42,31 @@ const Row = React.createClass({
             ? <span className="toggle" title={EXPANDED_TITLE} onClick={this._onToggleClick}></span>
             : null;
 
+        //const ordinal = <span className="ordinal">{this.props.ordinal + 1})</span>;
+
+        const orderArea = this.props.children
+            ? null
+            : (
+                <span className="order">
+                    <input type="checkbox"/>
+                    <input type="text"/>
+                    <span className="label">x</span>
+                </span>
+            );
+
+        const name = <span className="name">{this.props.name}</span>;
+
         const description = this.props.description
             ? <span className="description" title={this.props.description}>{this.props.description}</span>
             : null;
 
         const image = this.props.image ? <span className="image">{this.props.image}</span> : null;
 
-        const ordinal = null; //<span className="ordinal">{this.props.ordinal + 1})</span>;
-        const name = <span className="name">{this.props.name}</span>;
-
         const price = this.props.children ? null : <span className="price">{this.props.price} грн.</span>;
 
         const controlsArea = this.props.role === 'admin' ? <RowControls {...this.props}></RowControls> : null;
 
-        const headerLeft = <div className="left">{toggleArea}{ordinal}{name}{description}{image}</div>;
+        const headerLeft = <div className="left">{orderArea}{toggleArea}{name}{description}{image}</div>;
         const headerRight = <div className="right">{price}{controlsArea}</div>;
 
         return (
