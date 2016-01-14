@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { getState, addChangeListener, removeChangeListener } from './state.es6';
 import Router from './router.es6';
+import { updateRoute } from './actions.es6';
 import DishesGrid from './components/dishes/dishes-grid.es6';
 import Home from './components/home/home.es6';
 import Order from './components/order/order.es6';
@@ -17,7 +18,7 @@ window.FoodPoint = {
     }
 };
 
-includeAutoReloadScript();
+injectAutoReloadScript();
 
 const Main = React.createClass({
     getInitialState () {
@@ -55,6 +56,7 @@ const Main = React.createClass({
         } else if (this.state.route === Router.ORDER) {
             return <Order/>;
         }
+        // TODO create 404 view
 
         return null;
     }
@@ -65,10 +67,13 @@ function _init () {
     container.id = 'application-container';
     document.body.appendChild(container);
 
+    const viewName = Router.getCurrent();
+    updateRoute(viewName);
+
     ReactDom.render(<Main/>, container);
 }
 
-function includeAutoReloadScript () {
+function injectAutoReloadScript () {
     if (
         window.location.hostname === 'localhost' ||
         window.location.hostname === '127.0.0.1' ||
