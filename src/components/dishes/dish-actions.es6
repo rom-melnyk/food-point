@@ -118,7 +118,7 @@ export function moveDishUp (parent, index) {
     Ajax.put(`/api/dishes/${parent.id}`, stringifyDish(parent))
         .then((res) => {
             // TODO toast msg from this
-            console.log(`"${parent.name}" updated`);
+            console.log(`The section "${parent.name}" was updated`);
         })
         .catch((err) => {
             console.log(err);

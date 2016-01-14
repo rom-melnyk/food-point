@@ -37,7 +37,7 @@ const Main = React.createClass({
         const view = this._getView();
         return (
             <div className="application">
-                <Header me={this.state.me} />
+                <Header me={this.state.me} authProviders={this.state.authProviders}/>
                 {view}
                 <Footer />
             </div>

@@ -19,7 +19,7 @@ export default React.createClass({
                         {meyOrdersEl}
                         {usersEl}
                     </div>
-                    <MeMenu me={this.props.me}/>
+                    <MeMenu me={this.props.me} authProviders={this.props.authProviders}/>
                 </div>
             </div>
         );

@@ -45,6 +45,11 @@ $header-logo-size: 2em;
     text-align: right;
 
     .login-section {
+      .please-wait {
+        @include icon-update;
+        @include animate-spin;
+      }
+
       .fb-login {
         @include icon-facebook();
         margin-left: 1em;

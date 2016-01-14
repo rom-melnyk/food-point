@@ -1,12 +1,20 @@
+import Constants from './constants/constants.es6';
+
 const _state = {
     route: '',
     dishes: {
         children: []
     },
     users: [],
-    orders: [],
+    order: {
+        what: [], // {dish: Object, count: Number},
+        where: '',
+        when: '',
+        notes: ''
+    },
     me: {},
-    modals: {}
+    modals: {},
+    authProviders: [ Constants.AUTH_PROVIDERS.PLEASE_WAIT ]
 };
 
 const _listeners = [];

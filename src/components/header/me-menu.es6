@@ -3,6 +3,9 @@ import Router from '../../router.es6';
 import { getMyData, updateMyData } from './me-actions.es6';
 import Modals from '../modals/modals.es6';
 import FbLogin from '../../facebook/fb-login.es6';
+import Constants from '../../constants/constants.es6';
+
+const BEGIN_OF_TIME = new Date(0).toString();
 
 export default React.createClass({
     componentDidMount () {
@@ -18,12 +21,28 @@ export default React.createClass({
     },
 
     _getLoginSection () {
-        return (
-            <span className="login-section">
-                Зайти через
-                <span className="link fb-login" onClick={this._onFbLoginClick}></span>
-            </span>
-        );
+        const authProviders = this.props.authProviders;
+
+        let label = null;
+        let providers = null;
+
+        if (authProviders[0] === Constants.AUTH_PROVIDERS.PLEASE_WAIT) {
+            label = <span className="please-wait"></span>;
+        } else if (authProviders.length > 0) {
+            label = 'Зайти через';
+            providers = [];
+
+            if (authProviders.indexOf(Constants.AUTH_PROVIDERS.FACEBOOK) > -1) {
+                providers.push(
+                    <span className="link fb-login" onClick={this._onFbLoginClick}></span>
+                );
+            }
+
+        } else {
+            label = 'Наразі неможливо зайти';
+        }
+
+        return <span className="login-section">{label}{providers}</span>;
     },
 
     _getPersonSection () {
@@ -43,7 +62,6 @@ export default React.createClass({
     },
 
     _onFbLoginClick () {
-        // TODO add safe FB call
         FB.login(
             () => {
                 FbLogin.doLoginSequence()
@@ -62,7 +80,6 @@ export default React.createClass({
     },
 
     _onLogoutClick () {
-        const beginOfTime = new Date(0).toString();
-        document.cookie = `session=; expires=${beginOfTime};`;
+        document.cookie = `session=; expires=${BEGIN_OF_TIME};`;
     }
 });

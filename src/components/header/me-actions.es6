@@ -22,6 +22,20 @@ export function editMyData (id, data) {
     _doUserApiCall('put', `/api/users/${id}`, data, 'edit-me');
 }
 
+export function addAuthProvider (provider) {
+    getState().authProviders.push(provider);
+    triggerChangeEvent();
+}
+
+export function removeAuthProvider (provider) {
+    const authProviders = getState().authProviders;
+    const index = authProviders.indexOf(provider);
+    if (index > -1) {
+        authProviders.splice(index, 1);
+        triggerChangeEvent();
+    }
+}
+
 // ---------------------------------- private methods ----------------------------------
 function _doUserApiCall (method, url, params, modalName) {
     setModalCommand(modalName, 'wait');

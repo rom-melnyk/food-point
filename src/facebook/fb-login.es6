@@ -1,10 +1,12 @@
 import Ajax from '../utils/ajax.es6';
+import { addAuthProvider, removeAuthProvider } from '../components/header/me-actions.es6';
+import Constants from '../constants/constants.es6';
 
-const POLL_INTERVAL = 100; // ms
+const MAX_LOADING_TIME = 5 * 1000; // ms
+let checkTimeoutId = null;
 
 export default {
     init: _init,
-    doSafeRequest: _doSafeRequest,
     checkState: _checkState,
     authenticate: _authenticate,
     doLoginSequence: _doLoginSequence
@@ -18,6 +20,11 @@ function _init () {
             //xfbml      : true,
             version    : 'v2.5'
         });
+
+        clearTimeout(checkTimeoutId);
+        checkTimeoutId = null;
+        removeAuthProvider(Constants.AUTH_PROVIDERS.PLEASE_WAIT);
+        addAuthProvider(Constants.AUTH_PROVIDERS.FACEBOOK);
     };
 
     (function(d, s, id){
@@ -27,30 +34,17 @@ function _init () {
         js.src = "//connect.facebook.net/uk_UA/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+
+    checkTimeoutId = setTimeout(() => {
+        if (!window.FB) {
+            removeAuthProvider(Constants.AUTH_PROVIDERS.PLEASE_WAIT);
+        }
+    }, MAX_LOADING_TIME);
 }
 
 //FB.api('/me', function(response) {
 //    console.log('Successful login for: ' + response.name);
 //});
-
-/**
- * @resolve {null} at this moment `window.FB` is defined
- * @returns {Promise}
- * @private
- */
-function _doSafeRequest() {
-    return new Promise((resolve, reject) => {
-        function __poll__ () {
-            if (window.FB) {
-                resolve();
-            } else {
-                setTimeout(__poll__, POLL_INTERVAL);
-            }
-        }
-
-        __poll__();
-    });
-}
 
 function _checkState() {
     return new Promise((resolve, reject) => {
