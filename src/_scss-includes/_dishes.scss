@@ -90,7 +90,7 @@
             width: 30%;
             text-align: right;
 
-            .controls {
+            .edit-controls {
               @include in-out-fast(opacity);
               padding-left: 1em;
               opacity: 0;
@@ -156,7 +156,7 @@
           background-color: $grey;
         }
 
-        &:hover .right .controls {
+        &:hover .right .edit-controls {
           opacity: 1;
         }
       }
@@ -211,11 +211,11 @@
         }
       }
 
-      &:first-child > .header > .right .controls > .up-down > .up {
+      &:first-child > .header > .right .edit-controls > .up-down > .up {
         visibility: hidden;
       }
 
-      &:last-child > .header > .right .controls > .up-down > .down {
+      &:last-child > .header > .right .edit-controls > .up-down > .down {
         visibility: hidden;
       }
     }

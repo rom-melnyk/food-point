@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import RowControls from './dish-row-controls.es6';
+import RowEditControls from './dish-row-edit-controls.es6';
+import RowOrderControls from './dish-row-order-controls.es6';
 import dom from '../../utils/dom.es6'
 
 const COLLAPSED_CLASS_NAME = 'collapsed';
@@ -44,15 +45,10 @@ const Row = React.createClass({
 
         //const ordinal = <span className="ordinal">{this.props.ordinal + 1})</span>;
 
+        // TODO verify if the view is "order"
         const orderArea = this.props.children
             ? null
-            : (
-                <span className="order">
-                    <input type="checkbox"/>
-                    <input type="number"/>
-                    <span className="label">x</span>
-                </span>
-            );
+            : <RowOrderControls {...this.props}></RowOrderControls>;
 
         const name = <span className="name">{this.props.name}</span>;
 
@@ -64,11 +60,10 @@ const Row = React.createClass({
 
         const price = this.props.children ? null : <span className="price">{this.props.price} грн.</span>;
 
-        // TODO put the condition to opposite state after debug
-        const controlsArea = this.props.role !== 'admin' ? <RowControls {...this.props}></RowControls> : null;
+        const editControlsArea = this.props.role === 'admin' ? <RowEditControls {...this.props}></RowEditControls> : null;
 
         const headerLeft = <div className="left">{orderArea}{toggleArea}{name}{description}{image}</div>;
-        const headerRight = <div className="right">{price}{controlsArea}</div>;
+        const headerRight = <div className="right">{price}{editControlsArea}</div>;
 
         return (
             <li className={this.props.children ? 'section' : ''}>

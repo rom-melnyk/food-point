@@ -3,8 +3,8 @@ import { openEditDishModal, openDeleteDishModal, moveDishUp } from './dish-actio
 
 export default React.createClass({
     render () {
-        const controlsArea = (
-            <span className="controls">
+        const editControlsArea = (
+            <span className="edit-controls">
                 <span className="link edit" onClick={this._onEditHandler}></span>
                 <span className="link delete" onClick={this._onDeleteHandler}></span>
                 <span className="up-down">
@@ -14,7 +14,7 @@ export default React.createClass({
             </span>
         );
 
-        return controlsArea;
+        return editControlsArea;
     },
 
     _onEditHandler () {
