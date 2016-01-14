@@ -12,7 +12,7 @@ export function parseDishes (dataFromServer, section = null, parent = null, ordi
     let childOrdinal = 0;
     _parseChildrenString(section.children)
         .forEach((id) => {
-            const dish = dataFromServer.filter(d => d.id === id)[0];
+            const dish = dataFromServer.find(d => d.id === id);
 
             if (!dish) {
                 return;
