@@ -49,7 +49,7 @@ const Row = React.createClass({
             : (
                 <span className="order">
                     <input type="checkbox"/>
-                    <input type="text"/>
+                    <input type="number"/>
                     <span className="label">x</span>
                 </span>
             );
@@ -64,7 +64,8 @@ const Row = React.createClass({
 
         const price = this.props.children ? null : <span className="price">{this.props.price} грн.</span>;
 
-        const controlsArea = this.props.role === 'admin' ? <RowControls {...this.props}></RowControls> : null;
+        // TODO put the condition to opposite state after debug
+        const controlsArea = this.props.role !== 'admin' ? <RowControls {...this.props}></RowControls> : null;
 
         const headerLeft = <div className="left">{orderArea}{toggleArea}{name}{description}{image}</div>;
         const headerRight = <div className="right">{price}{controlsArea}</div>;

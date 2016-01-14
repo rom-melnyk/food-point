@@ -22,7 +22,7 @@
         padding: .3em 1em;
 
         &:hover {
-          background-color: #f3f3f5;
+          background-color: $light-grey;
         }
 
         .left, .right {
@@ -44,28 +44,20 @@
             }
 
             .order {
-              //width: 5em;
-
               input {
                 display: inline-block;
                 vertical-align: middle;
                 margin-right: 1em;
               }
 
-              input[type=checkbox] {
-                width: 1.5em;
-                height: 1.5em;
-              }
-
               input[type=checkbox]:checked ~ * {
                 visibility: visible;
               }
 
-              input[type=text] {
-                width: 2em;
-                height: 1.5em;
-                text-align: right;
-                padding: .2em;
+              input[type=number] {
+                @extend .input-hover-behavior;
+                width: 3em;
+                text-align: center;
 
                 visibility: hidden;
               }
@@ -158,6 +150,10 @@
             }
           }
 
+        }
+
+        &:hover .left .order input[type=number] {
+          background-color: $grey;
         }
 
         &:hover .right .controls {

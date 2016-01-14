@@ -110,19 +110,9 @@
   .input-wrapper {
     width: 80%;
 
-    input, select {
-      @include in-out-fast(background-color);
-
+    input[type=text], select {
+      @extend .input-hover-behavior;
       width: 100%;
-      padding: .3em .7em;
-
-      font: inherit;
-      border: 1px solid #eee;
-      background-color: #eee;
-
-      &:focus {
-        background-color: #fff;
-      }
     }
   }
 }
