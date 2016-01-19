@@ -54,7 +54,7 @@ const Main = React.createClass({
         } else if (this.state.route === Router.DISHES) {
             return <DishesGrid data={this.state.dishes} user={this.state.me} />;
         } else if (this.state.route === Router.ORDER) {
-            return <Order/>;
+            return <Order data={this.state.dishes} user={this.state.me} order={this.state.order}/>;
         }
         // TODO create 404 view
 

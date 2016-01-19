@@ -1,10 +1,12 @@
 .view.order {
-  ul {
-    list-style: disc inside;
-    margin: .5em 0;
+  .order-total {
+    ul {
+      list-style: disc inside;
+      margin: .5em 0;
 
-    li {
-      padding-left: 1em;
+      li {
+        padding-left: 1em;
+      }
     }
   }
 }

@@ -2,7 +2,7 @@ import Ajax from '../utils/ajax.es6';
 import { addAuthProvider, removeAuthProvider } from '../components/header/me-actions.es6';
 import Constants from '../constants/constants.es6';
 
-const MAX_LOADING_TIME = 5 * 1000; // ms
+const MAX_LOADING_TIME = 15 * 1000; // ms
 let checkTimeoutId = null;
 
 export default {
@@ -65,8 +65,7 @@ function _authenticate(authResponse) {
 }
 
 function _doLoginSequence() {
-    return _doSafeRequest()
-        .then(_checkState)
+    return _checkState()
         .then((state) => {
             return state.status === 'connected'
                 ? _authenticate(state.authResponse)

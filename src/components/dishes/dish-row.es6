@@ -45,10 +45,7 @@ const Row = React.createClass({
 
         //const ordinal = <span className="ordinal">{this.props.ordinal + 1})</span>;
 
-        // TODO verify if the view is "order"
-        const orderArea = this.props.children
-            ? null
-            : <RowOrderControls {...this.props}></RowOrderControls>;
+        const orderArea = this.props.order && !this.props.children ? <RowOrderControls {...this.props} /> : null;
 
         const name = <span className="name">{this.props.name}</span>;
 
@@ -60,7 +57,7 @@ const Row = React.createClass({
 
         const price = this.props.children ? null : <span className="price">{this.props.price} грн.</span>;
 
-        const editControlsArea = this.props.role === 'admin' ? <RowEditControls {...this.props}></RowEditControls> : null;
+        const editControlsArea = this.props.role === 'admin' ? <RowEditControls {...this.props} /> : null;
 
         const headerLeft = <div className="left">{orderArea}{toggleArea}{name}{description}{image}</div>;
         const headerRight = <div className="right">{price}{editControlsArea}</div>;
@@ -83,7 +80,7 @@ const Row = React.createClass({
         const role = this.props.role;
         if (children && children.length > 0) {
             const rows = children.map((dish) => {
-                return <Row key={dish.id} {...dish} role={role}/>;
+                return <Row key={dish.id} {...dish} role={role} order={this.props.order}/>;
             });
 
             return <ul>{rows}</ul>;

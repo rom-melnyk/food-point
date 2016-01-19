@@ -9,10 +9,10 @@ export default React.createClass({
 
     render () {
         const rows = this.props.data.children.map((dish) => {
-            return <Row key={dish.id} {...dish} role={this.props.user.role}/>
+            return <Row key={dish.id} {...dish} role={this.props.user.role} order={this.props.order} />
         });
 
-        const createEl = this.props.role === 'admin'
+        const createEl = this.props.role === 'admin' && !this.props.order
             ? (
                 <div className="create">
                     <span className="button create-dish" onClick={this._onCreateDishHandler}>
