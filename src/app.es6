@@ -9,7 +9,7 @@ import Order from './components/order/order.es6';
 import Header from './components/header/header.es6';
 import Footer from './components/footer/footer.es6';
 
-import FbLogin from './facebook/fb-login.es6';
+import FbLogin from './login-providers/fb-login.es6';
 
 window.FoodPoint = {
     init: () => {

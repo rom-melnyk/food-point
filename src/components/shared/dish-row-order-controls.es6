@@ -21,7 +21,7 @@ export default React.createClass({
             <span className="order">
                 <input type="checkbox" onChange={this._onUpdateHandler}/>
                 <input type="number" onChange={this._onUpdateHandler}/>
-                <span className="label">x</span>
+                <span className="label">&#10005;</span>
             </span>
         );
 

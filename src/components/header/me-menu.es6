@@ -2,7 +2,7 @@ import React from 'react';
 import Router from '../../router.es6';
 import { getMyData, updateMyData } from './me-actions.es6';
 import Modals from '../modals/modals.es6';
-import FbLogin from '../../facebook/fb-login.es6';
+import FbLogin from '../../login-providers/fb-login.es6';
 import Constants from '../../constants/constants.es6';
 
 const BEGIN_OF_TIME = new Date(0).toString();

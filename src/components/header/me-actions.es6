@@ -1,7 +1,7 @@
 import { getState, update, triggerChangeEvent } from '../../state.es6';
 import { setModalCommand } from '../../actions.es6';
 import Ajax from '../../utils/ajax.es6';
-import FbLogin from '../../facebook/fb-login.es6';
+import FbLogin from '../../login-providers/fb-login.es6';
 
 // ---------------------------------- me ----------------------------------
 export function getMyData () {
