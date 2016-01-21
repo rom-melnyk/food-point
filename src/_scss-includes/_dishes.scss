@@ -1,7 +1,7 @@
 @import "shared";
 @import "icon-font/fontello";
 
-.view.dishes {
+.view/*.dishes*/ {
   h1 {
     margin-top: 0;
     margin-bottom: 1em;

@@ -1,5 +1,5 @@
 import React from 'react';
-import DishesGrid from '../dishes/dishes-grid.es6';
+import DishesList from '../dishes/dishes-all-rows.es6';
 
 export default React.createClass({
     render () {
@@ -10,7 +10,7 @@ export default React.createClass({
                         <div className="total">TOTAL: {this._getOrderTotal()}</div>
                     </div>
 
-                    <DishesGrid data={this.props.data} user={this.props.user} order={true} />
+                    <DishesList data={this.props.data} user={this.props.user} order={true} />
                 </div>
             </div>
         );
