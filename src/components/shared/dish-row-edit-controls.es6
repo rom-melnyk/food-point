@@ -1,5 +1,5 @@
 import React from 'react';
-import { openEditDishModal, openDeleteDishModal, moveDishUp } from './dish-actions.es6';
+import { openEditDishModal, openDeleteDishModal, moveDishUp } from './../dishes/dish-actions.es6';
 
 export default React.createClass({
     render () {

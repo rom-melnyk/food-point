@@ -1,5 +1,5 @@
 import React from 'react';
-import DishesList from '../dishes/dishes-all-rows.es6';
+import DishesList from '../shared/dishes-all-rows.es6';
 
 export default React.createClass({
     render () {

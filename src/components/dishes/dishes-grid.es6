@@ -1,6 +1,5 @@
 import React from 'react';
-import Row from './dish-row.es6';
-import AllRows from './dishes-all-rows.es6';
+import AllRows from './../shared/dishes-all-rows.es6';
 import { getDishes, openEditDishModal } from './dish-actions.es6';
 
 export default React.createClass({
