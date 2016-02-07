@@ -43,8 +43,7 @@ This file contains the server config. It's very private and sensitive so I don't
   },
 
   "facebook": {
-    "api-id": 1234567890,
-    "comment": "----- must be Number, not String! -----"
+    "api-id": 1234567890
   }
 }
 ```
