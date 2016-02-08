@@ -40,6 +40,10 @@ This file contains the server config. It's very private and sensitive so I don't
     "secret": "Place your text here",
     "comment": "----- duration is <number><s|m|h|d|w>, means number of seconds/.../days/weeks -----",
     "duration": "1d"
+  },
+
+  "facebook": {
+    "api-id": 1234567890
   }
 }
 ```

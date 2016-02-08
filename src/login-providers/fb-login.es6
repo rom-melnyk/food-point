@@ -1,8 +1,11 @@
 import Ajax from '../utils/ajax.es6';
 import { addAuthProvider, removeAuthProvider } from '../components/header/me-actions.es6';
 import Constants from '../constants/constants.es6';
+import Config from '../../config.json';
 
 const MAX_LOADING_TIME = 15 * 1000; // ms
+const APP_ID = Config.facebook['app-id'] + '';
+
 let checkTimeoutId = null;
 
 export default {
@@ -15,7 +18,7 @@ export default {
 function _init () {
     window.fbAsyncInit = function() {
         FB.init({
-            appId      : '1649156238676800',
+            appId      : APP_ID,
             cookie     : true,
             //xfbml      : true,
             version    : 'v2.5'
