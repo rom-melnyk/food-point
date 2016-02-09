@@ -34,7 +34,7 @@ export default React.createClass({
 
             if (authProviders.indexOf(Constants.AUTH_PROVIDERS.FACEBOOK) > -1) {
                 providers.push(
-                    <span className="link fb-login" onClick={this._onFbLoginClick}></span>
+                    <span key={0} className="link fb-login" onClick={this._onFbLoginClick}></span>
                 );
             }
 
