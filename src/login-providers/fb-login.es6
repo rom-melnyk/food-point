@@ -32,8 +32,8 @@ function _init () {
 
         clearTimeout(checkTimeoutId);
         checkTimeoutId = null;
-        removeAuthProvider(Constants.AUTH_PROVIDERS.PLEASE_WAIT);
         addAuthProvider(Constants.AUTH_PROVIDERS.FACEBOOK);
+        removeAuthProvider(Constants.AUTH_PROVIDERS.PLEASE_WAIT);
     };
 
     (function(d, s, id){
