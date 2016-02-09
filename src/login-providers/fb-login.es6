@@ -5,11 +5,13 @@ import Config from '../../config.json';
 
 const MAX_LOADING_TIME = 15 * 1000; // ms
 let APP_ID;
+let APP_LOCALE;
 
 try {
     APP_ID = Config.facebook['api-id'] + '';
+    APP_LOCALE = Config.facebook.locale;
 } catch (e) {
-    throw new Error('`config.json#facebook.app-id` section is missing');
+    throw new Error('Make sure that "config.json" exists and contains both "facebook"."app-id" and "facebook"."locale"');
 }
 
 let checkTimeoutId = null;
@@ -40,7 +42,7 @@ function _init () {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {return;}
         js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/uk_UA/sdk.js";
+        js.src = `//connect.facebook.net/${APP_LOCALE}/sdk.js`;
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 

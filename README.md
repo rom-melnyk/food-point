@@ -43,7 +43,8 @@ This file contains the server config. It's very private and sensitive so I don't
   },
 
   "facebook": {
-    "api-id": 1234567890
+    "api-id": 1234567890,
+    "locale": "en_US"
   }
 }
 ```
