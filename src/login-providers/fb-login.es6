@@ -4,7 +4,13 @@ import Constants from '../constants/constants.es6';
 import Config from '../../config.json';
 
 const MAX_LOADING_TIME = 15 * 1000; // ms
-const APP_ID = Config.facebook['app-id'] + '';
+let APP_ID;
+
+try {
+    APP_ID = Config.facebook['api-id'] + '';
+} catch (e) {
+    throw new Error('`config.json#facebook.app-id` section is missing');
+}
 
 let checkTimeoutId = null;
 
@@ -19,7 +25,7 @@ function _init () {
     window.fbAsyncInit = function() {
         FB.init({
             appId      : APP_ID,
-            cookie     : true,
+            //cookie     : true,
             //xfbml      : true,
             version    : 'v2.5'
         });
