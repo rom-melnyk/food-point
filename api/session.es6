@@ -3,6 +3,7 @@ const Token = require('./token.es6');
 const COOKIE_MAX_AGE = require('./session-duration.es6').duration;
 
 const COOKIE_NAME = 'session';
+const URL_MASK = /^\/api\//;
 
 module.exports = {
     // we respect the principle that other middleware use, say `app.use(cookieParser());`
@@ -12,7 +13,7 @@ module.exports = {
 
 // -------------------------- private methods --------------------------
 function _sessionFn (req, res, next) {
-    if (!/^\/api\//.test(req.path)) {
+    if (!URL_MASK.test(req.path)) {
         // we don't need authorization for static calls
         next();
         return;
