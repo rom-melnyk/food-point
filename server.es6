@@ -1,5 +1,3 @@
-const dev = require('./dev.es6');
-
 const express = require('express');
 const config = require('./config.json');
 const bodyParser = require('body-parser');
@@ -41,5 +39,24 @@ const server = app.listen(config.port, () => {
     );
 });
 
-dev.init(/^(--)?dev$/i);
-dev.watch(app, server);
+// Development mode support (run with "--dev")
+if (process.argv.filter(arg => /^(--)?dev$/i.test(arg)).length > 0) {
+    const webpack = require('webpack');
+    const webpackConfig = require('./webpack.config');
+
+    const compiler = webpack(webpackConfig);
+    compiler.watch({
+        aggregateTimeout: 300/*,
+         poll: true*/
+    }, (error, stats) => {
+        if (error) {
+            console.log(`========== ERROR ==========`);
+            console.log(`Something terrible happened`);
+            console.log(`===========================\n`);
+        }
+
+        const logs = stats.toString({colors: true});
+        console.log(logs);
+    })
+    ;
+}

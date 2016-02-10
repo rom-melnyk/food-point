@@ -1,3 +1,5 @@
+import './style.scss';
+
 import React from 'react';
 import ReactDom from 'react-dom';
 import { getState, addChangeListener, removeChangeListener } from './state.es6';
@@ -17,8 +19,6 @@ window.FoodPoint = {
         _init();
     }
 };
-
-injectAutoReloadScript();
 
 const Main = React.createClass({
     getInitialState () {
@@ -71,16 +71,4 @@ function _init () {
     updateRoute(viewName);
 
     ReactDom.render(<Main/>, container);
-}
-
-function injectAutoReloadScript () {
-    if (
-        window.location.hostname === 'localhost' ||
-        window.location.hostname === '127.0.0.1' ||
-        /[?&]debug(&.+)?/i.test(window.location.search))
-    {
-        const script = document.createElement('script');
-        document.head.appendChild(script);
-        script.src = '/auto-reload.js';
-    }
 }
