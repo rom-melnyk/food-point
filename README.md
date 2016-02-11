@@ -12,8 +12,8 @@
   - if it's installed as service, do `systemctl stop node-server` (the process name may vary),
   - otherwise press `Ctrl-C`
 1. Check out new version from appropriate tag: `git checkout -b v### v###`
-1. Clean libraries: `git clean -df && npm cache clean`
-1. Compile static resources: `npm run compile-js && npm run compile-css`
+1. Clean libraries nd reinstall dependencies: `git clean -df && npm cache clean && npm install`
+1. Compile static resources: `npm run prod`
 1. Apply MySQL if necessary: `mysql -uXXX -pYYY < sql/v###.sql` (replace "XXX" and "YYY" with appropriate values)
 1. If no errors happened, start the server again
   - if it's installed as service, do `systemctl start node-server` (the process name may vary),

@@ -22,7 +22,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile-prod": "webpack --progress --colors",
+    "prod": "webpack -p --progress --colors",
     "dev": "node --harmony server.es6 --dev"
   },
   "dependencies": {
