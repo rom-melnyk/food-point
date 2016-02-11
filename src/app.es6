@@ -52,7 +52,7 @@ const Main = React.createClass({
         if (this.state.route === Router.HOME) {
             return <Home/>;
         } else if (this.state.route === Router.DISHES) {
-            return <DishesGrid data={this.state.dishes} user={this.state.me} />;
+            return <DishesGrid dishes={this.state.dishes} role={this.state.me.role} />;
         } else if (this.state.route === Router.ORDER) {
             return <Order data={this.state.dishes} user={this.state.me} order={this.state.order}/>;
         }
