@@ -20,7 +20,8 @@ export default {
     init: _init,
     checkState: _checkState,
     authenticate: _authenticate,
-    doLoginSequence: _doLoginSequence
+    doLoginSequence: _doLoginSequence,
+    doLogoutSequence: _doLogoutSequence
 };
 
 function _init () {
@@ -81,6 +82,20 @@ function _doLoginSequence() {
             return state.status === 'connected'
                 ? _authenticate(state.authResponse)
                 : state.status;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
+function _doLogoutSequence() {
+    return _checkState()
+        .then((state) => {
+            return state.status === 'connected'
+                ? new Promise((resolve) => {
+                    FB.logout(() => resolve());
+                })
+                : false;
         })
         .catch((err) => {
             console.log(err);

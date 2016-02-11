@@ -81,5 +81,9 @@ export default React.createClass({
 
     _onLogoutClick () {
         document.cookie = `session=; expires=${BEGIN_OF_TIME};`;
+        FbLogin.doLogoutSequence()
+            .catch((err) => {
+                console.log(err);
+            });
     }
 });
