@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import classnames from 'classnames';
 import RowEditControls from './dish-row-edit-controls.es6';
 import RowOrderControls from './dish-row-order-controls.es6';
 import dom from '../../utils/dom.es6'
@@ -39,8 +40,12 @@ const Row = React.createClass({
     },
 
     render () {
+        if (this.props.role !== 'admin' && !this.props.isVisible) {
+            return null;
+        }
+
         const toggleArea = this.props.children
-            ? <span className="toggle" title={EXPANDED_TITLE} onClick={this._onToggleClick}></span>
+            ? <span className="toggle" title={EXPANDED_TITLE} onClick={this._onToggleClick} />
             : null;
 
         //const ordinal = <span className="ordinal">{this.props.ordinal + 1})</span>;
@@ -63,7 +68,10 @@ const Row = React.createClass({
         const headerRight = <div className="right">{price}{editControlsArea}</div>;
 
         return (
-            <li className={this.props.children ? 'section' : ''}>
+            <li className={classnames({
+                section: this.props.children,
+                'is-hidden': !this.props.isVisible
+            })} >
                 <div className="header">
                     {headerLeft}
                     {headerRight}

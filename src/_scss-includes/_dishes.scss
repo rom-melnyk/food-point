@@ -161,6 +161,14 @@
         }
       }
 
+      &.is-hidden {
+        opacity: .3;
+
+        .header {
+          text-decoration: line-through;
+        }
+      }
+
       &.section {
         margin-top: 3em;
         margin-bottom: 3em;
