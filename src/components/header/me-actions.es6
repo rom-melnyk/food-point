@@ -9,19 +9,25 @@ const BEGIN_OF_TIME = new Date(0).toString();
 export function getMyData () {
     Ajax.get('/api/me')
         .then((response) => {
-            updateMyData(response);
+            _updateState(response);
         })
         .catch((err) => {
             console.log(err);
         });
 }
 
-export function updateMyData (data) {
-    update('me', data && !data.error ? data : {});
-}
-
 export function editMyData (id, data) {
-    _doUserApiCall('put', `/api/users/${id}`, data, 'edit-me');
+    Ajax.put(`/api/users/${id}`, data)
+        .then((res) => {
+            return Ajax.get('/api/me');
+        })
+        .then((data) => {
+            update('me', data && !data.error ? data : {});
+            setModalCommand('edit-me', 'close');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }
 
 export function addAuthProvider (provider) {
@@ -43,7 +49,7 @@ export function loginViaFacebook () {
         () => {
             FbLogin.doLoginSequence()
                 .then((response) => {
-                    updateMyData(response);
+                    _updateState(response);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -58,6 +64,7 @@ export function loginViaFacebook () {
 
 export function logout () {
     document.cookie = `session=; expires=${BEGIN_OF_TIME};`;
+    _updateState(null);
     // TODO check if was facebook-login
     FbLogin.doLogoutSequence()
         .catch((err) => {
@@ -66,18 +73,6 @@ export function logout () {
 }
 
 // ---------------------------------- private methods ----------------------------------
-function _doUserApiCall (method, url, params, modalName) {
-    setModalCommand(modalName, 'wait');
-
-    Ajax[method](url, params)
-        .then((res) => {
-            return Ajax.get('/api/me');
-        })
-        .then((data) => {
-            update('me', data && !data.error ? data : {});
-            setModalCommand(modalName, 'close');
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+function _updateState (data) {
+    update('me', data && !data.error ? data : {});
 }

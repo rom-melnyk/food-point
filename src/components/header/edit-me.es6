@@ -37,6 +37,8 @@ export default React.createClass({
     _phone: null,
 
     _onOkHandler () {
+        setModalCommand('edit-me', 'wait');
+
         editMyData(this.props.data.id, {
             name: this._name.getValue(),
             email: this._email.getValue(),
