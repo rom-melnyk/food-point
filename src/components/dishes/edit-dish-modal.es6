@@ -37,15 +37,14 @@ export default React.createClass({
 
     render () {
         const priceTrail = <span className="currency">грн.</span>;
-        const parentInput = (
-            <select className="section" name="section">{this._generateSectionList()}</select>
+        const sectionInput = (
+            <select className="section" name="section">{ this._generateSectionList() }</select>
         );
         const isVisibleInput = (
             <input type="checkbox" className="is-visible" name="is-visible" />
         );
 
         let nameLabel;
-        let isVisibleLabel = 'Показувати ';
 
         let priceElement = null;
         let descriptionElement = null;
@@ -54,10 +53,8 @@ export default React.createClass({
 
         if (this.props.children) {
             nameLabel = 'Секція';
-            isVisibleLabel += 'секцію?';
         } else {
             nameLabel = 'Страва';
-            isVisibleLabel += 'страву?';
             priceElement = <ModalSection
                 label="Ціна"
                 name="price"
@@ -68,23 +65,23 @@ export default React.createClass({
             sectionElement = <ModalSection
                 label="Помістити у"
                 name="section"
-                content={{input: parentInput}}
+                content={{input: sectionInput}}
                 ref={(cmp) => { this._parent= cmp; }}
             />;
         }
 
-        const nameSection = <ModalSection label={nameLabel} name="name" ref={(cmp) => { this._name = cmp; }} />;
+        const nameElement = <ModalSection label={nameLabel} name="name" ref={(cmp) => { this._name = cmp; }} />;
 
         const isVisibleElement = <ModalSection
-            label={isVisibleLabel}
-            name="isVisible"
+            label="Показувати?"
+            name="is-visible"
             content={{input: isVisibleInput}}
             ref={(cmp) => { this._isVisible = cmp; }}
         />;
 
         return (
             <div className="edit-dish">
-                {nameSection}
+                {nameElement}
                 {priceElement}
                 {descriptionElement}
                 {imageElement}
@@ -123,7 +120,7 @@ export default React.createClass({
     _onOkHandler () {
         const newDishData = {};
 
-        ['name', 'price', 'description', 'image'].forEach((field) => {
+        ['name', 'price', 'description', 'image', 'isVisible'].forEach((field) => {
             newDishData[field] = this[`_${field}`] ? this[`_${field}`].getValue() : null;
         }, this);
 

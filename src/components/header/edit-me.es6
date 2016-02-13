@@ -44,6 +44,12 @@ export default React.createClass({
             email: this._email.getValue(),
             address: this._address.getValue(),
             phone: this._phone.getValue()
+        })
+        .then(() => {
+            setModalCommand('edit-me', 'close');
+        })
+        .catch((err) => {
+            console.log(err);
         });
     },
 

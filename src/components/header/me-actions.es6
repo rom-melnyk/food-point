@@ -17,13 +17,12 @@ export function getMyData () {
 }
 
 export function editMyData (id, data) {
-    Ajax.put(`/api/users/${id}`, data)
+    return Ajax.put(`/api/users/${id}`, data)
         .then((res) => {
             return Ajax.get('/api/me');
         })
         .then((data) => {
             update('me', data && !data.error ? data : {});
-            setModalCommand('edit-me', 'close');
         })
         .catch((err) => {
             console.log(err);
