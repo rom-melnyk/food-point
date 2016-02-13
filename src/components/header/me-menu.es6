@@ -1,11 +1,9 @@
 import React from 'react';
 import Router from '../../router.es6';
-import { getMyData, updateMyData } from './me-actions.es6';
+import { getMyData, loginViaFacebook, logout } from './me-actions.es6';
 import Modals from '../modals/modals.es6';
 import FbLogin from '../../login-providers/fb-login.es6';
 import Constants from '../../constants/constants.es6';
-
-const BEGIN_OF_TIME = new Date(0).toString();
 
 export default React.createClass({
     componentDidMount () {
@@ -62,28 +60,10 @@ export default React.createClass({
     },
 
     _onFbLoginClick () {
-        FB.login(
-            () => {
-                FbLogin.doLoginSequence()
-                    .then((response) => {
-                        updateMyData(response);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            },
-            {
-                scope: 'public_profile,email',
-                auth_type: 'rerequest'
-            }
-        );
+        loginViaFacebook();
     },
 
     _onLogoutClick () {
-        document.cookie = `session=; expires=${BEGIN_OF_TIME};`;
-        FbLogin.doLogoutSequence()
-            .catch((err) => {
-                console.log(err);
-            });
+        logout();
     }
 });

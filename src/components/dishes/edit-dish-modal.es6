@@ -20,6 +20,8 @@ export default React.createClass({
 
         //this._image.setValue(this.props.image || '');
 
+        this._isVisible.setValue(!!this.props.isVisible);
+
         if (!this.props.children && this.props.parent) {
             this._parent.setValue(this.props.parent.id);
         }
@@ -38,8 +40,12 @@ export default React.createClass({
         const parentInput = (
             <select className="section" name="section">{this._generateSectionList()}</select>
         );
+        const isVisibleInput = (
+            <input type="checkbox" className="is-visible" name="is-visible" />
+        );
 
         let nameLabel;
+        let isVisibleLabel = 'Показувати ';
 
         let priceElement = null;
         let descriptionElement = null;
@@ -48,8 +54,10 @@ export default React.createClass({
 
         if (this.props.children) {
             nameLabel = 'Секція';
+            isVisibleLabel += 'секцію?';
         } else {
             nameLabel = 'Страва';
+            isVisibleLabel += 'страву?';
             priceElement = <ModalSection
                 label="Ціна"
                 name="price"
@@ -67,12 +75,20 @@ export default React.createClass({
 
         const nameSection = <ModalSection label={nameLabel} name="name" ref={(cmp) => { this._name = cmp; }} />;
 
+        const isVisibleElement = <ModalSection
+            label={isVisibleLabel}
+            name="isVisible"
+            content={{input: isVisibleInput}}
+            ref={(cmp) => { this._isVisible = cmp; }}
+        />;
+
         return (
             <div className="edit-dish">
                 {nameSection}
                 {priceElement}
                 {descriptionElement}
                 {imageElement}
+                {isVisibleElement}
                 {sectionElement}
                 <ModalControls onBackHandler={this._onBackHandler} onOkHandler={this._onOkHandler}/>
             </div>
@@ -83,6 +99,7 @@ export default React.createClass({
     _price: null,
     _description: null,
     //_image: null,
+    _isVisible: null,
     _parent: null,
 
     _generateSectionList () {

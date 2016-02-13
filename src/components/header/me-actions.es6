@@ -3,6 +3,8 @@ import { setModalCommand } from '../../actions.es6';
 import Ajax from '../../utils/ajax.es6';
 import FbLogin from '../../login-providers/fb-login.es6';
 
+const BEGIN_OF_TIME = new Date(0).toString();
+
 // ---------------------------------- me ----------------------------------
 export function getMyData () {
     Ajax.get('/api/me')
@@ -34,6 +36,33 @@ export function removeAuthProvider (provider) {
         authProviders.splice(index, 1);
         triggerChangeEvent();
     }
+}
+
+export function loginViaFacebook () {
+    FB.login(
+        () => {
+            FbLogin.doLoginSequence()
+                .then((response) => {
+                    updateMyData(response);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        {
+            scope: 'public_profile,email',
+            auth_type: 'rerequest'
+        }
+    );
+}
+
+export function logout () {
+    document.cookie = `session=; expires=${BEGIN_OF_TIME};`;
+    // TODO check if was facebook-login
+    FbLogin.doLogoutSequence()
+        .catch((err) => {
+            console.log(err);
+        });
 }
 
 // ---------------------------------- private methods ----------------------------------

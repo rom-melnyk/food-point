@@ -19,22 +19,39 @@ export default React.createClass({
         return (
             <div className="input-section">
                 <label>{this.props.label}</label>
-                    <span className="input-wrapper">
-                        {beforeInput}
-                        {input}
-                        {afterInput}
-                    </span>
+                <span className="input-wrapper">
+                    {beforeInput}
+                    {input}
+                    {afterInput}
+                </span>
             </div>
         );
     },
 
     getValue () {
-        return this._inputElement && this._inputElement.value;
+        if (!this._inputElement) {
+            return null;
+        }
+
+        switch (this._inputElement.type) {
+            case 'checkbox':
+                return this._inputElement.checked;
+            default:
+                return this._inputElement.value;
+        }
     },
 
     setValue (value = '') {
-        if (this._inputElement) {
-            this._inputElement.value = value;
+        if (!this._inputElement) {
+            return;
+        }
+
+        switch (this._inputElement.type) {
+            case 'checkbox':
+                this._inputElement.checked = !!value;
+                break;
+            default:
+                return this._inputElement.value = value;
         }
     },
 
