@@ -39,7 +39,7 @@ const Main = React.createClass({
             <div className="application">
                 <Header me={this.state.me} authProviders={this.state.authProviders}/>
                 {view}
-                <Footer />
+                <Footer version={this.state.version} />
             </div>
         );
     },
