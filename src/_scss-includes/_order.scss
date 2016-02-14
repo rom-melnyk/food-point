@@ -1,5 +1,7 @@
+@import "./_shared";
+
 .view.order {
-  .order-total {
+  /*.order-total*/.wrapper {
     ul {
       list-style: disc inside;
       margin: .5em 0;
@@ -7,6 +9,12 @@
       li {
         padding-left: 1em;
       }
+    }
+
+    section:last-child {
+      margin-top: 2em;
+      padding-top: .5em;
+      border-top: 1px solid $light-grey;
     }
   }
 }

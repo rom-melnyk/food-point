@@ -1,6 +1,6 @@
-@import "shared";
-@import "icon-font/fontello";
-@import "icon-font/animations";
+@import "./_shared";
+@import "./icon-font/_fontello";
+@import "./icon-font/_animations";
 
 .modal-shader {
   @include in-out-fast(background-color);

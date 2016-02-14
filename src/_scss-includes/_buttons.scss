@@ -1,4 +1,4 @@
-@import "shared";
+@import "./_shared";
 
 $button-gradient-from: hsl(200, 75%, 85%);
 $button-gradient-to: lighten($button-gradient-from, 10%);

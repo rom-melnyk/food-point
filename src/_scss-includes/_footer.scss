@@ -1,6 +1,6 @@
-@import "shared";
+@import "./_shared";
 
-$footer-logo-size: 3em;
+$footer-logo-size: 4em;
 
 .application > .footer {
   background-color: $grey;
@@ -14,11 +14,17 @@ $footer-logo-size: 3em;
   .left {
     width: 30%;
     text-align: right;
+
+    .version {
+      .name {
+        font-style: italic;
+      }
+    }
   }
 
   .middle {
     width: 40%;
-    margin: -.5em 0;
+    margin: -1em 0;
     text-align: center;
 
     .logo {

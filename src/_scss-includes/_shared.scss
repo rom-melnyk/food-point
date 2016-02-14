@@ -4,8 +4,6 @@ $light-grey: hsl(200, 20%, 90%);
 $modal-background-color: hsla(200, 20, 20, .9);
 $modal-shadow-color: #000;
 
-
-
 // --------------------- mixins ---------------------
 @mixin clear-fix {
   &::after {
