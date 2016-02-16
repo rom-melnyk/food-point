@@ -1,6 +1,8 @@
 @import "./_shared";
 
 $footer-height: 6em;
+$max-width: 60em;
+$min-width: 25em;
 
 html, body {
   height: 100%;
@@ -9,11 +11,43 @@ html, body {
 #application-container {
   min-height: 100%;
   position: relative;
+  //background-color: hsla(0, 100%, 80%, .8);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    z-index: -10;
+
+    background-image: url("~/img/background.png");
+  }
+
+  &::after {
+    $background-color: hsla(0, 100%, 100%, .85);
+    $gap: 2.5%;
+
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100% - 2 * $gap;
+    max-width: $max-width - 2em;
+    height: 100%;
+
+    z-index: -5;
+    transform: translateX(-50%);
+
+    background-color: $background-color;
+    box-shadow: 0 0 2em 2em $background-color;
+  }
 
   .application {
     min-height: 100%;
     height: 100%;
-    background-image: url("~/img/background.png");
 
     & > .header {}
 
@@ -33,8 +67,8 @@ html, body {
       .wrapper {
         @include clear-fix;
 
-        min-width: 25em;
-        max-width: 60em;
+        min-width: $min-width;
+        max-width: $max-width;
         margin: 0 auto;
         padding: 2em;
       }
