@@ -18,6 +18,7 @@
 1. If no errors happened, start the server again
   - if it's installed as service, do `systemctl start node-server` (the process name may vary),
   - otherwise run `node --harmony server.es6`
+1. Don't forget to change `isProduction` field in `config.json`
 
 ---
 
