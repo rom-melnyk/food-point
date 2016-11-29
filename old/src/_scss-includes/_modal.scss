@@ -1,0 +1,136 @@
+@import "./_shared";
+@import "./icon-font/_fontello";
+@import "./icon-font/_animations";
+
+.modal-shader {
+  @include in-out-fast(background-color);
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: transparent;
+
+  &.appear {
+    background-color: $modal-background-color;
+
+    .modal-wrapper {
+      top: 50%;
+      opacity: 1;
+
+      .modal-window .modal-container {
+        visibility: visible;
+      }
+    }
+  }
+
+  .modal-wrapper {
+    @include vertically-centered();
+    top: -50%;
+
+    opacity: 0;
+
+    transition: opacity .3s, top .3s;
+
+    .modal-window {
+      position: relative;
+      min-width: 40%;
+      max-width: 80%;
+      margin: 0 auto;
+      padding: 2em;
+
+      background-color: #fff;
+      box-shadow: 0 0 3em $modal-shadow-color;
+
+
+      &.wait {
+        .close {
+          visibility: hidden;
+        }
+
+        .wait-indicator {
+          @include vertically-centered();
+          @include icon-update();
+
+          font-size: 200%;
+          text-align: center;
+          color: $modal-background-color;
+
+          &::before {
+            @include animate-spin();
+          }
+        }
+
+        .modal-container {
+          visibility: hidden;
+        }
+      }
+
+      .close {
+        @include in-out-fast(opacity);
+        @include icon-x();
+
+        position: absolute;
+        top: .5em;
+        right: .5em;
+
+        cursor: pointer;
+        opacity: .3;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      .wait-indicator {}
+
+      .modal-container {
+        visibility: hidden;
+      }
+    }
+  }
+
+}
+
+.input-section {
+  display: table;
+  width: 100%;
+  padding: .3em 0;
+
+  label, .input-wrapper {
+    display: table-cell;
+  }
+
+  label {
+    width: 20%;
+  }
+
+  .input-wrapper {
+    width: 80%;
+
+    input[type=text], select {
+      @extend .input-hover-behavior;
+      width: 100%;
+    }
+  }
+}
+
+.modal-controls {
+  padding-top: .3em;
+  text-align: center;
+
+  .button {
+    padding: .3em .5em;
+
+    &.cancel {
+      @include icon-back();
+      margin-right: 2em;
+    }
+
+    &.submit {
+      @include icon-ok();
+    }
+  }
+}

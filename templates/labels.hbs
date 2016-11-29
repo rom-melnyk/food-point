@@ -1,0 +1,12 @@
+<h1>These are labels:</h1>
+<ul>
+{{#each payload}}
+    <li>
+        <span class="id">{{id}}</span>
+        <span class="name">{{name}}</span>
+        <span class="icon">{{icon}}</span>
+    </li>
+{{/each}}
+</ul>
+
+{{> input label="New label" value="" errorMessage="Назва не може бути порожньою!"}}

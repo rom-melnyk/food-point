@@ -1,0 +1,61 @@
+@import "./_shared";
+
+$button-gradient-from: hsl(200, 75%, 85%);
+$button-gradient-to: lighten($button-gradient-from, 10%);
+$button-gradient-from-hover: lighten($button-gradient-from, 5%);
+$button-gradient-to-hover: lighten($button-gradient-to, 2%);
+
+@mixin __clickable__ {
+  display: inline-block;
+  line-height: 1em;
+
+  border-radius: .2em;
+  cursor: pointer;
+}
+
+.button {
+  @include __clickable__();
+  @include in-out-fast(border-color);
+
+  padding: .5em;
+
+  background: linear-gradient($button-gradient-from, $button-gradient-to, $button-gradient-from);
+  border: 1px solid $button-gradient-from;
+
+  &:hover {
+    background: linear-gradient($button-gradient-from-hover, $button-gradient-to-hover, $button-gradient-from-hover);
+    border-color: $button-gradient-from-hover;
+  }
+}
+
+.link {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+
+  font-size: 75%;
+  line-height: 2em;
+  text-align: center;
+  vertical-align: middle;
+
+  opacity: .3;
+  cursor: pointer;
+
+  transition: background-color .3s, color .3s, opacity .3s, transform .3s;
+
+  &::before {
+    transition: transform .3s;
+  }
+
+  &:hover {
+    background-color: #000;
+    opacity: 1;
+    color: white;
+    transform: rotate(45deg);
+
+    &::before {
+      transform: rotate(-45deg);
+    }
+  }
+}
+

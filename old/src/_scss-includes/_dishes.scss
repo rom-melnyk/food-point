@@ -1,0 +1,278 @@
+@import "./_shared";
+@import "./icon-font/_fontello";
+
+.view/*.dishes*/ {
+  h1 {
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  ul {
+    li {
+      margin-bottom: .5em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .header {
+        @include in-out-fast(background-color);
+        display: table;
+        width: 100%;
+        padding: .3em 1em;
+
+        &:hover {
+          background-color: $light-grey;
+        }
+
+        .left, .right {
+          display: table-cell;
+          vertical-align: middle;
+
+          &.left {
+            width: 70%;
+
+            .ordinal {
+              display: inline-block;
+              width: 2em;
+              margin-right: 1em;
+
+              font-size: .75em;
+              line-height: 1.33em;
+              text-align: right;
+              opacity: .3;
+            }
+
+            .order {
+              input {
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 1em;
+              }
+
+              input[type=checkbox]:checked ~ * {
+                visibility: visible;
+              }
+
+              input[type=number] {
+                @extend .input-hover-behavior;
+                width: 3em;
+                text-align: center;
+
+                visibility: hidden;
+              }
+
+              span {
+                margin-right: 1em;
+                visibility: hidden;
+              }
+            }
+
+            .description {
+              display: inline-block;
+              max-width: 20em;
+              margin-left: 1em;
+              font-style: italic;
+              text-overflow: ellipsis;
+              opacity: .3;
+
+              &::before {
+                content: "(";
+              }
+
+              &::after {
+                content: ")";
+              }
+            }
+          }
+
+          &.right {
+            width: 30%;
+            text-align: right;
+
+            .edit-controls {
+              @include in-out-fast(opacity);
+              padding-left: 1em;
+              opacity: 0;
+
+              .link {
+                margin-right: .7em;
+
+                &.edit {
+                  @include icon-edit();
+                }
+
+                &.delete {
+                  @include icon-x();
+                }
+              }
+
+              .up-down {
+                display: inline-block;
+                vertical-align: middle;
+                margin-top: -0.1em;
+
+                font-size: 1.5em;
+
+                * {
+                  @include in-out-fast(opacity);
+                  display: block;
+                  height: .6em;
+
+                  overflow: hidden;
+                  cursor: pointer;
+                  opacity: .3;
+
+                  &:hover {
+                    opacity: 1;
+                  }
+                }
+
+                .up {
+                  @include icon-up();
+
+                  &::before {
+                    position: relative;
+                    bottom: 0.2em;
+                    margin: 0;
+                  }
+                }
+                .down {
+                  @include icon-down();
+
+                  &::before {
+                    position: relative;
+                    bottom: 0.3em;
+                    margin: 0;
+                  }
+                }
+              }
+            }
+          }
+
+        }
+
+        &:hover .left .order input[type=number] {
+          background-color: $grey;
+        }
+
+        &:hover .right .edit-controls {
+          opacity: 1;
+        }
+      }
+
+      &.is-hidden {
+        opacity: .3;
+
+        .header {
+          text-decoration: line-through;
+        }
+      }
+
+      &.section {
+        margin-top: 3em;
+        margin-bottom: 3em;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        & > .header {
+          padding-left: .5em;
+
+          .left {
+            .toggle {
+              @include icon-down;
+              @include in-out-fast(opacity);
+              font-size: 125%;
+              opacity: .3;
+              cursor: pointer;
+
+              &::before {
+                @include in-out-fast(transform);
+              }
+
+              &:hover {
+                opacity: 1;
+              }
+            }
+
+            .name {
+              padding-left: .3em;
+              font-size: 150%;
+            }
+          }
+        }
+
+        .children {
+          @include in-out-fast(height); // height is set by JS
+          overflow: hidden;
+          border-bottom: 1px solid $grey;
+        }
+
+        &.collapsed {
+          & > .header .left .toggle {
+            &::before {
+              transform: rotate(-90deg);
+            }
+          }
+        }
+      }
+
+      &:first-child > .header > .right .edit-controls > .up-down > .up {
+        visibility: hidden;
+      }
+
+      &:last-child > .header > .right .edit-controls > .up-down > .down {
+        visibility: hidden;
+      }
+    }
+
+    // TODO Maybe different font-size for sections of different depth?
+    //ul {
+    //}
+  }
+
+  .create {
+    margin-top: 1em;
+    text-align: center;
+
+    .button {
+      @include icon-edit();
+      padding: .3em 1.2em .3em 1em;
+
+      &::before {
+        margin-right: .5em;
+      }
+
+      &.create-dish {
+        margin-right: 2em;
+      }
+    }
+  }
+}
+
+.edit-dish {
+  .input-section .input-wrapper {
+    input[name=price] {
+      width: 6em;
+      text-align: right;
+    }
+
+    .currency {
+      padding-left: .3em;
+    }
+  }
+}
+
+.delete-dish {
+  .label {
+    padding: .3em 0;
+
+    .name {
+      font-style: italic;
+    }
+  }
+}
+
+

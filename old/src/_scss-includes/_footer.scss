@@ -1,0 +1,42 @@
+@import "./_shared";
+
+$footer-logo-size: 4em;
+
+.application > .footer {
+  background-color: $grey;
+  border-top: 1px solid darken($grey, 20%);
+
+  .left, .middle, .right {
+    float: left;
+    font-size: .75em;
+  }
+
+  .left {
+    width: 30%;
+    text-align: right;
+
+    .version {
+      .name {
+        font-style: italic;
+      }
+    }
+  }
+
+  .middle {
+    width: 40%;
+    margin: -1em 0;
+    text-align: center;
+
+    .logo {
+      display: inline-block;
+      width: $footer-logo-size;
+      height: $footer-logo-size;
+      background: url("~/img/logo.png") no-repeat;
+      background-size: $footer-logo-size $footer-logo-size;
+    }
+  }
+
+  .right {
+    width: 30%;
+  }
+}
