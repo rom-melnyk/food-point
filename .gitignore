@@ -8,4 +8,5 @@ fontello*.zip
 fontello*/
 
 config.json
-api/token.es6
+api/token.es
+
