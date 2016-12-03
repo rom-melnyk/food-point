@@ -1,0 +1,39 @@
+@import url(https://fonts.googleapis.com/css?family=Cuprum&subset=latin,cyrillic);
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Cuprum", "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arials;
+  font-size: 22px;
+}
+
+ul {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  margin-bottom: .5em;
+  margin-top: 1em;
+}
+
+input, select {
+  font-size: inherit;
+}
+
+input[type=text], select {
+  padding: .3em .7em;
+}
+
+input[type=number] {
+  padding: 0 0 0 .7em;
+}
+
+input[type=checkbox] {
+  width: 1.2em;
+  height: 1.2em;
+}

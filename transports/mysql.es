@@ -21,7 +21,7 @@ function doQuery (query, fields) {
     return new Promise((resolve, reject) => {
         pool.getConnection((err, connection) => {
             if (err) {
-                connection.release();
+                connection && connection.release();
                 reject({ message: 'Error getting the connecting to database', debug: err });
                 return;
             }

@@ -1,0 +1,47 @@
+$grey: hsl(200, 35%, 80%);
+$light-grey: hsl(200, 35%, 92%);
+
+$modal-background-color: hsla(200, 35%, 20%, .9);
+$modal-shadow-color: #000;
+
+// --------------------- mixins ---------------------
+@mixin clear-fix {
+  &::after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}
+
+@mixin in-out-fast($property) {
+  transition: $property .3s;
+}
+
+@mixin vertically-centered {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@mixin shadow($size: 3em, $color: $modal-shadow-color) {
+  box-shadow: 0 0 $size $color;
+}
+
+.input-hover-behavior {
+  @include in-out-fast(background-color);
+
+  border: 1px solid $light-grey;
+  background-color: $light-grey;
+
+  &:focus {
+    background-color: #fff;
+  }
+}
