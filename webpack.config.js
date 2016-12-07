@@ -10,28 +10,22 @@ var cssFilename = 'style.css';
 
 module.exports = {
     entry: [
-        srcDir + 'app.es',
+        srcDir + 'client-app.es',
         srcDir + 'style.scss'
     ],
     output: {
         path: compiledDir,
-        filename: jsFilename,
-        // chunkFilename: '[id].js'
+        filename: jsFilename
     },
     module: {
         loaders: [
             { test: /\.scss$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass?sourceMap') },
             { test: /\.json$/, loader: 'json-loader' },
-            // { test: /\.png$/, loader: 'url?limit=120000' },
-            // { test: /\.ttf(.*)?$/, loader: 'url?limit=60000' },
-            // { test: /\.eot(.*)?$/, loader: 'url?limit=60000' },
-            // { test: /\.svg(.*)?$/, loader: 'url?limit=60000' },
-            // { test: /\.woff(.*)?$/, loader: 'url?limit=60000' },
             { test: /\.es?$/, exclude: /node_modules/, loader: 'babel-loader' }
         ]
     },
     plugins: [
-        new ExtractTextPlugin(cssFilename + ''),
+        new ExtractTextPlugin(cssFilename),
         new CopyPlugin([
             { from: compiledDir + jsFilename + '*', to: destDir + 'js/[name].[ext]' },
             { from: compiledDir + cssFilename + '*', to: destDir + 'css/[name].[ext]'}

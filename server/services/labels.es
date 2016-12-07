@@ -2,8 +2,7 @@ const _ = require('lodash');
 const store = require('../store.es');
 const { wrapResponse } = require('../utils/api-response.es');
 
-const Label = require('./../model/labels/label.es');
-const formatters = require('./../model/labels/server-formatter.es');
+const formatters = require('../model/labels/server-formatter.es');
 
 const mysql = require('../transports/mysql.es');
 

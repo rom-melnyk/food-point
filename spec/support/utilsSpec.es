@@ -1,4 +1,4 @@
-const ModelHelpers = require('../../utils/model.es');
+const ModelHelpers = require('.././model.es');
 
 describe('ModelHelpers', () => {
 

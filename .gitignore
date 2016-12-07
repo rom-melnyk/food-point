@@ -7,6 +7,6 @@ npm-debug.log*
 fontello*.zip
 fontello*/
 
-config.json
+server/config.json
 api/token.es
 

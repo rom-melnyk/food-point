@@ -13,16 +13,17 @@ const labelsApi = require('./express-api/labels.es');
 // --- semi-static views ---
 const labelsView = require('./express-views/labels.es');
 
+const templatesDir = 'server/templates/';
 const hbsConfig = {
     defaultLayout: 'main',
     extname: 'hbs',
-    layoutsDir: 'templates/layouts',
-    partialsDir: 'templates/partials',
+    layoutsDir: `${templatesDir}layouts`,
+    partialsDir: `${templatesDir}partials`,
 };
 
 const app = express();
 
-app.set('views', 'templates/');
+app.set('views', templatesDir);
 app.set('view engine', 'hbs');
 app.engine('hbs', exphbs(hbsConfig));
 
@@ -34,7 +35,7 @@ app.use(bodyParser.json());
 // --- semi-static views ---
 app.get('/labels', labelsView.labelsPage);
 
-app.use(express.static(__dirname + '/static'));
+app.use(express.static(`${__dirname}/../static`));
 
 // app.use(session.session());
 
@@ -59,25 +60,3 @@ const server = app.listen(config.port, () => {
         address.port
     );
 });
-
-// Development mode support (run with "--dev")
-if (process.argv.filter(arg => /^(--)?dev$/i.test(arg)).length > 0) {
-    const webpack = require('webpack');
-    const webpackConfig = require('./webpack.config');
-
-    const compiler = webpack(webpackConfig);
-    compiler.watch({
-        aggregateTimeout: 300/*,
-         poll: true*/
-    }, (error, stats) => {
-        if (error) {
-            console.log(`========== ERROR ==========`);
-            console.log(`Something terrible happened`);
-            console.log(`===========================\n`);
-        }
-
-        const logs = stats.toString({colors: true});
-        console.log(logs);
-    })
-    ;
-}

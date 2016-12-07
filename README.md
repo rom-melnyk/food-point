@@ -1,10 +1,20 @@
 # Installation
-1. Install NodeJS, MySQL
-1. Create your `./config.json`. See the structure below
-1. Create your `./api/token.es6`. See the structure below
-1. `npm install`
-1. `npm run` to check options
-1. `npm run dev` to start the development
+1. Install NodeJS, MySQL.
+1. Create your `./server/config.json`. See the structure below.
+1. Create your `./server/express-api/token.es`. See the structure below.
+1. `npm install`.
+1. `npm run` to check options.
+
+# Development
+1. Make sure the MySQL service is up and running.
+1. Run `npm run dev-server` in one terminal. That runs the server.
+1. Run `npm run dev-client` in another terminal. that runs Webpack in watch mode.
+
+# File structure and Data flow
+- `./client/` contains client-related source files;
+  - `./client/_compiled/` is the destination for Webpack compiler (JS and CSS files are moved to proper directory afterwards).
+- `./server/` contains server-related stuff.
+- `./static/` contains all the static files that are passed to HTML (compiled JS and CSS, images, `favicon.ico`, etc).
 
 # Deploy new version to Production
 1. Make sure to `set NODE_ENV=production`
@@ -22,7 +32,7 @@
 
 ---
 
-# The default `./config.json`
+# The default `./server/config.json`
 This file contains the server config. It's very private and sensitive so I don't share it. Create it by yourself.
 
 ```json
@@ -50,7 +60,7 @@ This file contains the server config. It's very private and sensitive so I don't
 }
 ```
 
-# The `api/token.es6`
+# The `./server/express-api/token.es`
 For the security reason I don't share the mechanism of generating the token string _(SESSION cookie)._ So you have to implement it by yourself according to following interface.
 You can use, for example, `md5(userId + timestamp + secret) + userId`; that provides the mechanism of transferring the `userId`, verifying it and invalidating the cookie value if it's _(?)_ spoiled.
 Feel free to implement it on your own.

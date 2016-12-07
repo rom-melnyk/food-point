@@ -1,4 +1,4 @@
-const { getState, addValue, editValue, removeValue } = require('../../store.es');
+const { getState, addValue, editValue, removeValue } = require('../../server/store.es');
 
 describe('store', () => {
 
