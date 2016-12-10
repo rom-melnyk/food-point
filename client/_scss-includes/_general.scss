@@ -1,15 +1,18 @@
 @import "./_shared";
 
+
 $footer-height: 6em;
 $header-height: 6em;
 $max-width: 60em;
 $min-width: 25em;
 
+
 html, body {
   height: 100%;
 }
 
-#application-container {
+
+/*#application-container {
   min-height: 100%;
   position: relative;
   //background-color: hsla(0, 100%, 80%, .8);
@@ -24,7 +27,7 @@ html, body {
 
     z-index: -10;
 
-    background-image: url("~/img/background.png");
+    background-image: url("/img/background.png");
   }
 
   &::after {
@@ -75,4 +78,4 @@ html, body {
       }
     }
   }
-}
+}*/
