@@ -1,11 +1,3 @@
-$darkest: hsl(210, 80%, 10%);
-$darker: lighten($darkest, 10%);
-$lightest: #ffffff;
-$lighter: darken($lightest, 30%);
-$accent: adjust_color($darkest, $lightness: 50%);
-
-
-// --------------------- mixins ---------------------
 @mixin clear-fix {
   &::after {
     content: "";

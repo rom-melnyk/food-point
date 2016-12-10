@@ -1,4 +1,4 @@
-@import "./_shared";
+@import "vars";
 @import url(https://fonts.googleapis.com/css?family=Cuprum&subset=latin,cyrillic);
 
 
@@ -10,7 +10,7 @@
 
 
 body {
-  font-family: "Cuprum", "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arials;
+  font-family: "Cuprum", "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, serif;
   font-size: 22px;
   background-color: $darkest;
   color: $lightest;
