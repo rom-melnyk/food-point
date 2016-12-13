@@ -1,0 +1,14 @@
+@import "shared/vars";
+
+
+.outer-container:first-child {
+  margin-bottom: 3em;
+  background-color: $darkest;
+}
+
+
+.outer-container > .header {
+  padding: 2em 0;
+
+  color: $lightest;
+}

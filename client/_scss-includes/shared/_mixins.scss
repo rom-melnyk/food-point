@@ -1,3 +1,6 @@
+@import "vars";
+
+
 @mixin clear-fix {
   &::after {
     content: "";

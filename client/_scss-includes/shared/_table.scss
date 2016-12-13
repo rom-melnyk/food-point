@@ -1,0 +1,34 @@
+@import "vars";
+
+
+.table {
+  margin-bottom: 1em;
+}
+
+
+.table-header {
+  margin-bottom: .1em;
+  padding-bottom: .1em;
+
+  border-bottom: $border-thick;
+}
+
+
+.table-row {
+  margin-bottom: .1em;
+  padding-bottom: .1em;
+
+  border: $border-thin;
+  border-color: transparent transparent $darker transparent;
+
+
+  &:last-child {
+    margin-bottom: 0;
+    border-bottom: $border-thick;
+  }
+
+
+  &:hover {
+    border-color: $darker;
+  }
+}

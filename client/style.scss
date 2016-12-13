@@ -1,14 +1,14 @@
-@import "_scss-includes/reset";
-@import "_scss-includes/grid";
+@import "_scss-includes/shared/grid";
+@import "_scss-includes/shared/table";
 //@import "_scss-includes/icon-font/fontello";
 //@import "_scss-includes/icon-font/animations";
 //@import "_scss-includes/buttons";
 //@import "_scss-includes/modal";
 
 
-@import "_scss-includes/general";
-//@import "_scss-includes/header";
-//@import "_scss-includes/footer";
+@import "_scss-includes/shared/general";
+@import "_scss-includes/header";
+@import "_scss-includes/footer";
 //@import "_scss-includes/home";
 //@import "_scss-includes/dishes";
 //@import "_scss-includes/order";

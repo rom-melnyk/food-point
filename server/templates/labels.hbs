@@ -1,12 +1,46 @@
-<h1>These are labels:</h1>
-<ul>
-{{#each payload}}
-    <li>
-        <span class="id">{{id}}</span>
-        <span class="name">{{name}}</span>
-        <span class="icon">{{icon}}</span>
-    </li>
-{{/each}}
-</ul>
+<div class="main-content labels">
+    <h1>Labels area</h1>
 
-{{> input label="New label" value="" errorMessage="Назва не може бути порожньою!"}}
+    <div class="table">
+        <div class="row table-header">
+            <div class="column-2">Назва</div>
+            <div class="column-1">Іконка</div>
+        </div>
+        {{#each payload}}
+            <div class="row table-row">
+                <!--<div class="id">{{id}}</div>-->
+                <div class="column-2 name">{{name}}</div>
+                <div class="column-1 icon">
+                    <span class="icon">{{icon}}</span>
+                    <span class="icon-actions">
+                    <span class="button edit">Edit</span>
+                    <span class="button delete">Del</span>
+                </span>
+                </div>
+                <div class="column-1 actions">
+                    <span class="button edit">Edit</span>
+                    <span class="button delete">Del</span>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+    <div class="form row">
+        <div class="form-name">New label</div>
+        <div class="row">
+            <div class="column-2">
+                {{> input label="New label" value="" errorMessage="Назва не може бути порожньою!"}}
+            </div>
+            <div class="column-1">
+                <span class="icon"></span>
+                <span class="icon-actions">
+                    <span class="button edit">...</span>
+                </span>
+            </div>
+            <div class="column-1 actions">
+                <span class="button edit">Save</span>
+                <span class="button delete">Cancel</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+@import "shared/vars";
+
+
+.outer-container:last-child {
+  margin-top: 3em;
+  background-color: $darkest;
+}
+
+
+.outer-container > .footer {
+  padding: 2em 0;
+
+  color: $lightest;
+}

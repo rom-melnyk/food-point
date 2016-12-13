@@ -4,6 +4,14 @@
     {{> head}}
 </head>
 <body>
-    {{{body}}}
+    <div class="outer-container">
+        {{> header}}
+    </div>
+    <div class="outer-container">
+        {{{body}}}
+    </div>
+    <div class="outer-container">
+        {{> footer}}
+    </div>
 </body>
 </html>

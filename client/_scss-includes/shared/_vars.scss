@@ -1,0 +1,16 @@
+// ---------------------------------- colors ----------------------------------
+$darkest: hsl(210, 40%, 10%);
+$darker: lighten($darkest, 20%);
+$lightest: #ffffff;
+$lighter: darken($lightest, 30%);
+$accent: adjust_color($darkest, $saturation: 80%, $lightness: 50%);
+
+
+// -------------------------------- dimensions --------------------------------
+$min-width: 10em;
+$max-width: 40em;
+
+
+// ---------------------------------- borders ---------------------------------
+$border-thin: 1px dashed $darker;
+$border-thick: 3px dashed $darker;
