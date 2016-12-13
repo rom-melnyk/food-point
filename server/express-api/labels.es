@@ -3,9 +3,9 @@ const labelsService = require('../services/labels.es');
 
 function addLabel(req, res) {
     const { name, icon } = _.pick(req.body, ['name', 'icon']);
-     labelsService.addLabel({ name, icon })
+    labelsService.addLabel({ name, icon })
         .then((data) => { res.json(data); })
-         .catch((data) => { res.json(data); });
+        .catch((data) => { res.json(data); });
 }
 
 function getLabels(req, res) {
