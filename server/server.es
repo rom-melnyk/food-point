@@ -1,7 +1,9 @@
 const config = require('./config.json');
 
+const path = require('path');
 const express = require('express');
 const exphbs  = require('express-handlebars');
+const multer = require('multer');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -10,8 +12,10 @@ const cookieParser = require('cookie-parser');
 // const users = require('./express-api/users.es6');
 // const dishes = require('./express-api/dishes.es6');
 const labelsApi = require('./express-api/labels.es');
+const picturesApi = require('./express-api/pictures.es');
 // --- semi-static views ---
 const labelsView = require('./express-views/labels.es');
+const picturesView = require('./express-views/pictures.es');
 
 const templatesDir = 'server/templates/';
 const hbsConfig = {
@@ -34,8 +38,10 @@ app.use(bodyParser.json());
 
 // --- semi-static views ---
 app.get('/labels', labelsView.labelsPage);
+app.get('/pictures', picturesView.picturesPage);
 
-app.use(express.static(`${__dirname}/../static`));
+const staticDir = path.join(__dirname, '..', 'static');
+app.use(express.static(staticDir));
 
 // app.use(session.session());
 
@@ -45,6 +51,12 @@ app.get('/api/labels', labelsApi.getLabels);
 app.get('/api/labels/:id', labelsApi.getLabel);
 app.put('/api/labels/:id', labelsApi.editLabel);
 app.delete('/api/labels/:id', labelsApi.removeLabel);
+
+const uploadDir = path.join(__dirname, '..', config.uploadDir);
+const uploader = multer({ dest: uploadDir }).single('picture');
+// "picture" is the name of the field in the form
+app.post('/api/pictures', uploader, picturesApi.uploadPicture);
+app.get('/api/pictures', picturesApi.getPictures);
 
 // app.get('/api/dishes', dishes.getDishes);
 // app.get('/api/dishes/:id', dishes.getDishById);

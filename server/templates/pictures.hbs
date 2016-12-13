@@ -1,0 +1,44 @@
+<div class="main-content pictures">
+    <h1>Labels area</h1>
+
+    <div class="table">
+        <div class="row table-header">
+            <div class="column-1">Назва</div>
+            <div class="column-1">Фото</div>
+        </div>
+        {{#each payload}}
+            <div class="row table-row">
+                <!--<div class="id">{{id}}</div>-->
+                <div class="column-1 name">{{name}}</div>
+                <div class="column-1 picture">
+                    <span class="picture" style="
+                            display: inline-block;
+                            width: 100px;
+                            height: 100px;
+                            background-size: cover;
+                            background-position: center center;
+                            background-image: url('/img/uploaded/{{name}}')
+                            "></span>
+                </div>
+                <div class="column-1 actions">
+                    <span class="button edit">Edit</span>
+                    <span class="button delete">Del</span>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+    <form class="form" action="/api/pictures" method="POST" enctype="multipart/form-data">
+        <div class="form-name">New Picture</div>
+        <div class="row">
+            <div class="column-3">
+                <!-- field name should be same as described in "server.es" -->
+                <input type="file" name="picture">
+            </div>
+            <div class="column-1 actions">
+                <!--<span class="button edit">Save</span>-->
+                <input type="submit" value="Ok">
+            </div>
+        </div>
+    </form>
+</div>

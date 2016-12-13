@@ -17,7 +17,7 @@ const pool = mysql.createPool({
  * @param {Array} [fields]
  * @return Promise
  */
-function doQuery (query, fields) {
+function doQuery(query, fields) {
     return new Promise((resolve, reject) => {
         pool.getConnection((err, connection) => {
             if (err) {
@@ -63,7 +63,7 @@ function doQuery (query, fields) {
  * @param {String} string
  * @return {String}
  */
-function escape (string) {
+function escape(string) {
     string = string ? string + '' : '';
     return string.replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, (char) => {
         switch (char) {

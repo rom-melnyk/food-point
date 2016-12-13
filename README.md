@@ -18,6 +18,7 @@
 
 # Deploy new version to Production
 1. Make sure to `set NODE_ENV=production`
+1. Make sure the folder from `config.json # uploadDir` is writable.
 1. Stop the server
   - if it's installed as service, do `systemctl stop node-server` (the process name may vary),
   - otherwise press `Ctrl-C`
@@ -40,12 +41,15 @@ This file contains the server config. It's very private and sensitive so I don't
   "port": 8080,
 
   "mysql": {
-    "comment": "----- Place MySQL auth params here -----",
+    "mysql---comment": "----- Place MySQL auth params here -----",
     "host": "localhost",
     "user": "mysql_username",
     "password": "mysql_password",
     "database": "food_point"
   },
+
+  "uploadDir---comment": "----- The path is relative to project directory -----",
+  "uploadDir": "static/img/uploaded",
 
   "session": {
     "secret": "Place your text here",
