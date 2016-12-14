@@ -53,8 +53,7 @@ app.put('/api/labels/:id', labelsApi.editLabel);
 app.delete('/api/labels/:id', labelsApi.removeLabel);
 
 const uploadDir = path.join(__dirname, '..', config.uploadDir);
-const uploader = multer({ dest: uploadDir }).single('picture');
-// "picture" is the name of the field in the form
+const uploader = multer({ dest: uploadDir }).single('file'); // "file" is the name of the field in the form
 app.post('/api/pictures', uploader, picturesApi.uploadPicture);
 app.get('/api/pictures', picturesApi.getPictures);
 

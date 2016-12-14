@@ -43,10 +43,10 @@ const CONTENT_TYPE_REGEXP = /application\/json/;
 
 
 function _doRequest (method, url, data) {
-    const { header, body } = _generateRequestParams(method, data);
-
     return new Promise((resolve, reject) => {
+        const { header, body } = _generateRequestParams(method, data);
         const xhr = new XMLHttpRequest();
+
         xhr.onreadystatechange = () => {
             if (xhr.readyState !== 4) {
                 return;
@@ -88,9 +88,9 @@ function _generateRequestParams(method, data) {
     }
 
     if (data.constructor === File) {
-        // header = 'multipart/form';
+        // header is handled automatically
         body = new FormData();
-        body.append(data);
+        body.append('file', data); // the name of "multiform" HTTP request field; this expected by server#multer
 
         return { header, body };
     }
