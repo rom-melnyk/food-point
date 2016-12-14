@@ -5,7 +5,9 @@ function uploadPicture(form) {
         return;
     }
 
-
+    return Ajax.post(form.getAttribute('action'), form.querySelector('input').files[0])
+        .then(console.log)
+        .catch(console.error);
 }
 
 module.exports = { uploadPicture };
