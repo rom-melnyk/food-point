@@ -7,7 +7,7 @@ function wrapResponse(payload, message, debug) {
             code: payload,
             message
         };
-        if (config.isProduction) {
+        if (!config.isProduction) {
             result.debug = debug;
         }
         return result

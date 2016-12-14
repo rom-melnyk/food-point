@@ -19,7 +19,12 @@ function uploadPicture(filesObj) {
         );
     }
 
-    const newName = `${Date.now()}-${filesObj.originalname}`;
+    let newName = `${Date.now()}-${filesObj.originalname}`;
+    if (newName.length > 100) { // DB limitations; name.length <= 100
+        const lastDotPos = newName.lastIndexOf('.');
+        const ext = newName.substr(lastDotPos);
+        newName = newName.substr(0, 100 - ext.length) + ext;
+    }
     const newPath = path.join(filesObj.destination, newName);
 
     return new Promise((resolve, reject) => {
