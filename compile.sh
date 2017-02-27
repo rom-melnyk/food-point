@@ -2,7 +2,8 @@
 
 UPLOAD_DIR=___upload-me___$(date "+%Y-%m-%d---%H-%M-%S")
 
-LIST="index.php "
+# TODO extend this with all the files required
+LIST="index.php .htaccess"
 LIST="$LIST "
 
 echo "Preparing the \"$UPLOAD_DIR/\" directory..."
