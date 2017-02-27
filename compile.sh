@@ -10,6 +10,8 @@ echo "Preparing the \"$UPLOAD_DIR/\" directory..."
 [ -d $UPLOAD_DIR ] && rm -fr $UPLOAD_DIR
 mkdir $UPLOAD_DIR
 
+# TODO compile JS and CSS files; minimize 'em
+
 echo
 echo "Copying files..."
 cp -vr $LIST $UPLOAD_DIR
