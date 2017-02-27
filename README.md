@@ -13,7 +13,7 @@
 
 ## Directories and files
 - **`src/`** contains JS and CSS dev files. should not be upoaded to the server!
-- **`\_\_\_upload-me\_\_\_`** will contain everything you need to upload to the server.
+- **`___upload-me___`** will contain everything you need to upload to the server.
 - PHP scripts.
 - all the XML or JSON files.
 - static content like images.
