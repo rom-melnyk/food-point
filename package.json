@@ -1,0 +1,32 @@
+{
+  "name": "foodpoint.if.ua",
+  "version": "3.0.0",
+  "description": "foodpoint.if.ua site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node_modules/.bin/gulp --help || exit 0",
+    "prod": "node_modules/.bin/gulp --help"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rom-melnyk/food-point.git"
+  },
+  "keywords": [
+    "php",
+    "gulp",
+    "js",
+    "es6"
+  ],
+  "author": "Roman Melnyk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rom-melnyk/food-point/issues"
+  },
+  "homepage": "https://github.com/rom-melnyk/food-point#readme",
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
+  }
+}

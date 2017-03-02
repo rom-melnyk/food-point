@@ -1,0 +1,40 @@
+@import "colors";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font: 18px normal Verdana, Arial, sans-serif;
+  color: $charcoal;
+}
+
+a {
+  color: $electro;
+
+  &:visited {
+    color: $dark-electro;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: .8em 0 .2em;
+}
+
+h1 {
+  font-size: 200%;
+}
+
+h2 {
+  font-size: 175%;
+}
+
+h3 {
+  font-size: 150%;
+}
+
+h4 {
+  font-size: 125%;
+}
