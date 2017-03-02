@@ -26,7 +26,9 @@
   "homepage": "https://github.com/rom-melnyk/food-point#readme",
   "private": true,
   "devDependencies": {
+    "babel-preset-es2016": "^6.22.0",
     "gulp": "^3.9.1",
-    "gulp-sass": "^3.1.0"
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.4.1"
   }
 }

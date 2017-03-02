@@ -1,10 +1,11 @@
 <html>
 <head>
     <title>Food Point</title>
-    <link rel="stylesheet" src="./style.css"/>
+    <link rel="stylesheet" href="./style.css"/>
+    <script type="text/javascript" src="./script.js"></script>
 </head>
-<body>
-<h1>It works!</h1>
-<h2>foodpoint.if.ua</h2>
+<body onload="App.run();">
+	<h1>It works!</h1>
+	<h2>foodpoint.if.ua</h2>
 </body>
 </html>
