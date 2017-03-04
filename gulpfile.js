@@ -16,7 +16,6 @@ const PATH = {
     JS: {
         sourceDir: './js-src/',
         sourceName: 'app.js',
-        compiledName: 'app-compiled.js',
         destDir: './',
         destName: 'script.js'
     },
@@ -43,34 +42,29 @@ gulp.task('css:watch', () => {
 });
 
 // ---------------------- ES6 --> JS ----------------------
-gulp.task('js:cleanup', () => del([`${PATH.JS.sourceDir}${PATH.JS.compiledName}`, `${PATH.JS.destDir}${PATH.JS.destName}*`]));
+gulp.task('js:cleanup', () => del([`${PATH.JS.destDir}${PATH.JS.destName}*`]));
 
-gulp.task('js:browserify', ['js:cleanup'], () => browserify(
-    [
-        `${PATH.JS.sourceDir}${PATH.JS.sourceName}`,
-        `!${PATH.JS.sourceDir}${PATH.JS.compiledName}`,
-        './version.json'
-    ]).bundle()
-    .pipe(source(`${PATH.JS.sourceDir}${PATH.JS.sourceName}`))
-    .pipe(buffer())
-    .pipe(rename(`${PATH.JS.compiledName}`))
-    .pipe(sourcemaps.init())
-    .pipe(sourcemaps.write(`${PATH.JS.sourceDir}`))
-    .pipe(gulp.dest(`${PATH.JS.sourceDir}`))
-);
+gulp.task('js', ['js:cleanup'], () => {
+    const b = browserify({
+        entries: [`${PATH.JS.sourceDir}${PATH.JS.sourceName}`, './version.json'],
+        debug: true
+    });
 
-gulp.task('js:babelify', ['js:browserify'], () => gulp.src([`${PATH.JS.sourceDir}${PATH.JS.compiledName}`])
-    .pipe(babel())
-    // .pipe(uglify())
-    .pipe(rename(`${PATH.JS.destName}`))
-    .pipe(gulp.dest(`${PATH.JS.destDir}`))
-);
-
-gulp.task('js', ['js:babelify']); // shorthand
+    return b.bundle()
+        .pipe(source(`${PATH.JS.sourceDir}${PATH.JS.sourceName}`))
+        .pipe(buffer())
+        .pipe(rename(`${PATH.JS.destName}`))
+        .pipe(sourcemaps.init({ loadMaps: true }))
+        // .pipe(uglify())
+        // .on('error', gutil.log)
+        .pipe(sourcemaps.write(`${PATH.JS.destDir}`))
+        .pipe(gulp.dest(`${PATH.JS.destDir}`));
+});
 
 gulp.task('js:watch', () => {
-    gulp.watch([`${PATH.JS.sourceDir}**/*.js`, './version.json'], ['js']);
+    gulp.watch([`${PATH.JS.sourceDir}**/*.js`, `!${PATH.JS.sourceDir}${PATH.JS.compiledName}`, './version.json'], ['js']);
 });
+
 
 // ---------------------- default task ----------------------
 gulp.task('default', ['css', 'js', 'css:watch', 'js:watch']);

@@ -2,7 +2,6 @@
 ___upload-me___*/
 style.css
 script.js
-js-src/app-compiled.js
 *.map
 
 ## Dev environments: WebStorm, Eclipse
