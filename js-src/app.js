@@ -9,7 +9,7 @@ const FP = {
 };
 
 if (window) {
-    window.App = FP;
+    window.FP = FP;
 } else {
     module.export = FP;
 }
