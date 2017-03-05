@@ -30,7 +30,7 @@ const PATH = {
 // ---------------------- SCSS --> CSS ----------------------
 gulp.task('css:cleanup', () => del([`${PATH.CSS.destDir}${PATH.CSS.destName}*`]));
 
-gulp.task('css', ['css:cleanup'], () => gulp.src(`${PATH.CSS.sourceDir}**/*.scss`)
+gulp.task('css', ['css:cleanup'], () => gulp.src(`${PATH.CSS.sourceDir}${PATH.CSS.sourceName}`)
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.write(`${PATH.CSS.destDir}`))

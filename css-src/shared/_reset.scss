@@ -1,4 +1,4 @@
-@import "colors";
+@import "shared/colors";
 
 * {
   box-sizing: border-box;
@@ -7,12 +7,21 @@
 }
 
 html, body {
-  font: 18px normal Verdana, Arial, sans-serif;
+  font-size: 18px;
   color: $charcoal;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  text-align: left;
 }
 
 a {
   color: $electro;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
 
   &:visited {
     color: $dark-electro;
@@ -21,6 +30,8 @@ a {
 
 h1, h2, h3, h4, h5, h6 {
   margin: .8em 0 .2em;
+  font-weight: 300;
+  text-align: center;
 }
 
 h1 {
