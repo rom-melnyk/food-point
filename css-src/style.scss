@@ -5,6 +5,7 @@
 @import "shared/colors";
 @import "shared/grid";
 
+@import "components/site-menu";
 @import "components/footer";
 
 body {
@@ -12,6 +13,12 @@ body {
   font-style: normal;
   font-weight: 300;
   background-color: $pastel;
+}
+
+.top-level-wrapper {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 // headers
