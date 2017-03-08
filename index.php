@@ -13,12 +13,7 @@
 
     <nav class="site-menu">
         <div class="top-level-wrapper">
-            <ul>
-                <li><a href="#">Страви</a></li>
-                <li><a href="#">Замовити</a></li>
-                <li><a href="#">Цікаве</a></li>
-                <li><a href="#">Про нас</a></li>
-            </ul>
+            <?php include './php/components/site-menu.php'; ?>
         </div>
     </nav>
 
@@ -49,12 +44,7 @@
                 <span class="phone-num">(067) 11-67-130</span>
             </div>
             <div class="col-1">
-                <ul>
-                    <li>Страви</li>
-                    <li>Замовити</li>
-                    <li>Цікаве</li>
-                    <li>Про нас</li>
-                </ul>
+                <?php include './php/components/site-menu.php'; ?>
             </div>
             <div class="col-1">
                 <span class="logo"></span>
