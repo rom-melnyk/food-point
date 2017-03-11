@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300,700');
-// https://fonts.google.com/specimen/Roboto+Slab?selection.family=Roboto+Slab:300,700
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,700|Roboto+Slab:300,700');
+// https://fonts.google.com/?selection.family=Roboto+Condensed:300|Roboto+Slab:300,700&subset=cyrillic
 
 @import "shared/reset";
 @import "shared/colors";
@@ -10,7 +10,8 @@
 @import "components/footer";
 
 body {
-  font-family: 'Roboto Slab', serif;
+  // font-family: 'Roboto Slab', serif;
+  font-family: 'Roboto Condensed', sans-serif;
   font-style: normal;
   font-weight: 300;
   background-color: $pastel;
