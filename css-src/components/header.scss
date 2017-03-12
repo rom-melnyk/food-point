@@ -1,13 +1,20 @@
 @import "../shared/_colors.scss";
 
+$logo-size: 65px;
+
 body > header {
-    margin: 1em 0 2em;
-    text-align: center;
+    margin: 2em 0 2em;
 
     .logo {
-        width: 50px;
-        height: 50px;
-        display: inline-block;
-        background-color: $charcoal;
+        float: left;
+        width: $logo-size;
+        height: $logo-size;
+        margin: -.5em 0;
+        background: center center no-repeat url("./img/logo.png");
+        background-size: contain;
+    }
+
+    .site-menu {
+        float: right;
     }
 }

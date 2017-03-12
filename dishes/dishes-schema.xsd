@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- root element -->
+    <xs:element name="dishes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="category" type="categorySchema" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="dish" type="dishSchema" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- category -->
+    <xs:complexType name="categorySchema">
+        <xs:sequence>
+            <xs:element name="dish" type="dishSchema" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="img" type="xs:string"/>
+    </xs:complexType>
+
+    <!-- dish -->
+    <xs:complexType name="dishSchema" mixed="true">
+        <!-- dish description goes in the tag -->
+        <xs:attribute name="name" type="xs:string"/><!-- use="required"-->
+        <xs:attribute name="price" type="xs:integer"/>
+        <xs:attribute name="img" type="xs:string"/>
+        <xs:attribute name="promote" type="xs:boolean"/>
+    </xs:complexType>
+
+</xs:schema>

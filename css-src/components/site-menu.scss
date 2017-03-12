@@ -1,9 +1,7 @@
 @import "../shared/_colors.scss";
 
-nav.site-menu {
-    ul {
-        list-style: none;
-    }
+ul.site-menu {
+    list-style: none;
 
     li {
         display: inline-block;

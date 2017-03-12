@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dishes>
+    <category name="піца">
+        <dish>мандибурка і парадички</dish>
+        <dish price="45" promote="true">перець і крупи</dish>
+    </category>
+    <dish price="30">трохи помідорів</dish>
+    <dish>дохуя масла</dish>
+    <dish price="33" img="img/logo.png" />
+</dishes>

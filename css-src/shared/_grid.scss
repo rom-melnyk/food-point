@@ -1,12 +1,16 @@
-.row {
-  display: block;
-
+.clear-fix {
   &:after {
     content: "";
     display: block;
     clear: both;
     height: 0;
   }
+}
+
+.row {
+  @extend .clear-fix;
+
+  display: block;
 }
 
 .col, .col-1, .col-2, .col-3, .col-4 {

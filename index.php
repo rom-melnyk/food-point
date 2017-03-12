@@ -6,16 +6,11 @@
 </head>
 <body onload="FP.run();">
     <header>
-        <div class="top-level-wrapper">
-            <span class="logo"></span>
-        </div>
-    </header>
-
-    <nav class="site-menu">
-        <div class="top-level-wrapper">
+        <div class="top-level-wrapper clear-fix">
+            <div class="logo"></div>
             <?php include './php/components/site-menu.php'; ?>
         </div>
-    </nav>
+    </header>
 
     <section class="dishes">
         <div class="top-level-wrapper">
