@@ -1,0 +1,8 @@
+.idea/
+.vscode/
+
+node_modules/
+npm-debug.log
+
+CREDS.md
+server/db/config.php

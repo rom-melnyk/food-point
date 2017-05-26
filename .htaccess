@@ -1,0 +1,9 @@
+AddDefaultCharset UTF-8
+
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^page/([^/?]+) page.php?name=$1&%{QUERY_STRING} [PT,L]
