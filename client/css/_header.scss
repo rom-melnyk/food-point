@@ -1,42 +1,30 @@
 @import "constants";
+@import "components";
 
-.logo {
-    div, a img {
-        width: 80%;
+.header-logo {
+    text-align: center;
+    margin-bottom: 1em;
+
+    .logo {
+        width: 2.5em;
     }
 
     .slogan {
-        margin-top: 1em;
+        margin-top: .5em;
         font-size: $big-text;
-        text-align: center;
     }
 }
 
-.contact-us {
-    i {
-        margin-right: .5em;
+.site-menu {
+    text-align: center;
+
+    .menu-item {
+        @extend .button;
     }
 }
 
 @media screen and (max-width: $screen-s-width) {
-    .logo {
-        div, a img {
-            width: 100%;
-        }
-
-        .slogan {
-            margin: 1em 0;
-        }
-    }
-
-    .contact-us {
-        margin-bottom: $content-margin;
-        margin-left: 50%;
-    }
 }
 
 @media screen and (min-width: $screen-s-width + 1) and (max-width: $screen-m-width) {
-    .contact-us {
-        font-size: $small-text;
-    }
 }

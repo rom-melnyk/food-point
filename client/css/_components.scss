@@ -1,0 +1,12 @@
+.button {
+    display: inline-block;
+    padding: .5em 2em;
+    margin-right: 2em;
+
+    border-radius: .25em;
+    border: 1px solid #333;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
