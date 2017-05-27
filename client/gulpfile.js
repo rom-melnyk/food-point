@@ -53,7 +53,9 @@ gulp.task('js:cleanup', () => {
         `${DIRS.JsDeploy}/*.js*`,
         `!${DIRS.JsDeploy}`,
         `!${DIRS.JsDeploy}/.gitignore`,
-    ]);
+    ], {
+        force: true
+    });
 });
 
 gulp.task('js', [ 'js:cleanup' ], () => {
@@ -92,7 +94,9 @@ gulp.task('css:cleanup', () => {
         `${DIRS.CssDeploy}/*.css*`,
         `!${DIRS.CssDeploy}`,
         `!${DIRS.CssDeploy}/.gitignore`
-    ]);
+    ], {
+        force: true
+    });
 });
 
 gulp.task('css', [ 'css:cleanup' ], () => {

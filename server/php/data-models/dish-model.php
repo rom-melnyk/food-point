@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/db/db.php';
 
 function get_dishes() {
     $query = 'SELECT * FROM dishes;';

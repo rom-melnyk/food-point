@@ -1,0 +1,22 @@
+@import "constants";
+
+footer {
+    & > * {
+        font-size: $small-text;
+    }
+}
+
+.logo-small {
+    max-width: 80%;
+}
+
+.footer-about-us p {
+    margin-right: .75em;
+}
+
+@media screen and (max-width: $screen-s-width) {
+    .logo-small {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+}

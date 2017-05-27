@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/data-models/dish-model.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/data-models/dish-model.php';
 
 header('Content-Type: application/json; charset=utf-8');
 $result = null;
