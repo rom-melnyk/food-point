@@ -4,6 +4,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/data-models/dish-model.php';
 header('Content-Type: application/json; charset=utf-8');
 $result = null;
 
+/******************************************
+Testing:
+
+curl --include --request POST --data '{"name": "Borsch", "price": 11}' http://foodpoint.if.ua/api/dishes.php
+curl --include --request PUT --data '{"name": "Borsch", "price": 11}' http://foodpoint.if.ua/api/dishes.php?id=...
+curl --include --request DELETE http://foodpoint.if.ua/api/dishes.php?id=...
+
+******************************************/
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $result = array_key_exists('id', $_REQUEST) ? get_dish($_REQUEST['id']) : get_dishes();
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -23,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 } else if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $result = array_key_exists('id', $_REQUEST) ? delete_dish($_REQUEST['id']) : generate_error('"id" param is missing');
 }
+
 
 $result = array_key_exists('error', $result) && $result['error']
     ? generate_error($result)
