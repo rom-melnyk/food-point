@@ -2,7 +2,7 @@
 <head>
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/includes/head.php'; ?>
 </head>
-<body onload="FP.start();">
+<body onload="FP.startApp();">
     <div class="main-content">
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/includes/header.php'; ?>
 

@@ -1,9 +1,10 @@
-const test = require('./test');
+const { startAdminApp } = require('./admin/admin');
 
 const FP = {
-    start() {
-        console.log(`It works: ${test}!`);
-    }
+    startApp() {
+        console.log(`It works!`);
+    },
+    startAdminApp
 }
 
 if (window) {
