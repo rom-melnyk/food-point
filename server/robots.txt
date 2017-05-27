@@ -1,0 +1,10 @@
+//******
+//****** TODO Implement this!
+//******
+
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /webstat/
+Disallow: /content/
+Disallow: /php/
+Allow /
