@@ -39,7 +39,7 @@
   }
 
 
-  &.edit {
+  &.info {
     background-color: darken($info-color, 30%);
 
     &:hover {
@@ -48,11 +48,20 @@
   }
 
 
-  &.delete {
+  &.error {
     background-color: darken($error-color, 30%);
 
     &:hover {
       background-color: darken($error-color, 20%);
+    }
+  }
+
+
+  &.ok {
+    background-color: darken($link-color, 30%);
+
+    &:hover {
+      background-color: darken($link-color, 20%);
     }
   }
 }

@@ -36,7 +36,7 @@ class State {
                 root[chunk] = typeof chunks[0] === 'number' ? [] : {};
             }
             root = root[chunk];
-            chunk = chunk.shift();
+            chunk = chunks.shift();
         }
 
         root[chunk] = value;

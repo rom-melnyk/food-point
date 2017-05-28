@@ -1,0 +1,41 @@
+@import "../constants";
+@import "../components";
+
+input, textarea {
+  display: inline-block;
+  width: 100%;
+  padding: .25em;
+  background-color: lighten($bg-color, 10%);
+  border-radius: .25em;
+  border: 1px solid transparent;
+
+  transition: background-color $transition-props, border-color $transition-props;
+
+  &:hover {
+    background-color: lighten($bg-color, 20%);
+    border-color: transparentize($text-color, .7);
+  }
+
+  &:focus {
+    background-color: lighten($bg-color, 80%);
+    border-color: transparentize($text-color, .7);
+  }
+}
+
+textarea {
+  resize: none;
+}
+
+.admin-app {
+  .form {
+    .row {
+      @extend .v-list;
+    }
+
+    .controls {
+      margin: 1em 0;
+      text-align: center;
+      font-size: $x-small-text;
+    }
+  }
+}

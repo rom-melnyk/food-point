@@ -62,9 +62,15 @@ function put(url, data) {
 }
 
 
+function del(url) {
+    return request('delete', url);
+}
+
+
 export {
     request,
     get,
     post,
-    put
+    put,
+    del
 };
