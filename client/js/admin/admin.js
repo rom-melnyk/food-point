@@ -1,10 +1,27 @@
 import { h, render, Component } from 'preact';
+import DishesList from './dishes-list';
+import state from './state';
 
+import { getDishes } from './actions';
 
 class AdminApp extends Component {
-    render(props, state) {
+    constructor() {
+        super();
+        Object.assign(this.state, state.state);
+        this._setState = this.setState.bind(this);
+    }
+
+    componentDidMount() {
+        state.addChangeListener(this._setState);
+    }
+
+    componentWillUnmount() {
+        state.removeChangeListener(this._setState);
+    }
+
+    render(props, { dishes }) {
         return (
-            <h1>Dishes:</h1>
+            <DishesList dishes={ dishes } />
         );
     }
 }
@@ -16,7 +33,8 @@ function startAdminApp() {
     }
 
     const div = document.querySelector('.admin-app');
-    render(<AdminApp/>, div);
+    render(<AdminApp />, div);
+    getDishes();
 }
 
 
