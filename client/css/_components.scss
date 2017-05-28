@@ -1,12 +1,58 @@
+@import "constants";
+
+
+.v-list {
+  margin-bottom: .25em;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+.h-list {
+  margin-right: 2em;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+
 .button {
-    display: inline-block;
-    padding: .5em 2em;
-    margin-right: 2em;
+  @extend .h-list;
 
-    border-radius: .25em;
-    border: 1px solid #333;
+  display: inline-block;
+  padding: .5em 2em;
 
-    &:last-child {
-        margin-right: 0;
+  background-color: lighten($bg-color, 10%);
+  border-radius: .25em;
+  border: 1px solid transparent;
+
+  cursor: pointer;
+  transition: background-color $transition-props, border-color $transition-props;
+
+
+  &:hover {
+    background-color: lighten($bg-color, 20%);
+    border-color: transparentize($text-color, .7);
+  }
+
+
+  &.edit {
+    background-color: darken($info-color, 30%);
+
+    &:hover {
+      background-color: darken($info-color, 20%);
     }
+  }
+
+
+  &.delete {
+    background-color: darken($error-color, 30%);
+
+    &:hover {
+      background-color: darken($error-color, 20%);
+    }
+  }
 }

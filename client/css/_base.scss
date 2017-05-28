@@ -16,7 +16,7 @@ html, body {
 
 body {
   color: $text-color;
-  background-color: #000;
+  background-color: $bg-color;
   font-size: 18px;
   font-weight: 300;
   font-family:'Open Sans', Helvetica, Arial, sans-serif;
@@ -47,15 +47,21 @@ li {
   list-style: none none;
 }
 
-a, a:hover, a:visited, a:active, a * {
-  color: $text-color;
-  text-decoration: none;
-}
-
-a.link {
-  // color is set in `_skins.scss`
+a {
+  color: $link-color;
   text-decoration: underline;
   transition: color $transition-props;
+
+  &:hover {
+    color: darken($link-color, 30%);
+  }
+  &:visited, &:active {
+    color: darken($link-color, 30%);
+  }
+
+  img {
+    text-decoration: none;
+  }
 }
 
 // ------------------ top-level layout ------------------

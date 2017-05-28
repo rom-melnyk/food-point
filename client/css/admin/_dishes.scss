@@ -1,0 +1,28 @@
+@import "../constants";
+@import "../components";
+
+.admin-app {
+  .dish {
+    @extend .v-list;
+
+    position: relative;
+    padding: 1em;
+    overflow: hidden;
+
+    .controls {
+      position: absolute;
+      bottom: -3em;
+      padding: .25em;
+      background-color: transparentize($bg-color, .3);
+      text-align: center;
+      font-size: $x-small-text;
+      transition: bottom $transition-props;
+    }
+
+    &:hover {
+      .controls {
+        bottom: 1em;
+      }
+    }
+  }
+}
