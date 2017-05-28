@@ -18,12 +18,13 @@ class Dish extends Component {
                 <div class="dish">
                     <div class="row">
                         <div class="column-3">
-                            <div class="name">{ name }</div>
+                            <span class="name">{ name }</span>
+                            { size ? ', ' : '' }
+                            <span class="size">{ size }</span>
                             <div class="description">{ description }</div>
-                            <div class="size">{ size }</div>
                         </div>
                         <div class="column-1">
-                            <div class="description">{ price }</div>
+                            <div class="price">{ price }</div>
                         </div>
                     </div>
                     <div class="controls-hover">

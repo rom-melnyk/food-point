@@ -6,14 +6,29 @@
     @extend .v-list;
 
     position: relative;
-    padding: 1em 0;
+    padding: .5em;
     overflow: hidden;
+
+    border-radius: .25em;
+    border: 1px solid transparent;
+    transition: background-color $transition-props, border-color $transition-props;
+
+    .size {
+      font-style: italic;
+    }
+
+    .description {
+      margin: 1em 0;
+      font-size: $x-small-text;
+    }
 
     .controls-hover {
       position: absolute;
+      left: 0;
       width: 100%;
-      bottom: -3em;
-      padding: .25em;
+      bottom: -5em;
+      padding: 1em;
+      border-radius: .5em;
       background-color: transparentize($bg-color, .3);
       text-align: center;
       font-size: $x-small-text;
@@ -21,8 +36,11 @@
     }
 
     &:hover {
+      background-color: lighten($bg-color, 20%);
+      border-color: transparentize($text-color, .7);
+
       .controls-hover {
-        bottom: 1em;
+        bottom: 0;
       }
     }
   }
