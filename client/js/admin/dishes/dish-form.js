@@ -20,18 +20,20 @@ class DishForm extends Component {
     }
 
     render(props, state) {
+        const header = state.id ? 'Редагувати страву' : 'Створити страву';
         const formComps = FIELDS.map(field => (
             <div className="row">
                 <div className="label column-1">{ this.getFormLabelName(field) }</div>
-                <div className="label column-3">{ this.getFormInputElement(field, state[field]) }</div>
+                <div className="column-3">{ this.getFormInputElement(field, state[field]) }</div>
             </div>
         ));
         return (
-            <div class="dish form">
+            <div class="form">
+                <h1>{ header }</h1>
                 { formComps }
                 <div class="controls">
-                    <span class="button grey" onClick={ this.onBackClick }>Back</span>
-                    <span class="button green" onClick={ this.onSaveClick }>Save</span>
+                    <span class="button grey" onClick={ this.onBackClick }>Назад</span>
+                    <span class="button green" onClick={ this.onSaveClick }>Зберегти</span>
                 </div>
             </div>
         );
@@ -39,7 +41,7 @@ class DishForm extends Component {
 
     getFormLabelName(field) {
         return ({
-            name: 'Ім\'я',
+            name: 'Назва',
             description: 'Опис',
             size: 'Порція',
             price: 'Ціна'

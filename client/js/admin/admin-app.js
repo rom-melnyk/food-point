@@ -4,6 +4,7 @@ import { Router } from 'preact-router';
 import state from './state';
 import { LINKS } from './urls';
 
+import AdminMenu from './admin-menu';
 import DishesList from './dishes/dishes-list';
 import DishForm from './dishes/dish-form';
 
@@ -41,9 +42,10 @@ function startAdminApp() {
         return;
     }
 
-    history.pushState(null, null, LINKS.DishesList); // redirect to DishesList
-    const div = document.querySelector('.admin-app');
-    render(<AdminApp />, div);
+    const menuDiv = document.querySelector('header > nav');
+    const appDiv = document.querySelector('.admin-app');
+    render(<AdminMenu />, menuDiv);
+    render(<AdminApp />, appDiv);
     getDishes();
 }
 

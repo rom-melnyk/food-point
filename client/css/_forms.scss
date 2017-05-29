@@ -3,22 +3,24 @@
 
 
 input, textarea {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: $normal-text;
   display: inline-block;
   width: 100%;
   padding: .25em;
-  background-color: lighten($bg-color, 10%);
+  background-color: lighten($bg-color, 30%);
   border-radius: .25em;
   border: 1px solid transparent;
 
   transition: background-color $transition-props, border-color $transition-props;
 
   &:hover {
-    background-color: lighten($bg-color, 20%);
+    background-color: lighten($bg-color, 40%);
     border-color: transparentize($text-color, .7);
   }
 
   &:focus {
-    background-color: lighten($bg-color, 80%);
+    background-color: lighten($bg-color, 90%);
     border-color: transparentize($text-color, .7);
   }
 }
@@ -26,6 +28,12 @@ input, textarea {
 
 textarea {
   resize: none;
+}
+
+
+.label {
+  font-size: $small-text;
+  padding-top: .75em;
 }
 
 
@@ -47,12 +55,10 @@ textarea {
 }
 
 
-.admin-app {
-  .form {
-    @extend .v-list;
+.form {
+  @extend .v-list;
 
-    .controls {
-      margin-top: 1em;
-    }
+  .controls {
+    margin-top: 1em;
   }
 }

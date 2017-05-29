@@ -8,6 +8,8 @@
 
   .dish {
     @extend .hoverable;
+    margin-right: -.5em;
+    margin-left: -.5em;
 
     position: relative;
     padding: .5em;

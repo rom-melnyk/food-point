@@ -15,7 +15,7 @@ class DishList extends Component {
         );
         return (
             <div className="dishes">
-                <h1>Dishes:</h1>
+                <h1>Страви:</h1>
                 { dishesComps }
                 { linkComp }
             </div>
