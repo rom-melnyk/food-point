@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
-import { toggleDishEdit, updateDish, createDish } from './actions';
+import { updateDish, createDish } from './actions';
+import state from '../state';
 
 const FIELDS = [ 'name', 'description', 'size', 'price' ];
 
@@ -11,11 +12,18 @@ class DishForm extends Component {
         this.onSaveClick = this.onSaveClick.bind(this);
     }
 
-    render(props/*{ id, name, description, image, size, price, props }*/, state) {
+    componentDidMount() {
+        const id = this.props.id;
+        if (id) {
+            this.setState( state.state.dishes.find(d => d.id === id) || {} );
+        }
+    }
+
+    render(props, state) {
         const formComps = FIELDS.map(field => (
             <div className="row">
                 <div className="label column-1">{ this.getFormLabelName(field) }</div>
-                <div className="label column-3">{ this.getFormInputElement(field, props[field]) }</div>
+                <div className="label column-3">{ this.getFormInputElement(field, state[field]) }</div>
             </div>
         ));
         return (
@@ -44,7 +52,7 @@ class DishForm extends Component {
                 <textarea
                     rows={ 3 }
                     name={ field }
-                    onInput={ (e) => { this.state[field] = e.target.value; } }
+                    onInput={ e => this.setState({ [field]: e.target.value }) }
                 >
                     { value || '' }
                 </textarea>
@@ -54,7 +62,7 @@ class DishForm extends Component {
                     type="number"
                     name={ field }
                     value={ value || 0 }
-                    onInput={ (e) => { this.state[field] = e.target.value; } }
+                    onInput={ e => this.setState({ [field]: e.target.value }) }
                 />
             );
             default:
@@ -64,32 +72,23 @@ class DishForm extends Component {
                 type="text"
                 name={ field }
                 value={ value || '' }
-                onInput={ (e) => { this.state[field] = e.target.value; } }
+                onInput={ e => this.setState({ [field]: e.target.value }) }
             />
         );
     }
 
-    getFormInputValue(field) {
-        switch (field) {
-            case 'description': return <textarea rows={ 3 } name={ field }>{ value || '' }</textarea>;
-            case 'price': return <input type="number" name={ field } value={ value || 0 }/>;
-            default:
-        }
-        return <input type="text" name={ field } value={ value || '' }/>;
-    }
-
     onBackClick(e) {
-        toggleDishEdit(this.props.id, false);
+        history.back();
     }
 
     onSaveClick(e) {
         const data = FIELDS.reduce((obj, field) => {
-            obj[field] = this.state[field] === undefined ? this.props[field] : this.state[field];
+            obj[field] = this.state[field];
             return obj;
         }, {});
 
-        if (this.props.id) {
-            updateDish(this.props.id, data);
+        if (this.state.id) {
+            updateDish(this.state.id, data);
         } else {
             createDish(data);
         }

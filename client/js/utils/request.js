@@ -17,7 +17,12 @@ function request(method, url, data = {}) {
                 const contentType = xhr.getResponseHeader('Content-Type');
                 if (/application\/json/.test(contentType)) {
                     try {
-                        resolve(JSON.parse(xhr.responseText));
+                        const parsed = JSON.parse(xhr.responseText);
+                        if (parsed.error) {
+                            reject(parsed);
+                        } else {
+                            resolve(parsed);
+                        }
                     } catch (e) {
                         console.error(`Response from "${url}" is unparsable as JSON`, xhr.responseText);
                         reject(null);

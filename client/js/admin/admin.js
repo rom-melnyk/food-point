@@ -1,8 +1,13 @@
 import { h, render, Component } from 'preact';
-import DishesList from './dishes-list';
-import state from './state';
+import { Router } from 'preact-router';
 
-import { getDishes } from './actions';
+import state from './state';
+import { LINKS } from './urls';
+
+import DishesList from './dishes/dishes-list';
+import DishForm from './dishes/dish-form';
+
+import { getDishes } from './dishes/actions';
 
 class AdminApp extends Component {
     constructor() {
@@ -21,7 +26,11 @@ class AdminApp extends Component {
 
     render(props, { dishes }) {
         return (
-            <DishesList dishes={ dishes } />
+            <Router>
+                <DishesList path={ LINKS.DishesList } dishes={ dishes } />
+                <DishForm path={ LINKS.EditDish } />
+                <DishForm path={ `${LINKS.EditDish}/:id` } />
+            </Router>
         );
     }
 }
@@ -32,6 +41,7 @@ function startAdminApp() {
         return;
     }
 
+    history.pushState(null, null, LINKS.DishesList); // redirect to DishesList
     const div = document.querySelector('.admin-app');
     render(<AdminApp />, div);
     getDishes();
