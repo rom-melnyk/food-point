@@ -4,7 +4,12 @@ $ALLOWED_EXTS = array('JPG', 'JPEG', 'PNG', 'GIF');
 
 
 function get_images() {
-    return array();
+    global $TARGET_DIR;
+
+    $files = scandir($TARGET_DIR) or array();
+    $files = array_filter($files, 'filter_by_extension');
+    $files = array_values($files);
+    return $files;
 }
 
 
@@ -32,37 +37,51 @@ function create_image($image) {
         return array( 'error' => TRUE, 'debug' => 'File is bigger than 500k' );
     }
 
-    $target_file = $TARGET_DIR . basename($image['name']);
-    $image_file_props = pathinfo($target_file);
+    $target_basename = basename($image['name']);
+    $target_full_filename = $TARGET_DIR . $target_basename;
+    $target_file_props = pathinfo($target_full_filename);
 
-    if (!in_array(strtoupper($image_file_props['extension']), $ALLOWED_EXTS)) {
+    if (!is_extension_valid($target_file_props['extension'])) {
         return array( 'error' => TRUE, 'debug' => 'Only JPG, JPEG, PNG & GIF files are allowed' );
     }
 
     // Make sure names are not duplicated
     $suffix = 0;
-    while (file_exists($target_file)) {
+    while (file_exists($target_full_filename)) {
         $suffix++;
-        $target_file = $image_file_props['dirname'] . '/' .
-            $image_file_props['filename'] . "_$suffix" .
-            $image_file_props['extension'];
+        $target_basename = $target_file_props['filename'] .
+            "_$suffix." .
+            $target_file_props['extension'];
+        $target_full_filename = $target_file_props['dirname'] . '/' . $target_basename;
     }
 
-    $moving_result = move_uploaded_file($image['tmp_name'], $target_file);
+    $moving_result = move_uploaded_file($image['tmp_name'], $target_full_filename);
     return $moving_result
         ? array(
             'error' => FALSE,
-            'name' => $suffix
-                ? $image_file_props['filename'] . "_$suffix" . $image_file_props['extension']
-                : $image_file_props['basename'],
+            'name' => $target_basename,
             'props' => $image_props
         )
-        : array( 'error' => TRUE, 'debug' => 'Filesystem error occurred' );
+        : array( 'error' => TRUE, 'debug' => 'Filesystem error ' );
 }
 
 
 function delete_dish($name) {
-    return array();
+    global $TARGET_DIR;
+    $result = unlink($TARGET_DIR . $name);
+    return $result
+        ? array('result' => TRUE)
+        : array( 'error' => TRUE, 'debug' => 'Filesystem error' );
 }
 
+
+// ---------------------------------- helpers ----------------------------------
+function is_extension_valid($ext) {
+    global $ALLOWED_EXTS;
+    return in_array(strtoupper($ext), $ALLOWED_EXTS);
+}
+
+function filter_by_extension($fname) {
+    return is_extension_valid( pathinfo($fname, PATHINFO_EXTENSION) );
+}
 ?>
