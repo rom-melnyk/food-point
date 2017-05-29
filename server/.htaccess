@@ -6,4 +6,5 @@ RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteRule ^page/([^/?]+) page.php?name=$1&%{QUERY_STRING} [PT,L]
+RewriteRule ^admin admin.php?%{QUERY_STRING} [PT,L]
+RewriteRule ^api/(.*) php/api/$1.php?%{QUERY_STRING} [PT,L]

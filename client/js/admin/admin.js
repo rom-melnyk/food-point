@@ -28,7 +28,7 @@ class AdminApp extends Component {
 
 
 function startAdminApp() {
-    if (!/admin.php$/.test(location.pathname)) {
+    if (!/^\/admin/.test(location.pathname)) {
         return;
     }
 

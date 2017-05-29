@@ -2,7 +2,7 @@ import { get, post, put, del } from '../utils/request';
 import state from './state';
 
 const URLS = {
-    Dishes: '/php/api/dishes.php'
+    Dishes: '/api/dishes'
 };
 
 
