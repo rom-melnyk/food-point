@@ -2,25 +2,25 @@
 @import "components";
 
 .header-logo {
-    text-align: center;
-    margin-bottom: 1em;
+  text-align: center;
+  margin-bottom: 1em;
 
-    .logo {
-        width: 2.5em;
-    }
+  .logo {
+    width: 2.5em;
+  }
 
-    .slogan {
-        margin-top: .5em;
-        font-size: $big-text;
-    }
+  .slogan {
+    margin-top: .5em;
+    font-size: $big-text;
+  }
 }
 
 .site-menu {
-    text-align: center;
+  @extend .h-list;
+  text-align: center;
 
-    .menu-item {
-        @extend .button;
-    }
+  .menu-item {
+  }
 }
 
 @media screen and (max-width: $screen-s-width) {

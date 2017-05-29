@@ -4,11 +4,9 @@
         <div class="slogan">Ми готуємо з любов'ю</div>
     </div>
     <nav class="site-menu">
-        <ul>
-            <li class="menu-item">Головна</li>
-            <li class="menu-item">Поїсти</li>
-            <li class="menu-item">Що нового?</li>
-            <li class="menu-item">Про нас</li>
-        </ul>
+        <span class="button grey">Головна</span>
+        <span class="button grey">Поїсти</span>
+        <span class="button grey">Що нового?</span>
+        <span class="button grey">Про нас</span>
     </nav>
 </header>

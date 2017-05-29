@@ -1,7 +1,7 @@
 @import "constants";
 
 
-.v-list {
+.v-list > * {
   margin-bottom: .25em;
 
   &:last-child {
@@ -10,7 +10,8 @@
 }
 
 
-.h-list {
+.h-list > * {
+  display: inline-block;
   margin-right: 2em;
 
   &:last-child {
@@ -19,27 +20,35 @@
 }
 
 
-.button {
-  @extend .h-list;
-
-  display: inline-block;
-  padding: .5em 2em;
-
-  background-color: lighten($bg-color, 10%);
+.hoverable {
   border-radius: .25em;
   border: 1px solid transparent;
+  transition: border-color $transition-props;
 
+  &:hover {
+    border-color: transparentize($text-color, .7);
+  }
+}
+
+
+.button {
+  @extend .hoverable;
+  display: inline-block;
+  padding: .5em 2em;
   cursor: pointer;
   transition: background-color $transition-props, border-color $transition-props;
 
 
-  &:hover {
-    background-color: lighten($bg-color, 20%);
-    border-color: transparentize($text-color, .7);
+  &.grey {
+    background-color: lighten($bg-color, 10%);
+
+    &:hover {
+      background-color: lighten($bg-color, 20%);
+    }
   }
 
 
-  &.info {
+  &.blue {
     background-color: darken($info-color, 30%);
 
     &:hover {
@@ -48,7 +57,7 @@
   }
 
 
-  &.error {
+  &.red {
     background-color: darken($error-color, 30%);
 
     &:hover {
@@ -57,7 +66,7 @@
   }
 
 
-  &.ok {
+  &.green {
     background-color: darken($link-color, 30%);
 
     &:hover {

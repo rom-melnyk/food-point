@@ -28,12 +28,11 @@ textarea {
 
 .admin-app {
   .form {
-    .row {
-      @extend .v-list;
-    }
+    @extend .v-list;
 
     .controls {
-      margin: 1em 0;
+      @extend .h-list;
+      margin-top: 1em;
       text-align: center;
       font-size: $x-small-text;
     }

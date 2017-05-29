@@ -2,16 +2,16 @@
 @import "../components";
 
 .admin-app {
-  .dish {
+  .dishes {
     @extend .v-list;
+  }
+
+  .dish {
+    @extend .hoverable;
 
     position: relative;
     padding: .5em;
     overflow: hidden;
-
-    border-radius: .25em;
-    border: 1px solid transparent;
-    transition: background-color $transition-props, border-color $transition-props;
 
     .size {
       font-style: italic;
@@ -23,6 +23,8 @@
     }
 
     .controls-hover {
+      @extend .h-list;
+
       position: absolute;
       left: 0;
       width: 100%;
@@ -36,9 +38,6 @@
     }
 
     &:hover {
-      background-color: lighten($bg-color, 20%);
-      border-color: transparentize($text-color, .7);
-
       .controls-hover {
         bottom: 0;
       }

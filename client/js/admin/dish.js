@@ -28,8 +28,8 @@ class Dish extends Component {
                         </div>
                     </div>
                     <div class="controls-hover">
-                        <span class="button edit info" onClick={ this.onEditClick }>Edit</span>
-                        <span class="button delete error" onClick={ this.onDelClick }>Delete</span>
+                        <span class="button blue info" onClick={ this.onEditClick }>Edit</span>
+                        <span class="button red error" onClick={ this.onDelClick }>Delete</span>
                     </div>
                 </div>
             );

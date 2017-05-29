@@ -22,8 +22,8 @@ class DishForm extends Component {
             <div class="dish form">
                 { formComps }
                 <div class="controls">
-                    <span class="button back" onClick={ this.onBackClick }>Back</span>
-                    <span class="button ok" onClick={ this.onSaveClick }>Save</span>
+                    <span class="button grey" onClick={ this.onBackClick }>Back</span>
+                    <span class="button green" onClick={ this.onSaveClick }>Save</span>
                 </div>
             </div>
         );
