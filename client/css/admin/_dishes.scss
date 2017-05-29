@@ -22,23 +22,8 @@
       font-size: $x-small-text;
     }
 
-    .controls-hover {
-      @extend .h-list;
-
-      position: absolute;
-      left: 0;
-      width: 100%;
-      bottom: -5em;
-      padding: 1em;
-      border-radius: .5em;
-      background-color: transparentize($bg-color, .3);
-      text-align: center;
-      font-size: $x-small-text;
-      transition: bottom $transition-props;
-    }
-
     &:hover {
-      .controls-hover {
+      .hover-controls {
         bottom: 0;
       }
     }

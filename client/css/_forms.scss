@@ -1,5 +1,6 @@
-@import "../constants";
-@import "../components";
+@import "constants";
+@import "components";
+
 
 input, textarea {
   display: inline-block;
@@ -22,19 +23,36 @@ input, textarea {
   }
 }
 
+
 textarea {
   resize: none;
 }
+
+
+.controls {
+  @extend .h-list;
+  text-align: center;
+  font-size: $x-small-text;
+
+  &.hover-controls {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: -5em;
+    padding: 1em;
+    border-radius: .5em;
+    background-color: transparentize($bg-color, .3);
+    transition: bottom $transition-props;
+  }
+}
+
 
 .admin-app {
   .form {
     @extend .v-list;
 
     .controls {
-      @extend .h-list;
       margin-top: 1em;
-      text-align: center;
-      font-size: $x-small-text;
     }
   }
 }

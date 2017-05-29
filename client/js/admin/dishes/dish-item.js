@@ -26,7 +26,7 @@ class Dish extends Component {
                         <div className="price">{ price }</div>
                     </div>
                 </div>
-                <div className="controls-hover">
+                <div className="controls hover-controls">
                     <span className="button blue info" onClick={ this.onEditClick }>Edit</span>
                     <span className="button red error" onClick={ this.onDelClick }>Delete</span>
                 </div>
