@@ -31,19 +31,32 @@ function request(method, url, data = {}) {
                     resolve(xhr.responseText);
                 }
             } else {
-                reject({ status: xhr.status, response: xhr.response.text });
+                reject({
+                    error: true,
+                    status: xhr.status,
+                    response: xhr.response && xhr.response.text || xhr.responseText
+                });
             }
         };
 
         xhr.open(method, url, true);
         if (method === "POST" || method === "PUT") {
-            xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-            let body = '{}';
-            try {
-                body = JSON.stringify(data);
-            } catch (e) {
-                console.error(`Cannot serialize provided data`, data);
+            const isFile = data && data.constructor === File;
+            let body = null;
+
+            if (isFile) {
+                body = new FormData();
+                body.append('image', data, data.name);
+            } else {
+                xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+                try {
+                    body = JSON.stringify(data);
+                } catch (e) {
+                    console.error(`Cannot serialize provided data`, data);
+                    body = '{}';
+                }
             }
+
             xhr.send(body);
         } else {
             xhr.send();

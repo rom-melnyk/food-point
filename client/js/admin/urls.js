@@ -5,7 +5,8 @@ const API = {
 const LINKS = {
     Home: 'admin',
     DishesList: '/admin/dishes',
-    EditDish: '/admin/dishes/edit'
+    EditDish: '/admin/dishes/edit',
+    ImagesList: '/admin/images'
 };
 
 

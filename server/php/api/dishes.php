@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $result = generate_error('"id" param is missing');
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    $result = array_key_exists('id', $_REQUEST) ? delete_dish($_REQUEST['id']) : generate_error('"id" param is missing');
+    $result = array_key_exists('id', $_REQUEST) ? delete_dish($_REQUEST['id']) : generate_error('Missing "id" param in the URL');
 }
 
 

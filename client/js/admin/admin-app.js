@@ -7,6 +7,7 @@ import { LINKS } from './urls';
 import AdminMenu from './admin-menu';
 import DishesList from './dishes/dishes-list';
 import DishForm from './dishes/dish-form';
+import ImageForm from './images/image-form';
 
 import { getDishes } from './dishes/actions';
 
@@ -31,6 +32,7 @@ class AdminApp extends Component {
                 <DishesList path={ LINKS.DishesList } dishes={ dishes } />
                 <DishForm path={ LINKS.EditDish } />
                 <DishForm path={ `${LINKS.EditDish}/:id` } />
+                <ImageForm path={ LINKS.ImagesList } />
             </Router>
         );
     }

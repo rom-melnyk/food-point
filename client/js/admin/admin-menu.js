@@ -8,6 +8,10 @@ const MENU = [
         link: LINKS.DishesList
     },
     {
+        text: 'Зображення',
+        link: LINKS.ImagesList
+    },
+    {
         text: 'Замовлення',
         link: LINKS.DishesList
     }
