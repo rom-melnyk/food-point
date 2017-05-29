@@ -32,6 +32,7 @@ const DB_CONFIG = array(
 ## Facebook essentials
 Facebook API v5 requires PHP v5.4+.
 
+**TBD!**
 Create `develop/php/fb-app-credentials.php`:
 ```
 <?php
@@ -44,12 +45,12 @@ $FB_APP_CREDENTIALS = [
 ```
 
 ## Develop and deploy
-1. `npm run dev`: compiles all the client assets, copies them to **`depoy/`** folder.
+1. `npm run dev`: compiles all the client assets, copies them to **`server/`** folder.
 1. `npm run prod`: behaves similar but generates minified files (prod-friendly).
-1. Upload the content of **`deploy/`** to the server via FTP.
-  - Make sure that folder is writable and `fb-cache/` is writable too.
+1. Upload the content of **`server/`** to the server via FTP.
+  - Make sure that folder is writable and `gfx/uploaded/` is writable too.
   - Remove `.gitignore` from the server :)
-  - Update `sitemap.xml` and `robots.txt` if needed (both are copied by `prod` task only).
+  - Update `sitemap.xml` and `robots.txt` if needed.
   - Update Google site verification file.
 1. Make sure there are following modules installed on server:
   - `mbstring` (required for Facebook);
@@ -58,48 +59,12 @@ $FB_APP_CREDENTIALS = [
 
 ## Some tricks:
 - `tail -f logs/error.log` to track the Apache/PHP errors.
+- `echo '<?php phpinfo(); ?>' | php | grep <...>` to theck if an option if enabled in PHP config (works locally and via SSH).
+
 
 
 # Architecture
-
-
-## `content/tiles.json`
-Is an array of objects responsible for every particular tile in the main page.
-Props expected (all `String`):
-
-- **title**;
-- **description**;
-- **icon-class** is the CSS class name to be passed to thr icon element,  
-   or **icon-file** (the filename with extension; all icons reside in `gfx/icons/`);
-- **link** (URL of the external page)  
-   or **content-file** (the filename _without extension_ in `content/` responsible for appropriate area);
-- **tile-content** stands for the PHP or HTML file _(without extension!)_ responsible for the content of the tile;
-- **tile-class** is CSS classname(-s) assigned to tile.
-
-## `index.php`
-Main entry point; home page. Contains tiles according to `tiles.json`;
-
-## `page.php`
-Internal links (`content-file` in `tiles.json`) lead to `/page/<...>` which is redirected via `.htaccess` to `page.php?name=<...>`. The file from `content/` with appropriate name and extension `.php` or `.html` will be injected in the page.
-
-## Facebook process
-
-### On main page (`content/fb-backgrounds.php` + appropriate record in `content/tiles.json`):
-1. Look for the posts cached in `fb-cache/fb-content.json`.
-1. If any contetnt found, extract three first pictures.
-1. If found, fout them to appropriate tile alongside with the icon.
-
-### On _facebook_ page:
-
-1. Look for the token in `fb-cache/fb-token.txt`.
-1. If not found ot invalid, render login invitation.
-  1. When user logs in successfully, the `/page/facebook?save-token&access_token=...` is called.
-  1. It retrieves the token, extends it and tries to save in `fb-cache/fb-token.txt`.
-  1. If successfully, page is been reloaded in 5 sec otherwise login innvitation is rendered.
-1. If token is found and valid, look for posts in `content/fb-content.json`.
-1. If not found or outdated, try to fetch Facebook contetnt from the network.
-1. If successfully, try to save updated content locally and render it,
-1. otherwise render login invitation.
+**TBD!**
 
 ---
 
