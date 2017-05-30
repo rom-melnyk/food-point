@@ -9,7 +9,9 @@ import DishesList from './dishes/dishes-list';
 import DishForm from './dishes/dish-form';
 import ImagesList from './images/images-list';
 
-import { getDishes } from './dishes/actions';
+import { getDishes } from './dishes/dish-actions';
+import { getImages } from './images/image-actions';
+
 
 class AdminApp extends Component {
     constructor() {
@@ -48,7 +50,10 @@ function startAdminApp() {
     const appDiv = document.querySelector('.admin-app');
     render(<AdminMenu />, menuDiv);
     render(<AdminApp />, appDiv);
+
+    // prepare state
     getDishes();
+    getImages();
 }
 
 

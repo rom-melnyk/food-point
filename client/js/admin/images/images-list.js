@@ -4,20 +4,13 @@ import Image from './image-item';
 // import { LINKS } from '../urls';
 
 class ImagesList extends Component {
-    render({ images }, state) {
-        const imagesComps = images.map(i => <Image { ...i } />);
-        // const linkComp = (
-        //     <div className="controls">
-        //         <span className="button green" onClick={ this.onAddClick }>
-        //             Додати страву
-        //         </span>
-        //     </div>
-        // );
+    render({ images, selectable = false }, state) {
+        const imagesComps = images.map(i => <Image name={ i } />);
+        const className = 'images row' + ( selectable ? ' selectable' : '' );
         return (
-            <div className="images">
+            <div className={ className }>
                 <h1>Зображення:</h1>
                 { imagesComps }
-                { /*linkComp*/ }
             </div>
         );
     }

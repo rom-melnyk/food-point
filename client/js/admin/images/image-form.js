@@ -1,8 +1,10 @@
 import { h, Component } from 'preact';
-import { post } from '../../utils/request';
-import store from '../store';
+import { uploadImage } from './image-actions';
 
 
+/**
+ * @stateful
+ */
 class ImageForm extends Component {
     constructor() {
         super(...arguments);
@@ -33,7 +35,7 @@ class ImageForm extends Component {
 
     onSaveClick(e) {
         if (this.input && this.input.files && this.input.files.length) {
-            post('/api/images', this.input.files[0]);
+            uploadImage(this.input.files[0]);
         }
     }
 

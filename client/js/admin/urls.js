@@ -1,5 +1,6 @@
 const API = {
-    Dishes: '/api/dishes'
+    Dishes: '/api/dishes',
+    Images: '/api/images',
 };
 
 const LINKS = {

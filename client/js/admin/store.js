@@ -1,8 +1,9 @@
 import Store from '../store-ctor';
 
 const store = new Store({
-    dishes: []
+    dishes: [],
+    images: []
 });
-window.state = store; // TODO remove after debugging
+window.store = store; // TODO remove after debugging
 
 export default store;

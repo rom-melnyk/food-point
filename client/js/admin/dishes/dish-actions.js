@@ -14,7 +14,7 @@ function getDishes() {
 
 function createDish(data) {
     return post(API.Dishes, data)
-        .then(() => getDishes())
+        .then(getDishes)
         .then(() => route(LINKS.DishesList))
         .catch(console.error);
 }
@@ -22,7 +22,7 @@ function createDish(data) {
 
 function updateDish(id, data) {
     return put(`${API.Dishes}?id=${id}`, data)
-        .then(() => getDishes())
+        .then(getDishes)
         .then(() => route(LINKS.DishesList))
         .catch(console.error);
 }
@@ -30,7 +30,7 @@ function updateDish(id, data) {
 
 function deleteDish(id) {
     return del(`${API.Dishes}?id=${id}`)
-        .then(() => getDishes())
+        .then(getDishes)
         .catch(console.error);
 }
 

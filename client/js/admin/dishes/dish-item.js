@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import DishForm from './dish-form';
-import { deleteDish } from './actions';
+import { deleteDish } from './dish-actions';
 import { route } from 'preact-router';
 import { LINKS } from '../urls';
 

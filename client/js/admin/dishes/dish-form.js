@@ -1,10 +1,12 @@
 import { h, Component } from 'preact';
-import { updateDish, createDish } from './actions';
+import { updateDish, createDish } from './dish-actions';
 import store from '../store';
 
 const FIELDS = [ 'name', 'description', 'size', 'price' ];
 
-
+/**
+ * @stateful
+ */
 class DishForm extends Component {
     constructor() {
         super(...arguments);
@@ -85,12 +87,12 @@ class DishForm extends Component {
 
     onSaveClick(e) {
         const data = FIELDS.reduce((obj, field) => {
-            obj[field] = this.store[field];
+            obj[field] = this.state[field];
             return obj;
         }, {});
 
-        if (this.store.id) {
-            updateDish(this.store.id, data);
+        if (this.state.id) {
+            updateDish(this.state.id, data);
         } else {
             createDish(data);
         }

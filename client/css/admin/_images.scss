@@ -1,0 +1,44 @@
+@import "../constants";
+@import "../components";
+
+.admin-app .images {
+  .image-wrapper {
+    position: relative;
+    // kinda hack for square div
+    height: 0;
+    padding-bottom: 25%;
+    // -------------------------
+    border-radius: .25em;
+
+    .image {
+      position: absolute;
+      top: .25em;
+      right: .25em;
+      bottom: .25em;
+      left: .25em;
+
+      border-radius: .25em;
+      background-size: cover;
+      background-position: center;
+
+      opacity: .7;
+    }
+  }
+
+
+  &.selectable .image-wrapper {
+    transition: background-color $transition-props;
+
+    .image {
+      transition: opacity $transition-props;
+    }
+
+    &:hover {
+      background-color: $text-color;
+
+      .image {
+        opacity: 1;
+      }
+    }
+  }
+}
