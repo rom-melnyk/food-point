@@ -1,12 +1,12 @@
 import { get, post, put, del } from '../../utils/request';
 import { route } from 'preact-router';
-import state from '../state';
+import store from '../store';
 import { API, LINKS } from '../urls';
 
 function getDishes() {
     return get(API.Dishes)
         .then((dishes) => {
-            state.update('dishes', dishes);
+            store.update('dishes', dishes);
         })
         .catch(console.error);
 }

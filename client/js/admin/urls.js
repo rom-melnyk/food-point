@@ -6,7 +6,8 @@ const LINKS = {
     Home: 'admin',
     DishesList: '/admin/dishes',
     EditDish: '/admin/dishes/edit',
-    ImagesList: '/admin/images'
+    ImagesList: '/admin/images',
+    EditImages: '/admin/images/edit'
 };
 
 

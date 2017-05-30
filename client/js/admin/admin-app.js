@@ -1,38 +1,38 @@
 import { h, render, Component } from 'preact';
 import { Router } from 'preact-router';
 
-import state from './state';
+import store from './store';
 import { LINKS } from './urls';
 
 import AdminMenu from './admin-menu';
 import DishesList from './dishes/dishes-list';
 import DishForm from './dishes/dish-form';
-import ImageForm from './images/image-form';
+import ImagesList from './images/images-list';
 
 import { getDishes } from './dishes/actions';
 
 class AdminApp extends Component {
     constructor() {
         super();
-        Object.assign(this.state, state.state);
+        Object.assign(this.state, store.state);
         this._setState = this.setState.bind(this);
     }
 
     componentDidMount() {
-        state.addChangeListener(this._setState);
+        store.addChangeListener(this._setState);
     }
 
     componentWillUnmount() {
-        state.removeChangeListener(this._setState);
+        store.removeChangeListener(this._setState);
     }
 
-    render(props, { dishes }) {
+    render(props, { dishes, images }) {
         return (
             <Router>
                 <DishesList path={ LINKS.DishesList } dishes={ dishes } />
                 <DishForm path={ LINKS.EditDish } />
                 <DishForm path={ `${LINKS.EditDish}/:id` } />
-                <ImageForm path={ LINKS.ImagesList } />
+                <ImagesList path={ LINKS.ImagesList } images={ images } />
             </Router>
         );
     }

@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import { updateDish, createDish } from './actions';
-import state from '../state';
+import store from '../store';
 
 const FIELDS = [ 'name', 'description', 'size', 'price' ];
 
@@ -15,7 +15,7 @@ class DishForm extends Component {
     componentDidMount() {
         const id = this.props.id;
         if (id) {
-            this.setState( state.state.dishes.find(d => d.id === id) || {} );
+            this.setState( store.state.dishes.find(d => d.id === id) || {} );
         }
     }
 
@@ -28,12 +28,12 @@ class DishForm extends Component {
             </div>
         ));
         return (
-            <div class="form">
+            <div className="form">
                 <h1>{ header }</h1>
                 { formComps }
-                <div class="controls">
-                    <span class="button grey" onClick={ this.onBackClick }>Назад</span>
-                    <span class="button green" onClick={ this.onSaveClick }>Зберегти</span>
+                <div className="controls">
+                    <span className="button grey" onClick={ this.onBackClick }>Назад</span>
+                    <span className="button green" onClick={ this.onSaveClick }>Зберегти</span>
                 </div>
             </div>
         );
@@ -85,12 +85,12 @@ class DishForm extends Component {
 
     onSaveClick(e) {
         const data = FIELDS.reduce((obj, field) => {
-            obj[field] = this.state[field];
+            obj[field] = this.store[field];
             return obj;
         }, {});
 
-        if (this.state.id) {
-            updateDish(this.state.id, data);
+        if (this.store.id) {
+            updateDish(this.store.id, data);
         } else {
             createDish(data);
         }

@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import { post } from '../../utils/request';
-import state from '../state';
+import store from '../store';
 
 
 class ImageForm extends Component {
@@ -19,9 +19,9 @@ class ImageForm extends Component {
                         <input type="file" name="image" ref={ (i) => { this.input = i; } }/>
                     </div>
                 </div>
-                <div class="controls">
-                    <span class="button grey" onClick={ this.onBackClick }>Назад</span>
-                    <span class="button green" onClick={ this.onSaveClick }>Завантажити</span>
+                <div className="controls">
+                    <span className="button grey" onClick={ this.onBackClick }>Назад</span>
+                    <span className="button green" onClick={ this.onSaveClick }>Завантажити</span>
                 </div>
             </div>
         );
