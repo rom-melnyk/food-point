@@ -3,16 +3,16 @@ import { Router } from 'preact-router';
 
 import store from './store';
 import { LINKS } from './urls';
+import { MODES as ImageManagerModes } from './images/image-constants';
 
 import AdminMenu from './admin-menu';
-import DishesList from './dishes/dishes-list';
+import DishesManager from './dishes/dishes-manager';
 import DishForm from './dishes/dish-form';
 import ImagesManager from './images/images-manager';
 
 import { getDishes } from './dishes/dish-actions';
 import { getImages } from './images/image-actions';
 
-import { MODES as ImageManagerModes } from './images/image-constants';
 
 class AdminApp extends Component {
     constructor() {
@@ -32,7 +32,7 @@ class AdminApp extends Component {
     render(props, { dishes, images }) {
         return (
             <Router>
-                <DishesList path={ LINKS.DishesList } dishes={ dishes } />
+                <DishesManager path={ LINKS.DishesList } dishes={ dishes } />
                 <DishForm path={ LINKS.EditDish } />
                 <DishForm path={ `${LINKS.EditDish}/:id` } />
 

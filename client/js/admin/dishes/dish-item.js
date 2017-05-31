@@ -15,7 +15,7 @@ class Dish extends Component {
 
     render({ id, name, description, image, size, price, props }, state) {
         const imageComp = image
-            ? <span className="image" style={ `background-image: url(${ PATH + name });` } title={ name } />
+            ? <span className="image" style={ `background-image: url(${ PATH + image });` } title={ image } />
             : <span className="image none" />;
 
         return (

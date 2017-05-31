@@ -3,7 +3,7 @@ import Dish from './dish-item';
 import { route } from 'preact-router';
 import { LINKS } from '../urls';
 
-class DishList extends Component {
+class DishesManager extends Component {
     render({ dishes }, state) {
         const dishesComps = dishes.map(d => <Dish { ...d } />);
         const linkComp = (
@@ -28,4 +28,4 @@ class DishList extends Component {
 }
 
 
-export default DishList;
+export default DishesManager;
