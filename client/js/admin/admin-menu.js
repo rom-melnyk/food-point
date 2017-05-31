@@ -9,7 +9,7 @@ const MENU = [
     },
     {
         text: 'Зображення',
-        link: LINKS.ImagesList
+        link: LINKS.ImageManager
     },
     {
         text: 'Замовлення',

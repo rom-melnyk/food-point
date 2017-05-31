@@ -5,10 +5,12 @@ const API = {
 
 const LINKS = {
     Home: 'admin',
+
     DishesList: '/admin/dishes',
     EditDish: '/admin/dishes/edit',
-    ImagesList: '/admin/images',
-    EditImages: '/admin/images/edit'
+
+    ImagesManager: '/admin/images',
+    ImagePicker: '/admin/images/pick'
 };
 
 

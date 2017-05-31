@@ -7,11 +7,12 @@ import { LINKS } from './urls';
 import AdminMenu from './admin-menu';
 import DishesList from './dishes/dishes-list';
 import DishForm from './dishes/dish-form';
-import ImagesList from './images/images-list';
+import ImagesManager from './images/images-manager';
 
 import { getDishes } from './dishes/dish-actions';
 import { getImages } from './images/image-actions';
 
+import { MODES as ImageManagerModes } from './images/image-constants';
 
 class AdminApp extends Component {
     constructor() {
@@ -34,7 +35,9 @@ class AdminApp extends Component {
                 <DishesList path={ LINKS.DishesList } dishes={ dishes } />
                 <DishForm path={ LINKS.EditDish } />
                 <DishForm path={ `${LINKS.EditDish}/:id` } />
-                <ImagesList path={ LINKS.ImagesList } images={ images } />
+
+                <ImagesManager path={ LINKS.ImagePicker } images={ images } mode={ ImageManagerModes.Picker } />
+                <ImagesManager path={ LINKS.ImagesManager } images={ images } mode={ ImageManagerModes.Manage } />
             </Router>
         );
     }
