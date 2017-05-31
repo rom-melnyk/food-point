@@ -2,7 +2,11 @@
 @import "../components";
 
 .admin-app .images {
+  @extend .v-list;
+
   .image-wrapper {
+    @extend .hoverable;
+
     position: relative;
     // kinda hack for square div
     height: 0;
@@ -26,7 +30,7 @@
   }
 
 
-  &.selectable .image-wrapper {
+  &.picker .image-wrapper {
     transition: background-color $transition-props;
 
     .image {

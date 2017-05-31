@@ -42,17 +42,33 @@ textarea {
   text-align: center;
   font-size: $x-small-text;
 
-  &.hover-controls {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    bottom: -5em;
-    padding: 1em;
-    border-radius: .5em;
-    background-color: transparentize($bg-color, .3);
-    transition: bottom $transition-props;
+}
+
+
+.hover-controls {
+  @extend .controls;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: -5em;
+  padding: 1em;
+  border-radius: .5em;
+  background-color: transparentize($bg-color, .3);
+  transition: bottom $transition-props;
+}
+
+
+.has-hover-controls {
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    .hover-controls {
+      bottom: 0;
+    }
   }
 }
+
 
 
 .form {

@@ -11,9 +11,7 @@
     margin-right: -.5em;
     margin-left: -.5em;
 
-    position: relative;
     padding: .5em;
-    overflow: hidden;
 
     .size {
       font-style: italic;
@@ -22,12 +20,6 @@
     .description {
       margin: 1em 0;
       font-size: $x-small-text;
-    }
-
-    &:hover {
-      .hover-controls {
-        bottom: 0;
-      }
     }
   }
 }

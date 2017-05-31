@@ -37,7 +37,7 @@ class AdminApp extends Component {
                 <DishForm path={ `${LINKS.EditDish}/:id` } />
 
                 <ImagesManager path={ LINKS.ImagePicker } images={ images } mode={ ImageManagerModes.Picker } />
-                <ImagesManager path={ LINKS.ImagesManager } images={ images } mode={ ImageManagerModes.Manage } />
+                <ImagesManager path={ LINKS.ImagesManager } images={ images } mode={ ImageManagerModes.Manager } />
             </Router>
         );
     }

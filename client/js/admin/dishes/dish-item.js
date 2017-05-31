@@ -14,7 +14,7 @@ class Dish extends Component {
 
     render({ id, name, description, image, size, price, props }, state) {
         return (
-            <div className="dish">
+            <div className="dish has-hover-controls">
                 <div className="row">
                     <div className="column-3">
                         <span className="name">{ name }</span>
@@ -26,7 +26,7 @@ class Dish extends Component {
                         <div className="price">{ price }</div>
                     </div>
                 </div>
-                <div className="controls hover-controls">
+                <div className="hover-controls">
                     <span className="button blue info" onClick={ this.onEditClick }>Edit</span>
                     <span className="button red error" onClick={ this.onDelClick }>Delete</span>
                 </div>

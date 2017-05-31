@@ -1,5 +1,5 @@
 const MODES = {
-    Manage: 'manager',
+    Manager: 'manager',
     Picker: 'picker'
 };
 const PATH = '/gfx/uploaded/';

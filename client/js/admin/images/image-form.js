@@ -35,7 +35,13 @@ class ImageForm extends Component {
 
     onSaveClick(e) {
         if (this.input && this.input.files && this.input.files.length) {
-            uploadImage(this.input.files[0]);
+            uploadImage(this.input.files[0])
+                .then((res) => {
+                    if (res) {
+                        this.input.value = '';
+                    }
+                })
+                .catch(console.error);
         }
     }
 

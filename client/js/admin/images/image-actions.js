@@ -15,8 +15,14 @@ function getImages() {
 function uploadImage(data) {
     return post(API.Images, data)
         .then(getImages)
-        .then(() => route(LINKS.ImagesList))
-        .catch(console.error);
+        .then(() => {
+            route(LINKS.ImagePicker);
+            return true;
+        })
+        .catch((e) => {
+            console.error(e);
+            return false;
+        });
 }
 
 
