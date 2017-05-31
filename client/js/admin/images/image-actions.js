@@ -15,10 +15,6 @@ function getImages() {
 function uploadImage(data) {
     return post(API.Images, data)
         .then(getImages)
-        .then(() => {
-            route(LINKS.ImagePicker);
-            return true;
-        })
         .catch((e) => {
             console.error(e);
             return false;
@@ -33,8 +29,14 @@ function deleteImage(name) {
 }
 
 
+function selectImage(name) {
+    store.update('image-picker', name);
+}
+
+
 export {
     getImages,
     uploadImage,
-    deleteImage
+    deleteImage,
+    selectImage
 };

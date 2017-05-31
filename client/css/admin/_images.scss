@@ -2,7 +2,9 @@
 @import "../components";
 
 .admin-app .images {
-  @extend .v-list;
+  .row {
+    margin-bottom: .75em;
+  }
 
   .image-wrapper {
     @extend .hoverable;
@@ -31,6 +33,7 @@
 
 
   &.picker .image-wrapper {
+    cursor: pointer;
     transition: background-color $transition-props;
 
     .image {

@@ -16,7 +16,7 @@ class ImageForm extends Component {
         return (
             <div className="form" >
                 <div className="row">
-                    <div className="label column-1">Файл</div>
+                    <div className="label column-1">Додати зображення:</div>
                     <div className="column-3">
                         <input type="file" name="image" ref={ (i) => { this.input = i; } }/>
                     </div>
@@ -37,7 +37,7 @@ class ImageForm extends Component {
         if (this.input && this.input.files && this.input.files.length) {
             uploadImage(this.input.files[0])
                 .then((res) => {
-                    if (res) {
+                    if (res !== false) {
                         this.input.value = '';
                     }
                 })

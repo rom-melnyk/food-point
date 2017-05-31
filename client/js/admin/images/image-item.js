@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import { MODES, PATH } from './image-constants';
-import { deleteImage } from './image-actions';
+import { deleteImage, selectImage } from './image-actions';
 
 class Image extends Component {
     constructor() {
@@ -21,7 +21,7 @@ class Image extends Component {
             : null;
 
         return (
-            <div className={ className }>
+            <div className={ className } onClick={ this.onSelectClick }>
                 <span className="image" style={ `background-image: url(${ PATH + name });` } title={ name }/>
                 { controlsComp }
             </div>
@@ -34,7 +34,8 @@ class Image extends Component {
 
     onSelectClick(e) {
         if (this.props.mode === MODES.Picker) {
-            console.info(`"${this.props.name}" selected`);
+            selectImage(this.props.name);
+            history.back();
         }
     }
 }
