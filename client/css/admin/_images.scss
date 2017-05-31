@@ -1,51 +1,70 @@
 @import "../constants";
 @import "../components";
 
+
 .admin-app .images {
   .row {
     margin-bottom: .75em;
   }
+}
 
-  .image-wrapper {
-    @extend .hoverable;
 
-    position: relative;
-    // kinda hack for square div
-    height: 0;
-    padding-bottom: 25%;
-    // -------------------------
+.image-wrapper {
+  position: relative;
+  // kinda hack for square div
+  height: 0;
+  padding-bottom: 25%;
+  // -------------------------
+  border-radius: .25em;
+
+
+  .image {
+    position: absolute;
+    top: .25em;
+    right: .25em;
+    bottom: .25em;
+    left: .25em;
+
     border-radius: .25em;
+    background-size: cover;
+    background-position: center;
 
-    .image {
-      position: absolute;
-      top: .25em;
-      right: .25em;
-      bottom: .25em;
-      left: .25em;
+    opacity: .7;
 
-      border-radius: .25em;
-      background-size: cover;
-      background-position: center;
-
-      opacity: .7;
+    &.none {
+      background-color: lighten($bg-color, 30%);
     }
   }
+}
 
 
-  &.picker .image-wrapper {
-    cursor: pointer;
-    transition: background-color $transition-props;
+.picker .image-wrapper {
+  cursor: pointer;
+  transition: background-color $transition-props;
+
+  .image {
+    transition: opacity $transition-props;
+  }
+
+  &:hover {
+    background-color: $text-color;
 
     .image {
-      transition: opacity $transition-props;
+      opacity: 1;
     }
+  }
+}
 
-    &:hover {
-      background-color: $text-color;
 
-      .image {
-        opacity: 1;
-      }
-    }
+// override for form psuedo-field
+.form .image-wrapper {
+  width: 33.3333%;
+  padding-bottom: 33.3333%;
+
+  .image {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 }

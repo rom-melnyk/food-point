@@ -13,6 +13,10 @@
 
     padding: .5em;
 
+    .all-text {
+      padding-left: .25em;
+    }
+
     .size {
       font-style: italic;
     }
@@ -20,6 +24,10 @@
     .description {
       margin: 1em 0;
       font-size: $x-small-text;
+    }
+
+    .price {
+      text-align: right;
     }
   }
 }

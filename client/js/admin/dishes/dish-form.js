@@ -1,8 +1,14 @@
 import { h, Component } from 'preact';
+
+import { route } from 'preact-router';
 import { updateDish, createDish } from './dish-actions';
+
 import store from '../store';
 
-const FIELDS = [ 'name', 'description', 'size', 'price' ];
+import { LINKS } from '../urls';
+import { PATH } from '../images/image-constants';
+
+const FIELDS = [ 'name', 'description', 'size', 'price', 'image' ];
 
 /**
  * @stateful
@@ -34,8 +40,8 @@ class DishForm extends Component {
                 <h1>{ header }</h1>
                 { formComps }
                 <div className="controls">
-                    <span className="button grey" onClick={ this.onBackClick }>Назад</span>
-                    <span className="button green" onClick={ this.onSaveClick }>Зберегти</span>
+                    <span className="button grey back" onClick={ this.onBackClick }>Назад</span>
+                    <span className="button green save" onClick={ this.onSaveClick }>Зберегти</span>
                 </div>
             </div>
         );
@@ -46,7 +52,8 @@ class DishForm extends Component {
             name: 'Назва',
             description: 'Опис',
             size: 'Порція',
-            price: 'Ціна'
+            price: 'Ціна',
+            image: 'Зображення'
         })[field] || field;
     }
 
@@ -69,6 +76,28 @@ class DishForm extends Component {
                     onInput={ e => this.setState({ [field]: e.target.value }) }
                 />
             );
+            case 'image': {
+                const imageControlsComps = (
+                    <div className="hover-controls">
+                        <span className="button blue pick" onClick={ () => route(LINKS.ImagePicker) }>...</span>
+                        {
+                            value
+                                ? <span className="button red delete" onClick={ () => this.setState({ image: undefined }) }>X</span>
+                                : null
+                        }
+                    </div>
+                );
+                const imageComp = value
+                    ? <span className="image" style={ `background-image: url(${ PATH + name });` } title={ name } />
+                    : <span className="image none" />;
+
+                return (
+                    <div className="image-wrapper has-hover-controls">
+                        { imageComp }
+                        { imageControlsComps }
+                    </div>
+                );
+            }
             default:
         }
         return (

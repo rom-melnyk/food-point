@@ -3,6 +3,7 @@ import DishForm from './dish-form';
 import { deleteDish } from './dish-actions';
 import { route } from 'preact-router';
 import { LINKS } from '../urls';
+import { PATH } from '../images/image-constants';
 
 
 class Dish extends Component {
@@ -13,10 +14,17 @@ class Dish extends Component {
     }
 
     render({ id, name, description, image, size, price, props }, state) {
+        const imageComp = image
+            ? <span className="image" style={ `background-image: url(${ PATH + name });` } title={ name } />
+            : <span className="image none" />;
+
         return (
             <div className="dish has-hover-controls">
                 <div className="row">
-                    <div className="column-3">
+                    <div className="column-1 image-wrapper">
+                        { imageComp }
+                    </div>
+                    <div className="column-2 all-text">
                         <span className="name">{ name }</span>
                         { size ? ', ' : '' }
                         <span className="size">{ size }</span>
@@ -27,8 +35,8 @@ class Dish extends Component {
                     </div>
                 </div>
                 <div className="hover-controls">
-                    <span className="button blue info" onClick={ this.onEditClick }>Edit</span>
-                    <span className="button red error" onClick={ this.onDelClick }>Delete</span>
+                    <span className="button blue edit" onClick={ this.onEditClick }>Edit</span>
+                    <span className="button red delete" onClick={ this.onDelClick }>Delete</span>
                 </div>
             </div>
         );

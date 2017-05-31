@@ -52,7 +52,6 @@ textarea {
   width: 100%;
   bottom: -5em;
   padding: 1em;
-  border-radius: .5em;
   background-color: transparentize($bg-color, .3);
   transition: bottom $transition-props;
 }
