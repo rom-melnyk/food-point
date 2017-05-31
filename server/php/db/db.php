@@ -32,6 +32,11 @@ function query($query = '') {
 
     $result_array = array();
     while ($row = $result->fetch_assoc()) {
+        foreach ($row as $key => $value) {
+            if (is_numeric($value)) {
+                $row[$key] = (int) $value;
+            }
+        }
         array_push($result_array, $row);
     }
     return $result_array;
