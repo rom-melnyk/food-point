@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $dish = file_get_contents('php://input');
     $dish = json_decode($dish);
 
-    $result = $dish ? create_dish($dish) : generate_error('Input not parseable as JSON');
+    $result = $dish ? create_dish($dish) : generate_error('Input not parsable as JSON');
 } else if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     if (array_key_exists('id', $_REQUEST)) {
         $dish = file_get_contents('php://input');
