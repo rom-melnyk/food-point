@@ -18,15 +18,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $result = array_key_exists('id', $_REQUEST) ? get_dish_group($_REQUEST['id']) : get_dish_groups();
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $group = file_get_contents('php://input');
-    $group = json_decode($group);
+    $group = json_decode($group, true);
 
-    $result = $group ? create_dish_group($group) : generate_error('Input not parsable as JSON');
+    $result = is_array($group)
+        ? count($group)
+            ? create_dish_group($group)
+            : generate_error('Nothing to update')
+        : generate_error('Input not parsable as JSON');
 } else if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     if (array_key_exists('id', $_REQUEST)) {
         $group = file_get_contents('php://input');
-        $group = json_decode($group);
+        $group = json_decode($group, true);
         
-        $result = update_dish_group($_REQUEST['id'], $group);
+        $result = is_array($group)
+        ? count($group)
+            ? update_dish_group($_REQUEST['id'], $group)
+            : generate_error('Nothing to update')
+        : generate_error('Input not parsable as JSON');
     } else {
         $result = generate_error('"id" param is missing');
     }

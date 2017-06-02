@@ -26,7 +26,7 @@ class Dish extends Component {
                     </div>
                     <div className="column-2 all-text">
                         <span className="name">{ name }</span>
-                        <span className="size">{ size }</span>
+                        { size ? <span className="size">{ size }</span> : null }
                         <div className="description">{ description }</div>
                     </div>
                     <div className="column-1">

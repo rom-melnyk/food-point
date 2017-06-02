@@ -45,15 +45,11 @@ function query($query = '') {
 
 function sanitize($value, $wrap_in_quotes = TRUE) {
     global $mysqli;
-    if (is_numeric($value)) {
-        return $value;
-    } else {
-        $value = $mysqli->escape_string($value);
-        if ($wrap_in_quotes) {
-            $value = "'$value'";
-        }
-        return $value;
+    $value = $mysqli->escape_string($value);
+    if ($wrap_in_quotes) {
+        $value = "'$value'";
     }
+    return $value;
 }
 
 

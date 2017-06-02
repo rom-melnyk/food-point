@@ -18,15 +18,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $result = array_key_exists('id', $_REQUEST) ? get_dish($_REQUEST['id']) : get_dishes();
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dish = file_get_contents('php://input');
-    $dish = json_decode($dish);
+    $dish = json_decode($dish, true);
 
-    $result = $dish ? create_dish($dish) : generate_error('Input not parsable as JSON');
+    $result = is_array($dish)
+        ? count($dish)
+            ? create_dish($dish)
+            : generate_error('Nothing to update')
+        : generate_error('Input not parsable as JSON');
 } else if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     if (array_key_exists('id', $_REQUEST)) {
         $dish = file_get_contents('php://input');
-        $dish = json_decode($dish);
-        
-        $result = update_dish($_REQUEST['id'], $dish);
+        $dish = json_decode($dish, true);
+
+        $result = is_array($dish)
+            ? count($dish)
+                ? update_dish($_REQUEST['id'], $dish)
+                : generate_error('Nothing to update')
+            : generate_error('Input not parsable as JSON');
     } else {
         $result = generate_error('"id" param is missing');
     }

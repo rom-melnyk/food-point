@@ -72,8 +72,8 @@ class GroupForm extends Component {
     }
 
     onSaveClick(e) {
-        const data = FIELDS.reduce((obj, field) => {
-            obj[field] = this.state[field];
+        const data = FIELDS.reduce((obj, { name }) => {
+            obj[name] = this.state[name];
             return obj;
         }, {});
 
