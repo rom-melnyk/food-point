@@ -8,9 +8,11 @@ import { MODES as ImageManagerModes } from './images/image-constants';
 import AdminMenu from './admin-menu';
 import DishesManager from './dishes/dishes-manager';
 import DishForm from './dishes/dish-form';
+import GroupForm from './dishes/group-form';
 import ImagesManager from './images/images-manager';
 
 import { getDishes } from './dishes/dish-actions';
+import { getGroups } from './dishes/group-actions';
 import { getImages } from './images/image-actions';
 
 
@@ -35,6 +37,7 @@ class AdminApp extends Component {
                 <DishesManager path={ LINKS.DishesList } dishes={ dishes } />
                 <DishForm path={ LINKS.EditDish } />
                 <DishForm path={ `${LINKS.EditDish}/:id` } />
+                <GroupForm path={ `${LINKS.EditGroup}` } />
 
                 <ImagesManager path={ LINKS.ImagePicker } images={ images } mode={ ImageManagerModes.Picker } />
                 <ImagesManager path={ LINKS.ImagesManager } images={ images } mode={ ImageManagerModes.Manager } />
@@ -56,6 +59,7 @@ function startAdminApp() {
 
     // prepare state
     getDishes();
+    getGroups();
     getImages();
 }
 

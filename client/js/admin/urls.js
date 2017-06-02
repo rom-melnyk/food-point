@@ -1,6 +1,7 @@
 const API = {
     Dishes: '/api/dishes',
     Images: '/api/images',
+    Groups: '/api/dish-groups',
 };
 
 const LINKS = {
@@ -11,7 +12,7 @@ const LINKS = {
     EditGroup: '/admin/groups/edit',
 
     ImagesManager: '/admin/images',
-    ImagePicker: '/admin/images/pick'
+    ImagePicker: '/admin/images/pick',
 };
 
 

@@ -12,7 +12,7 @@ class DishesManager extends Component {
                     Додати страву
                 </span>
                 <span className="button green" onClick={ this.onAddGroupClick }>
-                    Додати страву
+                    Додати групу
                 </span>
             </div>
         );

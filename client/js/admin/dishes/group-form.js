@@ -9,13 +9,17 @@ import store from '../store';
 import { LINKS } from '../urls';
 
 
-const FIELDS = [ 'name', 'description', 'size', 'price', 'image' ];
+const FIELDS = [
+    { name: 'name', label: 'Назва' },
+    { name: 'description', label: 'Опис' },
+    { name: 'image', label: 'Зображення' }
+];
 let editState = null;
 
 /**
  * @stateful
  */
-class DishForm extends Component {
+class GroupForm extends Component {
     constructor() {
         super(...arguments);
         this.onBackClick = this.onBackClick.bind(this);
@@ -40,13 +44,8 @@ class DishForm extends Component {
     }
 
     render(props, state) {
-        const header = state.id ? 'Редагувати страву' : 'Створити страву';
-        const formComps = FIELDS.map(field => (
-            <div className="row">
-                <div className="label column-1">{ this.getFormLabelName(field) }</div>
-                <div className="column-3">{ this.getFormInputElement(field, state[field]) }</div>
-            </div>
-        ));
+        const header = state.id ? 'Редагувати групу' : 'Створити групу';
+        const formComps = FIELDS.map( ({ name, label }) => this.getFormInputElement(name, label, state[name]) );
         return (
             <div className="form">
                 <h1>{ header }</h1>
@@ -59,24 +58,13 @@ class DishForm extends Component {
         );
     }
 
-    getFormLabelName(field) {
-        return ({
-            name: 'Назва',
-            description: 'Опис',
-            size: 'Порція',
-            price: 'Ціна',
-            image: 'Зображення'
-        })[field] || field;
-    }
-
-    getFormInputElement(field, value) {
-        switch (field) {
-            case 'description': return <Textarea name="description" value={ value } parent={ this } />;
-            case 'price': return <NumberInput name="price" value={ value } parent={ this } />;
-            case 'image': return <ImageInput name="image" image={ value } parent={ this } onPick={ this.onImagePickerClick } />;
+    getFormInputElement(name, label, value) {
+        switch (name) {
+            case 'description': return <Textarea name={ name } label={ label } value={ value } parent={ this } />;
+            case 'image': return <ImageInput name={ name } label={ label } image={ value } parent={ this } onPick={ this.onImagePickerClick } />;
             default:
         }
-        return <TextInput name={ field } value={ value } parent={ this } />;
+        return <TextInput name={ name } label={ label } value={ value } parent={ this } />;
     }
 
     onBackClick(e) {
@@ -103,4 +91,4 @@ class DishForm extends Component {
 }
 
 
-export default DishForm;
+export default GroupForm;
