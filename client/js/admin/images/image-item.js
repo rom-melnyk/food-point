@@ -11,7 +11,7 @@ class Image extends Component {
 
     render({ name, mode = MODES.Manager }, { selected }) {
         const isManager = mode === MODES.Manager;
-        const className = 'column-1 image-wrapper hoverable' + (isManager ? ' has-hover-controls' : '');
+        const className = ' image-wrapper hoverable' + (isManager ? ' has-hover-controls' : '');
         const controlsComp = isManager
             ? (
                 <div className="hover-controls">
@@ -21,9 +21,11 @@ class Image extends Component {
             : null;
 
         return (
-            <div className={ className } onClick={ this.onSelectClick }>
-                <span className="image" style={ `background-image: url(${ PATH + name });` } title={ name } />
-                { controlsComp }
+            <div className="column-1">
+                <div className={ className } onClick={ this.onSelectClick }>
+                    <span className="image" style={ `background-image: url(${ PATH + name });` } title={ name } />
+                    { controlsComp }
+                </div>
             </div>
         );
     }

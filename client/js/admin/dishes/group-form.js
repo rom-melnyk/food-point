@@ -9,13 +9,7 @@ import store from '../store';
 import { LINKS } from '../urls';
 
 
-const FIELDS = [
-    { name: 'name', label: 'Назва' },
-    { name: 'description', label: 'Опис' },
-    { name: 'size', label: 'Порція' },
-    { name: 'price', label: 'Ціна' },
-    { name: 'image', label: 'Зображення' }
-];
+const FIELDS = [ 'name', 'description', 'size', 'price', 'image' ];
 let editState = null;
 
 /**
@@ -47,7 +41,12 @@ class DishForm extends Component {
 
     render(props, state) {
         const header = state.id ? 'Редагувати страву' : 'Створити страву';
-        const formComps = FIELDS.map( ({ name, label }) => this.getFormInputElement(name, label, state[name]) );
+        const formComps = FIELDS.map(field => (
+            <div className="row">
+                <div className="label column-1">{ this.getFormLabelName(field) }</div>
+                <div className="column-3">{ this.getFormInputElement(field, state[field]) }</div>
+            </div>
+        ));
         return (
             <div className="form">
                 <h1>{ header }</h1>
@@ -60,14 +59,24 @@ class DishForm extends Component {
         );
     }
 
-    getFormInputElement(name, label, value) {
-        switch (name) {
-            case 'description': return <Textarea name={ name } label={ label } value={ value } parent={ this } />;
-            case 'price': return <NumberInput name={ name } label={ label } value={ value } parent={ this } />;
-            case 'image': return <ImageInput name={ name } label={ label } image={ value } parent={ this } onPick={ this.onImagePickerClick } />;
+    getFormLabelName(field) {
+        return ({
+            name: 'Назва',
+            description: 'Опис',
+            size: 'Порція',
+            price: 'Ціна',
+            image: 'Зображення'
+        })[field] || field;
+    }
+
+    getFormInputElement(field, value) {
+        switch (field) {
+            case 'description': return <Textarea name="description" value={ value } parent={ this } />;
+            case 'price': return <NumberInput name="price" value={ value } parent={ this } />;
+            case 'image': return <ImageInput name="image" image={ value } parent={ this } onPick={ this.onImagePickerClick } />;
             default:
         }
-        return <TextInput name={ name } label={ label } value={ value } parent={ this } />;
+        return <TextInput name={ field } value={ value } parent={ this } />;
     }
 
     onBackClick(e) {

@@ -8,7 +8,10 @@ class DishesManager extends Component {
         const dishesComps = dishes.map(d => <Dish { ...d } />);
         const linkComp = (
             <div className="controls">
-                <span className="button green" onClick={ this.onAddClick }>
+                <span className="button green" onClick={ this.onAddDishClick }>
+                    Додати страву
+                </span>
+                <span className="button green" onClick={ this.onAddGroupClick }>
                     Додати страву
                 </span>
             </div>
@@ -22,8 +25,12 @@ class DishesManager extends Component {
         );
     }
 
-    onAddClick(e) {
+    onAddDishClick(e) {
         route(LINKS.EditDish);
+    }
+
+    onAddGroupClick(e) {
+        route(LINKS.EditGroup);
     }
 }
 

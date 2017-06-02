@@ -3,8 +3,8 @@
 
 
 .admin-app .images {
-  .row {
-    margin-bottom: .75em;
+  & > .row {
+    margin: 0 -.25em .75em -.25em;
   }
 }
 
@@ -12,18 +12,19 @@
 .image-wrapper {
   position: relative;
   // kinda hack for square div
+  width: 100%;
   height: 0;
-  padding-bottom: 25%;
+  padding-bottom: 100%;
   // -------------------------
   border-radius: .25em;
 
 
   .image {
     position: absolute;
-    top: .25em;
-    right: .25em;
-    bottom: .25em;
-    left: .25em;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
     border-radius: .25em;
     background-size: cover;
@@ -43,6 +44,11 @@
   transition: background-color $transition-props;
 
   .image {
+    top: .25em;
+    right: .25em;
+    bottom: .25em;
+    left: .25em;
+
     transition: opacity $transition-props;
   }
 
@@ -58,13 +64,10 @@
 
 // override for form psuedo-field
 .form .image-wrapper {
-  width: 33.3333%;
-  padding-bottom: 33.3333%;
-
   .image {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    //top: 0;
+    //right: 0;
+    //bottom: 0;
+    //left: 0;
   }
 }

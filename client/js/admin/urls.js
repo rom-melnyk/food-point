@@ -8,6 +8,7 @@ const LINKS = {
 
     DishesList: '/admin/dishes',
     EditDish: '/admin/dishes/edit',
+    EditGroup: '/admin/groups/edit',
 
     ImagesManager: '/admin/images',
     ImagePicker: '/admin/images/pick'
