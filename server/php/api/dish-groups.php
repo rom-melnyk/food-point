@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/data-models/dish-group-model.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/api/api-helpers.php';
 
-header('Content-Type: application/json; charset=utf-8');
 $result = null;
 
 /******************************************
@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $result = is_array($group)
         ? count($group)
             ? create_dish_group($group)
-            : generate_error('Nothing to update')
-        : generate_error('Input not parsable as JSON');
+            : generate_api_error('Nothing to update')
+        : generate_api_error('Input not parsable as JSON');
 } else if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     if (array_key_exists('id', $_REQUEST)) {
         $group = file_get_contents('php://input');
@@ -33,28 +33,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $result = is_array($group)
         ? count($group)
             ? update_dish_group($_REQUEST['id'], $group)
-            : generate_error('Nothing to update')
-        : generate_error('Input not parsable as JSON');
+            : generate_api_error('Nothing to update')
+        : generate_api_error('Input not parsable as JSON');
     } else {
-        $result = generate_error('"id" param is missing');
+        $result = generate_api_error('"id" param is missing');
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    $result = array_key_exists('id', $_REQUEST) ? delete_dish_group($_REQUEST['id']) : generate_error('Missing "id" param in the URL');
+    $result = array_key_exists('id', $_REQUEST) ? delete_dish_group($_REQUEST['id']) : generate_api_error('Missing "id" param in the URL');
 }
 
 
-$result = array_key_exists('error', $result) && $result['error']
-    ? generate_error($result)
-    : $result;
 echo json_encode($result);
-
-
-// --------------------------------- helpers ---------------------------------
-function generate_error($info) {
-    return array(
-        'error' => TRUE,
-        'debug' => $info
-    );
-}
 
 ?>

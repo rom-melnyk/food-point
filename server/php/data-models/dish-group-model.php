@@ -1,20 +1,38 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/db/db.php';
 
+// ------------------------------- helpers -------------------------------
+function children_to_array($group) {
+    $children = explode(',', $group['children']);
+    $group['children'] = array_map(function ($val) { return is_numeric($val) ? (int) $val : $val; }, $children);
+    return $group;
+}
+// -----------------------------------------------------------------------
+
+
 function get_dish_groups() {
     $query = 'SELECT * FROM dish_groups;';
     $result = db\query($query);
     // make sure the root is always there
+    // not very pure but app-safe
     if (!count($result)) {
         create_dish_group(array('name' => '/'));
+        $result = db\query($query);
     }
-    return db\query($query);
+
+    return array_key_exists('error', $result)
+        ? $result
+        : array_map('children_to_array', $result);
 }
 
 
 function get_dish_group($id) {
     $query = 'SELECT * FROM dish_groups WHERE id = ' . db\sanitize($id) . ';';
-    return db\query($query);
+    $result = db\query($query);
+
+    return array_key_exists('error', $result) || !count($result)
+        ? $result
+        : children_to_array($result[0]);
 }
 
 
@@ -38,6 +56,9 @@ function update_dish_group($id, $group) {
     $values = array();
 
     foreach ($group as $column => $value) {
+        if ($column === 'children' && is_array($value)) {
+            $value = implode(',', $value);
+        }
         array_push($values, db\sanitize($column, FALSE) . '=' . db\sanitize($value));
     }
     $values = implode(', ', $values);
@@ -48,6 +69,7 @@ function update_dish_group($id, $group) {
 
 
 function delete_dish_group($id) {
+    // TODO move dishes and groups to parent before deleting
     $query = 'DELETE FROM dish_groups WHERE id = ' . db\sanitize($id) . ';';
     return db\query($query);
 }
