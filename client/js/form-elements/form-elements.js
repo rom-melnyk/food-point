@@ -99,7 +99,31 @@ class ImageInput extends Component {
             </div>
         );
     }
+}
 
+
+class GroupInput extends Component {
+    constructor({ name, parent, groups, onInput }) {
+        super(...arguments);
+        this.onInput = generateOnInputHandler(name, parent, onInput);
+        this.groups = groups;
+    }
+
+    render({ name, label, value = '' }, state) {
+        label = label || name;
+        // value = value || (this.groups[0] && this.groups[0].id);
+        const optionsComps = this.groups.map(o => <option value={o.id }>{ o.name === '/' ? '[ Меню ]' : o.name }</option>);
+        return (
+            <div className="row">
+                <div className="label column-1">{ label }</div>
+                <div className="column-3">
+                    <select name={ name } value={ value } onInput={ this.onInput }>
+                        { optionsComps }
+                    </select>
+                </div>
+            </div>
+        );
+    }
 }
 
 
@@ -107,5 +131,6 @@ export {
     Textarea,
     TextInput,
     NumberInput,
+    GroupInput,
     ImageInput
 };

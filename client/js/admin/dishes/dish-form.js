@@ -33,7 +33,13 @@ class DishForm extends Component {
     componentDidMount() {
         const id = +this.props.id;
         if (id) {
-            this.setState( store.state.dishes.find(d => d.id === id) || {} );
+            const dish = store.state.dishes.find(d => d.id === id) || {};
+            const parent = store.state.groups.find(g => g.items.indexOf(dish.id) !== -1) || {};
+            this.setState( dish );
+            this.setState({ group: parent.id });
+        } else {
+            const root = store.state.groups.find(g => g.name === '/');
+            this.setState({ group: root.id });
         }
         if (editState) {
             this.setState(editState);
@@ -65,7 +71,7 @@ class DishForm extends Component {
             case 'description': return <Textarea name={ name } label={ label } value={ value } parent={ this } />;
             case 'price': return <NumberInput name={ name } label={ label } value={ value } parent={ this } />;
             case 'image': return <ImageInput name={ name } label={ label } image={ value } parent={ this } onPick={ this.onImagePickerClick } />;
-            case 'group': return <GroupInput name={ name } label={ label } value={ value } groups={ this.props.groups } parent={ this } />;
+            case 'group': return <GroupInput name={ name } label={ label } value={ value } groups={ store.state.groups } parent={ this } />;
             default:
         }
         return <TextInput name={ name } label={ label } value={ value } parent={ this } />;
@@ -77,7 +83,9 @@ class DishForm extends Component {
 
     onSaveClick(e) {
         const data = FIELDS.reduce((obj, { name }) => {
-            obj[name] = this.state[name];
+            if (name !== 'group') {
+                obj[ name ] = this.state[ name ];
+            }
             return obj;
         }, {});
 

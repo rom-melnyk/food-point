@@ -4,10 +4,10 @@ import { API, LINKS } from '../urls';
 
 
 function getDishesStructure() {
-    return get(API.DishesStructure)
-        .then((structure) => {
+    return Promise.all([ get(API.DishesStructure), get(API.Dishes), get(API.Groups) ])
+        .then(([structure, dishes, groups ]) => {
             store.update('dishes-structure', structure);
-            const { dishes, groups } = getPlainGroupsAndDishes(structure);
+            // const { dishes, groups } = getPlainGroupsAndDishes(structure);
             store.update('dishes', dishes);
             store.update('groups', groups);
         })
@@ -19,6 +19,7 @@ export { getDishesStructure };
 
 
 // ------------------------- helpers -------------------------
+/**
 const GROUP_FIELDS = [ 'id', 'name', 'description', 'image' ];
 const DISH_FIELDS = [ 'id', 'name', 'description', 'image', 'size', 'price', 'props' ];
 
@@ -54,3 +55,4 @@ function createDataItem(fieldset, data, parent) {
     group.parent = parent;
     return group;
 }
+**/

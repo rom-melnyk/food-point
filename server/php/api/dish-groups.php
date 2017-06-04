@@ -43,6 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 
-echo json_encode($result);
+send_api_output($result);
 
 ?>
