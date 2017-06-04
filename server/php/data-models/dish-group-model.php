@@ -2,9 +2,9 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/db/db.php';
 
 // ------------------------------- helpers -------------------------------
-function children_to_array($group) {
-    $children = explode(',', $group['children']);
-    $group['children'] = array_map(function ($val) { return is_numeric($val) ? (int) $val : $val; }, $children);
+function items_to_array($group) {
+    $items = explode(',', $group['items']);
+    $group['items'] = array_map(function ($val) { return is_numeric($val) ? (int) $val : $val; }, $items);
     return $group;
 }
 // -----------------------------------------------------------------------
@@ -22,7 +22,7 @@ function get_dish_groups() {
 
     return array_key_exists('error', $result)
         ? $result
-        : array_map('children_to_array', $result);
+        : array_map('items_to_array', $result);
 }
 
 
@@ -32,7 +32,7 @@ function get_dish_group($id) {
 
     return array_key_exists('error', $result) || !count($result)
         ? $result
-        : children_to_array($result[0]);
+        : items_to_array($result[0]);
 }
 
 
@@ -56,7 +56,7 @@ function update_dish_group($id, $group) {
     $values = array();
 
     foreach ($group as $column => $value) {
-        if ($column === 'children' && is_array($value)) {
+        if ($column === 'items' && is_array($value)) {
             $value = implode(',', $value);
         }
         array_push($values, db\sanitize($column, FALSE) . '=' . db\sanitize($value));

@@ -1,8 +1,29 @@
 @import "../constants";
 @import "../components";
 
-.admin-app {
-  .dishes {
+.admin-app > .dishes {
+  @extend .v-list;
+
+  // don't show wrapper for root group
+  .group .group {
+    $group-border: 2px dashed lighten($bg-color, 30%);
+
+    margin-bottom: 2em;
+    border-radius: .25em;
+    border: $group-border;
+
+    .group-data {
+      margin-bottom: .25em;
+      border-bottom: $group-border;
+      padding: .5em;
+    }
+
+    .group-items {
+      padding: 0 .5em .5em .5em;
+    }
+  }
+
+  .group-items {
     @extend .v-list;
   }
 

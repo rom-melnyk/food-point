@@ -36,7 +36,6 @@ class GroupForm extends Component {
             this.setState(editState);
             editState = null;
         }
-        this.setState
         if (store.state['image-picker']) {
             this.setState({ image: store.state['image-picker'] });
             selectImage(null);

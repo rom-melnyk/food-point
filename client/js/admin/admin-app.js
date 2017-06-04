@@ -30,16 +30,16 @@ class AdminApp extends Component {
         store.removeChangeListener(this._setState);
     }
 
-    render(props, { dishes, images }) {
+    render(props, state) {
         return (
             <Router>
-                <DishesManager path={ LINKS.DishesList } dishes={ dishes } />
+                <DishesManager path={ LINKS.DishesList } dishesStructure={ state['dishes-structure'] } />
                 <DishForm path={ LINKS.EditDish } />
                 <DishForm path={ `${LINKS.EditDish}/:id` } />
                 <GroupForm path={ `${LINKS.EditGroup}` } />
 
-                <ImagesManager path={ LINKS.ImagePicker } images={ images } mode={ ImageManagerModes.Picker } />
-                <ImagesManager path={ LINKS.ImagesManager } images={ images } mode={ ImageManagerModes.Manager } />
+                <ImagesManager path={ LINKS.ImagePicker } images={ state.images } mode={ ImageManagerModes.Picker } />
+                <ImagesManager path={ LINKS.ImagesManager } images={ state.images } mode={ ImageManagerModes.Manager } />
             </Router>
         );
     }

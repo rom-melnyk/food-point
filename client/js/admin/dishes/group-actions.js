@@ -27,6 +27,8 @@ function updateGroup(id, data, shouldNavigate = true) {
 
 
 function deleteGroup(id) {
+    console.log('// TODO move dishes to parent');
+    return;
     return del(`${API.Groups}?id=${id}`)
         .then(getDishesStructure)
         .catch(console.error);

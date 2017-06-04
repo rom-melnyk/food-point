@@ -26,13 +26,13 @@ function build_dishes_structure($dishes, $groups) {
         $group = count($filtered) ? array_values($filtered)[0] : NULL;
 
         if (is_array($group)) {
-            $children = array_map(
+            $items = array_map(
                 function ($id) use ($dishes, $groups) {
                     return get_child($id, $dishes, $groups);
                 },
-                $group['children']
+                $group['items']
             );
-            $group['children'] = array_filter($children, function ($ch) { return is_array($ch); });
+            $group['items'] = array_filter($items, function ($ch) { return is_array($ch); });
         }
 
         return $group;
