@@ -1,8 +1,8 @@
 import { h, Component } from 'preact';
 
-import { Textarea, TextInput, NumberInput, ImageInput } from '../../form-elements/form-elements';
+import { Textarea, TextInput, ImageInput } from '../../form-elements/form-elements';
 import { route } from 'preact-router';
-import { updateDish, createDish } from './dish-actions';
+import { updateGroup, createGroup } from './group-actions';
 import { selectImage } from '../images/image-actions';
 
 import store from '../store';
@@ -78,9 +78,9 @@ class GroupForm extends Component {
         }, {});
 
         if (this.state.id) {
-            updateDish(this.state.id, data);
+            updateGroup(this.state.id, data);
         } else {
-            createDish(data);
+            createGroup(data);
         }
     }
 

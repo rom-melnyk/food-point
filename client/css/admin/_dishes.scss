@@ -19,16 +19,16 @@
 
     .name {
       display: inline-block;
-      margin-right: .5em;
     }
 
     .size {
       display: inline-block;
       padding: .25em .5em;
-      //font-style: italic;
+      margin-left: .5em;
       font-size: $small-text;
       border-radius: .25em;
       border: 1px solid lighten($bg-color, 30%);
+      white-space: nowrap;
     }
 
     .description {

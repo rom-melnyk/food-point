@@ -3,18 +3,12 @@ import { route } from 'preact-router';
 import store from '../store';
 import { API, LINKS } from '../urls';
 
-function getDishes() {
-    return get(API.Dishes)
-        .then((dishes) => {
-            store.update('dishes', dishes);
-        })
-        .catch(console.error);
-}
+import { getDishesStructure } from './dishes-structure-actions';
 
 
 function createDish(data) {
     return post(API.Dishes, data)
-        .then(getDishes)
+        .then(getDishesStructure)
         .then(() => route(LINKS.DishesList))
         .catch(console.error);
 }
@@ -22,7 +16,7 @@ function createDish(data) {
 
 function updateDish(id, data) {
     return put(`${API.Dishes}?id=${id}`, data)
-        .then(getDishes)
+        .then(getDishesStructure)
         .then(() => route(LINKS.DishesList))
         .catch(console.error);
 }
@@ -30,13 +24,12 @@ function updateDish(id, data) {
 
 function deleteDish(id) {
     return del(`${API.Dishes}?id=${id}`)
-        .then(getDishes)
+        .then(getDishesStructure)
         .catch(console.error);
 }
 
 
 export {
-    getDishes,
     createDish,
     updateDish,
     deleteDish

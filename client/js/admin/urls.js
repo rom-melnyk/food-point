@@ -1,7 +1,9 @@
 const API = {
     Dishes: '/api/dishes',
-    Images: '/api/images',
     Groups: '/api/dish-groups',
+    DishesStructure: '/api/dishes-structure',
+
+    Images: '/api/images',
 };
 
 const LINKS = {

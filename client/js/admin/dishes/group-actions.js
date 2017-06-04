@@ -3,40 +3,37 @@ import { route } from 'preact-router';
 import store from '../store';
 import { API, LINKS } from '../urls';
 
-function getGroups() {
-    return get(API.Groups)
-        .then((dishes) => {
-            store.update('groups', dishes);
-        })
-        .catch(console.error);
-}
+import { getDishesStructure } from './dishes-structure-actions';
 
 
 function createGroup(data) {
     return post(API.Groups, data)
-        .then(getGroups)
-        .then(() => {}/*route(LINKS.GroupsList)*/)
+        .then(getDishesStructure)
+        .then(() => route(LINKS.DishesList))
         .catch(console.error);
 }
 
 
-function updateGroup(id, data) {
+function updateGroup(id, data, shouldNavigate = true) {
     return put(`${API.Groups}?id=${id}`, data)
-        .then(getGroups)
-        .then(() => {}/*route(LINKS.GroupsList)*/)
+        .then(getDishesStructure)
+        .then(() => {
+            if (shouldNavigate) {
+                route(LINKS.DishesList);
+            }
+        })
         .catch(console.error);
 }
 
 
 function deleteGroup(id) {
     return del(`${API.Groups}?id=${id}`)
-        .then(getGroups)
+        .then(getDishesStructure)
         .catch(console.error);
 }
 
 
 export {
-    getGroups,
     createGroup,
     updateGroup,
     deleteGroup

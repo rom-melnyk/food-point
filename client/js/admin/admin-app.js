@@ -11,8 +11,7 @@ import DishForm from './dishes/dish-form';
 import GroupForm from './dishes/group-form';
 import ImagesManager from './images/images-manager';
 
-import { getDishes } from './dishes/dish-actions';
-import { getGroups } from './dishes/group-actions';
+import { getDishesStructure } from './dishes/dishes-structure-actions';
 import { getImages } from './images/image-actions';
 
 
@@ -58,8 +57,7 @@ function startAdminApp() {
     render(<AdminApp />, appDiv);
 
     // prepare state
-    getDishes();
-    getGroups();
+    getDishesStructure();
     getImages();
 }
 

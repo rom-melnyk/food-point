@@ -1,8 +1,7 @@
 import Store from '../store-ctor';
 
 const store = new Store({
-    dishes: [],
-    groups: [],
+    'dishes-structure': {},
 
     images: [],
     'image-picker': null,
