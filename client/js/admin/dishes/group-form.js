@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 
-import { Textarea, TextInput, ImageInput } from '../../form-elements/form-elements';
+import { Textarea, TextInput, GroupInput, ImageInput } from '../../form-elements/form-elements';
 import { route } from 'preact-router';
 import { updateGroup, createGroup } from './group-actions';
 import { selectImage } from '../images/image-actions';
@@ -12,6 +12,7 @@ import { LINKS } from '../urls';
 const FIELDS = [
     { name: 'name', label: 'Назва' },
     { name: 'description', label: 'Опис' },
+    { name: 'group', label: 'Група' },
     { name: 'image', label: 'Зображення' }
 ];
 let editState = null;
@@ -22,6 +23,7 @@ let editState = null;
 class GroupForm extends Component {
     constructor() {
         super(...arguments);
+        this.availableGroups = [];
         this.onBackClick = this.onBackClick.bind(this);
         this.onSaveClick = this.onSaveClick.bind(this);
         this.onImagePickerClick = this.onImagePickerClick.bind(this);
@@ -30,12 +32,22 @@ class GroupForm extends Component {
     componentDidMount() {
         const id = +this.props.id;
         if (id) {
-            this.setState( store.state.dishes.find(d => d.id === id) || {} );
+            const group = store.state.groups.find(d => d.id === id) || {};
+            const parent = store.state.groups.find(g => g.items.indexOf(id) !== -1) || {};
+            this.setState( group );
+            this.setState({ group: parent.id });
+            this.availableGroups = store.state.groups.filter(g => g.id !== id);
+        } else {
+            const root = store.state.groups.find(g => g.name === '/');
+            this.setState({ group: root.id });
+            this.availableGroups = store.state.groups;
         }
+
         if (editState) {
             this.setState(editState);
             editState = null;
         }
+
         if (store.state['image-picker']) {
             this.setState({ image: store.state['image-picker'] });
             selectImage(null);
@@ -60,6 +72,7 @@ class GroupForm extends Component {
     getFormInputElement(name, label, value) {
         switch (name) {
             case 'description': return <Textarea name={ name } label={ label } value={ value } parent={ this } />;
+            case 'group': return <GroupInput name={ name } label={ label } value={ value } groups={ this.availableGroups } parent={ this } />;
             case 'image': return <ImageInput name={ name } label={ label } image={ value } parent={ this } onPick={ this.onImagePickerClick } />;
             default:
         }
@@ -72,14 +85,16 @@ class GroupForm extends Component {
 
     onSaveClick(e) {
         const data = FIELDS.reduce((obj, { name }) => {
-            obj[name] = this.state[name];
+            if (name !== 'group') {
+                obj[ name ] = this.state[ name ];
+            }
             return obj;
         }, {});
 
         if (this.state.id) {
-            updateGroup(this.state.id, data);
+            updateGroup(this.state.id, data, newGroupId);
         } else {
-            createGroup(data);
+            createGroup(data, this.state.group);
         }
     }
 

@@ -6,9 +6,12 @@ function generateOnInputHandler(name, parent, onInput) {
     return typeof onInput === 'function'
         ? onInput
         : (e) => {
-            let value = +e.target.value;
-            if (isNaN(value)) {
-                value = e.target.value;
+            let value = e.target.value;
+            if (value) {
+                value = +e.target.value;
+                if (isNaN(value)) {
+                    value = e.target.value;
+                }
             }
             parent.setState({ [name]: value });
         }
@@ -109,16 +112,15 @@ class ImageInput extends Component {
 
 
 class GroupInput extends Component {
-    constructor({ name, parent, groups, onInput }) {
+    constructor({ name, parent, onInput }) {
         super(...arguments);
         this.onInput = generateOnInputHandler(name, parent, onInput);
-        this.groups = groups;
     }
 
-    render({ name, label, value = '' }, state) {
+    render({ name, label, value = '', groups = [] }, state) {
         label = label || name;
         // value = value || (this.groups[0] && this.groups[0].id);
-        const optionsComps = this.groups.map(o => <option value={o.id }>{ o.name === '/' ? '[ Меню ]' : o.name }</option>);
+        const optionsComps = groups.map(o => <option value={o.id }>{ o.name === '/' ? '[ Меню ]' : o.name }</option>);
         return (
             <div className="row">
                 <div className="label column-1">{ label }</div>

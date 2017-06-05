@@ -34,17 +34,19 @@ class DishForm extends Component {
         const id = +this.props.id;
         if (id) {
             const dish = store.state.dishes.find(d => d.id === id) || {};
-            const parent = store.state.groups.find(g => g.items.indexOf(dish.id) !== -1) || {};
+            const parent = store.state.groups.find(g => g.items.indexOf(id) !== -1) || {};
             this.setState( dish );
             this.setState({ group: parent.id });
         } else {
             const root = store.state.groups.find(g => g.name === '/');
             this.setState({ group: root.id });
         }
+
         if (editState) {
             this.setState(editState);
             editState = null;
         }
+
         if (store.state['image-picker']) {
             this.setState({ image: store.state['image-picker'] });
             selectImage(null);
@@ -70,8 +72,8 @@ class DishForm extends Component {
         switch (name) {
             case 'description': return <Textarea name={ name } label={ label } value={ value } parent={ this } />;
             case 'price': return <NumberInput name={ name } label={ label } value={ value } parent={ this } />;
-            case 'image': return <ImageInput name={ name } label={ label } image={ value } parent={ this } onPick={ this.onImagePickerClick } />;
             case 'group': return <GroupInput name={ name } label={ label } value={ value } groups={ store.state.groups } parent={ this } />;
+            case 'image': return <ImageInput name={ name } label={ label } image={ value } parent={ this } onPick={ this.onImagePickerClick } />;
             default:
         }
         return <TextInput name={ name } label={ label } value={ value } parent={ this } />;
@@ -90,9 +92,9 @@ class DishForm extends Component {
         }, {});
 
         if (this.state.id) {
-            updateDish(this.state.id, data);
+            updateDish(this.state.id, data, newGroupId);
         } else {
-            createDish(data);
+            createDish(data, this.state.group);
         }
     }
 
