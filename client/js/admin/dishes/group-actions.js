@@ -15,8 +15,9 @@ function createGroup(data, parentId) {
 }
 
 
-function updateGroup(id, data, shouldNavigate = true) {
+function updateGroup(id, data, newGroupId, shouldNavigate = true) {
     return put(`${API.Groups}?id=${id}`, data)
+        .then(() => moveToGroup(`g${id}`, newGroupId))
         .then(getDishesStructure)
         .then(() => {
             if (shouldNavigate) {
@@ -43,7 +44,7 @@ function addToGroup(id, groupId) {
         return Promise.reject(`Group with id=${groupId} not found`);
     }
     group.items.push(id);
-    return updateGroup(groupId, { items: group.items });
+    return put(`${API.Groups}?id=${groupId}`, { items: group.items });
 }
 
 
@@ -56,13 +57,29 @@ function removeFromGroup(id) {
     if (currentDishIndex !== -1) {
         group.items.splice(currentDishIndex, 1);
     }
-    return updateGroup(group.id, { items: group.items });
+    return put(`${API.Groups}?id=${group.id}`, { items: group.items });
 }
+
+
+function moveToGroup(id, newGroupId) {
+    const oldGroup = store.state.groups.find(g => g.items.indexOf(id) !== -1);
+    if (!oldGroup) {
+        return Promise.reject(`No group found containing the dish with id=${id}`);
+    }
+
+    if (oldGroup.id !== newGroupId) {
+        return removeFromGroup(id)
+            .then(() => addToGroup(id, newGroupId));
+    }
+}
+
+
 export {
     createGroup,
     updateGroup,
     deleteGroup,
 
     addToGroup,
-    removeFromGroup
+    removeFromGroup,
+    moveToGroup
 };

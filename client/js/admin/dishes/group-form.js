@@ -34,7 +34,7 @@ class GroupForm extends Component {
         if (id) {
             const group = store.state.groups.find(d => d.id === id) || {};
             const gid = `g${id}`;
-            const parent = store.state.groups.find(g => g.items.indexOf(id) !== -1) || {};
+            const parent = store.state.groups.find(g => g.items.indexOf(gid) !== -1) || {};
             this.setState( group );
             this.setState({ group: parent.id });
             this.availableGroups = store.state.groups.filter(g => g.id !== id);
@@ -93,7 +93,7 @@ class GroupForm extends Component {
         }, {});
 
         if (this.state.id) {
-            updateGroup(this.state.id, data, newGroupId);
+            updateGroup(this.state.id, data, this.state.group);
         } else {
             createGroup(data, this.state.group);
         }

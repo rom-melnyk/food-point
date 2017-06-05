@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/db/db.php';
 
 // ------------------------------- helpers -------------------------------
 function items_to_array($group) {
-    $items = explode(',', $group['items']);
+    $items = $group['items'] ? explode(',', $group['items']) : array();
     $group['items'] = array_map(function ($val) { return is_numeric($val) ? (int) $val : $val; }, $items);
     return $group;
 }

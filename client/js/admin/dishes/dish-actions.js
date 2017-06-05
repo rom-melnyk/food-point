@@ -1,7 +1,7 @@
 import { get, post, put, del } from '../../utils/request';
 import { route } from 'preact-router';
 import { API, LINKS } from '../urls';
-import { addToGroup, removeFromGroup } from './group-actions';
+import { addToGroup, removeFromGroup, moveToGroup } from './group-actions';
 
 import { getDishesStructure } from './dishes-structure-actions';
 
@@ -17,6 +17,7 @@ function createDish(data, groupId) {
 
 function updateDish(id, data, newGroupId) {
     return put(`${API.Dishes}?id=${id}`, data)
+        .then(() => moveToGroup(id, newGroupId))
         .then(getDishesStructure)
         .then(() => route(LINKS.DishesList))
         .catch(console.error);

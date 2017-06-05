@@ -26,7 +26,7 @@ class DishGroup extends Component {
                         <div className="image-wrapper">{ imageComp }</div>
                     </div>
                     <div className="column-2 all-text">
-                        <span className="name">{ name }</span>
+                        <div className="name">{ name }</div>
                         <div className="description">{ description }</div>
                     </div>
 
@@ -38,10 +38,9 @@ class DishGroup extends Component {
             )
             : null;
 
-        const itemsComps = items && items.map(item => item.items
-            ? <DishGroup { ...item } />
-            : <Dish { ...item } />
-        );
+        const itemsComps = items && items.length
+            ? items.map(item => item.items ? <DishGroup { ...item } /> : <Dish { ...item } />)
+            : <div>Порожня група</div>;
         return (
             <div className="group">
                 { groupDataComps }

@@ -92,7 +92,7 @@ class DishForm extends Component {
         }, {});
 
         if (this.state.id) {
-            updateDish(this.state.id, data, newGroupId);
+            updateDish(this.state.id, data, this.state.group);
         } else {
             createDish(data, this.state.group);
         }

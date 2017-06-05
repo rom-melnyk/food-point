@@ -37,6 +37,7 @@ class AdminApp extends Component {
                 <DishForm path={ LINKS.EditDish } />
                 <DishForm path={ `${LINKS.EditDish}/:id` } />
                 <GroupForm path={ `${LINKS.EditGroup}` } />
+                <GroupForm path={ `${LINKS.EditGroup}/:id` } />
 
                 <ImagesManager path={ LINKS.ImagePicker } images={ state.images } mode={ ImageManagerModes.Picker } />
                 <ImagesManager path={ LINKS.ImagesManager } images={ state.images } mode={ ImageManagerModes.Manager } />
