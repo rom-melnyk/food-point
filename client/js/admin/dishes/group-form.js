@@ -33,6 +33,7 @@ class GroupForm extends Component {
         const id = +this.props.id;
         if (id) {
             const group = store.state.groups.find(d => d.id === id) || {};
+            const gid = `g${id}`;
             const parent = store.state.groups.find(g => g.items.indexOf(id) !== -1) || {};
             this.setState( group );
             this.setState({ group: parent.id });

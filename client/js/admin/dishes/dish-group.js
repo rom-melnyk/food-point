@@ -38,9 +38,9 @@ class DishGroup extends Component {
             )
             : null;
 
-        const itemsComps = items && items.map(ch => ch.children
-            ? <DishGroup { ...ch } />
-            : <Dish { ...ch } />
+        const itemsComps = items && items.map(item => item.items
+            ? <DishGroup { ...item } />
+            : <Dish { ...item } />
         );
         return (
             <div className="group">
