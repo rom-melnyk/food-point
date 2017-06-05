@@ -27,6 +27,7 @@ function query($query = '') {
     }
 
     if ($result === TRUE || $result === FALSE || $result === NULL) {
+        $result = $mysqli->insert_id;
         return array('error' => FALSE, 'result' => $result);
     }
 

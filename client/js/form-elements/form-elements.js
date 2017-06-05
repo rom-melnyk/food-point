@@ -5,7 +5,13 @@ import { PATH as IMAGE_PATH } from '../admin/images/image-constants';
 function generateOnInputHandler(name, parent, onInput) {
     return typeof onInput === 'function'
         ? onInput
-        : e => parent.setState({ [name]: e.target.value });
+        : (e) => {
+            let value = +e.target.value;
+            if (isNaN(value)) {
+                value = e.target.value;
+            }
+            parent.setState({ [name]: value });
+        }
 }
 
 class Textarea extends Component {
