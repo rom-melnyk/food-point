@@ -29,9 +29,20 @@ function updateGroup(id, data, newGroupId, shouldNavigate = true) {
 
 
 function deleteGroup(id) {
-    console.log('// TODO move dishes to parent');
-    return;
-    return del(`${API.Groups}?id=${id}`)
+    const group = store.state.groups.find(g => g.id === id);
+    if (!group) {
+        return Promise.reject(`Group with id=${id} not found`);
+    }
+
+    const gid = `g${id}`;
+    const parent = store.state.groups.find(g => g.items.indexOf(gid) !== -1);
+    if (!parent) {
+        return Promise.reject(`No parent group found containing the group with id=${id}`);
+    }
+
+    return removeFromParentGroup(gid)
+        .then(() => addToGroup(group.items, parent.id))
+        .then(() => del(`${API.Groups}?id=${id}`))
         .then(getDishesStructure)
         .catch(console.error);
 }
@@ -43,21 +54,22 @@ function addToGroup(id, groupId) {
     if (!group) {
         return Promise.reject(`Group with id=${groupId} not found`);
     }
-    group.items.push(id);
+    id = Array.isArray(id) ? id : [ id ]; // support for bucket add (deleteGroup() scenario)
+    group.items.push(...id);
     return put(`${API.Groups}?id=${groupId}`, { items: group.items });
 }
 
 
-function removeFromGroup(id) {
-    const group = store.state.groups.find(g => g.items.indexOf(id) !== -1);
-    if (!group) {
-        return Promise.reject(`No group found containing the dish with id=${id}`);
+function removeFromParentGroup(id) {
+    const parent = store.state.groups.find(g => g.items.indexOf(id) !== -1);
+    if (!parent) {
+        return Promise.reject(`No parent group found containing the ${ /^g/.test(id) ? 'group' : 'dish' } with id=${id}`);
     }
-    const currentDishIndex = group.items.findIndex(item => item === id);
-    if (currentDishIndex !== -1) {
-        group.items.splice(currentDishIndex, 1);
+    const currentItemIndex = parent.items.indexOf(id);
+    if (currentItemIndex !== -1) {
+        parent.items.splice(currentItemIndex, 1);
     }
-    return put(`${API.Groups}?id=${group.id}`, { items: group.items });
+    return put(`${API.Groups}?id=${parent.id}`, { items: parent.items });
 }
 
 
@@ -68,7 +80,7 @@ function moveToGroup(id, newGroupId) {
     }
 
     if (oldGroup.id !== newGroupId) {
-        return removeFromGroup(id)
+        return removeFromParentGroup(id)
             .then(() => addToGroup(id, newGroupId));
     }
 }
@@ -80,6 +92,6 @@ export {
     deleteGroup,
 
     addToGroup,
-    removeFromGroup,
+    removeFromParentGroup,
     moveToGroup
 };
