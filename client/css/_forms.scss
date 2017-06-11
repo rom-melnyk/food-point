@@ -3,24 +3,26 @@
 
 
 input, textarea, select {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-  font-size: $normal-text;
   display: inline-block;
   width: 100%;
   padding: .25em;
-  background-color: lighten($bg-color, 30%);
+  background-color: darken($bg-color, 30%);
   border-radius: .25em;
   border: 1px solid transparent;
+
+  font-weight: 300;
+  font-family:'Roboto Slab', serif;
+  font-size: $normal-text;
 
   transition: background-color $transition-props, border-color $transition-props;
 
   &:hover {
-    background-color: lighten($bg-color, 40%);
+    background-color: darken($bg-color, 10%);
     border-color: transparentize($text-color, .7);
   }
 
   &:focus {
-    background-color: lighten($bg-color, 90%);
+    background-color: darken($bg-color, 10%);
     border-color: transparentize($text-color, .7);
   }
 }
@@ -52,7 +54,7 @@ textarea {
   width: 100%;
   bottom: -5em;
   padding: 1em;
-  background-color: transparentize($bg-color, .3);
+  background: linear-gradient(to bottom, transparent 20%, transparentize($bg-color, .05) 100%);
   transition: bottom $transition-props;
 }
 

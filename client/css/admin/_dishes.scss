@@ -6,7 +6,7 @@
 
   // don't show wrapper for root group
   .group .group {
-    $group-border: 2px dashed lighten($bg-color, 30%);
+    $group-border: 2px dashed darken($bg-color, 30%);
 
     margin-bottom: 2em;
     border-radius: .25em;
@@ -44,7 +44,7 @@
       margin-left: .5em;
       font-size: $small-text;
       border-radius: .25em;
-      border: 1px solid lighten($bg-color, 30%);
+      border: 1px solid darken($bg-color, 30%);
       white-space: nowrap;
     }
 

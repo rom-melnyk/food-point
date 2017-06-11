@@ -33,7 +33,7 @@
     opacity: .7;
 
     &.none {
-      background-color: lighten($bg-color, 30%);
+      background-color: darken($bg-color, 30%);
     }
   }
 }
