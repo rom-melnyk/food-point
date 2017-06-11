@@ -1,21 +1,23 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/api/api-helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/data-models/image-model.php';
 
-header('Content-Type: application/json; charset=utf-8');
-$result = null;
+$result = NULL;
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $result = get_images();
+    $result = model\get_images();
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = array_key_exists('image', $_FILES)
-        ? create_image($_FILES['image'])
-        : array('error' => TRUE, 'debug' => 'Missing "image" field in the form data');
+        ? model\create_image($_FILES['image'])
+        : generate_api_error('Missing "image" field in the form data');
 } else if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $result = array_key_exists('name', $_REQUEST)
-        ? delete_dish($_REQUEST['name'])
-        : array('error' => TRUE, 'debug' => 'Missing "name" param in the URL');
+        ? model\delete_image($_REQUEST['name'])
+        : generate_api_error('Missing "name" param in the URL');
 } else {
-    $result = array('error' => TRUE, 'debug' => 'Method not supported');
+    $result = generate_api_error('Method not supported');
 }
 
-echo json_encode($result);
+send_api_output($result);
+
+?>
