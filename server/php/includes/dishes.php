@@ -3,6 +3,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/data-models/image-model.php';
 
 
 function get_group_header($group) {
+    if ($group['name'] === '/') {
+        return '';
+    }
+
     $img = '';
     if ($group['image']) {
         if ($group['name'] || $group['description']) {
@@ -20,7 +24,7 @@ function get_group_header($group) {
         }
     }
 
-    $text_cell_classname = 'column-' . ($group['image'] ? 10 : 12) . ' all-text';
+    $text_cell_classname = $group['image'] ? 'column-10 all-text' : 'column-12';
     $name = $group['name']
         ? '<div class="name">' . $group['name'] . '</div>'
         : '';
@@ -42,7 +46,7 @@ function get_group_header($group) {
 }
 
 
-function get_group_items($group, $should_wrap = TRUE) {
+function get_group_items($group) {
     $html= '';
     foreach ($group['items'] as $item) {
         $html .= array_key_exists('items', $item)
@@ -50,16 +54,15 @@ function get_group_items($group, $should_wrap = TRUE) {
             : get_dish($item);
     }
 
-    return $should_wrap
-        ? ('<div class="group-items">' . $html . '</div>')
-        : $html;
+    return '<div class="group-items">' . $html . '</div>';
 }
 
 
 function get_group($group) {
-    return $group['name'] && $group['name'] === '/'
-        ? get_group_items($group, FALSE) // workaround the root
-        : ('<div class="group">' . get_group_header($group) . get_group_items($group) . '</div>');
+    return '<div class="group">'
+        . get_group_header($group)
+        . get_group_items($group)
+        . '</div>';
 }
 
 

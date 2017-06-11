@@ -13,13 +13,13 @@
     border: $group-border;
 
     .group-data {
-      margin-bottom: .25em;
-      border-bottom: $group-border;
+      margin-bottom: .5em;
+      // border-bottom: $group-border;
       padding: .5em;
     }
 
     .group-items {
-      padding: 0 .75em .5em .75em;
+      padding: 0 .75em .25em .75em;
     }
   }
 
