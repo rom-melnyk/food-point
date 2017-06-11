@@ -41,7 +41,11 @@ namespace model {
             return array( 'error' => TRUE, 'debug' => 'File is bigger than 500k' );
         }
 
-        $target_basename = basename($image['name']);
+        $target_basename = str_replace(
+            array('/', '\\', '+', '&', ':', '?', '*', '~', '"', "'", '`', '|'),
+            '_',
+            basename($image['name'])
+        );
         $target_full_filename = $FS_TARGET_DIR . $target_basename;
         $target_file_props = pathinfo($target_full_filename);
 

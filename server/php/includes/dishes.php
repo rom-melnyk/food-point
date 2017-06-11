@@ -71,7 +71,7 @@ function get_dish($dish) {
         ? (
             '<div class="column-2">'
             . '<div class="image-wrapper">'
-            . '<span class="image" src="background-image: url(\''
+            . '<span class="image" style="background-image: url(\''
                 . model\HTML_TARGET_DIR . $dish['image']
                 . '\')"></span>'
             . '</div>'
