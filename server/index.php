@@ -11,7 +11,7 @@
 
         <div class="dishes">
 <?php
-    $structure = get_dishes_structure();
+    $structure = model\get_dishes_structure();
     echo get_group($structure);
 ?>
         </div>

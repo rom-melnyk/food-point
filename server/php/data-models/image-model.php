@@ -1,13 +1,14 @@
 <?php
 namespace model {
-    $TARGET_DIR = $_SERVER['DOCUMENT_ROOT'] . '/gfx/uploaded/';
+    const HTML_TARGET_DIR = '/gfx/uploaded/';
+    $FS_TARGET_DIR = $_SERVER['DOCUMENT_ROOT'] . HTML_TARGET_DIR;
     $ALLOWED_EXTS = array('JPG', 'JPEG', 'PNG', 'GIF');
 
 
     function get_images() {
-        global $TARGET_DIR;
+        global $FS_TARGET_DIR;
 
-        $files = scandir($TARGET_DIR) or array();
+        $files = scandir($FS_TARGET_DIR) or array();
         $files = array_filter($files, function ($fname) {
             return helpers\is_extension_valid( pathinfo($fname, PATHINFO_EXTENSION) );
         });
@@ -17,7 +18,7 @@ namespace model {
 
 
     function create_image($image) {
-        global $TARGET_DIR;
+        global $FS_TARGET_DIR;
         global $ALLOWED_EXTS;
 
         if (
@@ -41,7 +42,7 @@ namespace model {
         }
 
         $target_basename = basename($image['name']);
-        $target_full_filename = $TARGET_DIR . $target_basename;
+        $target_full_filename = $FS_TARGET_DIR . $target_basename;
         $target_file_props = pathinfo($target_full_filename);
 
         if (!helpers\is_extension_valid($target_file_props['extension'])) {
@@ -70,8 +71,8 @@ namespace model {
 
 
     function delete_image($name) {
-        global $TARGET_DIR;
-        $result = unlink($TARGET_DIR . $name);
+        global $FS_TARGET_DIR;
+        $result = unlink($FS_TARGET_DIR . $name);
         return $result
             ? array('result' => TRUE)
             : array( 'error' => TRUE, 'debug' => 'Filesystem error' );

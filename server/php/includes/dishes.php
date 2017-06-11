@@ -1,56 +1,61 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/data-models/image-model.php';
+
 
 function get_group_header($group) {
-    $name = array_key_exists('name', $group)
+    $img = $group['image']
+        ? '<img class="image" src="' . model\HTML_TARGET_DIR . $group['image'] . '" />'
+        : '';
+    $name = $group['name']
         ? '<div class="name">' . $group['name'] . '</div>'
         : '';
-    $description = array_key_exists('description', $group)
+    $description = $group['description']
         ? '<div class="description">' . $group['description'] . '</div>'
         : '';
-    $img = array_key_exists('image', $group)
-        ? '<img class="image" src="' . $group['image'] . '" />'
-        : '';
 
-    return '<div class="group-header">' . $img . $name . $description . '</div>';
+    return '<div class="row group-data">' . $img . $name . $description . '</div>';
 }
 
-function get_group_items($group) {
-    $html= '<div class="group-items">';
+
+function get_group_items($group, $should_wrap = TRUE) {
+    $html= '';
     foreach ($group['items'] as $item) {
         $html .= array_key_exists('items', $item)
             ? get_group($item)
             : get_dish($item);
     }
-    $html .= '</div>';
-    return $html;
+
+    return $should_wrap
+        ? ('<div class="group-items">' . $html . '</div>')
+        : $html;
 }
 
+
 function get_group($group) {
-    $html = '<div class="group">';
-    $html .= get_group_header($group);
-    $html .= get_group_items($group);
-    $html .= '</div>';
+    return $group['name'] && $group['name'] === '/'
+        ? get_group_items($group, FALSE) // workaround the root
+        : ('<div class="group">' . get_group_header($group) . get_group_items($group) . '</div>');
 }
 
 
 function get_dish($dish) {
-    $name = array_key_exists('name', $group)
-        ? '<div class="name">' . $group['name'] . '</div>'
+    $img = $dish['image']
+        ? '<img class="image" src="' . model\HTML_TARGET_DIR . $dish['image'] . '" />'
         : '';
-    $description = array_key_exists('description', $group)
-        ? '<div class="description">' . $group['description'] . '</div>'
+    $name = $dish['name']
+        ? '<div class="name">' . $dish['name'] . '</div>'
         : '';
-    $size = array_key_exists('size', $group)
-        ? '<div class="size">' . $group['size'] . '</div>'
+    $description = $dish['description']
+        ? '<div class="description">' . $dish['description'] . '</div>'
         : '';
-    $price = array_key_exists('price', $group)
-        ? '<div class="price">' . $group['price'] . '</div>'
+    $size = $dish['size']
+        ? '<div class="size">' . $dish['size'] . '</div>'
         : '';
-    $img = array_key_exists('image', $group)
-        ? '<img class="image" src="' . $group['image'] . '" />'
+    $price = $dish['price']
+        ? '<div class="price">' . $dish['price'] . '</div>'
         : '';
 
-    return $img . $name . $size . $description . $price;
+    return '<div class="row group-data">' . $img . $name . $size . $description . $price . '</div>';
 }
 
 ?>
