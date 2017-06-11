@@ -41,9 +41,9 @@ textarea {
 
 .controls {
   @extend .h-list;
+  margin-top: 1em;
   text-align: center;
   font-size: $x-small-text;
-
 }
 
 
@@ -75,7 +75,5 @@ textarea {
 .form {
   @extend .v-list;
 
-  .controls {
-    margin-top: 1em;
-  }
+  .controls {}
 }

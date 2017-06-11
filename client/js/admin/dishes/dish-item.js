@@ -20,15 +20,15 @@ class Dish extends Component {
         return (
             <div className="dish has-hover-controls">
                 <div className="row">
-                    <div className="column-1">
+                    <div className="column-2">
                         <div className="image-wrapper">{ imageComp }</div>
                     </div>
-                    <div className="column-2 all-text">
+                    <div className="column-8 all-text">
                         <span className="name">{ name }</span>
                         { size ? <span className="size">{ size }</span> : null }
                         <div className="description">{ description }</div>
                     </div>
-                    <div className="column-1">
+                    <div className="column-2">
                         <div className="price">{ price }</div>
                     </div>
                 </div>

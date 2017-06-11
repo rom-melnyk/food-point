@@ -27,8 +27,8 @@ class Textarea extends Component {
         label = label || name;
         return (
             <div className="row">
-                <div className="label column-1">{ label }</div>
-                <div className="column-3">
+                <div className="label column-3">{ label }</div>
+                <div className="column-9">
                     <textarea rows={ rows } name={ name } value={ value } onInput={ this.onInput } />
                 </div>
             </div>
@@ -47,8 +47,8 @@ class TextInput extends Component {
         label = label || name;
         return (
             <div className="row">
-                <div className="label column-1">{ label }</div>
-                <div className="column-3">
+                <div className="label column-3">{ label }</div>
+                <div className="column-9">
                     <input type="text" name={ name } value={ value } onInput={ this.onInput }/>
                 </div>
             </div>
@@ -67,7 +67,7 @@ class NumberInput extends Component {
         label = label || name;
         return (
             <div className="row">
-                <div className="label column-1">{ label }</div>
+                <div className="label column-3">{ label }</div>
                 <div className="column-3">
                     <input type="number" name={ name } value={ value } min={ min } max={ max } onInput={ this.onInput }/>
                 </div>
@@ -95,8 +95,8 @@ class ImageInput extends Component {
 
         return (
             <div className="row">
-                <div className="label column-1">{ label }</div>
-                <div className="column-1">
+                <div className="label column-3">{ label }</div>
+                <div className="column-3">
                     <div className="image-wrapper has-hover-controls">
                         { imageComp }
                         <div className="hover-controls">
@@ -123,8 +123,8 @@ class GroupInput extends Component {
         const optionsComps = groups.map(o => <option value={o.id }>{ o.name === '/' ? '[ Меню ]' : o.name }</option>);
         return (
             <div className="row">
-                <div className="label column-1">{ label }</div>
-                <div className="column-3">
+                <div className="label column-3">{ label }</div>
+                <div className="column-9">
                     <select name={ name } value={ value } onInput={ this.onInput }>
                         { optionsComps }
                     </select>

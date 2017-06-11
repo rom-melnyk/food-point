@@ -22,12 +22,15 @@ class DishGroup extends Component {
         const groupDataComps = name !== '/'
             ? (
                 <div className="row group-data has-hover-controls">
-                    <div className="column-1">
+                    <div className="column-2">
                         <div className="image-wrapper">{ imageComp }</div>
                     </div>
-                    <div className="column-2 all-text">
+                    <div className="column-8 all-text">
                         <div className="name">{ name }</div>
                         <div className="description">{ description }</div>
+                    </div>
+                    <div className="column-2">
+                        {/* collapse; up/down */}
                     </div>
 
                     <div className="hover-controls">

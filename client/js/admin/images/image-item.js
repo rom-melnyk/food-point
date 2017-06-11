@@ -21,7 +21,7 @@ class Image extends Component {
             : null;
 
         return (
-            <div className="column-1">
+            <div className="column-3">
                 <div className={ className } onClick={ this.onSelectClick }>
                     <span className="image" style={ `background-image: url(${ PATH + name });` } title={ name } />
                     { controlsComp }

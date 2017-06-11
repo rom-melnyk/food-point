@@ -16,8 +16,8 @@ class ImageForm extends Component {
         return (
             <div className="form" >
                 <div className="row">
-                    <div className="label column-1">Додати зображення:</div>
-                    <div className="column-3">
+                    <div className="label column-3">Додати зображення:</div>
+                    <div className="column-9">
                         <input type="file" name="image" ref={ (i) => { this.input = i; } }/>
                     </div>
                 </div>

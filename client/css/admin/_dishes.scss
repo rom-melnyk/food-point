@@ -1,7 +1,7 @@
 @import "../constants";
 @import "../components";
 
-.admin-app > .dishes {
+/*.admin-app > */.dishes {
   @extend .v-list;
 
   // don't show wrapper for root group
@@ -61,5 +61,14 @@
 
   .all-text {
     padding-left: .5em;
+  }
+}
+
+
+// ---------------------------- media queries ----------------------------
+@media screen and (max-width: $screen-s-width) {
+  .dishes .dish .price {
+    padding-left: .5em;
+    text-align: left;
   }
 }
