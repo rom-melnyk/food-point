@@ -53,15 +53,15 @@ li {
 }
 
 a {
-  color: $link-color;
+  color: darken($link-color, 30%);
   text-decoration: underline;
   transition: color $transition-props;
 
   &:hover {
-    color: darken($link-color, 30%);
+    color: darken($link-color, 20%);
   }
   &:visited, &:active {
-    color: darken($link-color, 30%);
+    color: darken($link-color, 50%);
   }
 
   img {
@@ -78,7 +78,7 @@ a {
   margin: 0 auto;
 
   & > header {
-    margin: $content-margin auto;
+    margin: $content-margin auto 2 * $content-margin auto;
   }
 
   & > section {
@@ -86,6 +86,6 @@ a {
   }
 
   & > footer {
-    margin: $content-margin auto;
+    margin: 2 * $content-margin auto $content-margin auto;
   }
 }
