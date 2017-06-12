@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import DishGroup from './dish-group';
+import { Button, Types } from '../../form-elements/buttons';
 import { route } from 'preact-router';
 import { LINKS } from '../urls';
 
@@ -7,12 +8,20 @@ class DishesManager extends Component {
     render({ dishesStructure }, state) {
         const linkComp = (
             <div className="controls">
-                <span className="button green" onClick={ this.onAddDishClick }>
-                    Додати страву
-                </span>
-                <span className="button green" onClick={ this.onAddGroupClick }>
-                    Додати групу
-                </span>
+                <Button
+                    type={ Types.ADD }
+                    onClick={ this.onAddDishClick }
+                    title="Додати страву"
+                    showTitle={ true }
+                    iconClassName='file-o'
+                />
+                <Button
+                    type={ Types.ADD }
+                    onClick={ this.onAddGroupClick }
+                    title="Додати групу"
+                    showTitle={ true }
+                    iconClassName='file-text-o'
+                />
             </div>
         );
         return (

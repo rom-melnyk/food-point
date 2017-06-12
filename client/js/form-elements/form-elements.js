@@ -82,7 +82,13 @@ class ImageInput extends Component {
     constructor({ name, parent, onPick, onDelete }) {
         super(...arguments);
         this.onPick = typeof onPick === 'function' ? onPick : () => {};
-        this.onDelete = typeof onDelete === 'function' ? onDelete : () => parent.setState({ [name]: null });
+        this.onDelete = typeof onDelete === 'function'
+            ? onDelete
+            : () => {
+                if (window.confirm('Таки без зображення?')) {
+                    parent.setState({ [name]: null });
+                }
+            }
     }
 
     render({ image = '', label }, state) {
@@ -91,7 +97,7 @@ class ImageInput extends Component {
             ? <span className="image" style={ `background-image: url(${ IMAGE_PATH + image });` } title={ image } />
             : <span className="image none" />;
         const delButtonComp = image
-            ? <Button type={ Types.DELETE } onClick={ this.onDelete } />
+            ? <Button type={ Types.DELETE } narrow={ true } onClick={ this.onDelete } />
             : null;
 
         return (
@@ -101,7 +107,7 @@ class ImageInput extends Component {
                     <div className="image-wrapper has-hover-controls">
                         { imageComp }
                         <div className="hover-controls">
-                            <Button type={ Types.PICK } onClick={ this.onPick } />
+                            <Button type={ Types.PICK } narrow={ true } onClick={ this.onPick } />
                             { delButtonComp }
                         </div>
                     </div>

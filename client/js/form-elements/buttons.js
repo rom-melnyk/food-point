@@ -28,6 +28,11 @@ const Types = {
         spanClassName: 'blue',
         iconClassName: 'pencil'
     },
+    ADD: {
+        title: 'Додати',
+        spanClassName: 'green',
+        iconClassName: 'plus'
+    },
     PICK: {
         title: 'Вибрати',
         spanClassName: 'blue',
@@ -41,17 +46,25 @@ class Button extends Component {
         return Types;
     }
 
-    render({ type = {}, onClick, title, spanClassName, iconClassName }) {
+    render({ type = {}, onClick, title, showTitle = false, narrow = false, spanClassName, iconClassName }) {
         onClick = typeof onClick === 'function'
             ? onClick
             : (type.onClick || _emptyFn);
+
         title = title || type.title;
-        spanClassName = `button ${spanClassName || type.spanClassName}`;
+
+        spanClassName = spanClassName || type.spanClassName;
+        spanClassName = 'button '
+            + (showTitle ? 'with-title ' : '')
+            + (narrow ? 'narrow ' : '')
+            + (spanClassName ? spanClassName : '');
+
         iconClassName = `fa fa-${iconClassName || type.iconClassName}`;
 
         return (
             <span className={ spanClassName } onClick={ onClick } title={ title }>
                 <i className={ iconClassName } />
+                { showTitle ? title : '' }
             </span>
         );
     }

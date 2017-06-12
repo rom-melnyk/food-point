@@ -38,8 +38,18 @@
   cursor: pointer;
   transition: background-color $transition-props, border-color $transition-props;
 
+  &.narrow {
+    padding: .5em;
+  }
+
   i {
     vertical-align: middle;
+  }
+
+  &.with-title {
+    i {
+      padding-right: 1em;
+    }
   }
 
   &.grey {
