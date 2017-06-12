@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import { Button, Types } from '../../form-elements/buttons';
 import { deleteDish } from './dish-actions';
 import { route } from 'preact-router';
 import { LINKS } from '../urls';
@@ -33,8 +34,8 @@ class Dish extends Component {
                     </div>
                 </div>
                 <div className="hover-controls">
-                    <span className="button blue edit" onClick={ this.onEditClick }>Edit</span>
-                    <span className="button red delete" onClick={ this.onDelClick }>Delete</span>
+                    <Button type={ Types.EDIT } onClick={ this.onEditClick } />
+                    <Button type={ Types.DELETE } onClick={ this.onDelClick } />
                 </div>
             </div>
         );
@@ -45,7 +46,9 @@ class Dish extends Component {
     }
 
     onDelClick(e) {
-        deleteDish(this.props.id);
+        if (window.confirm('Видалити цю страву?')) {
+            deleteDish(this.props.id);
+        }
     }
 }
 

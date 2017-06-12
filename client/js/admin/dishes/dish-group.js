@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import Dish from './dish-item';
+import { Button, Types } from '../../form-elements/buttons';
 import { deleteGroup } from './group-actions';
 import { route } from 'preact-router';
 import { LINKS } from '../urls';
@@ -34,8 +35,8 @@ class DishGroup extends Component {
                     </div>
 
                     <div className="hover-controls">
-                        <span className="button blue edit" onClick={ this.onEditClick }>Edit</span>
-                        <span className="button red delete" onClick={ this.onDelClick }>Delete</span>
+                        <Button type={ Types.EDIT } onClick={ this.onEditClick } />
+                        <Button type={ Types.DELETE } onClick={ this.onDelClick } />
                     </div>
                 </div>
             )
@@ -59,7 +60,9 @@ class DishGroup extends Component {
     }
 
     onDelClick(e) {
-        deleteGroup(this.props.id);
+        if (window.confirm('Видалити цю групу?')) {
+            deleteGroup(this.props.id);
+        }
     }
 }
 

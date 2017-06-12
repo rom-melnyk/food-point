@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import { Button, Types } from './buttons';
 import { PATH as IMAGE_PATH } from '../admin/images/image-constants';
 
 
@@ -90,7 +91,7 @@ class ImageInput extends Component {
             ? <span className="image" style={ `background-image: url(${ IMAGE_PATH + image });` } title={ image } />
             : <span className="image none" />;
         const delButtonComp = image
-            ? <span className="button red delete" onClick={ this.onDelete }>X</span>
+            ? <Button type={ Types.DELETE } onClick={ this.onDelete } />
             : null;
 
         return (
@@ -100,7 +101,7 @@ class ImageInput extends Component {
                     <div className="image-wrapper has-hover-controls">
                         { imageComp }
                         <div className="hover-controls">
-                            <span className="button blue pick" onClick={ this.onPick }>...</span>
+                            <Button type={ Types.PICK } onClick={ this.onPick } />
                             { delButtonComp }
                         </div>
                     </div>

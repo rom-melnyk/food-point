@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import { Button, Types } from '../../form-elements/buttons';
 import { MODES, PATH } from './image-constants';
 import { deleteImage, selectImage } from './image-actions';
 
@@ -15,9 +16,7 @@ class Image extends Component {
         const controlsComp = isManager
             ? (
                 <div className="hover-controls">
-                    <span className="button red delete" onClick={ this.onDelClick }>
-                        <i className="icon-delete"/>
-                    </span>
+                    <Button type={ Types.DELETE } onClick={ this.onDelClick } />
                 </div>
             )
             : null;

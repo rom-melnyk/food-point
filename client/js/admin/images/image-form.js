@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import { Button, Types } from '../../form-elements/buttons';
 import { uploadImage } from './image-actions';
 
 
@@ -8,7 +9,6 @@ import { uploadImage } from './image-actions';
 class ImageForm extends Component {
     constructor() {
         super(...arguments);
-        this.onBackClick = this.onBackClick.bind(this);
         this.onSaveClick = this.onSaveClick.bind(this);
     }
 
@@ -22,18 +22,11 @@ class ImageForm extends Component {
                     </div>
                 </div>
                 <div className="controls">
-                    <span className="button grey" onClick={ this.onBackClick }><i className="icon-back" /></span>
-                    <span className="button green" onClick={ this.onSaveClick }>
-                        <i className="icon-ok" />
-                        Завантажити
-                    </span>
+                    <Button type={ Types.BACK } />
+                    <Button type={ Types.OK } onClick={ this.onSaveClick } />
                 </div>
             </div>
         );
-    }
-
-    onBackClick(e) {
-        history.back();
     }
 
     onSaveClick(e) {

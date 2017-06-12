@@ -1,6 +1,8 @@
 import { h, Component } from 'preact';
 
 import { Textarea, TextInput, NumberInput, ImageInput, GroupInput } from '../../form-elements/form-elements';
+import { Button, Types } from '../../form-elements/buttons';
+
 import { route } from 'preact-router';
 import { updateDish, createDish } from './dish-actions';
 import { selectImage } from '../images/image-actions';
@@ -25,7 +27,6 @@ let editState = null;
 class DishForm extends Component {
     constructor(props) {
         super(...arguments);
-        this.onBackClick = this.onBackClick.bind(this);
         this.onSaveClick = this.onSaveClick.bind(this);
         this.onImagePickerClick = this.onImagePickerClick.bind(this);
     }
@@ -61,8 +62,8 @@ class DishForm extends Component {
                 <h1>{ header }</h1>
                 { formComps }
                 <div className="controls">
-                    <span className="button grey back" onClick={ this.onBackClick }>Назад</span>
-                    <span className="button green save" onClick={ this.onSaveClick }>Зберегти</span>
+                    <Button type={ Types.BACK } />
+                    <Button type={ Types.OK } onClick={ this.onSaveClick } />
                 </div>
             </div>
         );
@@ -77,10 +78,6 @@ class DishForm extends Component {
             default:
         }
         return <TextInput name={ name } label={ label } value={ value } parent={ this } />;
-    }
-
-    onBackClick(e) {
-        history.back();
     }
 
     onSaveClick(e) {
