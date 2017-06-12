@@ -22,8 +22,11 @@ class ImageForm extends Component {
                     </div>
                 </div>
                 <div className="controls">
-                    <span className="button grey" onClick={ this.onBackClick }>Назад</span>
-                    <span className="button green" onClick={ this.onSaveClick }>Завантажити</span>
+                    <span className="button grey" onClick={ this.onBackClick }><i className="icon-back" /></span>
+                    <span className="button green" onClick={ this.onSaveClick }>
+                        <i className="icon-ok" />
+                        Завантажити
+                    </span>
                 </div>
             </div>
         );

@@ -15,7 +15,9 @@ class Image extends Component {
         const controlsComp = isManager
             ? (
                 <div className="hover-controls">
-                    <span className="button red delete" onClick={ this.onDelClick }>X</span>
+                    <span className="button red delete" onClick={ this.onDelClick }>
+                        <i className="icon-delete"/>
+                    </span>
                 </div>
             )
             : null;
@@ -31,7 +33,9 @@ class Image extends Component {
     }
 
     onDelClick(e) {
-        deleteImage(this.props.name);
+        if (window.confirm('Видалити це зображення?')) {
+            deleteImage(this.props.name);
+        }
     }
 
     onSelectClick(e) {
