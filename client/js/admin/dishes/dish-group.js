@@ -1,10 +1,13 @@
 import { h, Component } from 'preact';
 import Dish from './dish-item';
 import { Button, Types } from '../../form-elements/buttons';
-import { deleteGroup } from './group-actions';
+
 import { route } from 'preact-router';
 import { LINKS } from '../urls';
 import { PATH } from '../images/image-constants';
+
+import { getArrow } from './up-down-helpers';
+import { deleteGroup } from './group-actions';
 
 
 class DishGroup extends Component {
@@ -18,6 +21,9 @@ class DishGroup extends Component {
         const imageComp = image
             ? <span className="image" style={ `background-image: url(${ PATH + image });` } title={ image } />
             : <span className="image none" />;
+
+        const upComp = getArrow('up', id, true);
+        const downComp = getArrow('down', id, true);
 
         // don't show data and controls for root component
         const groupDataComps = name !== '/'
@@ -34,9 +40,11 @@ class DishGroup extends Component {
                         {/* collapse; up/down */}
                     </div>
 
-                    <div className="hover-controls">
-                        <Button type={ Types.EDIT } onClick={ this.onEditClick } />
-                        <Button type={ Types.DELETE } onClick={ this.onDelClick } />
+                    <div className="hover-controls small">
+                        <Button type={ Types.EDIT } onClick={ this.onEditClick } title="Редагувати групу" />
+                        <Button type={ Types.DELETE } onClick={ this.onDelClick } title="Видалити групу" />
+                        { upComp }
+                        { downComp }
                     </div>
                 </div>
             )

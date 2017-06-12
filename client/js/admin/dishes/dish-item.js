@@ -1,9 +1,12 @@
 import { h, Component } from 'preact';
 import { Button, Types } from '../../form-elements/buttons';
-import { deleteDish } from './dish-actions';
+
 import { route } from 'preact-router';
 import { LINKS } from '../urls';
 import { PATH } from '../images/image-constants';
+
+import { getArrow } from './up-down-helpers';
+import { deleteDish } from './dish-actions';
 
 
 class Dish extends Component {
@@ -17,6 +20,9 @@ class Dish extends Component {
         const imageComp = image
             ? <span className="image" style={ `background-image: url(${ PATH + image });` } title={ image } />
             : <span className="image none" />;
+
+        const upComp = getArrow('up', id);
+        const downComp = getArrow('down', id);
 
         return (
             <div className="dish has-hover-controls">
@@ -34,8 +40,10 @@ class Dish extends Component {
                     </div>
                 </div>
                 <div className="hover-controls small">
-                    <Button type={ Types.EDIT } onClick={ this.onEditClick } />
-                    <Button type={ Types.DELETE } onClick={ this.onDelClick } />
+                    <Button type={ Types.EDIT } onClick={ this.onEditClick } title="Редагувати страву" />
+                    <Button type={ Types.DELETE } onClick={ this.onDelClick } title="Видалити страву" />
+                    { upComp }
+                    { downComp }
                 </div>
             </div>
         );

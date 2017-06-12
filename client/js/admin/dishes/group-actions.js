@@ -15,6 +15,13 @@ function createGroup(data, parentId) {
 }
 
 
+/**
+ * @param {Number} id
+ * @param {Object} data
+ * @param {Number|null} newGroupId              if `null`, don't move to another group
+ * @param {Boolean} [shouldNavigate=false]
+ * @returns {Promise.<TResult>}
+ */
 function updateGroup(id, data, newGroupId, shouldNavigate = true) {
     return put(`${API.Groups}?id=${id}`, data)
         .then(() => moveToGroup(`g${id}`, newGroupId))
@@ -74,6 +81,10 @@ function removeFromParentGroup(id) {
 
 
 function moveToGroup(id, newGroupId) {
+    if (newGroupId === null) {
+        return false;
+    }
+
     const oldGroup = store.state.groups.find(g => g.items.indexOf(id) !== -1);
     if (!oldGroup) {
         return Promise.reject(`No group found containing the dish with id=${id}`);

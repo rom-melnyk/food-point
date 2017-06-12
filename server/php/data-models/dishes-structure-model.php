@@ -10,7 +10,7 @@ namespace model {
         $dishes = \db\query($query);
         $groups = get_dish_groups();
 
-        return \model\helpers\build_dishes_structure($dishes, $groups);
+        return helpers\build_dishes_structure($dishes, $groups);
     }
 }
 
