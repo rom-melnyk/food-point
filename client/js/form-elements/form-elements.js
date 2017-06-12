@@ -106,7 +106,7 @@ class ImageInput extends Component {
                 <div className="column-3">
                     <div className="image-wrapper has-hover-controls">
                         { imageComp }
-                        <div className="hover-controls">
+                        <div className="hover-controls small">
                             <Button type={ Types.PICK } narrow={ true } onClick={ this.onPick } />
                             { delButtonComp }
                         </div>

@@ -1,6 +1,8 @@
 import { h, Component } from 'preact';
 
 import { Textarea, TextInput, GroupInput, ImageInput } from '../../form-elements/form-elements';
+import { Button, Types } from '../../form-elements/buttons';
+
 import { route } from 'preact-router';
 import { updateGroup, createGroup } from './group-actions';
 import { selectImage } from '../images/image-actions';
@@ -24,7 +26,6 @@ class GroupForm extends Component {
     constructor() {
         super(...arguments);
         this.availableGroups = [];
-        this.onBackClick = this.onBackClick.bind(this);
         this.onSaveClick = this.onSaveClick.bind(this);
         this.onImagePickerClick = this.onImagePickerClick.bind(this);
     }
@@ -63,8 +64,8 @@ class GroupForm extends Component {
                 <h1>{ header }</h1>
                 { formComps }
                 <div className="controls">
-                    <span className="button grey back" onClick={ this.onBackClick }>Назад</span>
-                    <span className="button green save" onClick={ this.onSaveClick }>Зберегти</span>
+                    <Button type={ Types.BACK } />
+                    <Button type={ Types.OK } onClick={ this.onSaveClick } />
                 </div>
             </div>
         );
@@ -78,10 +79,6 @@ class GroupForm extends Component {
             default:
         }
         return <TextInput name={ name } label={ label } value={ value } parent={ this } />;
-    }
-
-    onBackClick(e) {
-        history.back();
     }
 
     onSaveClick(e) {

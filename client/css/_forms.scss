@@ -43,7 +43,10 @@ textarea {
   @extend .h-list;
   margin-top: 1em;
   text-align: center;
-  font-size: $x-small-text;
+
+  &.small {
+    font-size: $x-small-text;
+  }
 }
 
 

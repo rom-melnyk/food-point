@@ -33,7 +33,7 @@ class Dish extends Component {
                         <div className="price">{ price }</div>
                     </div>
                 </div>
-                <div className="hover-controls">
+                <div className="hover-controls small">
                     <Button type={ Types.EDIT } onClick={ this.onEditClick } />
                     <Button type={ Types.DELETE } onClick={ this.onDelClick } />
                 </div>

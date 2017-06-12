@@ -23,22 +23,24 @@ class ImageForm extends Component {
                 </div>
                 <div className="controls">
                     <Button type={ Types.BACK } />
-                    <Button type={ Types.OK } onClick={ this.onSaveClick } />
+                    { this.hasFile() ? <Button type={ Types.OK } onClick={ this.onSaveClick } /> : null }
                 </div>
             </div>
         );
     }
 
     onSaveClick(e) {
-        if (this.input && this.input.files && this.input.files.length) {
-            uploadImage(this.input.files[0])
-                .then((res) => {
-                    if (res !== false) {
-                        this.input.value = '';
-                    }
-                })
-                .catch(console.error);
-        }
+        uploadImage(this.input.files[0])
+            .then((res) => {
+                if (res !== false) {
+                    this.input.value = '';
+                }
+            })
+            .catch(console.error);
+    }
+
+    hasFile() {
+        return this.input && this.input.files && this.input.files.length;
     }
 
 }

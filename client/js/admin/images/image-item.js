@@ -15,8 +15,8 @@ class Image extends Component {
         const className = ' image-wrapper hoverable' + (isManager ? ' has-hover-controls' : '');
         const controlsComp = isManager
             ? (
-                <div className="hover-controls">
-                    <Button type={ Types.DELETE } onClick={ this.onDelClick } />
+                <div className="hover-controls small">
+                    <Button type={ Types.DELETE } narrow={ true } onClick={ this.onDelClick } />
                 </div>
             )
             : null;
