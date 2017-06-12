@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300,700&subset=cyrillic-ext');
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:300,700&subset=cyrillic-ext");
 @import "constants";
 
 // ------------------ reset ------------------
@@ -19,7 +19,7 @@ body {
   background-color: $bg-color;
   font-size: $normal-text;
   font-weight: 300;
-  font-family:'Roboto Slab', serif;
+  font-family: "Roboto Slab", serif;
 }
 
 @media screen and (max-width: $screen-s-width) {
