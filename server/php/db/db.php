@@ -1,7 +1,7 @@
 <?php
 namespace db;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/db/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/creds.php';
 
 $mysqli = new \mysqli(DB_CONFIG['host'], DB_CONFIG['user'], DB_CONFIG['password'], DB_CONFIG['database']);
 
