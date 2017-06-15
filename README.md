@@ -15,7 +15,7 @@ This version is made for basic PHP/Apache-powered server.
 1. Restart the Apache2: `sudo systemctl restart apache2.service`
 
 
-## MySQL
+## MySQL and other credentials
 Create `server/php/creds.php`:
 ```
 <?php
