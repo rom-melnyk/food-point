@@ -8,9 +8,14 @@
   .group .group {
     $group-border: 2px dashed darken($bg-color, 30%);
 
+    margin-top: 2em;
     margin-bottom: 2em;
     border-radius: .25em;
     border: $group-border;
+
+    &:first-child {
+      margin-top: 0;
+    }
 
     .group-data {
       margin-bottom: .5em;
