@@ -16,7 +16,7 @@ This version is made for basic PHP/Apache-powered server.
 
 
 ## MySQL
-Create `server/db/config.php`:
+Create `server/php/creds.php`:
 ```
 <?php
 const DB_CONFIG = array(
@@ -24,6 +24,19 @@ const DB_CONFIG = array(
     'user' => '...',
     'password' => '...',
     'database' => '...'
+);
+
+const ADMIN_CREDS = array(
+    'username' => '...',
+    'password' => '...'
+);
+
+const SESSION_SALT = '...';
+
+const FB_APP_CREDENTIALS = array(
+    'app_id' => '...',
+    'app_secret' => '...',
+    'default_graph_version' => 'v2.8'
 );
 ?>
 ```
@@ -33,21 +46,12 @@ const DB_CONFIG = array(
 Facebook API v5 requires PHP v5.4+.
 
 **TBD!**
-Create `develop/php/fb-app-credentials.php`:
-```
-<?php
-$FB_APP_CREDENTIALS = [
-    'app_id' => '...',
-    'app_secret' => '...',
-    'default_graph_version' => 'v2.8'
-];
-?>
-```
 
 ## Develop and deploy
 1. `npm run dev`: compiles all the client assets, copies them to **`server/`** folder.
 1. `npm run prod`: behaves similar but generates minified files (prod-friendly).
 1. Upload the content of **`server/`** to the server via FTP.
+  - **Important!** Provide proper content for `php/creds.php` file!
   - Make sure that folder is writable and `gfx/uploaded/` is writable too.
   - Remove `.gitignore` from the server :)
   - Update `sitemap.xml` and `robots.txt` if needed.
